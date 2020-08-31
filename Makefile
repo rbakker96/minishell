@@ -32,8 +32,6 @@ clean:
 	@echo "$(RED)----------------------------------------------------"
 	@echo "$(RED)Deleting			$(WHITE)main.o"
 	@echo "$(RED)----------------------------------------------------"
-	@echo "$(RED)Deleting			$(WHITE)FragTrap.o"
-	@echo "$(RED)----------------------------------------------------"
 	@/bin/rm -f $(OBJECTS)
 
 fclean: clean
