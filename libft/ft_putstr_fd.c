@@ -1,19 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   main.c                                             :+:    :+:            */
+/*   ft_putstr_fd.c                                     :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: roybakker <roybakker@student.codam.nl>       +#+                     */
+/*   By: rbakker <marvin@codam.nl>                    +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/08/31 10:42:36 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/09/01 17:52:13 by roybakker     ########   odam.nl         */
+/*   Created: 2019/11/04 13:08:34 by rbakker       #+#    #+#                 */
+/*   Updated: 2020/04/17 11:58:06 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "structs.h"
-#include "minishell.h"
+#include "libft.h"
 
-int		main()
+void			ft_putstr_fd(char *s, int fd)
 {
+	int i;
 
+	if (s == 0)
+		return ;
+	i = 0;
+	while (s[i] != '\0')
+	{
+		ft_putchar_fd(s[i], fd);
+		i++;
+	}
 }

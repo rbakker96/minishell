@@ -1,19 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   main.c                                             :+:    :+:            */
+/*   ft_memcpy.c                                        :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: roybakker <roybakker@student.codam.nl>       +#+                     */
+/*   By: rbakker <marvin@codam.nl>                    +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/08/31 10:42:36 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/09/01 17:52:13 by roybakker     ########   odam.nl         */
+/*   Created: 2019/10/30 13:23:16 by rbakker       #+#    #+#                 */
+/*   Updated: 2020/04/17 11:57:28 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "structs.h"
-#include "minishell.h"
+#include "libft.h"
 
-int		main()
+void		*ft_memcpy(void *dst, const void *src, size_t n)
 {
+	size_t	i;
 
+	i = 0;
+	if (!dst && !src)
+		return (0);
+	while (i < n)
+	{
+		((char*)dst)[i] = ((char*)src)[i];
+		i++;
+	}
+	return (dst);
 }

@@ -1,19 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   main.c                                             :+:    :+:            */
+/*   ft_isdigit.c                                       :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: roybakker <roybakker@student.codam.nl>       +#+                     */
+/*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/08/31 10:42:36 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/09/01 17:52:13 by roybakker     ########   odam.nl         */
+/*   Created: 2019/10/28 15:07:12 by rbakker       #+#    #+#                 */
+/*   Updated: 2020/04/17 11:56:50 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "structs.h"
-#include "minishell.h"
-
-int		main()
+int		ft_isdigit(char c)
 {
-
+	if (c >= '0' && c <= '9')
+		return (1);
+	else
+		return (0);
 }

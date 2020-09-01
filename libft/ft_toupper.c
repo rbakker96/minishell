@@ -1,19 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   main.c                                             :+:    :+:            */
+/*   ft_toupper.c                                       :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: roybakker <roybakker@student.codam.nl>       +#+                     */
+/*   By: rbakker <marvin@codam.nl>                    +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/08/31 10:42:36 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/09/01 17:52:13 by roybakker     ########   odam.nl         */
+/*   Created: 2019/10/28 16:26:58 by rbakker       #+#    #+#                 */
+/*   Updated: 2020/04/17 11:59:36 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "structs.h"
-#include "minishell.h"
-
-int		main()
+int		ft_toupper(int c)
 {
-
+	if (c >= 'a' && c <= 'z')
+		return (c - 32);
+	else
+		return (c);
 }

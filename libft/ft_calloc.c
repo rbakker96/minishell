@@ -1,19 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   main.c                                             :+:    :+:            */
+/*   ft_calloc.c                                        :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: roybakker <roybakker@student.codam.nl>       +#+                     */
+/*   By: rbakker <marvin@codam.nl>                    +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/08/31 10:42:36 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/09/01 17:52:13 by roybakker     ########   odam.nl         */
+/*   Created: 2019/11/01 14:11:59 by rbakker       #+#    #+#                 */
+/*   Updated: 2020/04/17 11:56:21 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "structs.h"
-#include "minishell.h"
+#include "libft.h"
+#include <stdlib.h>
 
-int		main()
+void			*ft_calloc(size_t count, size_t size)
 {
+	void	*s;
+	size_t	i;
 
+	i = 0;
+	s = malloc(count * size);
+	if (s == 0)
+		return (0);
+	while (i < (count * size))
+	{
+		((char*)s)[i] = 0;
+		i++;
+	}
+	return (s);
 }

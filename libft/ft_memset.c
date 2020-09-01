@@ -1,19 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   main.c                                             :+:    :+:            */
+/*   ft_memset.c                                        :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: roybakker <roybakker@student.codam.nl>       +#+                     */
+/*   By: rbakker <marvin@codam.nl>                    +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/08/31 10:42:36 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/09/01 17:52:13 by roybakker     ########   odam.nl         */
+/*   Created: 2019/10/31 09:53:37 by rbakker       #+#    #+#                 */
+/*   Updated: 2020/04/17 11:57:39 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "structs.h"
-#include "minishell.h"
+#include "libft.h"
 
-int		main()
+void		*ft_memset(void *b, int c, size_t len)
 {
+	size_t	i;
 
+	i = 0;
+	while (i < len)
+	{
+		((unsigned char*)b)[i] = (unsigned char)c;
+		i++;
+	}
+	return ((void*)b);
 }

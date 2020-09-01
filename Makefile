@@ -1,43 +1,68 @@
-NAME 		= 	minishell
+# **************************************************************************** #
+#                                                                              #
+#                                                         ::::::::             #
+#    Makefile                                           :+:    :+:             #
+#                                                      +:+                     #
+#    By: rbakker <rbakker@student.42.fr>              +#+                      #
+#                                                    +#+                       #
+#    Created: 2020/02/05 14:55:09 by rbakker       #+#    #+#                  #
+#    Updated: 2020/09/01 16:20:24 by roybakker     ########   odam.nl          #
+#                                                                              #
+# **************************************************************************** #
 
-SOURCES		= 	main.c
+NAME	=	minishell
 
-OBJECTS 	=	${SOURCES:%.cpp=%.o}
+SOURCES	= 	main.c
 
-FLAGS 		=	-Wall -Wextra -Werror -std=c++98
-COMPILE		=	clang++
+OBJECTS =	${SOURCES:%.c=%.o}
 
+FLAGS 	=	-Wall -Wextra -Werror
+COMPILE	=	gcc
+LIB		=	ar rc
 
-GREEN 		= 	\033[38;5;46m
-WHITE 		= 	\033[38;5;255m
-GREY 		= 	\033[38;5;8m
-ORANGE 		= 	\033[38;5;202m
-RED 		= 	\033[38;5;160m
+GREEN 	= 	\033[38;5;46m
+WHITE 	= 	\033[38;5;15m
+GREY 	= 	\033[38;5;8m
+ORANGE 	= 	\033[38;5;202m
+RED 	= 	\033[38;5;160m
 
 all: $(NAME)
 
-%.o: %.c
-	@echo "$(GREY)----------------------------------------------------"
-	@echo "$(GREY)Compiling			$@"
-	@echo "$(GREY)----------------------------------------------------"
-	@$(COMPILE) $(FLAGS) -c $< -o $@
-
 $(NAME): $(OBJECTS)
-	@$(COMPILE) $(FLAGS) $(OBJECTS) -o $(NAME)
+	@echo "$(WHITE)----------------------------------------------------"
+	@echo "$(WHITE)GET NEXT LINE			$(WHITE)"
+	@make -C gnl
+	@echo "$(WHITE)----------------------------------------------------"
+	@echo "$(WHITE)LIBFT			$(WHITE)"
+	@make -C libft
+	@echo "$(WHITE)----------------------------------------------------"
 	@echo "$(GREEN)----------------------------------------------------"
-	@echo "Executable			./minishell"
+	@$(COMPILE) -g -Lgnl -lgnl -Llibft -lft -o $(NAME) $(OBJECTS)
+	@echo "Executable				./minishell"
 	@echo "$(GREEN)----------------------------------------------------"
+
+%.o: %.c
+	@echo "$(WHITE)----------------------------------------------------"
+	@echo "$(WHITE)MINISHELL			$(WHITE)"
+	@echo "$(GREY)Compiling...				$(WHITE)$<"
+	@$(COMPILE) $(FLAGS) -Ilibft -Ignl -c -o $@ $<
 
 clean:
-	@echo "$(RED)----------------------------------------------------"
-	@echo "$(RED)Deleting			$(WHITE)main.o"
-	@echo "$(RED)----------------------------------------------------"
+	@echo "$(WHITE)Working on gnl..."
+	@make clean -C gnl
+	@echo "$(WHITE)Working on libft..."
+	@make clean -C libft
+	@echo "$(WHITE)Working on minishell..."
+	@echo "$(RED)DELETING OBJECTFILES"
 	@/bin/rm -f $(OBJECTS)
 
 fclean: clean
-	@echo "$(RED)----------------------------------------------------"
-	@echo "Deleting			$(WHITE)./minishell"
-	@echo "$(RED)----------------------------------------------------"
+	@echo "$(WHITE)Working on gnl..."
+	@make fclean -C gnl
+	@echo "$(WHITE)Working on libft...	"
+	@make fclean -C libft
+	@echo "$(WHITE)Working on minishell...	"
+	@echo "$(RED)DELETING EXECUTABLE"
 	@/bin/rm -f $(NAME)
 
 re: fclean all
