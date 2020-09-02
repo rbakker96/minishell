@@ -6,7 +6,7 @@
 /*   By: roybakker <roybakker@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/01 15:55:06 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/09/02 16:00:16 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/09/02 17:14:30 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 # include "libft/libft.h"
 # include "gnl/get_next_line.h"
 # include "structs.h"
+
+# include <stdio.h>
 
 /*
 **---------------------------ADDITIONAL FUNCTIONS-------------------------------
@@ -43,10 +45,13 @@ int			redirection_pipe_check(char *str);
 */
 void		parse_command(t_data *data);
 void		create_command_table(t_data *data, char *line);
-void		interpert_command(t_data *data, char *command);
+void		interpert_command(t_data *data, char *command, int index);
 
 /*
 ** analyze_commands.c
 */
+void		small_command(t_data *data, char *command, int index);
+void		average_command(t_data *data, char *command, int index);
+void		big_command(t_data *data, char *command, int index);
 
 #endif
