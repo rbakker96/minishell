@@ -1,27 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   main.c                                             :+:    :+:            */
+/*   analyze_commands.c                                 :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: roybakker <roybakker@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/08/31 10:42:36 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/09/02 13:02:28 by roybakker     ########   odam.nl         */
+/*   Created: 2020/09/02 15:56:23 by roybakker     #+#    #+#                 */
+/*   Updated: 2020/09/02 15:57:33 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "structs.h"
-#include "minishell.h"
-#include <stdio.h>
+#include "../minishell.h"
 
-int		main(void)
+void	small_command(t_data *data, char *command)
 {
-	t_data	data;
 
-	while(1)
-	{
-		print("minishel :: ");
-		parse_command(&data);
-	}
-	return (0);
+}
+
+void	average_command(t_data *data, char *command)
+{
+
+}
+
+void	big_command(t_data *data, char *command)
+{
+
 }

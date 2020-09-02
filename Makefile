@@ -6,13 +6,16 @@
 #    By: rbakker <rbakker@student.42.fr>              +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/02/05 14:55:09 by rbakker       #+#    #+#                  #
-#    Updated: 2020/09/01 16:20:24 by roybakker     ########   odam.nl          #
+#    Updated: 2020/09/02 15:54:12 by roybakker     ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	=	minishell
 
-SOURCES	= 	main.c
+SOURCES	= 	main.c \
+			parse/command_table.c \
+			additional_functions/file_one.c \
+			additional_functions/file_two.c
 
 OBJECTS =	${SOURCES:%.c=%.o}
 
