@@ -6,7 +6,7 @@
 /*   By: roybakker <roybakker@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/02 11:00:03 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/09/03 11:07:13 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/09/03 11:39:26 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	create_command_table(t_data *data, char *line)
 void	interpert_command(t_data *data, char *command, int index)
 {
 	int count;
-	data->table[index] = (t_command_table*)malloc(sizeof(t_command_table) * (1));
+	data->table[index] = (t_command_table*)malloc(sizeof(t_command_table) * 1);
 	count = (arguments_count(command) == 0) ? 1 : arguments_count(command);
 
 	if (count == 1)
