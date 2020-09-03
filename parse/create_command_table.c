@@ -6,7 +6,7 @@
 /*   By: roybakker <roybakker@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/02 11:00:03 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/09/02 17:41:06 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/09/03 11:07:13 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,6 @@ void	create_command_table(t_data *data, char *line)
 //	CLEAR STRUCT WHEN FAIL
 //
 	count = commands_count(commands);
-	printf("%d \n", count);
-//	CLEAR STRUCT WHEN FAIL
-//
 	data->table = (t_command_table**)malloc(sizeof(t_command_table*) * (count + 1));
 // 	CLEAR STRUCT WHEN FAIL
 //
@@ -53,12 +50,11 @@ void	create_command_table(t_data *data, char *line)
 void	interpert_command(t_data *data, char *command, int index)
 {
 	int count;
-
+	data->table[index] = (t_command_table*)malloc(sizeof(t_command_table) * (1));
 	count = (arguments_count(command) == 0) ? 1 : arguments_count(command);
-	printf("testinggggg\n");
+
 	if (count == 1)
 	{
-		printf("testasdfasdfasdf\n");
 		small_command(data, command, index);
 	}
 	if (count <= 3 && redirection_pipe_check(command) == 0)
