@@ -6,7 +6,7 @@
 /*   By: roybakker <roybakker@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/02 14:39:39 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/09/03 14:04:01 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/09/03 15:56:35 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ int		redirection_check(char *str)
 	int result;
 
 	result = ft_strncmp(str, "<", ft_strlen(str));
+	if (result != 0)
+		result = ft_strncmp(str, ">", ft_strlen(str));
 	if (result != 0)
 		result = ft_strncmp(str, ">>", ft_strlen(str));
 	return (result);

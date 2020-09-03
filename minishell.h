@@ -6,7 +6,7 @@
 /*   By: roybakker <roybakker@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/01 15:55:06 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/09/03 13:46:37 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/09/03 16:17:15 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,7 @@ void		interpert_command(t_data *data, char *command, int index);
 /*
 ** analyze_commands.c
 */
-void		small_command(t_data *data, char *command, int index);
-void		average_command(t_data *data, char *command, int index);
-void		big_command(t_data *data, char *command, int index);
+void		small_command(t_data *data, char **tokens, int index, int size);
+void		big_command(t_data *data, char **tokens, int index);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: roybakker <roybakker@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/01 14:27:26 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/09/02 16:53:10 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/09/03 16:20:06 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,24 +26,17 @@ typedef struct 			s_big
 	int 				exit_code;
 }						t_big;
 
-typedef struct 			s_average
+typedef struct 			s_small
 {
 	char 				*command;
 	char				option;
 	char				*input;
-	int 				exit_code;
-}						t_average;
-
-typedef struct 			s_small
-{
-	char 				*command;
 	int 				exit_code;
 }						t_small;
 
 typedef union			u_command
 {
 	t_small				small;
-	t_average			average;
 	t_big				big;
 }						t_command;
 
@@ -56,6 +49,5 @@ typedef struct 			s_data
 {
 	t_command_table 	**table;
 }						t_data;
-
 
 #endif
