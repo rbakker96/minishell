@@ -6,7 +6,7 @@
 /*   By: roybakker <roybakker@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/02 14:39:39 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/09/03 15:56:35 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/09/03 17:30:39 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int		command_type_check(char *str)
 	count = 0;
 	while(str[i] != '\0')
 	{
-		if (str[i] == '<' || str[i] == '|')
+		if (str[i] == '<' || str[i] == '>' || (str[i] == '>' && str[i + 1] == '>') ||str[i] == '|')
 			count++;
 		i++;
 	}

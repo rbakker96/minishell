@@ -6,7 +6,7 @@
 /*   By: roybakker <roybakker@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/02 15:56:23 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/09/03 16:21:43 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/09/03 17:52:29 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,28 @@ void	small_command(t_data *data, char **tokens, int index, int size)
 	return ;
 }
 
-void	big_command(t_data *data, char **tokens, int index)
+void	big_command(t_data *data, char *command, int index)
 {
-	printf("command in big struct\n");
-	if (data && tokens && index)
+	int count;
+	int id;
+	char **tokens;
+
+	id = 0;
+	tokens = ft_split(command, '|');
+//	CLEAR STRUCT WHEN FAIL
+//
+	count = commands_count(tokens);
+	data->table[index]->command = (t_command**)malloc(sizeof(t_command*) * count);
+//	CLEAR STRUCT WHEN FAIL
+//
+	data->table[index]->command[0] = (t_command*)malloc(sizeof(t_command) * 1);
+//	CLEAR STRUCT WHEN FAIL
+//
+	data->table[index]->command[0]->small.command = tokens[0];
+	data->table[index]->command[0]->big.option = ;
+	data->table[index]->command[0]->big.input = ;
+	data->table[index]->command[0]->big.output = ;
+	data->table[index]->command[0]->small.exit_code = 0;
+
 	return ;
 }

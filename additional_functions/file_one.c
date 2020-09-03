@@ -6,7 +6,7 @@
 /*   By: roybakker <roybakker@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/02 11:27:20 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/09/03 13:23:07 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/09/03 16:58:08 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int		commands_count(char **str)
 	return (i);
 }
 
-int		arguments_count(char *str)
+int		pipe_count(char *str)
 {
 	int i;
 	int count;
@@ -43,7 +43,7 @@ int		arguments_count(char *str)
 	count = 0;
 	while(str[i] != '\0')
 	{
-		if (str[i] == ' ')
+		if (str[i] == '|')
 			count++;
 		i++;
 	}

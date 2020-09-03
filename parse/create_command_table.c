@@ -6,11 +6,7 @@
 /*   By: roybakker <roybakker@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/02 11:00:03 by roybakker     #+#    #+#                 */
-<<<<<<< HEAD
-/*   Updated: 2020/09/03 16:17:02 by roybakker     ########   odam.nl         */
-=======
-/*   Updated: 2020/09/03 15:25:25 by qli           ########   odam.nl         */
->>>>>>> 02432e6cc341da81b5353fb0d5cc58068adda42a
+/*   Updated: 2020/09/03 17:44:31 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +21,7 @@ int	parse_command(t_data *data)
 	if (res == -1)
 		return (-1);
 //	CLEAR STRUCT WHEN FAIL
+//
 	if (input_validate(line) == -1)
 		return (-1);
 	create_command_table(data, line);
@@ -69,5 +66,5 @@ void	interpert_command(t_data *data, char *command, int index)
 	if (size <= 3 && command_type_check(command) == 0)
 		small_command(data, tokens, index, size);
 	else
-		big_command(data, tokens, index);
+		big_command(data, command, index);
 }
