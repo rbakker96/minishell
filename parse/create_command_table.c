@@ -6,7 +6,7 @@
 /*   By: roybakker <roybakker@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/02 11:00:03 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/09/03 17:44:31 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/09/03 21:30:07 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,40 +31,61 @@ int	parse_command(t_data *data)
 
 void	create_command_table(t_data *data, char *line)
 {
-	int		count;
-	int 	index;
 	char	**commands;
 
-	index = 0;
 	commands = ft_split(line , ';');
 //	CLEAR STRUCT WHEN FAIL
 //
-	count = commands_count(commands);
-	data->table = (t_command_table**)malloc(sizeof(t_command_table*) * (count + 1));
+	data->index = 0;
+	data->size = calculate_table_size(commands);
+	data->table = (t_command_table**)malloc(sizeof(t_command_table*) * (data->size));
 // 	CLEAR STRUCT WHEN FAIL
 //
-	while(commands[index] != 0)
+	while(data->index < data->size)
 	{
-		interpert_command(data, commands[index], index);
-		index++;
+		if (pipe_check(commands[data->index]) == 0)
+			basic_command(data, commands[data->index], 1);
+		else
+			piped_command(data, commands[data->index]);
+		data->index++;
 	}
 	free(commands);
 }
 
-void	interpert_command(t_data *data, char *command, int index)
+void	basic_command(t_data *data, char *command, int index)
 {
-	int size;
-	char **tokens;
+	int		size;
+	char 	**tokens;
 
 	tokens = ft_split(command, ' ');
-//	CLEAR STRUCT WHEN FAIL
-//
-	data->table[index] = (t_command_table*)malloc(sizeof(t_command_table) * 1);
 // 	CLEAR STRUCT WHEN FAIL
 //
+	data->table[data->index] = (t_command_table*)malloc(sizeof(t_command_table) * 1);
+//	CLEAR STRUCT WHEN FAIL
+//
+	data->table[data->index]->command = tokens[0];
+	data->table[data->index]->exit_code = 0;
 	size = commands_count(tokens);
-	if (size <= 3 && command_type_check(command) == 0)
-		small_command(data, tokens, index, size);
-	else
-		big_command(data, command, index);
+	while(index < size && data->table[data->index]->output == 0)
+	{
+		if (redirection(tokens[index]) == 0 || option(tokens[index]) == 0)
+			data->table[data->index]->operation = tokens[index];
+		else if (tokens[index - 1][0] == '>')
+			data->table[data->index]->output = tokens[index];
+		else if (data->table[data->index]->input == 0)
+			data->table[data->index]->input = ft_strdup(tokens[index]);
+		else
+			data->table[data->index]->input = join(data->table[data->index]->input, tokens[index], 0, 0);
+		index++;
+	}
+	printf("saved command in struct \ncommand = [%s]\n", data->table[data->index]->command);
+	printf("operation = [%s]\n", data->table[data->index]->operation);
+	printf("input = [%s]\n", data->table[data->index]->input);
+	printf("output = [%s]\n", data->table[data->index]->output);
+}
+
+void	piped_command(t_data *data, char *command)
+{
+	if (data && command)
+	return ;
 }

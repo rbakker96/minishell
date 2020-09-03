@@ -6,7 +6,7 @@
 /*   By: roybakker <roybakker@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/01 14:27:26 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/09/03 16:20:06 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/09/03 21:02:02 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,37 +17,20 @@
 **----------------------------------PARSE---------------------------------------
 */
 
-typedef struct 			s_big
+typedef struct 			s_command_table
 {
 	char 				*command;
-	char				option;
+	char				*operation;
 	char 				*input;
 	char 				*output;
 	int 				exit_code;
-}						t_big;
-
-typedef struct 			s_small
-{
-	char 				*command;
-	char				option;
-	char				*input;
-	int 				exit_code;
-}						t_small;
-
-typedef union			u_command
-{
-	t_small				small;
-	t_big				big;
-}						t_command;
-
-typedef struct 			s_command_table
-{
-	t_command 			**command;
 }						t_command_table;
 
 typedef struct 			s_data
 {
 	t_command_table 	**table;
+	int					size;
+	int					index;
 }						t_data;
 
 #endif
