@@ -6,7 +6,7 @@
 /*   By: roybakker <roybakker@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/01 15:55:06 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/09/03 13:46:37 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/09/03 15:42:49 by qli           ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int			redirection_check(char *str);
 /*
 ** create_command_table.c
 */
-void		parse_command(t_data *data);
+int			parse_command(t_data *data);
 void		create_command_table(t_data *data, char *line);
 void		interpert_command(t_data *data, char *command, int index);
 
@@ -54,5 +54,15 @@ void		interpert_command(t_data *data, char *command, int index);
 void		small_command(t_data *data, char *command, int index);
 void		average_command(t_data *data, char *command, int index);
 void		big_command(t_data *data, char *command, int index);
+
+/*
+**----------------------------------VALIDATE_INPUT------------------------------
+*/
+
+/*
+** validate_input.c
+*/
+int		input_validate(char *line);
+int 	check_duplicated_symbols(char *line);
 
 #endif

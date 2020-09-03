@@ -6,24 +6,26 @@
 /*   By: roybakker <roybakker@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/02 11:00:03 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/09/03 14:04:42 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/09/03 15:25:25 by qli           ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	parse_command(t_data *data)
+int	parse_command(t_data *data)
 {
 	int 	res;
 	char 	*line;
 
 	res = get_next_line(0, &line);
+	if (res == -1)
+		return (-1);
 //	CLEAR STRUCT WHEN FAIL
-//
-//	input_validate(data, line);
+	if (input_validate(line) == -1)
+		return (-1);
 	create_command_table(data, line);
 	free(line);
-	return ;
+	return (0);
 }
 
 void	create_command_table(t_data *data, char *line)

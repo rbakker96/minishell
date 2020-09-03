@@ -6,7 +6,7 @@
 /*   By: roybakker <roybakker@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/02 15:56:23 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/09/03 14:03:23 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/09/03 15:25:49 by qli           ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,10 @@ void	small_command(t_data *data, char *command, int index)
 
 void	average_command(t_data *data, char *command, int index)
 {
-	int id;
+	// int id;
 	char **token;
 
-	id = 1;
+	// id = 1;
 	token = ft_split(command, ' ');
 //	CLEAR STRUCT WHEN FAIL
 //
