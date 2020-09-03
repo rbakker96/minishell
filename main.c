@@ -6,7 +6,7 @@
 /*   By: roybakker <roybakker@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/08/31 10:42:36 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/09/03 14:40:55 by qli           ########   odam.nl         */
+/*   Updated: 2020/09/03 15:11:41 by qli           ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,6 @@
 #include "minishell.h"
 #include <stdio.h>
 
-// also made some changes
-// hi
-//hello
 int		main(void)
 {
 	t_data	data;
@@ -28,5 +25,3 @@ int		main(void)
 	}
 	return (0);
 }
-
-// changes to test conflict
