@@ -6,7 +6,7 @@
 /*   By: roybakker <roybakker@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/02 11:00:03 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/09/03 11:43:02 by qli           ########   odam.nl         */
+/*   Updated: 2020/09/03 14:04:42 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,9 @@ void	parse_command(t_data *data)
 	char 	*line;
 
 	res = get_next_line(0, &line);
-	input_validate(data, line);
+//	CLEAR STRUCT WHEN FAIL
+//
+//	input_validate(data, line);
 	create_command_table(data, line);
 	free(line);
 	return ;
@@ -40,6 +42,7 @@ void	create_command_table(t_data *data, char *line)
 //
 	while(commands[index] != 0)
 	{
+		printf("%d\n", index);
 		interpert_command(data, commands[index], index);
 		index++;
 	}
@@ -50,13 +53,15 @@ void	interpert_command(t_data *data, char *command, int index)
 {
 	int count;
 	data->table[index] = (t_command_table*)malloc(sizeof(t_command_table) * 1);
+// 	CLEAR STRUCT WHEN FAIL
+//
 	count = (arguments_count(command) == 0) ? 1 : arguments_count(command);
 
 	if (count == 1)
 	{
 		small_command(data, command, index);
 	}
-	if (count <= 3 && redirection_pipe_check(command) == 0)
+	else if (count <= 3 || command_type_check(command) != 0)
 		average_command(data, command, index);
 	else
 		big_command(data, command, index);

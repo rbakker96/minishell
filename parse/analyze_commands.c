@@ -6,7 +6,7 @@
 /*   By: roybakker <roybakker@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/02 15:56:23 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/09/03 11:39:18 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/09/03 14:03:23 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,42 +14,53 @@
 
 void	small_command(t_data *data, char *command, int index)
 {
-	int token;
-	char **tokens;
+	char **token;
 
-	token = 0;
-	tokens = ft_split(command, ' ');
+	token = ft_split(command, ' ');
 //	CLEAR STRUCT WHEN FAIL
 //
 	data->table[index]->command = (t_command**)malloc(sizeof(t_command*) * 1);
 //	CLEAR STRUCT WHEN FAIL
 //
-	data->table[index]->command[token] = (t_command*)malloc(sizeof(t_command) * 1);
+	data->table[index]->command[0] = (t_command*)malloc(sizeof(t_command) * 1);
 //	CLEAR STRUCT WHEN FAIL
 //
-	data->table[index]->command[token]->small.command = tokens[token];
-	data->table[index]->command[token]->small.exit_code = 0;
-	printf("stored in struct : %s\n", data->table[index]->command[token]->small.command);
+	data->table[index]->command[0]->small.command = token[0];
+	data->table[index]->command[0]->small.exit_code = 0;
+	printf("command in small struct : %s\n", data->table[index]->command[0]->small.command);
 	return ;
 }
 
 void	average_command(t_data *data, char *command, int index)
 {
-	int token;
-	char **tokens;
-	int token;
-	char **tokens;
+	int id;
+	char **token;
 
-	token = 0;
-	tokens = ft_split(command, ' ');
+	id = 1;
+	token = ft_split(command, ' ');
 //	CLEAR STRUCT WHEN FAIL
 //
-	data->table[index]->command = (t_command**)malloc(sizeof(t_command*) * (1));
+	data->table[index]->command = (t_command**)malloc(sizeof(t_command*) * 1);
 //	CLEAR STRUCT WHEN FAIL
 //
-	data->table[index]->command[token] = (t_command*)malloc(sizeof(t_command) * (2));
+	data->table[index]->command[0] = (t_command*)malloc(sizeof(t_command) * 1);
 //	CLEAR STRUCT WHEN FAIL
 //
+	data->table[index]->command[0]->average.command = token[0];
+	if (option_check(token[1]) == 0)
+	{
+		data->table[index]->command[0]->average.option = token[1][1];
+		data->table[index]->command[0]->average.input = token[2];
+	}
+	else
+	{
+		data->table[index]->command[0]->average.option = 0;
+		data->table[index]->command[0]->average.input = token[1];
+	}
+	data->table[index]->command[0]->average.exit_code = 0;
+	printf("command in average struct : %s\n", data->table[index]->command[0]->average.command);
+	printf("option in average struct : %c\n", data->table[index]->command[0]->average.option);
+	printf("input in average struct : %s\n", data->table[index]->command[0]->average.input);
 	return ;
 }
 

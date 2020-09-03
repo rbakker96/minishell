@@ -6,7 +6,7 @@
 /*   By: roybakker <roybakker@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/01 15:55:06 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/09/02 17:14:30 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/09/03 13:46:37 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,13 @@
 int			print(char *str);
 int			commands_count(char **str);
 int			arguments_count(char *str);
-int			redirection_pipe_check(char *str);
 
 /*
 ** file_two.c
 */
-
+int			command_type_check(char *str);
+int			option_check(char *str);
+int			redirection_check(char *str);
 
 /*
 **----------------------------------PARSE---------------------------------------
