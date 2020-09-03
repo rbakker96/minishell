@@ -6,7 +6,7 @@
 /*   By: roybakker <roybakker@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/08/31 10:42:36 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/09/03 14:37:09 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/09/03 14:39:37 by qli           ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 
 // also made some changes
 // hi
+//hello
 int		main(void)
 {
 	t_data	data;
@@ -27,3 +28,5 @@ int		main(void)
 	}
 	return (0);
 }
+
+// changes to test conflict
