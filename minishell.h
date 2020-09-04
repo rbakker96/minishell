@@ -6,7 +6,7 @@
 /*   By: roybakker <roybakker@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/01 15:55:06 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/09/03 21:29:01 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/09/04 13:18:55 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,15 @@ int			commands_count(char **str);
 /*
 ** file_two.c
 */
-int			command_type_check(char *str);
 int			option(char *str);
 int			redirection(char *str);
-int			pipe_check(char *str);
+int			split_check(char *str);
+int			pipe_count(char *str);
+int			redirection_count(char *str, int input, int output);
+
+/*
+** file_two.c
+*/
 char		*join(char *s1, char *s2, int i, int x);
 
 /*
@@ -49,7 +54,7 @@ char		*join(char *s1, char *s2, int i, int x);
 int			parse_command(t_data *data);
 void		create_command_table(t_data *data, char *line);
 void		basic_command(t_data *data, char *command, int index);
-void		piped_command(t_data *data, char *command);
+void		split_command(t_data *data, char *command);
 
 /*
 ** analyze_commands.c

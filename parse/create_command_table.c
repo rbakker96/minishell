@@ -6,7 +6,7 @@
 /*   By: roybakker <roybakker@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/02 11:00:03 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/09/03 21:30:07 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/09/04 13:25:06 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,13 +43,13 @@ void	create_command_table(t_data *data, char *line)
 //
 	while(data->index < data->size)
 	{
-		if (pipe_check(commands[data->index]) == 0)
+		if (split_check(commands[data->index]) == 0)
 			basic_command(data, commands[data->index], 1);
 		else
-			piped_command(data, commands[data->index]);
+			split_command(data, commands[data->index]);
 		data->index++;
 	}
-	free(commands);
+	// free array commands
 }
 
 void	basic_command(t_data *data, char *command, int index)
@@ -68,23 +68,30 @@ void	basic_command(t_data *data, char *command, int index)
 	size = commands_count(tokens);
 	while(index < size && data->table[data->index]->output == 0)
 	{
-		if (redirection(tokens[index]) == 0 || option(tokens[index]) == 0)
-			data->table[data->index]->operation = tokens[index];
+		if (redirection(tokens[index]) == 0)
+			data->table[data->index]->redirection = tokens[index];
+		else if (option(tokens[index]) == 0)
+			data->table[data->index]->option = tokens[index];
 		else if (tokens[index - 1][0] == '>')
 			data->table[data->index]->output = tokens[index];
+		else if (tokens[index - 1][0] == '<')
+			data->table[data->index]->input = ft_strdup(tokens[index]);
 		else if (data->table[data->index]->input == 0)
 			data->table[data->index]->input = ft_strdup(tokens[index]);
 		else
 			data->table[data->index]->input = join(data->table[data->index]->input, tokens[index], 0, 0);
 		index++;
 	}
+	//free array tokens
 	printf("saved command in struct \ncommand = [%s]\n", data->table[data->index]->command);
-	printf("operation = [%s]\n", data->table[data->index]->operation);
+	printf("option = [%s]\n", data->table[data->index]->option);
+	printf("redirection = [%s]\n", data->table[data->index]->redirection);
+	printf("redirected input = [%s]\n", data->table[data->index]->redirected_input);
 	printf("input = [%s]\n", data->table[data->index]->input);
 	printf("output = [%s]\n", data->table[data->index]->output);
 }
 
-void	piped_command(t_data *data, char *command)
+void	split_command(t_data *data, char *command)
 {
 	if (data && command)
 	return ;
