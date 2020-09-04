@@ -6,7 +6,7 @@
 /*   By: roybakker <roybakker@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/02 11:00:03 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/09/04 13:25:06 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/09/04 13:54:43 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	create_command_table(t_data *data, char *line)
 {
 	char	**commands;
 
-	commands = ft_split(line , ';');
+	commands = ft_split(line, ';');
 //	CLEAR STRUCT WHEN FAIL
 //
 	data->index = 0;

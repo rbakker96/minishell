@@ -6,7 +6,7 @@
 #    By: rbakker <rbakker@student.42.fr>              +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/02/05 14:55:09 by rbakker       #+#    #+#                  #
-#    Updated: 2020/09/04 13:08:00 by roybakker     ########   odam.nl          #
+#    Updated: 2020/09/04 13:54:11 by roybakker     ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,6 @@ NAME			=	minishell
 
 SOURCES			= 	main.c \
 					parse/create_command_table.c \
-					parse/analyze_commands.c \
 					additional_functions/file_one.c \
 					additional_functions/file_two.c \
 					additional_functions/file_three.c \
