@@ -6,7 +6,7 @@
 /*   By: roybakker <roybakker@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/02 11:27:20 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/09/03 20:31:27 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/09/04 13:18:54 by qli           ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ int		calculate_table_size(char **str)
 	while (str[index] != 0)
 	{
 		sub_array = ft_split(str[index], '|');
+	//	CLEAR STRUCT WHEN FAIL
+	//
 		size += commands_count(sub_array);
 		free(sub_array);
 		index++;

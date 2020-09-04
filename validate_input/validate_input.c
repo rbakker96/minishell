@@ -6,13 +6,13 @@
 /*   By: qli <qli@student.codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/03 15:19:55 by qli           #+#    #+#                 */
-/*   Updated: 2020/09/03 16:09:34 by qli           ########   odam.nl         */
+/*   Updated: 2020/09/04 13:11:18 by qli           ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int 	check_duplicated_symbols(char *line)
+int 	check_duplicate_symbols(char *line)
 {
 	int i;
 
@@ -22,7 +22,7 @@ int 	check_duplicated_symbols(char *line)
 		if ((line[i] == ';' && line[i + 1] == ';') || \
 		(line[i] == '|' && line[i + 1] == '|' && line[i + 2] == '|'))
 		{
-			print("duplicatd symbols\n");
+			print("duplicate symbols\n");
 			return (-1);
 		}
 		i++;
@@ -32,7 +32,7 @@ int 	check_duplicated_symbols(char *line)
 
 int		input_validate(char *line)
 {
-	if(check_duplicated_symbols(line) == -1)
+	if(check_duplicate_symbols(line) == -1)
 		return(-1);	
 	return (0);
 }

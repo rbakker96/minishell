@@ -6,7 +6,7 @@
 /*   By: roybakker <roybakker@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/01 15:55:06 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/09/04 12:35:03 by qli           ########   odam.nl         */
+/*   Updated: 2020/09/04 13:12:11 by qli           ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,12 +50,6 @@ int			parse_command(t_data *data);
 void		create_command_table(t_data *data, char *line);
 void		basic_command(t_data *data, char *command, int index);
 void		piped_command(t_data *data, char *command);
-
-/*
-** analyze_commands.c
-*/
-void		small_command(t_data *data, char **tokens, int index, int size);
-void		big_command(t_data *data, char *command, int index);
 
 /*
 **----------------------------------VALIDATE_INPUT------------------------------
