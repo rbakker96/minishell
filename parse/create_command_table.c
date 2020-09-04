@@ -6,11 +6,7 @@
 /*   By: roybakker <roybakker@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/02 11:00:03 by roybakker     #+#    #+#                 */
-<<<<<<< HEAD
-/*   Updated: 2020/09/03 16:17:02 by roybakker     ########   odam.nl         */
-=======
-/*   Updated: 2020/09/03 15:25:25 by qli           ########   odam.nl         */
->>>>>>> 02432e6cc341da81b5353fb0d5cc58068adda42a
+/*   Updated: 2020/09/03 16:24:58 by qli           ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
