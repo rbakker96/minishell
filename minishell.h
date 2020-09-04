@@ -6,7 +6,7 @@
 /*   By: roybakker <roybakker@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/01 15:55:06 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/09/03 16:28:20 by qli           ########   odam.nl         */
+/*   Updated: 2020/09/04 12:35:03 by qli           ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,15 +27,17 @@
 ** file_one.c
 */
 int			print(char *str);
+int			calculate_table_size(char **str);
 int			commands_count(char **str);
-int			arguments_count(char *str);
 
 /*
 ** file_two.c
 */
 int			command_type_check(char *str);
-int			option_check(char *str);
-int			redirection_check(char *str);
+int			option(char *str);
+int			redirection(char *str);
+int			pipe_check(char *str);
+char		*join(char *s1, char *s2, int i, int x);
 
 /*
 **----------------------------------PARSE---------------------------------------
@@ -46,13 +48,14 @@ int			redirection_check(char *str);
 */
 int			parse_command(t_data *data);
 void		create_command_table(t_data *data, char *line);
-void		interpert_command(t_data *data, char *command, int index);
+void		basic_command(t_data *data, char *command, int index);
+void		piped_command(t_data *data, char *command);
 
 /*
 ** analyze_commands.c
 */
 void		small_command(t_data *data, char **tokens, int index, int size);
-void		big_command(t_data *data, char **tokens, int index);
+void		big_command(t_data *data, char *command, int index);
 
 /*
 **----------------------------------VALIDATE_INPUT------------------------------
