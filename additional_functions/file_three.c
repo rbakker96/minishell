@@ -5,37 +5,41 @@
 /*                                                     +:+                    */
 /*   By: roybakker <roybakker@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/09/04 12:50:32 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/09/04 12:50:51 by roybakker     ########   odam.nl         */
+/*   Created: 2020/09/02 14:39:39 by roybakker     #+#    #+#                 */
+/*   Updated: 2020/09/08 15:54:12 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-char		*join(char *s1, char *s2, int i, int x)
+void	special_char(char *command, int *i, int *token)
 {
-	char	*joined_str;
+	(*token)++;
+	while(token_id(command[(*i)]) == 1 && command[(*i)] != '\0')
+		(*i)++;
+}
 
-	i = ft_strlen(s1);
-	x = ft_strlen(s2);
-	joined_str = malloc(sizeof(char) * (i + x + 1));
-// 	CLEAR STRUCT WHEN FAIL
-//
-	x = 0;
-	i = 0;
-	while (s1[i] != '\0')
-	{
-		joined_str[i] = s1[i];
-		i++;
-	}
-	joined_str[i] = ' ';
-	i++;
-	while (s2[x] != '\0')
-	{
-		joined_str[i + x] = s2[x];
-		x++;
-	}
-	joined_str[i + x] = '\0';
-	free(s1);
-	return (joined_str);
+void	dubbel_quotes(char *command, int *i, int *token)
+{
+	(*token)++;
+	(*i)++;
+	while(token_id(command[(*i)]) != 3 && command[(*i)] != '\0')
+		(*i)++;
+	(*i)++;
+}
+
+void	single_qoutes(char *command, int *i, int *token)
+{
+	(*token)++;
+	(*i)++;
+	while(token_id(command[(*i)]) != 4 && command[(*i)] != '\0')
+		(*i)++;
+	(*i)++;
+}
+
+void	basic_word(char *command, int *i, int *token)
+{
+	(*token)++;
+	while(token_id(command[(*i)]) == 0 && command[(*i)] != '\0')
+		(*i)++;
 }
