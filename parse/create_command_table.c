@@ -6,7 +6,7 @@
 /*   By: roybakker <roybakker@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/02 11:00:03 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/09/08 16:08:41 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/09/08 16:47:16 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	create_command_table(t_data *data, char *line)
 //
 	while(data->i < data->command_amount)
 	{
-		data->commands[data->i] = (t_command_table*)malloc(sizeof(t_command_table) * data->command_amount);
+		data->commands[data->i] = (t_command_table*)malloc(sizeof(t_command_table) * 1);
 // 		CLEAR STRUCT WHEN FAIL
 //
 		data->commands[data->i]->token_amount = get_amount_of_tokens(commands[data->i]);
@@ -53,14 +53,14 @@ void	create_command_table(t_data *data, char *line)
 		data->commands[data->i]->tokens = (char**)malloc(sizeof(char*) * data->commands[data->i]->token_amount);
 // 		CLEAR STRUCT WHEN FAIL
 //
-		process_tokens(data, commands[data->i], 0, 0);
+		save_tokens(data, commands[data->i], 0, 0);
 		data->i++;
 	}
 	free_split_array(commands);
 }
 
 
-void	process_tokens(t_data *data, char *command, int i, int len)
+void	save_tokens(t_data *data, char *command, int i, int len)
 {
 	int start;
 	int index;

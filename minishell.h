@@ -6,7 +6,7 @@
 /*   By: roybakker <roybakker@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/01 15:55:06 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/09/08 16:07:59 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/09/08 16:47:23 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int		redirection(char *str);
 */
 int		parse_command(t_data *data);
 void	create_command_table(t_data *data, char *line);
-void	process_tokens(t_data *data, char *command, int i, int len);
+void	save_tokens(t_data *data, char *command, int i, int len);
 
 /*
 **----------------------------------VALIDATE_INPUT------------------------------
