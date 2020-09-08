@@ -6,7 +6,7 @@
 /*   By: roybakker <roybakker@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/01 15:55:06 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/09/08 16:47:23 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/09/08 17:20:51 by qli           ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,12 @@
 # include "libft/libft.h"
 # include "gnl/get_next_line.h"
 # include "structs.h"
-
-# include <stdio.h>
+# include <stdio.h> //to remove
+# include <unistd.h>
+# include <sys/types.h>
+# include <sys/wait.h>
+# include <errno.h>      /* for 'ENOENT' and 'ENOMEM' */
+# include <limits.h>
 
 /*
 **---------------------------ADDITIONAL FUNCTIONS-------------------------------
@@ -51,6 +55,8 @@ void	basic_word(char *command, int *i, int *token);
 */
 int		option(char *str);
 int		redirection(char *str);
+int		check_executable_path(char *command);
+int		ft_isspace(int c);
 
 /*
 **----------------------------------PARSE---------------------------------------
@@ -72,5 +78,15 @@ void	save_tokens(t_data *data, char *command, int i, int len);
 */
 int		input_validate(char *line);
 int 	check_duplicated_symbols(char *line);
+
+/*
+**----------------------------------EXECUTE_COMMAND------------------------------
+*/
+
+/*
+** execute_command.c
+*/
+
+int		execute_command(t_data *data);
 
 #endif
