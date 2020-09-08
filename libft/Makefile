@@ -6,7 +6,7 @@
 #    By: rbakker <rbakker@student.42.fr>              +#+                      #
 #                                                    +#+                       #
 #    Created: 2019/10/29 08:44:29 by rbakker       #+#    #+#                  #
-#    Updated: 2020/04/17 11:59:51 by roybakker     ########   odam.nl          #
+#    Updated: 2020/09/08 16:25:01 by roybakker     ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,12 +44,10 @@ $(NAME): $(OBJECTS_S)
 	@echo "$(GREEN)Succesful"
 
 clean:
-	@echo "$(RED)DELETING OBJECTFILES"
 	@/bin/rm -f $(OBJECTS_S)
 	@/bin/rm -f $(OBJECTS_B)
 
 fclean: clean
-	@echo "$(RED)DELETING EXECUTABLE"
 	@/bin/rm -f $(NAME)
 
 re: fclean all

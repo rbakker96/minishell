@@ -6,7 +6,7 @@
 #    By: rbakker <rbakker@student.42.fr>              +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/02/05 14:55:09 by rbakker       #+#    #+#                  #
-#    Updated: 2020/09/08 15:56:26 by roybakker     ########   odam.nl          #
+#    Updated: 2020/09/08 16:26:33 by roybakker     ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -69,27 +69,31 @@ $(NAME): $(OBJECTS)
 endif
 
 %.o: %.c
-	@echo "$(WHITE)----------------------------------------------------"
-	@echo "$(WHITE)MINISHELL			$(WHITE)"
 	@echo "$(GREY)Compiling...				$(WHITE)$<"
 	@$(COMPILE) $(FLAGS) -Ilibft -Ignl -c -o $@ $<
 
 clean:
-	@echo "$(WHITE)Working on gnl..."
+	@echo "$(RED)----------------------------------------------------"
+	@echo "$(WHITE)REMOVED O-FILES GNL"
+	@echo "$(RED)----------------------------------------------------"
 	@make clean -C gnl
-	@echo "$(WHITE)Working on libft..."
+	@echo "$(WHITE)REMOVED O-FILES LIBFT"
+	@echo "$(RED)----------------------------------------------------"
 	@make clean -C libft
-	@echo "$(WHITE)Working on minishell..."
-	@echo "$(RED)DELETING OBJECTFILES"
+	@echo "$(WHITE)REMOVED O-FILES MINISHELL"
+	@echo "$(RED)----------------------------------------------------"
 	@/bin/rm -f $(OBJECTS)
 
 fclean: clean
-	@echo "$(WHITE)Working on gnl..."
+	@echo "$(RED)----------------------------------------------------"
+	@echo "$(WHITE)DELETE LIBGNL.A"
+	@echo "$(RED)----------------------------------------------------"
 	@make fclean -C gnl
-	@echo "$(WHITE)Working on libft...	"
+	@echo "$(WHITE)DELETE LIBFT.A"
+	@echo "$(RED)----------------------------------------------------"
 	@make fclean -C libft
-	@echo "$(WHITE)Working on minishell...	"
-	@echo "$(RED)DELETING EXECUTABLE"
+	@echo "$(WHITE)DELETE ./MINISHELL"
+	@echo "$(RED)----------------------------------------------------"
 	@/bin/rm -f $(NAME)
 
 re: fclean all

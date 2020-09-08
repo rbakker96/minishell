@@ -6,7 +6,7 @@
 /*   By: roybakker <roybakker@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/01 15:55:06 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/09/08 15:53:48 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/09/08 16:07:59 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@
 ** file_one.c
 */
 int		print(char *str);
+void	free_split_array(char **array);
 
 /*
 ** file_two.c

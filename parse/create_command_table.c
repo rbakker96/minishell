@@ -6,7 +6,7 @@
 /*   By: roybakker <roybakker@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/02 11:00:03 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/09/08 15:57:20 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/09/08 16:08:41 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	create_command_table(t_data *data, char *line)
 		process_tokens(data, commands[data->i], 0, 0);
 		data->i++;
 	}
-	// free array commands
+	free_split_array(commands);
 }
 
 
