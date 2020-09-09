@@ -6,7 +6,7 @@
 /*   By: qli <qli@student.codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/04 15:02:22 by qli           #+#    #+#                 */
-/*   Updated: 2020/09/08 18:04:18 by qli           ########   odam.nl         */
+/*   Updated: 2020/09/09 11:21:50 by qli           ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int		execute_executable(t_data *data)
 		return (-1);
 	else if (pid == 0)
 	{
-		execve(data->commands[data->i]->tokens[0], args, env);
+		execve(args[0], args, env);
 		if (errno == ENOENT)
 			print("Executable not found in the current directory\n");
 		else if (errno == ENOMEM)
@@ -45,22 +45,9 @@ int		execute_executable(t_data *data)
 	return (0);
 }
 
-int		execute_pwd(void)
-{
-	char buf[PATH_MAX];
-	char *ptr;
-
-	ptr = getcwd(buf, (size_t)PATH_MAX);
-	if (ptr == NULL)
-		return (-1);
-	print(ptr);
-	print("\n");
-	return (0);
-}
-
 int		execute_command(t_data *data)
 {
-	if (check_executable_path(data->commands[data->i]->tokens[0]) == 1)
+	if (check_executable_path(data->commands[data->i]->tokens[0]) == 0)
 		execute_executable(data);
 	if (ft_strncmp("pwd", data->commands[data->i]->tokens[0], 3) == 0)
 		execute_pwd();

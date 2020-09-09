@@ -6,7 +6,7 @@
 /*   By: roybakker <roybakker@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/01 15:55:06 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/09/08 17:20:51 by qli           ########   odam.nl         */
+/*   Updated: 2020/09/09 11:21:37 by qli           ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,5 +88,11 @@ int 	check_duplicated_symbols(char *line);
 */
 
 int		execute_command(t_data *data);
+
+/*
+** pwd.c
+*/
+
+int		execute_pwd(void);
 
 #endif
