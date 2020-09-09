@@ -6,7 +6,7 @@
 #    By: rbakker <rbakker@student.42.fr>              +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/02/05 14:55:09 by rbakker       #+#    #+#                  #
-#    Updated: 2020/09/08 17:16:40 by qli           ########   odam.nl          #
+#    Updated: 2020/09/09 11:24:51 by qli           ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,8 @@ SOURCES			= 	main.c \
 					additional_functions/file_three.c \
 					additional_functions/file_four.c \
 					validate_input/validate_input.c \
-					execute_command/execute_command.c
+					execute_command/execute_command.c \
+					execute_command/pwd.c
 
 OBJECTS 		=	${SOURCES:%.c=%.o}
 
