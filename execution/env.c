@@ -6,7 +6,7 @@
 /*   By: roybakker <roybakker@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/09 14:51:19 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/09/09 15:01:39 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/09/09 15:53:43 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,6 @@
 
 void	execute_env(t_data *data, int command, int *token)
 {
-
+	if (data && command && token)
+	return ;
 }

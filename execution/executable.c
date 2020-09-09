@@ -6,7 +6,7 @@
 /*   By: roybakker <roybakker@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/09 14:06:18 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/09/09 15:14:40 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/09/09 15:54:30 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ void	execute_executable(t_data *data, int command, int *token)
 	char *args[] = {"data->commands[command]->tokens[(*token)]", NULL};
 	char *env[] = {NULL};
 
+	if (data)
 	pid = fork();
 //	CLEAR STRUCT WHEN FAIL
 //
