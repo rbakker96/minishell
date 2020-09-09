@@ -6,17 +6,18 @@
 /*   By: roybakker <roybakker@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/08/31 10:42:36 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/09/09 14:50:00 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/09/09 15:44:09 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "structs.h"
 #include "minishell.h"
 
-int		main(void)
+int		main(int argc, char **argv, char **envp)
 {
 	t_data	data;
 
+	data.env = envp;
 	while(1)
 	{
 		prompt();
