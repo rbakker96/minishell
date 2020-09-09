@@ -6,7 +6,7 @@
 /*   By: roybakker <roybakker@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/01 15:55:06 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/09/09 15:58:32 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/09/09 16:34:02 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@
 */
 int		print(char *str);
 int		prompt(void);
+char	*get_current_directory(void);
 void	free_split_array(char **array);
 
 /*

@@ -6,7 +6,7 @@
 /*   By: roybakker <roybakker@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/02 11:27:20 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/09/09 13:54:53 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/09/09 16:34:07 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,38 @@ int		print(char *str)
 
 int		prompt(void)
 {
+	char *directory;
+
+	directory = get_current_directory();
 	print("\033[1;32m");
 	print("→ ");
 	print("\033[1;36m");
-	print(" -directory- ");
+	print(directory);
+	print(" ");
 	print("\033[0m");
+	free(directory);
 	return (0);
+}
+
+char	*get_current_directory(void)
+{
+	char buf[PATH_MAX];
+	int index;
+	char *path;
+	char **directory;
+
+	path = getcwd(buf, (size_t)PATH_MAX);
+//	CLEAR STRUCT WHEN FAIL
+//
+	directory = ft_split(path, '/');
+//	CLEAR STRUCT WHEN FAIL
+//
+	index = get_amount_of_commands(path, '/');
+	path = ft_strdup(directory[index - 1]);
+//	CLEAR STRUCT WHEN FAIL
+//
+	free_split_array(directory);
+	return (path);
 }
 
 void	free_split_array(char **array)
