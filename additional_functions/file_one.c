@@ -6,7 +6,7 @@
 /*   By: roybakker <roybakker@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/02 11:27:20 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/09/08 16:12:13 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/09/09 13:54:53 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,16 @@ int		print(char *str)
 	written = write(1, str, length);
 	if (written == -1)
 		return (-1);
+	return (0);
+}
+
+int		prompt(void)
+{
+	print("\033[1;32m");
+	print("→ ");
+	print("\033[1;36m");
+	print(" -directory- ");
+	print("\033[0m");
 	return (0);
 }
 

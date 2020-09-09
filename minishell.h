@@ -6,7 +6,7 @@
 /*   By: roybakker <roybakker@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/01 15:55:06 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/09/09 11:55:30 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/09/09 15:14:30 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@
 ** file_one.c
 */
 int		print(char *str);
+int		prompt(void);
 void	free_split_array(char **array);
 
 /*
@@ -84,15 +85,49 @@ void	save_tokens(t_data *data, char *command, int i, int len);
 */
 
 /*
-** execute_command.c
+** execution_loop.c
 */
-int		execution_loop(t_data *data);
+int		execution_loop(t_data *data, int command, int token);
+
+/*
+** cd.c
+*/
+void	execute_cd(t_data *data, int command, int *token);
+
+/*
+** echo.c
+*/
+void	execute_echo(t_data *data, int command, int *token);
+
+/*
+** env.c
+*/
+void	execute_env(t_data *data, int command, int *token);
+
+/*
+** execution.c
+*/
+void	execute_executable(t_data *data, int command, int *token);
+
+/*
+** exit.c
+*/
+void	execute_exit(t_data *data, int command, int *token);
+
+/*
+** export.c
+*/
+void	execute_export(t_data *data, int command, int *token);
 
 /*
 ** pwd.c
 */
-int		execute_pwd(void);
+void	execute_pwd(t_data *data, int command, int *token);
 
+/*
+** unset.c
+*/
+void	execute_unset(t_data *data, int command, int *token);
 
 
 #endif

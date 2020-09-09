@@ -6,50 +6,49 @@
 /*   By: qli <qli@student.codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/04 15:02:22 by qli           #+#    #+#                 */
-/*   Updated: 2020/09/09 11:36:07 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/09/09 14:57:08 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-// ** To use the executable within the bin folder **
-// int main(void)
-// {
-// 	char *args[] = {"/usr/bin/ls", "-la", NULL};
-// 	char *envp[] = {NULL};
-// 	execve(args[0], args, envp);
-// }
-
-int		execute_executable(t_data *data)
+int		identfy_command(t_data *data, int command, int *token)
 {
-	int	pid;
-	int status;
-	int errno;
-	char *args[] = {"data->commands[data->i]->tokens[0]", NULL};
-	char *env[] = {NULL};
-
-	pid = fork();
-	if (pid == -1)
-		return (-1);
-	else if (pid == 0)
-	{
-		execve(data->commands[data->i]->tokens[0], args, env);
-		if (errno == ENOENT)
-			print("Executable not found in the current directory\n");
-		else if (errno == ENOMEM)
-			print("Not enough memory to execute the executable\n");
-		else
-			printf("error #%d trying to execute the executable\n", errno);
-	}
-	wait(&status);
-	return (0);
+	if(ft_strncmp("echo", data->commands[command]->tokens[(*token)], 4) == 0)
+		execute_echo(data, command, token);
+	if(ft_strncmp("cd", data->commands[command]->tokens[(*token)], 2) == 0)
+		execute_cd(data, command, token);
+	if(ft_strncmp("pwd", data->commands[command]->tokens[(*token)], 3) == 0)
+		execute_pwd();
+	if(ft_strncmp("export", data->commands[command]->tokens[(*token)], 6) == 0)
+		execute_export(data, command, token);
+	if(ft_strncmp("unset", data->commands[command]->tokens[(*token)], 5) == 0)
+		execute_unset(data, command, token);
+	if(ft_strncmp("env", data->commands[command]->tokens[(*token)], 3) == 0)
+		execute_env(data, command, token);
+	if(ft_strncmp("exit", data->commands[command]->tokens[(*token)], 4) == 0)
+		execute_exit(data, command, token);
+	else
+		execute_executable(data);
 }
 
-int		execution_loop(t_data *data)
+int		execution_loop(t_data *data, int command, int token)
 {
-	if (check_executable_path(data->commands[data->i]->tokens[0]) == 1)
-		execute_executable(data);
-	if (ft_strncmp("pwd", data->commands[data->i]->tokens[0], 3) == 0)
-		execute_pwd();
+	while(command < data->command_amount)
+	{
+		while(token < data->commands[command]->token_amount)
+		{
+			identfy_command(data, command, &token);
+			token++;
+		}
+		command++;
+	}
+
+
+
+//	if (check_executable_path(data->commands[0]->tokens[0]) == 1)
+//		execute_executable(data);
+//	if (ft_strncmp("pwd", data->commands[0]->tokens[0], 3) == 0)
+//		execute_pwd();
 	return (0);
 }
