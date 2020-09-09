@@ -6,21 +6,21 @@
 #    By: rbakker <rbakker@student.42.fr>              +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/02/05 14:55:09 by rbakker       #+#    #+#                  #
-#    Updated: 2020/09/09 11:24:51 by qli           ########   odam.nl          #
+#    Updated: 2020/09/09 11:49:11 by roybakker     ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
 NAME			=	minishell
 
 SOURCES			= 	main.c \
-					parse/create_command_table.c \
 					additional_functions/file_one.c \
 					additional_functions/file_two.c \
 					additional_functions/file_three.c \
 					additional_functions/file_four.c \
-					validate_input/validate_input.c \
-					execute_command/execute_command.c \
-					execute_command/pwd.c
+					input_validation/validate_input.c \
+					parse/create_command_table.c \
+					execution/execute_loop.c \
+					execution/pwd.c
 
 OBJECTS 		=	${SOURCES:%.c=%.o}
 

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   execute_command.c                                  :+:    :+:            */
+/*   execute_loop.c                                     :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: qli <qli@student.codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/04 15:02:22 by qli           #+#    #+#                 */
-/*   Updated: 2020/09/09 11:25:08 by qli           ########   odam.nl         */
+/*   Updated: 2020/09/09 11:36:07 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int		execute_executable(t_data *data)
 	return (0);
 }
 
-int		execute_command(t_data *data)
+int		execution_loop(t_data *data)
 {
 	if (check_executable_path(data->commands[data->i]->tokens[0]) == 1)
 		execute_executable(data);

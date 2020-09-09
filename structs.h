@@ -6,7 +6,7 @@
 /*   By: roybakker <roybakker@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/01 14:27:26 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/09/08 16:15:00 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/09/09 12:01:11 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define STRUCTS_H
 
 /*
-**----------------------------------PARSE---------------------------------------
+**--------------------------------GENERAL---------------------------------------
 */
 
 typedef enum			e_defenitions
@@ -25,6 +25,10 @@ typedef enum			e_defenitions
 	append = 4
 }						t_defenitions;
 
+/*
+**-------------------------------EXECUTION--------------------------------------
+*/
+
 typedef struct 			s_table_item
 {
 	char 				*command;
@@ -34,6 +38,9 @@ typedef struct 			s_table_item
 	char 				*output;
 }						t_table_item;
 
+/*
+**---------------------------------PARSE----------------------------------------
+*/
 typedef struct 			s_command_table
 {
 	char				**tokens;
@@ -45,7 +52,6 @@ typedef struct 			s_data
 {
 	t_command_table 	**commands;
 	int					command_amount;
-	int					i;
 }						t_data;
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: roybakker <roybakker@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/01 15:55:06 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/09/09 11:24:51 by qli           ########   odam.nl         */
+/*   Updated: 2020/09/09 11:55:30 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 # include <limits.h>
 
 /*
-**---------------------------ADDITIONAL FUNCTIONS-------------------------------
+**---------------------------ADDITIONAL_FUNCTIONS-------------------------------
 */
 
 /*
@@ -59,6 +59,16 @@ int		check_executable_path(char *command);
 int		ft_isspace(int c);
 
 /*
+**-----------------------------INPUT_VALIDATION---------------------------------
+*/
+
+/*
+** validate_input.c
+*/
+int		input_validate(char *line);
+int 	check_duplicated_symbols(char *line);
+
+/*
 **----------------------------------PARSE---------------------------------------
 */
 
@@ -70,29 +80,19 @@ void	create_command_table(t_data *data, char *line);
 void	save_tokens(t_data *data, char *command, int i, int len);
 
 /*
-**----------------------------------VALIDATE_INPUT------------------------------
-*/
-
-/*
-** validate_input.c
-*/
-int		input_validate(char *line);
-int 	check_duplicated_symbols(char *line);
-
-/*
-**----------------------------------EXECUTE_COMMAND------------------------------
+**---------------------------------EXECUTION------------------------------------
 */
 
 /*
 ** execute_command.c
 */
-
-int		execute_command(t_data *data);
+int		execution_loop(t_data *data);
 
 /*
 ** pwd.c
 */
-
 int		execute_pwd(void);
+
+
 
 #endif
