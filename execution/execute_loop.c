@@ -6,13 +6,13 @@
 /*   By: qli <qli@student.codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/04 15:02:22 by qli           #+#    #+#                 */
-/*   Updated: 2020/09/09 15:56:47 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/09/09 16:10:15 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int		identfy_command(t_data *data, int command, int *token)
+void	identfy_command(t_data *data, int command, int *token)
 {
 	if(ft_strncmp("echo", data->commands[command]->tokens[(*token)], 4) == 0)
 		execute_echo(data, command, token);
@@ -29,10 +29,11 @@ int		identfy_command(t_data *data, int command, int *token)
 	if(ft_strncmp("exit", data->commands[command]->tokens[(*token)], 4) == 0)
 		execute_exit(data, command, token);
 	else
-		execute_executable(data, command, token);
+		return ;
+//		execute_executable(data, command, token);
 }
 
-int		execution_loop(t_data *data, int command, int token)
+void		execution_loop(t_data *data, int command, int token)
 {
 	while(command < data->command_amount)
 	{
@@ -40,8 +41,9 @@ int		execution_loop(t_data *data, int command, int token)
 		while(token < data->commands[command]->token_amount)
 		{
 			identfy_command(data, command, &token);
+			token++;
 		}
 		command++;
 	}
-	return (0);
+	return ;
 }

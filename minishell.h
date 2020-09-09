@@ -6,7 +6,7 @@
 /*   By: roybakker <roybakker@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/01 15:55:06 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/09/09 15:14:30 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/09/09 15:58:32 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,8 @@ void	save_tokens(t_data *data, char *command, int i, int len);
 /*
 ** execution_loop.c
 */
-int		execution_loop(t_data *data, int command, int token);
+void	execution_loop(t_data *data, int command, int token);
+void	identfy_command(t_data *data, int command, int *token);
 
 /*
 ** cd.c
