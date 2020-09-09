@@ -6,7 +6,7 @@
 /*   By: roybakker <roybakker@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/08/31 10:42:36 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/09/09 15:55:15 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/09/09 15:56:24 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,11 @@ int		main(int argc, char **argv, char **envp)
 {
 	t_data	data;
 
+	if (argc != 1 || !argv)
+	{
+		print("Incorrect input\n");
+		return (-1);
+	}
 	data.env = envp;
 	while(1)
 	{
