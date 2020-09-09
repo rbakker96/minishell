@@ -6,7 +6,7 @@
 /*   By: roybakker <roybakker@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/01 15:55:06 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/09/09 17:19:23 by qli           ########   odam.nl         */
+/*   Updated: 2020/09/09 17:59:26 by qli           ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@
 */
 int		print(char *str);
 int		prompt(void);
+char	*get_current_directory(void);
 void	free_split_array(char **array);
 
 /*
@@ -60,6 +61,11 @@ int		redirection(char *str);
 int		check_relative_path(char *command);
 int		ft_isspace(int c);
 char	*find_path(t_data *data);
+
+/*
+** file_five.c
+*/
+int		get_array_size(char **array);
 
 /*
 **-----------------------------INPUT_VALIDATION---------------------------------

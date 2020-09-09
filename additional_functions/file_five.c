@@ -1,28 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   env.c                                              :+:    :+:            */
+/*   file_five.c                                        :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: roybakker <roybakker@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/09/09 14:51:19 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/09/09 16:48:50 by roybakker     ########   odam.nl         */
+/*   Created: 2020/09/09 16:44:49 by roybakker     #+#    #+#                 */
+/*   Updated: 2020/09/09 16:45:36 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	execute_env(t_data *data, int command, int *token)
+int		get_array_size(char **array)
 {
-	int index;
+	int 	i;
 
-	index = 0;
-	while(data->env[index] != 0)
-	{
-		print(data->env[index]);
-		printf("\n");
-		index++;
-	}
-	if (command && (*token))
-		print(".");
+	i = 0;
+	while (array[i] != 0)
+		i++;
+	return (i);
 }
