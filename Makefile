@@ -6,7 +6,7 @@
 #    By: rbakker <rbakker@student.42.fr>              +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/02/05 14:55:09 by rbakker       #+#    #+#                  #
-#    Updated: 2020/09/09 16:03:42 by roybakker     ########   odam.nl          #
+#    Updated: 2020/09/09 17:02:09 by roybakker     ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,6 +17,7 @@ SOURCES			= 	main.c \
 					additional_functions/file_two.c \
 					additional_functions/file_three.c \
 					additional_functions/file_four.c \
+					additional_functions/file_five.c \
 					input_validation/validate_input.c \
 					parse/create_command_table.c \
 					execution/cd.c \

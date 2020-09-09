@@ -6,7 +6,7 @@
 /*   By: roybakker <roybakker@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/02 11:27:20 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/09/09 16:34:07 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/09/09 16:46:16 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ char	*get_current_directory(void)
 	directory = ft_split(path, '/');
 //	CLEAR STRUCT WHEN FAIL
 //
-	index = get_amount_of_commands(path, '/');
+	index = get_array_size(directory);
 	path = ft_strdup(directory[index - 1]);
 //	CLEAR STRUCT WHEN FAIL
 //

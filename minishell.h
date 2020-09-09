@@ -6,7 +6,7 @@
 /*   By: roybakker <roybakker@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/01 15:55:06 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/09/09 16:34:02 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/09/09 16:45:51 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,11 @@ int		option(char *str);
 int		redirection(char *str);
 int		check_executable_path(char *command);
 int		ft_isspace(int c);
+
+/*
+** file_five.c
+*/
+int		get_array_size(char **array);
 
 /*
 **-----------------------------INPUT_VALIDATION---------------------------------
