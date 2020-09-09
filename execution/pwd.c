@@ -6,7 +6,7 @@
 /*   By: qli <qli@student.codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/09 11:20:52 by qli           #+#    #+#                 */
-/*   Updated: 2020/09/09 15:12:51 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/09/09 15:26:26 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,5 +22,4 @@ void		execute_pwd(t_data *data, int command, int *token)
 //
 	print(ptr);
 	print("\n");
-	return ;
 }
