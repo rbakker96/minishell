@@ -6,7 +6,7 @@
 /*   By: qli <qli@student.codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/04 15:02:22 by qli           #+#    #+#                 */
-/*   Updated: 2020/09/09 16:10:15 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/09/09 17:56:30 by qli           ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,7 @@ void	identfy_command(t_data *data, int command, int *token)
 	if(ft_strncmp("exit", data->commands[command]->tokens[(*token)], 4) == 0)
 		execute_exit(data, command, token);
 	else
-		return ;
-//		execute_executable(data, command, token);
+		execute_executable(data, command, token);
 }
 
 void		execution_loop(t_data *data, int command, int token)

@@ -6,7 +6,7 @@
 /*   By: roybakker <roybakker@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/01 15:55:06 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/09/09 15:58:32 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/09/09 17:19:23 by qli           ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # include <sys/wait.h>
 # include <errno.h>      /* for 'ENOENT' and 'ENOMEM' */
 # include <limits.h>
+#include <string.h> /* for strerror */
 
 /*
 **---------------------------ADDITIONAL_FUNCTIONS-------------------------------
@@ -56,8 +57,9 @@ void	basic_word(char *command, int *i, int *token);
 */
 int		option(char *str);
 int		redirection(char *str);
-int		check_executable_path(char *command);
+int		check_relative_path(char *command);
 int		ft_isspace(int c);
+char	*find_path(t_data *data);
 
 /*
 **-----------------------------INPUT_VALIDATION---------------------------------
@@ -106,9 +108,12 @@ void	execute_echo(t_data *data, int command, int *token);
 void	execute_env(t_data *data, int command, int *token);
 
 /*
-** execution.c
+** executable.c
 */
 void	execute_executable(t_data *data, int command, int *token);
+void	relative_path(t_data *data, int command, int *token);
+void	absolute_path(t_data *data, int command, int *token);
+void	search_path(t_data *data, int command, int *token, char *path_array);
 
 /*
 ** exit.c
