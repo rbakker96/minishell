@@ -6,7 +6,7 @@
 /*   By: roybakker <roybakker@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/09 14:06:18 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/09/09 17:56:54 by qli           ########   odam.nl         */
+/*   Updated: 2020/09/10 17:37:30 by qli           ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ void	execute_executable(t_data *data, int command, int *token)
 		relative_path(data, command, token);
 	else
 		absolute_path(data, command, token);
+	*token = *token + 1;
 }
 
 void	relative_path(t_data *data, int command, int *token)

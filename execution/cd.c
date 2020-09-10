@@ -6,7 +6,7 @@
 /*   By: roybakker <roybakker@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/09 14:50:20 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/09/10 12:00:40 by qli           ########   odam.nl         */
+/*   Updated: 2020/09/10 17:36:08 by qli           ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,22 @@ void	go_to_home(t_data *data)
 
 void	execute_cd(t_data *data, int command, int *token)
 {
-	if (data->commands[command]->token_amount == 1 || \
-	ft_strncmp("~", data->commands[command]->tokens[(*token) + 1], 1) == 0)
+	if (data->commands[command]->token_amount == 1)
+	{
 		go_to_home(data);
-	chdir(data->commands[command]->tokens[(*token) + 1]);
-//		CLEAR STRUCT WHEN FAIL
-//
+		*token = *token + 1;
+	}
+	else if (ft_strncmp("~", data->commands[command]->tokens[(*token) + 1], 1) == 0)
+	{
+		go_to_home(data);
+		*token = *token + 2;
+	}
+	else
+	{
+		chdir(data->commands[command]->tokens[(*token) + 1]);
+	//		CLEAR STRUCT WHEN FAIL
+	//
+		*token = *token + 2;
+	}
 	return ;
 }
