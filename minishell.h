@@ -6,7 +6,7 @@
 /*   By: roybakker <roybakker@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/01 15:55:06 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/09/09 17:59:26 by qli           ########   odam.nl         */
+/*   Updated: 2020/09/10 17:56:22 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,18 +40,19 @@ void	free_split_array(char **array);
 ** file_two.c
 */
 int		get_amount_of_commands(char *line, char c);
-int		get_amount_of_tokens(char *command);
+int		get_amount_of_tokens(char *command, int i, int token);
 int		token_id(char c);
 int		begin_token(char *command, int i);
 int		len_token(char *command, int start, int len, int *space);
+int		len_sentence(char *command, int start, int len, int *space);
 
 /*
 ** file_three.c
 */
 void	special_char(char *command, int *i, int *token);
-void	dubbel_quotes(char *command, int *i, int *token);
-void	single_qoutes(char *command, int *i, int *token);
+void	quoted_sentence(char *command, int *i, int x);
 void	basic_word(char *command, int *i, int *token);
+int		quotes_count(char *command, int i, int x);
 
 /*
 ** file_four.c
@@ -125,6 +126,7 @@ void	search_path(t_data *data, int command, int *token, char *path_array);
 ** exit.c
 */
 void	execute_exit(t_data *data, int command, int *token);
+int		identify_new_line_option(t_data *data, int command, int *token, char **current_token);
 
 /*
 ** export.c

@@ -6,7 +6,7 @@
 /*   By: roybakker <roybakker@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/04 12:50:32 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/09/08 16:08:57 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/09/10 17:56:19 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,27 +27,18 @@ int		get_amount_of_commands(char *line, char c)
 	return (i);
 }
 
-int			get_amount_of_tokens(char *command)
+int			get_amount_of_tokens(char *command, int i, int token)
 {
-	int i;
-	int token;
-
-	token = 0;
-	i = 0;
 	while (command[i] == ' ' && command[i] != '\0')
 		i++;
 	while (command[i] != '\0')
 	{
-		if (token_id(command[i]) == 1)
-			special_char(command, &i, &token);
-		else if (token_id(command[i]) == 3)
-			dubbel_quotes(command, &i, &token);
-		else if (token_id(command[i]) == 4)
-			single_qoutes(command, &i, &token);
-		else if (token_id(command[i]) == 0)
-			basic_word(command, &i, &token);
-		else
+		if (token_id(command[i]) == 0)
 			i++;
+		else if (token_id(command[i]) == 1)
+			special_char(command, &i, &token);
+		else
+			basic_word(command, &i, &token);
 	}
 	if (token == 0)
 		return (1);
@@ -56,16 +47,16 @@ int			get_amount_of_tokens(char *command)
 
 int			token_id(char c)
 {
-	if (c == '>' || c == '<' || c == '|')
-		return (1);
-	else if (c == ' ')
-		return (2);
-	else if (c == 34)
-		return (3);
-	else if (c == 39)
-		return (4);
-	else
+	if (c == ' ')
 		return (0);
+	else if (c == '>' || c == '<' || c == '|')
+		return (1);
+	else if (c == 34)
+		return (2);
+	else if (c == 39)
+		return (3);
+	else
+		return (4);
 }
 
 int		begin_token(char *command, int i)
@@ -75,30 +66,70 @@ int		begin_token(char *command, int i)
 	return (i);
 }
 
+
 int		len_token(char *command, int start, int len, int *space)
 {
-	int x;
-
-	x = (token_id(command[start]) == 0) ? 0 : 1;
-	if (x != 0)
-		x = (token_id(command[start]) > 1) ? 3 : 1;
-	else if (x > 1)
-		x = (token_id(command[start]) > 3) ? 4 : 3;
-	if (token_id(command[start]) == x && x < 2)
-		while (token_id(command[start + len]) == x && command[start + len] != '\0')
-		{
-			len++;
-			if (token_id(command[start + len]) == 2)
-				(*space)++;
-		}
+	if(token_id(command[start]) == 1)
+	{
+		start++;
+		len = (token_id(command[start]) == 1) ? 2 : 1;
+		if (len == 2)
+			start++;
+		if (token_id(command[start]) == 2)
+			(*space)++;
+	}
 	else
-		len++;
-	if (x > 2)
-		while (token_id(command[start + len]) != x && command[start + len] != '\0')
-		{
-			len++;
-			if (token_id(command[start + len]) == x)
-				len++;
-		}
+		len = len_sentence(command, start, len, space);
 	return (len);
 }
+
+int		len_sentence(char *command, int start, int len, int *space)
+{
+	int quotes;
+	int x;
+
+	while(token_id(command[start + len]) == 4 && command[start + len] != '\0')
+		len++;
+	if (token_id(command[start + len]) == 2 || token_id(command[start + len]) == 3)
+	{
+		len++;
+		x = token_id(command[start + len]);
+		quotes = quotes_count(command, start, x);
+		while((token_id(command[start + len]) != x || quotes != 0) && command[start + len] != '\0')
+		{
+			if (token_id(command[start + len]) != x)
+				quotes--;
+			len++;
+		}
+		len++;
+	}
+	if (token_id(command[start + len]) == 2)
+		(*space)++;
+	return (len);
+}
+
+
+//int		len_token(char *command, int start, int len, int *space)
+//{
+//	int x;
+//
+//	x = (token_id(command[start]) == 0) ? 0 : 1;
+//	if (x != 0)
+//		x = (token_id(command[start]) > 1) ? 3 : 1;
+//	else if (x > 1)
+//		x = (token_id(command[start]) > 3) ? 4 : 3;
+//	if (token_id(command[start]) == x && x < 2)
+//		while (token_id(command[start + len]) == x && command[start + len] != '\0')
+//			len++;
+//	if (x > 2)
+//	{
+//		len++;
+//		while (token_id(command[start + len]) != x  && command[start + len] != '\0')
+//			len++;
+//		if (command[start + len] != '\0')
+//			len++;
+//	}
+//	if (token_id(command[start + len]) == 2)
+//		(*space)++;
+//	return (len);
+//}

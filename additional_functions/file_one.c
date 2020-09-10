@@ -6,7 +6,7 @@
 /*   By: roybakker <roybakker@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/02 11:27:20 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/09/09 16:46:16 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/09/10 11:26:27 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ int		print(char *str)
 
 	length = ft_strlen(str);
 	written = write(1, str, length);
-	if (written == -1)
-		return (-1);
+//		CLEAR STRUCT WHEN FAIL
+//
 	return (0);
 }
 

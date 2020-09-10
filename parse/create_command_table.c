@@ -6,7 +6,7 @@
 /*   By: roybakker <roybakker@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/02 11:00:03 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/09/09 12:01:21 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/09/10 15:50:06 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	create_command_table(t_data *data, char *line)
 		data->commands[i] = (t_command_table*)malloc(sizeof(t_command_table) * 1);
 // 		CLEAR STRUCT WHEN FAIL
 //
-		data->commands[i]->token_amount = get_amount_of_tokens(commands[i]);
+		data->commands[i]->token_amount = get_amount_of_tokens(commands[i], 0, 0);
 		printf("token amount = %d\n", data->commands[i]->token_amount);
 		data->commands[i]->tokens = (char**)malloc(sizeof(char*) * data->commands[i]->token_amount);
 // 		CLEAR STRUCT WHEN FAIL
