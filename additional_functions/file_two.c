@@ -6,7 +6,7 @@
 /*   By: roybakker <roybakker@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/04 12:50:32 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/09/10 17:56:19 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/09/10 21:15:19 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ int		len_token(char *command, int start, int len, int *space)
 		len = (token_id(command[start]) == 1) ? 2 : 1;
 		if (len == 2)
 			start++;
-		if (token_id(command[start]) == 2)
+		if (token_id(command[start]) == 0)
 			(*space)++;
 	}
 	else
@@ -103,33 +103,7 @@ int		len_sentence(char *command, int start, int len, int *space)
 		}
 		len++;
 	}
-	if (token_id(command[start + len]) == 2)
+	if (token_id(command[start + len]) == 0)
 		(*space)++;
 	return (len);
 }
-
-
-//int		len_token(char *command, int start, int len, int *space)
-//{
-//	int x;
-//
-//	x = (token_id(command[start]) == 0) ? 0 : 1;
-//	if (x != 0)
-//		x = (token_id(command[start]) > 1) ? 3 : 1;
-//	else if (x > 1)
-//		x = (token_id(command[start]) > 3) ? 4 : 3;
-//	if (token_id(command[start]) == x && x < 2)
-//		while (token_id(command[start + len]) == x && command[start + len] != '\0')
-//			len++;
-//	if (x > 2)
-//	{
-//		len++;
-//		while (token_id(command[start + len]) != x  && command[start + len] != '\0')
-//			len++;
-//		if (command[start + len] != '\0')
-//			len++;
-//	}
-//	if (token_id(command[start + len]) == 2)
-//		(*space)++;
-//	return (len);
-//}
