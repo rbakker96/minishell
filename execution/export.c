@@ -6,7 +6,7 @@
 /*   By: roybakker <roybakker@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/09 14:50:36 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/09/09 17:15:01 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/09/10 10:54:33 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,14 @@ void	execute_export(t_data *data, int command, int *token)
 
 	index = 0;
 	env_size = get_array_size(data->env);
-	new_env = (char**)malloc(sizeof(char*) * (env_size + 1));
+	new_env = (char**)malloc(sizeof(char*) * (env_size + 2));
 	while (index < env_size)
 	{
 		new_env[index] = ft_strdup(data->env[index]);
 //		CLEAR STRUCT WHEN FAIL
 //
 		index++;
+
 	}
 	new_env[index] = data->commands[command]->tokens[(*token) + 1];
 	new_env[index + 1] = 0;

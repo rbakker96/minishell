@@ -6,7 +6,7 @@
 /*   By: roybakker <roybakker@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/09 14:50:49 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/09/09 17:29:50 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/09/10 11:16:15 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,19 +22,22 @@ void	execute_unset(t_data *data, int command, int *token)
 
 	index = 0;
 	i = 0;
-	env_size = get_array_size(data->env) - 1;
+	env_size = get_array_size(data->env);
 	string = data->commands[command]->tokens[(*token) + 1];
-	new_env = (char**)malloc(sizeof(char*) * env_size);
+	new_env = (char**)malloc(sizeof(char*) * (env_size + 1));
 	while (index < env_size)
 	{
-		printf("i = %d\n", i);
-		if (ft_strncmp(new_env[index], string, ft_strlen(string))== 0)
+		if (ft_strncmp(data->env[index], string, ft_strlen(string)) == 0)
 			i++;
+		if (data->env[index + i] == 0)
+			break ;
 		new_env[index] = ft_strdup(data->env[index + i]);
 //		CLEAR STRUCT WHEN FAIL
 //
 		index++;
 	}
+	new_env[index] = 0;
+	free_split_array(data->env);
 	data->env = new_env;
 	if (command && (*token))
 		print(".");
