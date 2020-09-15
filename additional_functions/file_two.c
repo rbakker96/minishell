@@ -6,7 +6,7 @@
 /*   By: roybakker <roybakker@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/04 12:50:32 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/09/15 11:23:13 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/09/15 12:09:01 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,16 @@ int		get_amount_of_commands(char *line, char c)
 {
 	char	**array;
 	int 	i;
+	int		x;
 
 	i = 0;
+	x = 0;
 	array = ft_split(line, c);
 //	CLEAR STRUCT WHEN FAIL
 //
 	while (array[i] != 0)
 		i++;
+	i = i - x;
 	free_split_array(array);
 	return (i);
 }

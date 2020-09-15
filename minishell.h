@@ -6,7 +6,7 @@
 /*   By: roybakker <roybakker@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/01 15:55:06 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/09/15 11:39:26 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/09/15 14:57:33 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,12 @@ void	dubbel_command(char *line, char c, int i);
 void	mixed_command(char *line, int i, int x);
 void	end_of_line_command(char *line, char c, int i);
 void	validate_qoute(char *line, int *i, int x);
+
+/*
+** empty_command.c
+*/
+void	check_empty_command(char **line, int i, int x);
+void	remove_empty_command(char **line, int i, int empty);
 
 /*
 **------------------------------ERROR_HANDELING---------------------------------
