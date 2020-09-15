@@ -6,33 +6,61 @@
 /*   By: qli <qli@student.codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/03 15:19:55 by qli           #+#    #+#                 */
-/*   Updated: 2020/09/04 13:11:18 by qli           ########   odam.nl         */
+/*   Updated: 2020/09/15 11:37:56 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int 	check_duplicate_symbols(char *line)
+void 	check_input_redirection(char *line)
 {
-	int i;
+	dubbel_symbol(line, '<', 0);
+	dubbel_command(line, '<', 0);
+	end_of_line_command(line, '<', 0);
+}
 
-	i = 0;
-	while (line[i] != '\0')
+void	check_output_redirection(char *line)
+{
+	dubbel_command(line, '>', 0);
+	end_of_line_command(line, '>', 0);
+}
+
+void	check_pipes(char **line, int i)
+{
+	char *str;
+
+	dubbel_command((*line), '|', 0);
+	end_of_line_command((*line), '|', 0);
+	while ((*line)[i] != '\0')
 	{
-		if ((line[i] == ';' && line[i + 1] == ';') || \
-		(line[i] == '|' && line[i + 1] == '|' && line[i + 2] == '|'))
+		if((*line)[i] == '|' && (*line)[i + 1] == '|' )
 		{
-			print("duplicate symbols\n");
-			return (-1);
+			str = ft_substr((*line), 0, i);
+			free((*line));
+			*line = str;
 		}
 		i++;
 	}
-	return (0);
 }
 
-int		input_validate(char *line)
+void	check_multiline_commands(char *line, int i)
 {
-	if(check_duplicate_symbols(line) == -1)
-		return(-1);	
-	return (0);
+	while (line[i] != '\0')
+	{
+		if((token_id(line[i]) == 2 || token_id(line[i]) == 3) && i == 0)
+			validate_qoute(line, &i, token_id(line[i]));
+		else if((token_id(line[i]) == 2 || token_id(line[i]) == 3) && line[i - 1] != '\\')
+			validate_qoute(line, &i, token_id(line[i]));
+		i++;
+	}
+}
+
+void	input_validation(char **line)
+{
+	check_input_redirection((*line));
+	check_output_redirection((*line));
+	check_pipes(line, 0);
+	mixed_command((*line), 0, 0);
+	dubbel_symbol((*line), ';', 0);
+	check_multiline_commands((*line), 0);
 }

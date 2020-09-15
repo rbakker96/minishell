@@ -6,7 +6,7 @@
 #    By: rbakker <rbakker@student.42.fr>              +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/02/05 14:55:09 by rbakker       #+#    #+#                  #
-#    Updated: 2020/09/09 17:02:09 by roybakker     ########   odam.nl          #
+#    Updated: 2020/09/14 11:39:13 by roybakker     ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,6 +19,7 @@ SOURCES			= 	main.c \
 					additional_functions/file_four.c \
 					additional_functions/file_five.c \
 					input_validation/validate_input.c \
+					input_validation/check_functions.c \
 					parse/create_command_table.c \
 					execution/cd.c \
 					execution/echo.c \
@@ -29,6 +30,7 @@ SOURCES			= 	main.c \
 					execution/execute_loop.c \
 					execution/executable.c \
 					execution/pwd.c \
+					error_handeling/parse_error.c
 
 OBJECTS 		=	${SOURCES:%.c=%.o}
 

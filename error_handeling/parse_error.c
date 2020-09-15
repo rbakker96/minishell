@@ -1,23 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   file_five.c                                        :+:    :+:            */
+/*   parse_error.c                                      :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: roybakker <roybakker@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/09/09 16:44:49 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/09/14 13:30:44 by roybakker     ########   odam.nl         */
+/*   Created: 2020/09/14 10:53:18 by roybakker     #+#    #+#                 */
+/*   Updated: 2020/09/15 11:27:53 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int		get_array_size(char **array)
+void	parse_error(char charachter)
 {
-	int 	i;
-
-	i = 0;
-	while (array[i] != 0)
-		i++;
-	return (i);
+	print("minishell: parse error near ");
+	if (charachter == '>')
+		print("> \n");
+	else if (charachter == '<')
+		print("< \n");
+	else if (charachter == '|')
+		print("| \n");
+	else if (charachter == ';')
+		print("; \n");
+	else if (charachter == '\"')
+		print("\" \n");
+	else if (charachter == '\'')
+		print("\' \n");
+//	CLEAR STRUCT WHEN FAIL
+//
+	exit(1);
 }

@@ -6,7 +6,7 @@
 /*   By: roybakker <roybakker@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/01 15:55:06 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/09/10 17:58:14 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/09/15 11:39:26 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,8 +75,29 @@ int		get_array_size(char **array);
 /*
 ** validate_input.c
 */
-int		input_validate(char *line);
-int 	check_duplicated_symbols(char *line);
+void	input_validation(char **line);
+void 	check_input_redirection(char *line);
+void	check_output_redirection(char *line);
+void	check_pipes(char **line, int i);
+void	check_multiline_commands(char *line, int i);
+
+/*
+** check_functions.c
+*/
+void	dubbel_symbol(char *line, char c, int i);
+void	dubbel_command(char *line, char c, int i);
+void	mixed_command(char *line, int i, int x);
+void	end_of_line_command(char *line, char c, int i);
+void	validate_qoute(char *line, int *i, int x);
+
+/*
+**------------------------------ERROR_HANDELING---------------------------------
+*/
+
+/*
+** parse_error.c
+*/
+void	parse_error(char charachter);
 
 /*
 **----------------------------------PARSE---------------------------------------

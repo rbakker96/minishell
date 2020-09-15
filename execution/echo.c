@@ -6,7 +6,7 @@
 /*   By: roybakker <roybakker@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/09 14:49:34 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/09/10 13:23:20 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/09/11 15:04:01 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,12 @@ void	execute_echo(t_data *data, int command, int *token)
 	while((*token) < data->commands[command]->token_amount)
 	{
 		print(data->commands[command]->tokens[(*token)]);
+//		if()
+//			single_quotes_input();
+//		else if ()
+//			double_quotes_input();
+//		else if ()
+//			basic_input();
 		(*token)++;
 	}
 	if (newline)
@@ -39,10 +45,20 @@ int		identify_new_line_option(t_data *data, int command, int *token, char **curr
 		return (1);
 	}
 	else
-		return (1);
+		return (0);
 }
 
-//void	identify_echo_input()
+//void	basic_input()
 //{
-//	if ()
+
+//}
+
+//void	single_quotes_input()
+//{
+
+//}
+
+//void	dubbel_quotes_input()
+//{
+
 //}

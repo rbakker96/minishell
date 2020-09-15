@@ -6,7 +6,7 @@
 /*   By: roybakker <roybakker@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/02 14:39:39 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/09/10 17:53:35 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/09/15 10:48:04 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,9 @@
 void	special_char(char *command, int *i, int *token)
 {
 	(*token)++;
-	while(token_id(command[(*i)]) == 1 && command[(*i)] != '\0')
+	if (command[(*i)] == '>' && command[(*i) + 1] == '>')
+		(*i) += 2;
+	else
 		(*i)++;
 }
 

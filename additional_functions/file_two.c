@@ -6,7 +6,7 @@
 /*   By: roybakker <roybakker@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/04 12:50:32 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/09/10 21:15:19 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/09/15 11:23:13 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,9 @@ int			token_id(char c)
 		return (0);
 	else if (c == '>' || c == '<' || c == '|')
 		return (1);
-	else if (c == 34)
+	else if (c == '\"')
 		return (2);
-	else if (c == 39)
+	else if (c == '\'')
 		return (3);
 	else
 		return (4);
@@ -66,13 +66,12 @@ int		begin_token(char *command, int i)
 	return (i);
 }
 
-
 int		len_token(char *command, int start, int len, int *space)
 {
 	if(token_id(command[start]) == 1)
 	{
 		start++;
-		len = (token_id(command[start]) == 1) ? 2 : 1;
+		len = (command[start] == '>' && command[start - 1] == '>') ? 2 : 1;
 		if (len == 2)
 			start++;
 		if (token_id(command[start]) == 0)

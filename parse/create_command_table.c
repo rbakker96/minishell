@@ -6,7 +6,7 @@
 /*   By: roybakker <roybakker@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/02 11:00:03 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/09/10 21:13:48 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/09/14 15:23:57 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,7 @@ int	parse_command(t_data *data)
 		return (-1);
 //	CLEAR STRUCT WHEN FAIL
 //
-	if (input_validate(line) == -1)
-		return (-1);
+	input_validation(&line);
 	create_command_table(data, line);
 	free(line);
 	return (0);
