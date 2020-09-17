@@ -6,7 +6,7 @@
 /*   By: roybakker <roybakker@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/09 14:49:34 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/09/11 15:04:01 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/09/17 11:24:31 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,51 +14,60 @@
 
 void	execute_echo(t_data *data, int command, int *token)
 {
-	char *current_token;
-	int newline;
+	char	*value;
+	int		newline;
 
 	(*token)++;
-	current_token = data->commands[command]->tokens[(*token)];
-	newline = identify_new_line_option(data, command, token, &current_token);
-	while((*token) < data->commands[command]->token_amount)
+	value = data->commands[command]->tokens[(*token)];
+	newline = new_line_option(data, command, token, &value);
+	while(value[0] != '>' || value[0] != '<' || value[0] != '|')
 	{
 		print(data->commands[command]->tokens[(*token)]);
-//		if()
-//			single_quotes_input();
-//		else if ()
-//			double_quotes_input();
-//		else if ()
-//			basic_input();
 		(*token)++;
+//		if ((*token) == data->commands[command]->token_amount)
+//			break ;
+//		else if(value[0] == '\'')
+//			single_quotes_input(data, command, token, &value);
+//		else if (value[0] == '\"')
+//			double_quotes_input(data, command, token, &value);
+//		else
+//			basic_input(data, command, token, &value);
 	}
 	if (newline)
 		print("\n");
 	return ;
 }
 
-int		identify_new_line_option(t_data *data, int command, int *token, char **current_token)
+int		new_line_option(t_data *data, int command, int *token, char **value)
 {
-	if (ft_strncmp("-n", (*current_token), ft_strlen((*current_token))) == 0)
+	if (ft_strncmp("-n", (*value), ft_strlen((*value))) == 0)
 	{
 		(*token)++;
-		(*current_token) = data->commands[command]->tokens[(*token)];
+		*value = data->commands[command]->tokens[(*token)];
 		return (1);
 	}
 	else
 		return (0);
 }
 
-//void	basic_input()
+//void	basic_input(t_data *data, int command, int *token, char **value)
 //{
-
+//	int i;
+//
+//	i = 0;
+//	while(value[i] != '\0')
+//	{
+//		if (value[i] == '\\')
+//			len--;
+//	}
 //}
 
-//void	single_quotes_input()
+//void	single_quotes_input(t_data *data, int command, int *token, char **value)
 //{
-
+//
 //}
 
-//void	dubbel_quotes_input()
+//void	dubbel_quotes_input(t_data *data, int command, int *token, char **value)
 //{
 
 //}

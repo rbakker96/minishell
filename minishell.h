@@ -6,7 +6,7 @@
 /*   By: roybakker <roybakker@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/01 15:55:06 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/09/15 14:57:33 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/09/17 11:23:51 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,7 +154,7 @@ void	search_path(t_data *data, int command, int *token, char *path_array);
 ** exit.c
 */
 void	execute_exit(t_data *data, int command, int *token);
-int		identify_new_line_option(t_data *data, int command, int *token, char **current_token);
+int		new_line_option(t_data *data, int command, int *token, char **current_token);
 
 /*
 ** export.c

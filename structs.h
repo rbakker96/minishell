@@ -6,7 +6,7 @@
 /*   By: roybakker <roybakker@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/01 14:27:26 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/09/09 15:06:51 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/09/17 10:39:06 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ typedef struct 			s_data
 {
 	t_command_table 	**commands;
 	char				**env;
+	char				*output;
 	int					command_amount;
 }						t_data;
 

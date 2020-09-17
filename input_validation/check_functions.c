@@ -6,7 +6,7 @@
 /*   By: roybakker <roybakker@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/14 10:32:06 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/09/15 11:38:05 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/09/17 12:39:17 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ void	end_of_line_command(char *line, char c, int i)
 {
 	while(line[i] != '\0' && line[i] != ';')
 		i++;
+	i--;
 	while (line[i] == ' ')
 		i--;
 	if (line[i] == c)

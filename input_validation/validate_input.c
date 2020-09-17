@@ -6,7 +6,7 @@
 /*   By: qli <qli@student.codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/03 15:19:55 by qli           #+#    #+#                 */
-/*   Updated: 2020/09/15 15:10:14 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/09/17 12:48:32 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,3 +66,5 @@ void	input_validation(char **line)
 	check_empty_command(line, 0, 0);
 	printf("validated line = %s\n", (*line));
 }
+
+//think about cases which start with " for example "echo hi" -> wrong input
