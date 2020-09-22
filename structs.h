@@ -6,7 +6,7 @@
 /*   By: roybakker <roybakker@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/01 14:27:26 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/09/17 10:39:06 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/09/22 13:20:33 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,11 @@
 
 typedef enum			e_defenitions
 {
-	piped = 1,
-	input = 2,
-	overwrite = 3,
-	append = 4
+	space = 0,
+	meta_char = 1,
+	double_quote = 2,
+	single_quote = 3,
+	normal_char = 4
 }						t_defenitions;
 
 /*
@@ -52,7 +53,6 @@ typedef struct 			s_data
 {
 	t_command_table 	**commands;
 	char				**env;
-	char				*output;
 	int					command_amount;
 }						t_data;
 

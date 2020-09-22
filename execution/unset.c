@@ -6,7 +6,7 @@
 /*   By: roybakker <roybakker@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/09 14:50:49 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/09/10 11:16:15 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/09/22 13:37:39 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	execute_unset(t_data *data, int command, int *token)
 		index++;
 	}
 	new_env[index] = 0;
-	free_split_array(data->env);
+	free_array(data->env);
 	data->env = new_env;
 	if (command && (*token))
 		print(".");

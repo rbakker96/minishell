@@ -6,7 +6,7 @@
 /*   By: roybakker <roybakker@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/08 14:47:32 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/09/09 16:59:39 by qli           ########   odam.nl         */
+/*   Updated: 2020/09/22 13:34:55 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,24 +17,6 @@ int		option(char *str)
 	int result;
 
 	result = ft_strncmp(str, "-n", 2);
-	return (result);
-}
-
-int		redirection(char *str)
-{
-	int result;
-
-	result = 0;
-	if (!str)
-		return (0);
-	if (ft_strncmp(str, "|", ft_strlen(str)) == 0 )
-		result = piped;
-	else if (ft_strncmp(str, "<", ft_strlen(str)) == 0)
-		result = input;
-	else if (ft_strncmp(str, ">", ft_strlen(str)) == 0)
-		result = overwrite;
-	else if (ft_strncmp(str, ">>", ft_strlen(str)) == 0)
-		result = append;
 	return (result);
 }
 

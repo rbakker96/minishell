@@ -6,7 +6,7 @@
 /*   By: roybakker <roybakker@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/02 11:27:20 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/09/10 11:26:27 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/09/22 11:56:48 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,11 +56,11 @@ char	*get_current_directory(void)
 	path = ft_strdup(directory[index - 1]);
 //	CLEAR STRUCT WHEN FAIL
 //
-	free_split_array(directory);
+	free_array(directory);
 	return (path);
 }
 
-void	free_split_array(char **array)
+void	free_array(char **array)
 {
 	int i;
 
@@ -68,7 +68,7 @@ void	free_split_array(char **array)
 	if (!array)
 		return ;
 	while (array[i] != 0)
-		i++;
+			i++;
 	while (i >= 0)
 	{
 		free(array[i]);

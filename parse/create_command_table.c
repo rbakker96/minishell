@@ -6,7 +6,7 @@
 /*   By: roybakker <roybakker@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/02 11:00:03 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/09/14 15:23:57 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/09/22 13:19:01 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,21 +28,18 @@ int	parse_command(t_data *data)
 	return (0);
 }
 
-
 void	create_command_table(t_data *data, char *line)
 {
 	char	**commands;
 	int		i;
 
 	i = 0;
-	data->command_amount = get_amount_of_commands(line, ';');
+	data->command_amount = get_amount_of_commands(line, 1);
 	printf("command amount = %d\n", data->command_amount);
-	data->commands = (t_command_table**)malloc(sizeof(t_command_table*) * data->command_amount);
+	data->commands = (t_command_table**)malloc(sizeof(t_command_table*) * (data->command_amount + 1));
 // 	CLEAR STRUCT WHEN FAIL
 //
-	commands = ft_split(line, ';');
-// 	CLEAR STRUCT WHEN FAIL
-//
+	commands = save_commands(line, data->command_amount, 0, 0);
 	while(i < data->command_amount)
 	{
 		data->commands[i] = (t_command_table*)malloc(sizeof(t_command_table) * 1);
@@ -50,37 +47,11 @@ void	create_command_table(t_data *data, char *line)
 //
 		data->commands[i]->token_amount = get_amount_of_tokens(commands[i], 0, 0);
 		printf("token amount = %d\n", data->commands[i]->token_amount);
-		data->commands[i]->tokens = (char**)malloc(sizeof(char*) * data->commands[i]->token_amount);
+		data->commands[i]->tokens = (char**)malloc(sizeof(char*) * (data->commands[i]->token_amount + 1));
 // 		CLEAR STRUCT WHEN FAIL
 //
 		save_tokens(data, commands[i], i, 0);
 		i++;
 	}
-	free_split_array(commands);
-}
-
-
-void	save_tokens(t_data *data, char *command, int i, int len)
-{
-	int start;
-	int index;
-	int space;
-	int c;
-
-	c = 0;
-	index = 0;
-	while (command[c] == ' ' && command[c] != '\0')
-		c++;
-	while (command[c] != '\0' && index < data->commands[i]->token_amount)
-	{
-		space = 0;
-		start = begin_token(command, c);
-		len = len_token(command, start, 0, &space);
-		data->commands[i]->tokens[index] = ft_substr(command, start, len);
-		printf("token [%d] = [%s]\n", index, data->commands[i]->tokens[index]);
-// 		CLEAR STRUCT WHEN FAIL
-//
-		c += len + space;
-		index++;
-	}
+	free_array(commands);
 }

@@ -6,28 +6,33 @@
 /*   By: roybakker <roybakker@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/04 12:50:32 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/09/15 12:09:01 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/09/22 13:23:16 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int		get_amount_of_commands(char *line, char c)
+int		get_amount_of_commands(char *line, int i)
 {
-	char	**array;
-	int 	i;
-	int		x;
+	int count;
 
-	i = 0;
-	x = 0;
-	array = ft_split(line, c);
-//	CLEAR STRUCT WHEN FAIL
-//
-	while (array[i] != 0)
-		i++;
-	i = i - x;
-	free_split_array(array);
-	return (i);
+	count = 0;
+	while (line[i] != '\0')
+	{
+		while(line[i] == ' ')
+			i++;
+		if (token_id(line[i]) >= normal_char && line[i] != '\0' && line[i] != ';')
+			count++;
+		while (line[i] != '\0')
+		{
+			if (line[i] == ';' && line[i - 1] != '\\')
+				break ;
+			i++;
+		}
+		if (line[i] != '\0')
+			i++;
+	}
+	return (count);
 }
 
 int			get_amount_of_tokens(char *command, int i, int token)
@@ -36,9 +41,9 @@ int			get_amount_of_tokens(char *command, int i, int token)
 		i++;
 	while (command[i] != '\0')
 	{
-		if (token_id(command[i]) == 0)
+		if (token_id(command[i]) == space)
 			i++;
-		else if (token_id(command[i]) == 1)
+		else if (token_id(command[i]) == meta_char)
 			special_char(command, &i, &token);
 		else
 			basic_word(command, &i, &token);
@@ -60,52 +65,4 @@ int			token_id(char c)
 		return (3);
 	else
 		return (4);
-}
-
-int		begin_token(char *command, int i)
-{
-	while (command[i] == ' ' && command[i] != '\0')
-		i++;
-	return (i);
-}
-
-int		len_token(char *command, int start, int len, int *space)
-{
-	if(token_id(command[start]) == 1)
-	{
-		start++;
-		len = (command[start] == '>' && command[start - 1] == '>') ? 2 : 1;
-		if (len == 2)
-			start++;
-		if (token_id(command[start]) == 0)
-			(*space)++;
-	}
-	else
-		len = len_sentence(command, start, len, space);
-	return (len);
-}
-
-int		len_sentence(char *command, int start, int len, int *space)
-{
-	int quotes;
-	int x;
-
-	while(token_id(command[start + len]) == 4 && command[start + len] != '\0')
-		len++;
-	if (token_id(command[start + len]) == 2 || token_id(command[start + len]) == 3)
-	{
-		len++;
-		x = token_id(command[start + len]);
-		quotes = quotes_count(command, start, x);
-		while((token_id(command[start + len]) != x || quotes != 0) && command[start + len] != '\0')
-		{
-			if (token_id(command[start + len]) != x)
-				quotes--;
-			len++;
-		}
-		len++;
-	}
-	if (token_id(command[start + len]) == 0)
-		(*space)++;
-	return (len);
 }

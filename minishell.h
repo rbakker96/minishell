@@ -6,7 +6,7 @@
 /*   By: roybakker <roybakker@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/01 15:55:06 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/09/17 11:23:51 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/09/22 13:34:37 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,12 @@
 int		print(char *str);
 int		prompt(void);
 char	*get_current_directory(void);
-void	free_split_array(char **array);
+void	free_array(char **array);
 
 /*
 ** file_two.c
 */
-int		get_amount_of_commands(char *line, char c);
+int		get_amount_of_commands(char *line, int i);
 int		get_amount_of_tokens(char *command, int i, int token);
 int		token_id(char c);
 int		begin_token(char *command, int i);
@@ -58,7 +58,6 @@ int		quotes_count(char *command, int i, int x);
 ** file_four.c
 */
 int		option(char *str);
-int		redirection(char *str);
 int		check_relative_path(char *command);
 int		ft_isspace(int c);
 char	*find_path(t_data *data);
@@ -84,17 +83,12 @@ void	check_multiline_commands(char *line, int i);
 /*
 ** check_functions.c
 */
-void	dubbel_symbol(char *line, char c, int i);
-void	dubbel_command(char *line, char c, int i);
+void	double_symbol(char *line, char c, int i);
+void	double_command(char *line, char c, int i);
 void	mixed_command(char *line, int i, int x);
 void	end_of_line_command(char *line, char c, int i);
 void	validate_qoute(char *line, int *i, int x);
-
-/*
-** empty_command.c
-*/
-void	check_empty_command(char **line, int i, int x);
-void	remove_empty_command(char **line, int i, int empty);
+void	check_first_symbol(char *line);
 
 /*
 **------------------------------ERROR_HANDELING---------------------------------
@@ -115,6 +109,18 @@ void	parse_error(char charachter);
 int		parse_command(t_data *data);
 void	create_command_table(t_data *data, char *line);
 void	save_tokens(t_data *data, char *command, int i, int len);
+
+/*
+** commands.c
+*/
+char	**save_commands(char *line, char command_amount, int i, int index);
+int		len_command(char *line, int i, int len);
+int		empty_command(char *line, int i);
+
+/*
+** tokens.c
+*/
+
 
 /*
 **---------------------------------EXECUTION------------------------------------
