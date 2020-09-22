@@ -6,7 +6,7 @@
 /*   By: roybakker <roybakker@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/01 14:27:26 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/09/22 13:20:33 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/09/22 17:04:41 by qli           ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,11 @@ typedef enum			e_defenitions
 	meta_char = 1,
 	double_quote = 2,
 	single_quote = 3,
-	normal_char = 4
+	normal_char = 4,
+	piped = 5,
+	input = 6,
+	overwrite = 7,
+	append = 8
 }						t_defenitions;
 
 /*

@@ -6,7 +6,7 @@
 /*   By: roybakker <roybakker@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/01 15:55:06 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/09/22 13:34:37 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/09/22 17:04:01 by qli           ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,9 @@
 # include <sys/wait.h>
 # include <errno.h>      /* for 'ENOENT' and 'ENOMEM' */
 # include <limits.h>
-#include <string.h> /* for strerror */
+# include <string.h> /* for strerror */
+# include <sys/stat.h> /* for open */
+# include <fcntl.h> /* for open */
 
 /*
 **---------------------------ADDITIONAL_FUNCTIONS-------------------------------
@@ -61,6 +63,7 @@ int		option(char *str);
 int		check_relative_path(char *command);
 int		ft_isspace(int c);
 char	*find_path(t_data *data);
+int		redirection(char *str);
 
 /*
 ** file_five.c
@@ -171,6 +174,10 @@ void	execute_export(t_data *data, int command, int *token);
 ** pwd.c
 */
 void	execute_pwd(t_data *data, int command, int *token);
+void	check_redirection(t_data *data, int command, int *token, int *fd);
+void	write_pwd(int fd, char *ptr);
+void	check_pipe(t_data *data, int command, int *token, char *ptr);
+void	create_pipe(t_data *data, int command, int *token, char *ptr);
 
 /*
 ** unset.c
