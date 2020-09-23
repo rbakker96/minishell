@@ -6,7 +6,7 @@
 #    By: rbakker <rbakker@student.42.fr>              +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/02/05 14:55:09 by rbakker       #+#    #+#                  #
-#    Updated: 2020/09/19 15:00:42 by roybakker     ########   odam.nl          #
+#    Updated: 2020/09/23 16:03:33 by roybakker     ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ SOURCES			= 	main.c \
 					parse/commands.c \
 					parse/tokens.c \
 					execution/cd.c \
-					execution/echo.c \
+					execution/echo/echo.c \
 					execution/env.c \
 					execution/exit.c \
 					execution/export.c \

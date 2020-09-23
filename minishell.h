@@ -6,7 +6,7 @@
 /*   By: roybakker <roybakker@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/01 15:55:06 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/09/22 13:34:37 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/09/23 14:28:15 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,7 +130,7 @@ int		empty_command(char *line, int i);
 ** execution_loop.c
 */
 void	execution_loop(t_data *data, int command, int token);
-void	identfy_command(t_data *data, int command, int *token);
+void	identfy_command(t_data *data, int i, int *token, char *value);
 
 /*
 ** cd.c
@@ -138,10 +138,66 @@ void	identfy_command(t_data *data, int command, int *token);
 void	execute_cd(t_data *data, int command, int *token);
 void	go_to_home(t_data *data);
 
-/*
-** echo.c
-*/
-void	execute_echo(t_data *data, int command, int *token);
+	/*
+	**---------------------------------ECHO------------------------------------
+	*/
+
+	/*
+	** echo.c
+	*/
+void	execute_echo(t_data *data, int command, int *token, int token_amount);
+int		new_line_option(char *value, int token_amount, int *token);
+
+	/*
+	** no_quotes.c
+	*/
+void	no_quotes(t_data *data, int command, int *token, char **value, int *i);
+
+	/*
+	** no_input.c
+	*/
+void	no_input(t_data *data, int command, int *token, char **value);
+
+	/*
+	** single_quotes.c
+	*/
+void	single_quotes(t_data *data, int command, int *token, char **value);
+
+	/*
+	** double_quotes.c
+	*/
+void	dubbel_quotes(t_data *data, int command, int *token, char **value);
+
+
+	/*
+	**---------------------------------OUTPUT-----------------------------------
+	*/
+
+	/*
+	** create_fd.c
+	*/
+int		argument_count(t_data *data, int i, int token, int *token_amount);
+int		create_fd(t_data *data, int i, int token, int *token_amount);
+
+	/*
+	** create_append_redirection.c
+	*/
+
+
+	/*
+	** create_input_redirection.c
+	*/
+
+
+	/*
+	** create_overwrite_redirection.c
+	*/
+
+
+	/*
+	** create_pipe.c
+	*/
+
 
 /*
 ** env.c
@@ -160,7 +216,6 @@ void	search_path(t_data *data, int command, int *token, char *path_array);
 ** exit.c
 */
 void	execute_exit(t_data *data, int command, int *token);
-int		new_line_option(t_data *data, int command, int *token, char **current_token);
 
 /*
 ** export.c

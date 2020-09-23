@@ -6,7 +6,7 @@
 /*   By: roybakker <roybakker@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/19 13:23:47 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/09/22 14:30:13 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/09/23 11:24:16 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,6 @@ int		len_sentence(char *command, int start, int len, int *spaces)
 			else
 				len++;
 		}
-		len++;
 	}
 	if (token_id(command[start + len]) == space)
 		(*spaces)++;
