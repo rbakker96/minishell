@@ -6,7 +6,7 @@
 /*   By: roybakker <roybakker@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/01 15:55:06 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/09/22 17:04:01 by qli           ########   odam.nl         */
+/*   Updated: 2020/09/23 13:27:02 by qli           ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -174,10 +174,11 @@ void	execute_export(t_data *data, int command, int *token);
 ** pwd.c
 */
 void	execute_pwd(t_data *data, int command, int *token);
-void	check_redirection(t_data *data, int command, int *token, int *fd);
+void	check_output_redir(t_data *data, int command, int *token, int *fd);
 void	write_pwd(int fd, char *ptr);
 void	check_pipe(t_data *data, int command, int *token, char *ptr);
 void	create_pipe(t_data *data, int command, int *token, char *ptr);
+void	check_input_redir(t_data *data, int command, int token, int *fd);
 
 /*
 ** unset.c
