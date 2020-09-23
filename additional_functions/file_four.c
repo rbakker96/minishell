@@ -6,7 +6,7 @@
 /*   By: roybakker <roybakker@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/08 14:47:32 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/09/22 13:34:55 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/09/22 17:03:49 by qli           ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,4 +57,22 @@ char	*find_path(t_data *data)
 		i++;
 	}
 	return (NULL);
+}
+
+int		redirection(char *str)
+{
+	int result;
+
+	result = 0;
+	if (!str)
+		return (0);
+	if (ft_strncmp(str, "|", ft_strlen(str)) == 0 )
+		result = piped;
+	else if (ft_strncmp(str, "<", ft_strlen(str)) == 0)
+		result = input;
+	else if (ft_strncmp(str, ">", ft_strlen(str)) == 0)
+		result = overwrite;
+	else if (ft_strncmp(str, ">>", ft_strlen(str)) == 0)
+		result = append;
+	return (result);
 }

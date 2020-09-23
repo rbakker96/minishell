@@ -6,7 +6,11 @@
 /*   By: roybakker <roybakker@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/01 15:55:06 by roybakker     #+#    #+#                 */
+<<<<<<< HEAD
 /*   Updated: 2020/09/23 14:28:15 by roybakker     ########   odam.nl         */
+=======
+/*   Updated: 2020/09/23 13:27:02 by qli           ########   odam.nl         */
+>>>>>>> ff683d619aebc3c34403d8fda9853ac30a72965b
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +26,9 @@
 # include <sys/wait.h>
 # include <errno.h>      /* for 'ENOENT' and 'ENOMEM' */
 # include <limits.h>
-#include <string.h> /* for strerror */
+# include <string.h> /* for strerror */
+# include <sys/stat.h> /* for open */
+# include <fcntl.h> /* for open */
 
 /*
 **---------------------------ADDITIONAL_FUNCTIONS-------------------------------
@@ -61,6 +67,7 @@ int		option(char *str);
 int		check_relative_path(char *command);
 int		ft_isspace(int c);
 char	*find_path(t_data *data);
+int		redirection(char *str);
 
 /*
 ** file_five.c
@@ -226,6 +233,11 @@ void	execute_export(t_data *data, int command, int *token);
 ** pwd.c
 */
 void	execute_pwd(t_data *data, int command, int *token);
+void	check_output_redir(t_data *data, int command, int *token, int *fd);
+void	write_pwd(int fd, char *ptr);
+void	check_pipe(t_data *data, int command, int *token, char *ptr);
+void	create_pipe(t_data *data, int command, int *token, char *ptr);
+void	check_input_redir(t_data *data, int command, int token, int *fd);
 
 /*
 ** unset.c
