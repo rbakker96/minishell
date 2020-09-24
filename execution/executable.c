@@ -6,7 +6,7 @@
 /*   By: roybakker <roybakker@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/09 14:06:18 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/09/23 14:00:20 by qli           ########   odam.nl         */
+/*   Updated: 2020/09/24 13:52:07 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@ void	relative_path(t_data *data, int command, int *token)
 	{
 		execve(data->commands[command]->tokens[(*token)], args, envp);
 		error_message = strerror(errno);
-		print(error_message);
-		print("\n");
+		print(1, error_message);
+		print(1, "\n");
 		//	CLEAR STRUCT WHEN FAIL
 		//
 	}
@@ -77,7 +77,7 @@ void	search_path(t_data *data, int command, int *token, char *path_array)
 	//move up
 	updated_token = ft_strjoin("/", data->commands[command]->tokens[(*token)]);
 //	CLEAR STRUCT WHEN FAIL
-//	
+//
 	updated_path = ft_strjoin(path_array, updated_token);
 //	CLEAR STRUCT WHEN FAIL
 //

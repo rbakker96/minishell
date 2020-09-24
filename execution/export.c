@@ -6,7 +6,7 @@
 /*   By: roybakker <roybakker@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/09 14:50:36 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/09/10 17:39:59 by qli           ########   odam.nl         */
+/*   Updated: 2020/09/24 13:52:23 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	execute_export(t_data *data, int command, int *token)
 	new_env[index + 1] = 0;
 	data->env = new_env;
 	if (command && (*token))
-		print(".");
+		print(1, ".");
 }
 // have to update token correctly
 // have to check if input value of export is correct

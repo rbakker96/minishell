@@ -6,7 +6,7 @@
 /*   By: roybakker <roybakker@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/01 14:27:26 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/09/23 16:09:04 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/09/24 11:32:21 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,21 +27,19 @@ typedef enum			e_defenitions
 	piped = 5,
 	input = 6,
 	overwrite = 7,
-	append = 8
+	append = 8,
+	redirected = 9
 }						t_defenitions;
 
 /*
 **-------------------------------EXECUTION--------------------------------------
 */
 
-typedef struct 			s_table_item
+typedef struct 			s_fd
 {
-	char 				*command;
-	char				*option;
-	char				*operation;
-	char 				*input;
-	char 				*output;
-}						t_table_item;
+	int					input;
+	int					output;
+}						t_fd;
 
 /*
 **---------------------------------PARSE----------------------------------------
@@ -50,6 +48,7 @@ typedef struct 			s_command_table
 {
 	char				**tokens;
 	int					token_amount;
+	t_fd				fd;
 	int 				exit_code;
 }						t_command_table;
 

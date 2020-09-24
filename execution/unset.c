@@ -6,7 +6,7 @@
 /*   By: roybakker <roybakker@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/09 14:50:49 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/09/22 13:37:39 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/09/24 13:53:13 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	execute_unset(t_data *data, int command, int *token)
 	free_array(data->env);
 	data->env = new_env;
 	if (command && (*token))
-		print(".");
+		print(1, ".");
 }
 
 // have to update token correctly

@@ -6,7 +6,7 @@
 /*   By: roybakker <roybakker@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/09 14:49:34 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/09/23 16:04:11 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/09/24 14:43:48 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,31 +22,41 @@
 
 void	execute_echo(t_data *data, int i, int *token, int token_amount)
 {
-//	char	*value;
-//	int		newline;
-//	int		fd;
+	int		newline;
+	int		type;
 
-//	fd = create_fd(data, i, (*token), &token_amount);
-
-
-//	newline = new_line_option(value, token_amount, token);
+	(*token)++;
+	data->commands[i]->fd = create_fd(data, i, (*token), &token_amount);
+	while(redirection_check(data->commands[i]->tokens[(*token)]) == redirected)
+		(*token) += 2;
+	newline = newline_option(data->commands[i]->tokens[(*token)], token_amount,
+																		token);
 	while((*token) < token_amount)
 	{
-		print(data->commands[i]->tokens[(*token)]);
-		(*token)++;
+		type = quotes_check(data->commands[i]->tokens[(*token)]);
+		if (type == normal_char)
+			no_quotes(data, i, token);
+		else if (type == double_quote)
+			double_quotes(data, i, token);
+		else if (type == single_quote)
+			single_quotes(data, i, token);
+		else
+			(*token)++;
 	}
-//	if (!newline)
-//		print("\n");
+	if (!newline)
+		print(data->commands[i]->fd.output, "\n");
 	return ;
 }
 
-//int	new_line_option(char *value, int token_amount, int *token)
-//{
-//	if (ft_strncmp("-n", value, ft_strlen((*value))) == 0)
-//	{
-//		((*token) < token_amount ) ? (*token)++ : (*token);
-//		return (1);
-//	}
-//	else
-//		return (0);
-//}
+int	newline_option(char *value, int token_amount, int *token)
+{
+	if (!value)
+		return (0);
+	else if (ft_strncmp("-n", value, ft_strlen(value)) == 0)
+	{
+		((*token) < token_amount ) ? (*token)++ : (*token);
+		return (1);
+	}
+	else
+		return (0);
+}

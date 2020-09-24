@@ -6,11 +6,7 @@
 /*   By: roybakker <roybakker@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/01 15:55:06 by roybakker     #+#    #+#                 */
-<<<<<<< HEAD
-/*   Updated: 2020/09/23 14:28:15 by roybakker     ########   odam.nl         */
-=======
-/*   Updated: 2020/09/23 13:27:02 by qli           ########   odam.nl         */
->>>>>>> ff683d619aebc3c34403d8fda9853ac30a72965b
+/*   Updated: 2020/09/24 13:56:57 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +33,7 @@
 /*
 ** file_one.c
 */
-int		print(char *str);
+int		print(int fd, char *str);
 int		prompt(void);
 char	*get_current_directory(void);
 void	free_array(char **array);
@@ -48,9 +44,6 @@ void	free_array(char **array);
 int		get_amount_of_commands(char *line, int i);
 int		get_amount_of_tokens(char *command, int i, int token);
 int		token_id(char c);
-int		begin_token(char *command, int i);
-int		len_token(char *command, int start, int len, int *space);
-int		len_sentence(char *command, int start, int len, int *space);
 
 /*
 ** file_three.c
@@ -73,6 +66,8 @@ int		redirection(char *str);
 ** file_five.c
 */
 int		get_array_size(char **array);
+int		redirection_check(char *str);
+int		quotes_check(char *str);
 
 /*
 **-----------------------------INPUT_VALIDATION---------------------------------
@@ -115,7 +110,6 @@ void	parse_error(char charachter);
 */
 int		parse_command(t_data *data);
 void	create_command_table(t_data *data, char *line);
-void	save_tokens(t_data *data, char *command, int i, int len);
 
 /*
 ** commands.c
@@ -127,7 +121,10 @@ int		empty_command(char *line, int i);
 /*
 ** tokens.c
 */
-
+void	save_tokens(t_data *data, char *command, int i, int len);
+int		begin_token(char *command, int i);
+int		len_token(char *command, int start, int len, int *spaces);
+int		len_sentence(char *command, int start, int len, int *spaces);
 
 /*
 **---------------------------------EXECUTION------------------------------------
@@ -153,27 +150,22 @@ void	go_to_home(t_data *data);
 	** echo.c
 	*/
 void	execute_echo(t_data *data, int command, int *token, int token_amount);
-int		new_line_option(char *value, int token_amount, int *token);
+int		newline_option(char *value, int token_amount, int *token);
 
 	/*
 	** no_quotes.c
 	*/
-void	no_quotes(t_data *data, int command, int *token, char **value, int *i);
-
-	/*
-	** no_input.c
-	*/
-void	no_input(t_data *data, int command, int *token, char **value);
+void	no_quotes(t_data *data, int command, int *token);
 
 	/*
 	** single_quotes.c
 	*/
-void	single_quotes(t_data *data, int command, int *token, char **value);
+void	single_quotes(t_data *data, int i, int *token);
 
 	/*
 	** double_quotes.c
 	*/
-void	dubbel_quotes(t_data *data, int command, int *token, char **value);
+void	double_quotes(t_data *data, int i, int *token);
 
 
 	/*
@@ -184,22 +176,14 @@ void	dubbel_quotes(t_data *data, int command, int *token, char **value);
 	** create_fd.c
 	*/
 int		argument_count(t_data *data, int i, int token, int *token_amount);
-int		create_fd(t_data *data, int i, int token, int *token_amount);
+t_fd		create_fd(t_data *data, int i, int token, int *token_amount);
 
 	/*
-	** create_append_redirection.c
+	** handle_redirection_files.c
 	*/
-
-
-	/*
-	** create_input_redirection.c
-	*/
-
-
-	/*
-	** create_overwrite_redirection.c
-	*/
-
+int		append_file(t_data *data, int i, int *token);
+int		overwrite_file(t_data *data, int i, int *token);
+int		input_file(t_data *data, int i, int *token);
 
 	/*
 	** create_pipe.c
