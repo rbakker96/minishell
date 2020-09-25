@@ -6,13 +6,13 @@
 /*   By: roybakker <roybakker@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/02 11:27:20 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/09/24 13:51:23 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/09/25 10:35:59 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int		print(int fd, char *str)
+int		print(int fd, char *str) //make it a void later like print char
 {
 	int length;
 	int written;
@@ -24,6 +24,16 @@ int		print(int fd, char *str)
 	if (written == -1)
 		return (-1);
 	return (0);
+}
+
+void	print_char(int fd, char c)
+{
+	int written;
+
+	written = write(fd, &c, 1);
+//	CLEAR STRUCT WHEN FAIL
+//
+	return ;
 }
 
 int		prompt(void)

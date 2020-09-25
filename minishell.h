@@ -6,7 +6,7 @@
 /*   By: roybakker <roybakker@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/01 15:55:06 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/09/24 13:56:57 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/09/25 15:23:43 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@
 ** file_one.c
 */
 int		print(int fd, char *str);
+void	print_char(int fd, char c);
 int		prompt(void);
 char	*get_current_directory(void);
 void	free_array(char **array);
@@ -149,24 +150,27 @@ void	go_to_home(t_data *data);
 	/*
 	** echo.c
 	*/
-void	execute_echo(t_data *data, int command, int *token, int token_amount);
-int		newline_option(char *value, int token_amount, int *token);
+void	execute_echo(t_data *data, int i, int *token, int needed_tokens);
+int		newline_option(char *value, int needed_tokens, int *token);
+void	echo_variable(t_data *data, int i, int *token, int *index);
+char	*get_variable(t_data *data, char *value, int index, int i, int len);
 
 	/*
 	** no_quotes.c
 	*/
-void	no_quotes(t_data *data, int command, int *token);
+void	no_quotes(t_data *data, int i, int *token, int *index);
+void	no_quotes_escape(t_data *data, int i, int *token, int *index);
 
 	/*
 	** single_quotes.c
 	*/
-void	single_quotes(t_data *data, int i, int *token);
+void	single_quotes(t_data *data, int i, int *token, int *index);
 
 	/*
 	** double_quotes.c
 	*/
-void	double_quotes(t_data *data, int i, int *token);
-
+void	double_quotes(t_data *data, int i, int *token, int *index);
+void	double_quotes_escape(t_data *data, int i, int *token, int *index);
 
 	/*
 	**---------------------------------OUTPUT-----------------------------------
@@ -175,8 +179,7 @@ void	double_quotes(t_data *data, int i, int *token);
 	/*
 	** create_fd.c
 	*/
-int		argument_count(t_data *data, int i, int token, int *token_amount);
-t_fd		create_fd(t_data *data, int i, int token, int *token_amount);
+t_fd	create_fd(t_data *data, int i, int token, int *needed_tokens);
 
 	/*
 	** handle_redirection_files.c
