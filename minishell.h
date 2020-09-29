@@ -6,7 +6,7 @@
 /*   By: roybakker <roybakker@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/01 15:55:06 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/09/25 15:23:43 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/09/29 11:39:41 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include <unistd.h>
 # include <sys/types.h>
 # include <sys/wait.h>
+#include <sys/stat.h>
 # include <errno.h>      /* for 'ENOENT' and 'ENOMEM' */
 # include <limits.h>
 # include <string.h> /* for strerror */
@@ -173,13 +174,33 @@ void	double_quotes(t_data *data, int i, int *token, int *index);
 void	double_quotes_escape(t_data *data, int i, int *token, int *index);
 
 	/*
+	**------------------------------EXECUTABLE----------------------------------
+	*/
+
+	/*
+	** absolute_executable.c
+	*/
+
+	/*
+	** create_arguments.c
+	*/
+void	create_args(t_data *data, int command, int token);
+int		check_args_num(t_data *data, int command, int token);
+
+	/*
+	** run_executable.c
+	*/
+void	execute_executable(t_data *data, int i, int *token, int needed_tokens, int x);
+int		fork_executable(t_data *data, char **path, int x);
+
+	/*
 	**---------------------------------OUTPUT-----------------------------------
 	*/
 
 	/*
 	** create_fd.c
 	*/
-t_fd	create_fd(t_data *data, int i, int token, int *needed_tokens);
+int		*create_fd(t_data *data, int i, int token, int *needed_tokens, int fd[2]);
 
 	/*
 	** handle_redirection_files.c
@@ -198,13 +219,6 @@ int		input_file(t_data *data, int i, int *token);
 */
 void	execute_env(t_data *data, int command, int *token);
 
-/*
-** executable.c
-*/
-void	execute_executable(t_data *data, int command, int *token);
-void	relative_path(t_data *data, int command, int *token);
-void	absolute_path(t_data *data, int command, int *token);
-void	search_path(t_data *data, int command, int *token, char *path_array);
 
 /*
 ** exit.c
@@ -219,17 +233,11 @@ void	execute_export(t_data *data, int command, int *token);
 /*
 ** pwd.c
 */
-void	execute_pwd(t_data *data, int command, int *token);
-void	check_output_redir(t_data *data, int command, int *token, int *fd);
-void	write_pwd(int fd, char *ptr);
-void	check_pipe(t_data *data, int command, int *token, char *ptr);
-void	create_pipe(t_data *data, int command, int *token, char *ptr);
-void	check_input_redir(t_data *data, int command, int token, int *fd);
+void	execute_pwd(t_data *data, int i, int *token, int needed_tokens);
 
 /*
 ** unset.c
 */
 void	execute_unset(t_data *data, int command, int *token);
-
 
 #endif

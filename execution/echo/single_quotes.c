@@ -6,7 +6,7 @@
 /*   By: roybakker <roybakker@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/23 11:58:02 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/09/25 15:17:44 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/09/28 14:17:45 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	single_quotes(t_data *data, int i, int *token, int *index) //think with par
 	(*index)++;
 	while (value[(*index)] != '\'')
 	{
-		print_char(data->commands[i]->fd.output, value[(*index)]);
+		print_char(data->fd[1], value[(*index)]);
 		(*index)++;
 	}
 	(*index)++;

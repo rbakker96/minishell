@@ -6,7 +6,7 @@
 /*   By: roybakker <roybakker@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/09 14:49:34 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/09/25 15:05:59 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/09/28 14:16:25 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	execute_echo(t_data *data, int i, int *token, int needed_tokens)
 	int		index;
 
 	(*token)++;
-	data->commands[i]->fd = create_fd(data, i, (*token), &needed_tokens);
+	create_fd(data, i, (*token), &needed_tokens, data->fd);
 	while(redirection_check(data->commands[i]->tokens[(*token)]) == redirected)
 		(*token) += 2;
 	newline = newline_option(data->commands[i]->tokens[(*token)], needed_tokens,
@@ -35,11 +35,11 @@ void	execute_echo(t_data *data, int i, int *token, int needed_tokens)
 		else if (type == single_quote)
 			single_quotes(data, i, token, &index);
 		if ((*token) != (needed_tokens - 1))
-			print_char(data->commands[i]->fd.output, ' '); // prevent this with last token
+			print_char(data->fd[1], ' '); // prevent this with last token && after rdirection only one space instead of two
 		(*token)++;
 	}
 	if (!newline)
-		print(data->commands[i]->fd.output, "\n");
+		print(data->fd[1], "\n");
 	return ;
 }
 
@@ -72,7 +72,7 @@ void	echo_variable(t_data *data, int i, int *token, int *index)
 		return ;
 	while (variable[x] != '\0')
 	{
-		print_char(data->commands[i]->fd.output, variable[x]);
+		print_char(data->fd[1], variable[x]);
 		x++;
 	}
 }

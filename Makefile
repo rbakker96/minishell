@@ -6,7 +6,7 @@
 #    By: rbakker <rbakker@student.42.fr>              +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/02/05 14:55:09 by rbakker       #+#    #+#                  #
-#    Updated: 2020/09/24 13:56:07 by roybakker     ########   odam.nl          #
+#    Updated: 2020/09/28 18:03:38 by roybakker     ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,6 +28,8 @@ SOURCES			= 	main.c \
 					execution/echo/no_quotes.c \
 					execution/echo/double_quotes.c \
 					execution/echo/single_quotes.c \
+					execution/executable/create_arguments.c \
+					execution/executable/run_executable.c \
 					execution/output/create_fd.c \
 					execution/output/handle_redirection_files.c \
 					execution/env.c \
@@ -35,7 +37,6 @@ SOURCES			= 	main.c \
 					execution/export.c \
 					execution/unset.c \
 					execution/execute_loop.c \
-					execution/executable.c \
 					execution/pwd.c \
 					error_handeling/parse_error.c
 

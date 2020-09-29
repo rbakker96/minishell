@@ -6,7 +6,7 @@
 /*   By: roybakker <roybakker@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/23 11:57:35 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/09/25 15:24:55 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/09/28 14:17:37 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	double_quotes(t_data *data, int i, int *token, int *index)
 		else if (value[(*index)] == '$')
 			echo_variable(data, i, token, index);
 		else
-			print_char(data->commands[i]->fd.output, value[(*index)]);
+			print_char(data->fd[1], value[(*index)]);
 		if (value[(*index)] != '\0')
 			(*index)++;
 	}
@@ -47,10 +47,10 @@ void	double_quotes_escape(t_data *data, int i, int *token, int *index)
 	(*index)++;
 	if (value[(*index)] == '$' || value[(*index)] == '`' ||
 		value[(*index)] == '\"' || value[(*index)] == '\\')
-		print_char(data->commands[i]->fd.output, value[(*index)]);
+		print_char(data->fd[1], value[(*index)]);
 	else
 	{
-		print_char(data->commands[i]->fd.output, '\\');
-		print_char(data->commands[i]->fd.output, value[(*index)]);
+		print_char(data->fd[1], '\\');
+		print_char(data->fd[1], value[(*index)]);
 	}
 }
