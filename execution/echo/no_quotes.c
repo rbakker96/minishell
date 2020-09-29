@@ -6,7 +6,7 @@
 /*   By: roybakker <roybakker@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/23 11:57:21 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/09/28 14:16:51 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/09/29 11:52:43 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,11 @@ void	no_quotes(t_data *data, int i, int *token, int *index)
 	{
 		if(redirection_check(value) == redirected)
 		{
-			(*token)++;
-			return ;
+			(*token) += 2;
+			value = data->commands[i]->tokens[(*token)];
 		}
-//		if (value[(*index)] == '\"')
-//			double_quotes(data, i, token, index);
+		if (value[(*index)] == '\"')
+			double_quotes(data, i, token, index);
 		else if (value[(*index)] == '\'')
 			single_quotes(data, i, token, index);
 		if (value[(*index)] == '\\')

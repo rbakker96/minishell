@@ -6,7 +6,7 @@
 /*   By: roybakker <roybakker@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/09 14:49:34 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/09/28 14:16:25 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/09/29 11:53:56 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	execute_echo(t_data *data, int i, int *token, int needed_tokens)
 		else if (type == single_quote)
 			single_quotes(data, i, token, &index);
 		if ((*token) != (needed_tokens - 1))
-			print_char(data->fd[1], ' '); // prevent this with last token && after rdirection only one space instead of two
+			print_char(data->fd[1], ' ');
 		(*token)++;
 	}
 	if (!newline)
