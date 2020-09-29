@@ -6,7 +6,7 @@
 /*   By: roybakker <roybakker@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/02 11:27:20 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/09/25 10:35:59 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/09/29 17:33:23 by qli           ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ void	print_char(int fd, char c)
 	written = write(fd, &c, 1);
 //	CLEAR STRUCT WHEN FAIL
 //
+	if (written == -1)
+		return ;
 	return ;
 }
 
