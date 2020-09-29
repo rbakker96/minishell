@@ -6,7 +6,7 @@
 /*   By: qli <qli@student.codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/04 15:02:22 by qli           #+#    #+#                 */
-/*   Updated: 2020/09/28 16:50:06 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/09/29 14:22:14 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	identfy_command(t_data *data, int i, int *token, char *value)
 	if(ft_strncmp("echo", value, ft_strlen(value)) == 0)
 		execute_echo(data, i, token, data->commands[i]->token_amount);
 	else if(ft_strncmp("cd", value, ft_strlen(value)) == 0)
-		execute_cd(data, i, token);
+		execute_cd(data, i, token, data->commands[i]->token_amount);
 	else if(ft_strncmp("pwd", value, ft_strlen(value)) == 0)
 		execute_pwd(data, i, token, data->commands[i]->token_amount);
 	else if(ft_strncmp("export", value, ft_strlen(value)) == 0)

@@ -6,7 +6,7 @@
 /*   By: roybakker <roybakker@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/01 15:55:06 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/09/29 11:39:41 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/09/29 15:32:30 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,8 +141,8 @@ void	identfy_command(t_data *data, int i, int *token, char *value);
 /*
 ** cd.c
 */
-void	execute_cd(t_data *data, int command, int *token);
-void	go_to_home(t_data *data);
+void	execute_cd(t_data *data, int command, int *token, int needed_tokens);
+void	go_to_home(t_data *data, int i);
 
 	/*
 	**---------------------------------ECHO------------------------------------
