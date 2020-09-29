@@ -6,15 +6,15 @@
 /*   By: roybakker <roybakker@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/01 15:55:06 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/09/29 15:32:30 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/09/29 16:16:19 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 # include <stdlib.h>
-# include "libft/libft.h"
-# include "gnl/get_next_line.h"
+# include "1_supportive_lib/libft/libft.h"
+# include "1_supportive_lib/gnl/get_next_line.h"
 # include "structs.h"
 # include <stdio.h> //to remove
 # include <unistd.h>

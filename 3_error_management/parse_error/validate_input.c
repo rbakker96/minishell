@@ -6,11 +6,11 @@
 /*   By: qli <qli@student.codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/03 15:19:55 by qli           #+#    #+#                 */
-/*   Updated: 2020/09/19 15:00:51 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/09/29 15:59:16 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "../../minishell.h"
 
 void 	check_input_redirection(char *line)
 {

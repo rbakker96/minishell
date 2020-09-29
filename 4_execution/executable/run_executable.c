@@ -6,11 +6,11 @@
 /*   By: qli <qli@student.codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/24 20:12:02 by qli           #+#    #+#                 */
-/*   Updated: 2020/09/29 11:41:37 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/09/29 16:06:23 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "../../minishell.h"
 
 void	execute_executable(t_data *data, int i, int *token, int needed_tokens, int x)
 {

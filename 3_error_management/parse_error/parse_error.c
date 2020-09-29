@@ -6,11 +6,11 @@
 /*   By: roybakker <roybakker@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/14 10:53:18 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/09/24 14:08:50 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/09/29 15:59:20 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "../../minishell.h"
 
 void	parse_error(char charachter)
 {

@@ -6,11 +6,11 @@
 /*   By: roybakker <roybakker@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/14 10:32:06 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/09/22 14:46:33 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/09/29 15:59:28 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "../../minishell.h"
 
 void	double_symbol(char *line, char c, int i)
 {
