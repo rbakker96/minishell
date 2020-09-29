@@ -6,7 +6,7 @@
 /*   By: roybakker <roybakker@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/23 11:57:21 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/09/29 11:52:43 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/09/29 17:08:36 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ void	no_quotes(t_data *data, int i, int *token, int *index)
 		{
 			(*token) += 2;
 			value = data->commands[i]->tokens[(*token)];
+			if (value == NULL)
+				return ;
 		}
 		if (value[(*index)] == '\"')
 			double_quotes(data, i, token, index);
@@ -37,7 +39,6 @@ void	no_quotes(t_data *data, int i, int *token, int *index)
 		if (value[(*index)] != '\0')
 			(*index)++;
 	}
-	return ;
 }
 
 void	no_quotes_escape(t_data *data, int i, int *token, int *index)

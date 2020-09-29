@@ -6,7 +6,7 @@
 /*   By: roybakker <roybakker@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/01 15:55:06 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/09/29 16:16:19 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/09/29 17:07:45 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@
 # include <fcntl.h> /* for open */
 
 /*
-**---------------------------ADDITIONAL_FUNCTIONS-------------------------------
+**---------------------------SUPPORTIVE__FUNCTIONS------------------------------
 */
 
 /*
@@ -72,21 +72,34 @@ int		redirection_check(char *str);
 int		quotes_check(char *str);
 
 /*
-**-----------------------------INPUT_VALIDATION---------------------------------
+**-----------------------------ERROR_MANAGEMENT---------------------------------
 */
 
+	/*
+	**--------------------------EXECUTION_ERROR---------------------------------
+	*/
+
+	/*
+	**----------------------------PARSE_ERROR-----------------------------------
+	*/
+
 /*
-** validate_input.c
+** parse_error.c
 */
+void	parse_error(char charachter);
+
+	/*
+	** validate_input.c
+	*/
 void	input_validation(char **line);
 void 	check_input_redirection(char *line);
 void	check_output_redirection(char *line);
 void	check_pipes(char **line, int i);
 void	check_multiline_commands(char *line, int i);
 
-/*
-** check_functions.c
-*/
+	/*
+	** check_functions.c
+	*/
 void	double_symbol(char *line, char c, int i);
 void	double_command(char *line, char c, int i);
 void	mixed_command(char *line, int i, int x);
@@ -94,39 +107,6 @@ void	end_of_line_command(char *line, char c, int i);
 void	validate_qoute(char *line, int *i, int x);
 void	check_first_symbol(char *line);
 
-/*
-**------------------------------ERROR_HANDELING---------------------------------
-*/
-
-/*
-** parse_error.c
-*/
-void	parse_error(char charachter);
-
-/*
-**----------------------------------PARSE---------------------------------------
-*/
-
-/*
-** create_command_table.c
-*/
-int		parse_command(t_data *data);
-void	create_command_table(t_data *data, char *line);
-
-/*
-** commands.c
-*/
-char	**save_commands(char *line, char command_amount, int i, int index);
-int		len_command(char *line, int i, int len);
-int		empty_command(char *line, int i);
-
-/*
-** tokens.c
-*/
-void	save_tokens(t_data *data, char *command, int i, int len);
-int		begin_token(char *command, int i);
-int		len_token(char *command, int start, int len, int *spaces);
-int		len_sentence(char *command, int start, int len, int *spaces);
 
 /*
 **---------------------------------EXECUTION------------------------------------
@@ -174,11 +154,7 @@ void	double_quotes(t_data *data, int i, int *token, int *index);
 void	double_quotes_escape(t_data *data, int i, int *token, int *index);
 
 	/*
-	**------------------------------EXECUTABLE----------------------------------
-	*/
-
-	/*
-	** absolute_executable.c
+	**-----------------------------EXECUTABLE-----------------------------------
 	*/
 
 	/*
@@ -200,7 +176,7 @@ int		fork_executable(t_data *data, char **path, int x);
 	/*
 	** create_fd.c
 	*/
-int		*create_fd(t_data *data, int i, int token, int *needed_tokens, int fd[2]);
+void	create_fd(t_data *data, int i, int token, int *needed_tokens, int fd[2]);
 
 	/*
 	** handle_redirection_files.c
@@ -239,5 +215,30 @@ void	execute_pwd(t_data *data, int i, int *token, int needed_tokens);
 ** unset.c
 */
 void	execute_unset(t_data *data, int command, int *token);
+
+/*
+**----------------------------------PARSE---------------------------------------
+*/
+
+/*
+** create_command_table.c
+*/
+int		parse_command(t_data *data);
+void	create_command_table(t_data *data, char *line);
+
+/*
+** commands.c
+*/
+char	**save_commands(char *line, char command_amount, int i, int index);
+int		len_command(char *line, int i, int len);
+int		empty_command(char *line, int i);
+
+/*
+** tokens.c
+*/
+void	save_tokens(t_data *data, char *command, int i, int len);
+int		begin_token(char *command, int i);
+int		len_token(char *command, int start, int len, int *spaces);
+int		len_sentence(char *command, int start, int len, int *spaces);
 
 #endif

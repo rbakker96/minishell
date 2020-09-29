@@ -6,13 +6,13 @@
 /*   By: roybakker <roybakker@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/23 14:15:21 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/09/28 14:09:38 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/09/29 16:58:18 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-int		*create_fd(t_data *data, int i, int token, int *needed_tokens, int fd[2])
+void	create_fd(t_data *data, int i, int token, int *needed_tokens, int fd[2])
 {
 	char 	*value;
 
@@ -36,5 +36,4 @@ int		*create_fd(t_data *data, int i, int token, int *needed_tokens, int fd[2])
 		value = data->commands[i]->tokens[token];
 	}
 	*needed_tokens = token;
-	return (fd);
 }

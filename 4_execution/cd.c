@@ -6,7 +6,7 @@
 /*   By: roybakker <roybakker@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/09 14:50:20 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/09/29 15:50:40 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/09/29 16:55:11 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	execute_cd(t_data *data, int i, int *token, int needed_tokens)
 	create_fd(data, i, (*token), &needed_tokens, data->fd);
 	if (needed_tokens > 2)
 	{
-		print(2, "cd : too many arguments\n");
+		print(2, "cd : too many arguments\n"); // have to count without redirection values
 		(*token) = data->commands[i]->token_amount;
 		return ;
 	}
