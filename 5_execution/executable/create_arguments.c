@@ -6,7 +6,7 @@
 /*   By: qli <qli@student.codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/25 15:05:59 by qli           #+#    #+#                 */
-/*   Updated: 2020/09/30 13:02:01 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/09/30 17:39:22 by qli           ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	create_args(t_data *data, int i, int token)
 
 	x = 1;
 	args_num = check_args_num(data, i, token);
-	data->args = (char **)malloc(sizeof(char *) * args_num + 1);
+	data->args = (char **)malloc(sizeof(char *) * (args_num + 1));
 	data->args[0] = ft_strdup(data->commands[i]->tokens[token]);
 	//ERROR
 	//
