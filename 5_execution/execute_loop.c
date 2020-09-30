@@ -6,7 +6,7 @@
 /*   By: qli <qli@student.codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/04 15:02:22 by qli           #+#    #+#                 */
-/*   Updated: 2020/09/29 14:22:14 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/09/30 13:10:41 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,16 @@ void	identfy_command(t_data *data, int i, int *token, char *value)
 
 void		execution_loop(t_data *data, int command, int token)
 {
+
 	while(command < data->command_amount)
 	{
 		token = 0;
 		while(token < data->commands[command]->token_amount)
-			identfy_command(data, command, &token,
-										data->commands[command]->tokens[token]);
+		{
+			identfy_command(data, command, &token, data->commands[command]->tokens[token]);
+			free_array(data->commands[command]->tokens);
+		}
 		command++;
 	}
-	return ;
+	free_command_table(data->commands);
 }

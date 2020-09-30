@@ -6,7 +6,7 @@
 /*   By: roybakker <roybakker@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/02 11:27:20 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/09/25 10:35:59 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/09/30 10:31:49 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,24 +71,3 @@ char	*get_current_directory(void)
 	free_array(directory);
 	return (path);
 }
-
-void	free_array(char **array)
-{
-	int i;
-
-	i = 0;
-	if (!array)
-		return ;
-	while (array[i] != 0)
-			i++;
-	while (i >= 0)
-	{
-		free(array[i]);
-		i--;
-	}
-	free(array);
-}
-
-
-
-

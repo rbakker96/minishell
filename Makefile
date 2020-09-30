@@ -6,7 +6,7 @@
 #    By: rbakker <rbakker@student.42.fr>              +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/02/05 14:55:09 by rbakker       #+#    #+#                  #
-#    Updated: 2020/09/29 16:34:28 by roybakker     ########   odam.nl          #
+#    Updated: 2020/09/30 10:39:41 by roybakker     ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,24 +21,25 @@ SOURCES			= 	main.c \
 					3_error_management/parse_error/validate_input.c \
 					3_error_management/parse_error/check_functions.c \
 					3_error_management/parse_error/parse_error.c \
-					4_execution/cd.c \
-					4_execution/echo/echo.c \
-					4_execution/echo/no_quotes.c \
-					4_execution/echo/double_quotes.c \
-					4_execution/echo/single_quotes.c \
-					4_execution/executable/create_arguments.c \
-					4_execution/executable/run_executable.c \
-					4_execution/output/create_fd.c \
-					4_execution/output/handle_redirection_files.c \
-					4_execution/env.c \
-					4_execution/exit.c \
-					4_execution/export.c \
-					4_execution/unset.c \
-					4_execution/execute_loop.c \
-					4_execution/pwd.c \
-					5_parse/create_command_table.c \
-					5_parse/commands.c \
-					5_parse/tokens.c \
+					4_memory_management/free_struct.c \
+					5_execution/cd.c \
+					5_execution/echo/echo.c \
+					5_execution/echo/no_quotes.c \
+					5_execution/echo/double_quotes.c \
+					5_execution/echo/single_quotes.c \
+					5_execution/executable/create_arguments.c \
+					5_execution/executable/run_executable.c \
+					5_execution/output/create_fd.c \
+					5_execution/output/handle_redirection_files.c \
+					5_execution/env.c \
+					5_execution/exit.c \
+					5_execution/export.c \
+					5_execution/unset.c \
+					5_execution/execute_loop.c \
+					5_execution/pwd.c \
+					6_parse/create_command_table.c \
+					6_parse/commands.c \
+					6_parse/tokens.c \
 
 OBJECTS 		=	${SOURCES:%.c=%.o}
 

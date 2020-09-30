@@ -6,7 +6,7 @@
 /*   By: roybakker <roybakker@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/01 15:55:06 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/09/29 17:07:45 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/09/30 13:10:46 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ int		print(int fd, char *str);
 void	print_char(int fd, char c);
 int		prompt(void);
 char	*get_current_directory(void);
-void	free_array(char **array);
 
 /*
 ** file_two.c
@@ -70,6 +69,9 @@ int		redirection(char *str);
 int		get_array_size(char **array);
 int		redirection_check(char *str);
 int		quotes_check(char *str);
+
+
+
 
 /*
 **-----------------------------ERROR_MANAGEMENT---------------------------------
@@ -107,6 +109,16 @@ void	end_of_line_command(char *line, char c, int i);
 void	validate_qoute(char *line, int *i, int x);
 void	check_first_symbol(char *line);
 
+
+/*
+**-----------------------------MEMORY_MANAGEMENT---------------------------------
+*/
+
+/*
+** free_struct.c
+*/
+void	free_array(char **array);
+void	free_command_table(t_command_table **array);
 
 /*
 **---------------------------------EXECUTION------------------------------------
@@ -167,7 +179,7 @@ int		check_args_num(t_data *data, int command, int token);
 	** run_executable.c
 	*/
 void	execute_executable(t_data *data, int i, int *token, int needed_tokens, int x);
-int		fork_executable(t_data *data, char **path, int x);
+int		fork_executable(t_data *data);
 
 	/*
 	**---------------------------------OUTPUT-----------------------------------
@@ -176,7 +188,7 @@ int		fork_executable(t_data *data, char **path, int x);
 	/*
 	** create_fd.c
 	*/
-void	create_fd(t_data *data, int i, int token, int *needed_tokens, int fd[2]);
+void	create_fd(t_data *data, int i, int token, int *needed_tokens);
 
 	/*
 	** handle_redirection_files.c

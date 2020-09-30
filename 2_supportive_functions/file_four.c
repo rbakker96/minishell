@@ -6,7 +6,7 @@
 /*   By: roybakker <roybakker@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/08 14:47:32 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/09/24 13:18:36 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/09/29 21:21:55 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,17 +25,12 @@ int		check_relative_path(char *command)
 	int i;
 
 	i = 0;
-	while (command[i] != '\0')
-	{
-		if (ft_isspace(command[i]) == 1)
-			i++;
-		else if (command[i] == '.')
-			return (1);
-		else
-			return (0);
+	while (ft_isspace(command[i]) == 1)
 		i++;
-	}
-	return (0);
+	if (command[i] == '.')
+		return (1);
+	else
+		return (0);
 }
 
 int		ft_isspace(int c)

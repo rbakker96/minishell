@@ -6,7 +6,7 @@
 /*   By: qli <qli@student.codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/24 20:12:02 by qli           #+#    #+#                 */
-/*   Updated: 2020/09/29 16:06:23 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/09/30 13:24:22 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,10 @@ void	execute_executable(t_data *data, int i, int *token, int needed_tokens, int 
 	char	**path;
 	char	*path_token;
 
-	create_fd(data, i, (*token), &needed_tokens, data->fd);
+	create_fd(data, i, (*token), &needed_tokens);
 	create_args(data, i, (*token));
-	if (check_relative_path(data->commands[i]->tokens[*token]) == 1)
-		fork_executable(data, 0, 0);
+	if (check_relative_path(data->commands[i]->tokens[(*token)]) == 1)
+		fork_executable(data);
 	else
 	{
 		path = ft_split(find_path(data), ':');
@@ -30,7 +30,7 @@ void	execute_executable(t_data *data, int i, int *token, int needed_tokens, int 
 		while (path[x] != NULL)
 		{
 			data->args[0] = ft_strjoin(path[x], path_token);
-			if (!fork_executable(data, path, x))
+			if (!fork_executable(data))
 				break ;
 			x++;
 			free(data->args[0]);
@@ -39,7 +39,7 @@ void	execute_executable(t_data *data, int i, int *token, int needed_tokens, int 
 	(*token) = needed_tokens;
 }
 
-int		fork_executable(t_data *data, char **path, int x)
+int		fork_executable(t_data *data)
 {
 	int		pid;
 	int		status;
@@ -53,11 +53,6 @@ int		fork_executable(t_data *data, char **path, int x)
 		dup2(data->fd[0], 0);
 		dup2(data->fd[1], 1);
 		execve(data->args[0], data->args, data->envp);
-		if (!path || path[x + 1] == NULL)
-		{
-			print(2, strerror(errno));
-			print_char(2, '\n');
-		}
 		exit(1);
 	}
 	wait(&status);

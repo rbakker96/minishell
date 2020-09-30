@@ -6,7 +6,7 @@
 /*   By: roybakker <roybakker@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/01 14:27:26 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/09/29 11:14:51 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/09/30 11:14:17 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ typedef enum			e_defenitions
 */
 typedef struct 			s_command_table
 {
+	char				*command;
 	char				**tokens;
 	int					token_amount;
 	int 				exit_code;

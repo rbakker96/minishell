@@ -6,7 +6,7 @@
 /*   By: roybakker <roybakker@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/09 14:50:20 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/09/29 16:55:11 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/09/29 20:26:07 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,13 @@
 
 void	execute_cd(t_data *data, int i, int *token, int needed_tokens)
 {
-	char *value;
+	char	*value;
+//	int		arguments;
 
 	(*token)++;
 	value = data->commands[i]->tokens[(*token)];
-	create_fd(data, i, (*token), &needed_tokens, data->fd);
+	create_fd(data, i, (*token), &needed_tokens);
+//	arguments = cd_arguments(data, i, (*token), needed_tokens);
 	if (needed_tokens > 2)
 	{
 		print(2, "cd : too many arguments\n"); // have to count without redirection values
@@ -36,6 +38,11 @@ void	execute_cd(t_data *data, int i, int *token, int needed_tokens)
 	(*token) = needed_tokens;
 	return ;
 }
+
+// int		cd_arguments(t_data *data, int i, int token, int needed_tokens)
+// {
+
+// }
 
 void	go_to_home(t_data *data, int i)
 {

@@ -6,7 +6,7 @@
 /*   By: roybakker <roybakker@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/23 11:57:35 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/09/28 14:17:37 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/09/29 20:16:49 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	double_quotes_escape(t_data *data, int i, int *token, int *index)
 
 	value = data->commands[i]->tokens[(*token)];
 	(*index)++;
-	if (value[(*index)] == '$' || value[(*index)] == '`' ||
+	if (value[(*index)] == '$' || value[(*index)] == '`' || \
 		value[(*index)] == '\"' || value[(*index)] == '\\')
 		print_char(data->fd[1], value[(*index)]);
 	else
