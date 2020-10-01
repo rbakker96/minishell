@@ -6,7 +6,7 @@
 /*   By: qli <qli@student.codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/04 15:02:22 by qli           #+#    #+#                 */
-/*   Updated: 2020/10/01 11:46:31 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/10/01 16:57:08 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,11 @@ void	identfy_command(t_data *data, int i, int *token, char *value)
 	else if(ft_strncmp("unset", value, ft_strlen(value)) == 0)
 		execute_unset(data, i, token);
 	else if(ft_strncmp("env", value, ft_strlen(value)) == 0)
-		execute_env(data, i, token);
+		execute_env(data, token);
 	else if(ft_strncmp("exit", value, ft_strlen(value)) == 0)
 		execute_exit(data, i, token);
 	else
-		execute_executable(data, i, token, data->commands[i]->token_amount, 0);
+		execute_executable(data, i, token, data->commands[i]->token_amount);
 }
 
 void		initialise_pipe_fd(t_data *data)
@@ -47,11 +47,8 @@ void		execution_loop(t_data *data, int command, int token)
 		token = 0;
 		initialise_pipe_fd(data); // pipe fds are reset when process a new command table
 		while(token < data->commands[command]->token_amount)
-		{
 			identfy_command(data, command, &token, data->commands[command]->tokens[token]);
-			free_array(data->commands[command]->tokens);
-		}
 		command++;
 	}
-	free_command_table(data->commands);
+	free_struct(data);
 }

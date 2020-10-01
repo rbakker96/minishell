@@ -6,7 +6,7 @@
 /*   By: roybakker <roybakker@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/09 14:49:34 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/01 11:16:46 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/10/01 17:28:50 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,9 @@ void	echo_variable(t_data *data, int i, int *token, int *index)
 	value = data->commands[i]->tokens[(*token)];
 	(*index)++;
 	variable = get_variable(data, value, (*index), 0, 0);
-	while(value[(*index)] != '\0' && value[(*index) + 1] != ' ')
+	if (variable == NULL)
+		malloc_error(data, data->command_amount, 0);
+	while(value[(*index)] != '\0' && value[(*index) + 1] != ' ' && value[(*index) + 1] != '\"')
 		(*index)++;
 	while (variable[x] != '\0')
 	{
@@ -79,24 +81,24 @@ void	echo_variable(t_data *data, int i, int *token, int *index)
 char	*get_variable(t_data *data, char *value, int index, int i, int len)
 {
 	char	*variable;
-	int		env_size;
+	int		envp_size;
 	int		var_len;
 
-	env_size = get_array_size(data->env);
-	while(value[index + len] != '\0')
+	envp_size = get_array_size(data->envp);
+	while(value[index + len] != '\0' && value[index + len] != '\"')
 		len++;
 	variable = ft_substr(value, index, len);
 	if (variable == NULL)
-		malloc_error(data);
-	while (i < env_size)
+		return (0);
+	while (i < envp_size)
 	{
-		if (ft_strncmp(data->env[i], variable, ft_strlen(variable)) == 0)
+		if (ft_strncmp(data->envp[i], variable, ft_strlen(variable)) == 0)
 		{
 			free(variable);
-			var_len = ft_strlen(data->env[i]);
-			variable = ft_substr(data->env[i], (len + 1), (var_len - len - 1));
+			var_len = ft_strlen(data->envp[i]);
+			variable = ft_substr(data->envp[i], (len + 1), (var_len - len - 1));
 			if (variable == NULL)
-				malloc_error(data);
+				return (0);
 			return (variable);
 		}
 		i++;

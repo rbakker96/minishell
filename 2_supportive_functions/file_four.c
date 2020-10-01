@@ -6,7 +6,7 @@
 /*   By: roybakker <roybakker@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/08 14:47:32 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/09/29 21:21:55 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/10/01 15:46:34 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,10 @@ char	*find_path(t_data *data)
 	int i;
 
 	i = 0;
-	while (data->env[i] != NULL)
+	while (data->envp[i] != NULL)
 	{
-		if (ft_strncmp("PATH", data->env[i], 4) == 0)
-			return (data->env[i] + 5);
+		if (ft_strncmp("PATH", data->envp[i], 4) == 0)
+			return (data->envp[i] + 5);
 		i++;
 	}
 	return (NULL);

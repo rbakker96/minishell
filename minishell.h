@@ -6,7 +6,7 @@
 /*   By: roybakker <roybakker@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/01 15:55:06 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/01 11:10:00 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/10/01 16:57:19 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,8 @@ int		quotes_check(char *str);
 	** execution_error.c
 	*/
 void	redirection_error(t_data *data, char *filename, int i, int *token);
-void	malloc_error(t_data *data);
+void	malloc_error(t_data *data, int index, char **malloced_array);
+void	fork_error(t_data *data, int index);
 
 	/*
 	**----------------------------PARSE_ERROR-----------------------------------
@@ -122,7 +123,6 @@ void	check_first_symbol(char *line, int *ret);
 */
 void	free_struct(t_data *data);
 void	free_array(char **array);
-void	free_command_table(t_command_table **array);
 
 /*
 **---------------------------------EXECUTION------------------------------------
@@ -182,8 +182,9 @@ int		check_args_num(t_data *data, int command, int token);
 	/*
 	** run_executable.c
 	*/
-void	execute_executable(t_data *data, int i, int *token, int needed_tokens, int x);
-int		fork_executable(t_data *data);
+void	execute_executable(t_data *data, int i, int *token, int needed_tokens);
+void	execute_absolute_executable(t_data *data, int i, int *token, int x);
+int		fork_executable(t_data *data, int i);
 
 	/*
 	**---------------------------------OUTPUT-----------------------------------
@@ -209,18 +210,18 @@ int		input_file(t_data *data, int i, int *token);
 /*
 ** env.c
 */
-void	execute_env(t_data *data, int command, int *token);
+void	execute_env(t_data *data, int *token);
 
 
 /*
 ** exit.c
 */
-void	execute_exit(t_data *data, int command, int *token);
+void	execute_exit(t_data *data, int i, int *token);
 
 /*
 ** export.c
 */
-void	execute_export(t_data *data, int command, int *token);
+void	execute_export(t_data *data, int i, int *token);
 
 /*
 ** pwd.c
@@ -230,7 +231,7 @@ void	execute_pwd(t_data *data, int i, int *token, int needed_tokens);
 /*
 ** unset.c
 */
-void	execute_unset(t_data *data, int command, int *token);
+void	execute_unset(t_data *data, int i, int *token);
 
 /*
 **----------------------------------PARSE---------------------------------------
@@ -239,8 +240,9 @@ void	execute_unset(t_data *data, int command, int *token);
 /*
 ** create_command_table.c
 */
-int		parse_command(t_data *data);
-void	create_command_table(t_data *data, char *line);
+int		parse_command(t_data *data, char **envp);
+int		save_environment_variables(t_data *data, char **envp);
+int		create_command_table(t_data *data, char *line, int i);
 
 /*
 ** commands.c
@@ -252,7 +254,7 @@ int		empty_command(char *line, int i);
 /*
 ** tokens.c
 */
-void	save_tokens(t_data *data, char *command, int i, int len);
+void	save_tokens(t_data *data, char **array, char *command, int i, int len);
 int		begin_token(char *command, int i);
 int		len_token(char *command, int start, int len, int *spaces);
 int		len_sentence(char *command, int start, int len, int *spaces);

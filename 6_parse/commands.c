@@ -6,7 +6,7 @@
 /*   By: roybakker <roybakker@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/19 13:23:31 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/09/30 11:23:55 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/10/01 13:51:50 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,20 +18,20 @@ char	**save_commands(char *line, char command_amount, int i, int index)
 	int		len;
 
 	commands = (char**)malloc(sizeof(char*) * (command_amount + 1));
-// 	CLEAR STRUCT WHEN FAIL
-//
+	if (commands == NULL)
+		return (0);
 	while (line[i] != '\0' && index < command_amount)
 	{
 		len = len_command(line, i, 0);
 		if (empty_command(line, i) == 0)
 		{
-			commands[index] = (char*)malloc(sizeof(char) * len);
-// 			CLEAR STRUCT WHEN FAIL
-//
 			commands[index] = ft_substr(line, i, len);
-			printf("command [%d] = [%s]\n", index, commands[index]);
-// 			CLEAR STRUCT WHEN FAIL
-//
+			if (commands[index] == NULL)
+			{
+				free_array(commands);
+				return (0);
+			}
+			printf("command [%d] = [%s]\n", index, commands[index]); //TAKE OUT!!!
 			index++;
 		}
 		i += len;

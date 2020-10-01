@@ -6,7 +6,7 @@
 /*   By: roybakker <roybakker@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/01 14:27:26 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/01 11:45:21 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/10/01 15:42:03 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,8 @@ typedef struct 			s_data
 	int					pipe_fd2[2];
 	int					pipe_before;
 	int					pipe_after;
-	char				**env;
-	char				**args;
 	char				**envp;
+	char				**args;
 	int					command_amount;
 }						t_data;
 

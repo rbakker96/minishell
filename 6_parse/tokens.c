@@ -6,13 +6,13 @@
 /*   By: roybakker <roybakker@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/19 13:23:47 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/09/30 11:33:09 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/10/01 15:02:57 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	save_tokens(t_data *data, char *command, int i, int len)
+void	save_tokens(t_data *data, char **array, char *command, int i, int len)
 {
 	int start;
 	int index;
@@ -30,8 +30,8 @@ void	save_tokens(t_data *data, char *command, int i, int len)
 		len = len_token(command, start, 0, &spaces);
 		data->commands[i]->tokens[index] = ft_substr(command, start, len);
 		printf("token [%d] = [%s]\n", index, data->commands[i]->tokens[index]);
-// 		CLEAR STRUCT WHEN FAIL
-//
+		if (data->commands[i]->tokens[index] == NULL)
+			malloc_error(data, i, array);
 		c += len + spaces;
 		index++;
 	}

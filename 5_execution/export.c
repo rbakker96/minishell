@@ -6,34 +6,31 @@
 /*   By: roybakker <roybakker@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/09 14:50:36 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/09/24 13:52:23 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/10/01 17:00:46 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	execute_export(t_data *data, int command, int *token)
+void	execute_export(t_data *data, int i, int *token)
 {
 	int index;
-	int env_size;
-	char **new_env;
+	int envp_size;
+	char **new_envp;
 
 	index = 0;
-	env_size = get_array_size(data->env);
-	new_env = (char**)malloc(sizeof(char*) * (env_size + 2));
-	while (index < env_size)
+	envp_size = get_array_size(data->envp);
+	new_envp = (char**)malloc(sizeof(char*) * (envp_size + 2));
+	while (index < envp_size)
 	{
-		new_env[index] = ft_strdup(data->env[index]);
-//		CLEAR STRUCT WHEN FAIL
-//
+		new_envp[index] = ft_strdup(data->envp[index]);
+		if (new_envp[index] == NULL)
+			malloc_error(data, data->command_amount, new_envp);
 		index++;
-
 	}
-	new_env[index] = data->commands[command]->tokens[(*token) + 1];
-	new_env[index + 1] = 0;
-	data->env = new_env;
-	if (command && (*token))
-		print(1, ".");
+	new_envp[index] = data->commands[i]->tokens[(*token) + 1];
+	new_envp[index + 1] = 0;
+	data->envp = new_envp;
 }
 // have to update token correctly
 // have to check if input value of export is correct

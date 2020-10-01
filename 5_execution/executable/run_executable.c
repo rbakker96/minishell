@@ -6,48 +6,59 @@
 /*   By: qli <qli@student.codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/24 20:12:02 by qli           #+#    #+#                 */
-/*   Updated: 2020/09/30 13:24:22 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/10/01 17:05:22 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-void	execute_executable(t_data *data, int i, int *token, int needed_tokens, int x)
+void	execute_executable(t_data *data, int i, int *token, int needed_tokens)
+{
+	create_fd(data, i, (*token), &needed_tokens);
+	create_args(data, i, (*token));
+	if (check_relative_path(data->commands[i]->tokens[(*token)]) == 1)
+		fork_executable(data, i);
+	else
+		execute_absolute_executable(data, i, token, 0);
+	(*token) = needed_tokens;
+}
+
+void	execute_absolute_executable(t_data *data, int i, int *token, int x)
 {
 	char	**path;
 	char	*path_token;
 
-	create_fd(data, i, (*token), &needed_tokens);
-	create_args(data, i, (*token));
-	if (check_relative_path(data->commands[i]->tokens[(*token)]) == 1)
-		fork_executable(data);
-	else
+	path = ft_split(find_path(data), ':');
+	if (path == NULL)
+		malloc_error(data, data->command_amount, 0);
+	path_token = ft_strjoin("/", data->commands[i]->tokens[(*token)]);
+	if (path_token == NULL)
+		malloc_error(data, data->command_amount, path);
+	while (path[x] != NULL)
 	{
-		path = ft_split(find_path(data), ':');
-		path_token = ft_strjoin("/", data->commands[i]->tokens[(*token)]);
-		//ERROR path or path_token
-		//
-		while (path[x] != NULL)
+		data->args[0] = ft_strjoin(path[x], path_token);
+		if (data->args[0] == NULL)
 		{
-			data->args[0] = ft_strjoin(path[x], path_token);
-			if (!fork_executable(data))
-				break ;
-			x++;
-			free(data->args[0]);
+			free(path_token);
+			malloc_error(data, i, path);
 		}
+		if (!fork_executable(data, i))
+			break ;
+		x++;
 	}
-	(*token) = needed_tokens;
+	free_array(path);
+	free(path_token);
 }
 
-int		fork_executable(t_data *data)
+int		fork_executable(t_data *data, int i)
 {
 	int		pid;
 	int		status;
 	int		errno;
 
 	pid = fork();
-	//if (pid == -1)
-	//ERROR
+	if (pid == -1)
+		fork_error(data, i);
 	if (pid == 0)
 	{
 		dup2(data->fd[0], 0);

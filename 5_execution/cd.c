@@ -6,7 +6,7 @@
 /*   By: roybakker <roybakker@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/09 14:50:20 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/09/29 20:26:07 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/10/01 15:46:56 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,10 +48,10 @@ void	go_to_home(t_data *data, int i)
 {
 	char	*home_path;
 
-	while (data->env[i] != NULL)
+	while (data->envp[i] != NULL)
 	{
-		if (ft_strncmp("HOME", data->env[i], 4) == 0)
-			home_path = data->env[i] + 5;
+		if (ft_strncmp("HOME", data->envp[i], 4) == 0)
+			home_path = data->envp[i] + 5;
 		i++;
 	}
 	chdir(home_path);
