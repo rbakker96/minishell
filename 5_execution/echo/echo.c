@@ -6,7 +6,7 @@
 /*   By: roybakker <roybakker@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/09 14:49:34 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/09/29 20:26:19 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/10/01 11:16:46 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,8 @@ void	execute_echo(t_data *data, int i, int *token, int needed_tokens)
 			single_quotes(data, i, token, &index);
 		if ((*token) != (needed_tokens - 1))
 			print_char(data->fd[1], ' ');
-		(*token)++;
+		if ((*token) < needed_tokens)
+			(*token)++;
 	}
 	if (!newline)
 		print(data->fd[1], "\n");
@@ -68,8 +69,6 @@ void	echo_variable(t_data *data, int i, int *token, int *index)
 	variable = get_variable(data, value, (*index), 0, 0);
 	while(value[(*index)] != '\0' && value[(*index) + 1] != ' ')
 		(*index)++;
-	if (!variable)
-		return ;
 	while (variable[x] != '\0')
 	{
 		print_char(data->fd[1], variable[x]);
@@ -87,8 +86,8 @@ char	*get_variable(t_data *data, char *value, int index, int i, int len)
 	while(value[index + len] != '\0')
 		len++;
 	variable = ft_substr(value, index, len);
-//	CLEAR STRUCT WHEN FAIL
-//
+	if (variable == NULL)
+		malloc_error(data);
 	while (i < env_size)
 	{
 		if (ft_strncmp(data->env[i], variable, ft_strlen(variable)) == 0)
@@ -96,8 +95,8 @@ char	*get_variable(t_data *data, char *value, int index, int i, int len)
 			free(variable);
 			var_len = ft_strlen(data->env[i]);
 			variable = ft_substr(data->env[i], (len + 1), (var_len - len - 1));
-			//	CLEAR STRUCT WHEN FAIL
-			//
+			if (variable == NULL)
+				malloc_error(data);
 			return (variable);
 		}
 		i++;

@@ -6,25 +6,25 @@
 /*   By: roybakker <roybakker@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/14 10:32:06 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/09/29 15:59:28 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/09/30 14:21:27 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-void	double_symbol(char *line, char c, int i)
+void	double_symbol(char *line, char c, int i, int *ret)
 {
 	while (line[i] != '\0')
 	{
 		if (line[i] == '\\')
 			i += 2;
 		if(line[i - 1] != '\\' && line[i] == c && line[i + 1] == c)
-			parse_error(c);
+			print_error(c, ret);
 		i++;
 	}
 }
 
-void	double_command(char *line, char c, int i)
+void	double_command(char *line, char c, int i, int *ret)
 {
 	while (line[i] != '\0')
 	{
@@ -36,13 +36,13 @@ void	double_command(char *line, char c, int i)
 			while (line[i] == ' ' && line[i] != '\0')
 				i++;
 			if (line[i] == c)
-				parse_error(c);
+				print_error(c, ret);
 		}
 		i++;
 	}
 }
 
-void	mixed_command(char *line, int i, int x)
+void	mixed_command(char *line, int i, int x, int *ret)
 {
 	while (line[i] != '\0')
 	{
@@ -53,11 +53,11 @@ void	mixed_command(char *line, int i, int x)
 			while (line[i] == ' ' && line[i] != '\0')
 				i++;
 			if (line[x] == '|' && line[i] == '<')
-				parse_error('|');
+				print_error('|', ret);
 			else if (line[x] == '>' && (line[i] == '|' || line[i] == '<'))
-				parse_error(line[i]);
+				print_error(line[i], ret);
 			else if (line[x] == '<' && (line[i] == '|' || line[i] == '>'))
-				parse_error(line[i]);
+				print_error(line[i], ret);
 		}
 		if (line[i] == '\\')
 			i += 2;
@@ -66,7 +66,7 @@ void	mixed_command(char *line, int i, int x)
 	}
 }
 
-void	end_of_line_command(char *line, char c, int i)
+void	end_of_line_command(char *line, char c, int i, int *ret)
 {
 	while(line[i] != '\0' || (line[i] == ';' && line[i - 1] != '\\'))
 		i++;
@@ -74,10 +74,10 @@ void	end_of_line_command(char *line, char c, int i)
 	while (line[i] == ' ')
 		i--;
 	if (line[i] == c && line[i - 1] != '\\')
-		parse_error(c);
+		print_error(c, ret);
 }
 
-void	validate_qoute(char *line, int *i, int x)
+void	validate_qoute(char *line, int *i, int x, int *ret)
 {
 	(*i)++;
 	while(line[(*i)] != '\0')
@@ -89,23 +89,23 @@ void	validate_qoute(char *line, int *i, int x)
 		(*i)++;
 	}
 	if (x == double_quote)
-		parse_error('\"');
+		print_error('\"', ret);
 	else
-		parse_error('\'');
+		print_error('\'', ret);
 }
 
-void	check_first_symbol(char *line)
+void	check_first_symbol(char *line, int *ret)
 {
 	if (line[0] == ';' && line[1] == ';')
-		parse_error(';');
+		print_error(';', ret);
 	if (line[0] == '\'')
-		parse_error('\'');
+		print_error('\'', ret);
 	if (line[0] == '\"')
-		parse_error('\"');
+		print_error('\"', ret);
 	if (line[0] == '<')
-		parse_error('<');
+		print_error('<', ret);
 	if (line[0] == '>')
-		parse_error('>');
+		print_error('>', ret);
 	if (line[0] == '|')
-		parse_error('|');
+		print_error('|', ret);
 }

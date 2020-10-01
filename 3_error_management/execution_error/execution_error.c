@@ -1,33 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   main.c                                             :+:    :+:            */
+/*   execution_error.c                                  :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: roybakker <roybakker@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/08/31 10:42:36 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/01 11:34:49 by roybakker     ########   odam.nl         */
+/*   Created: 2020/09/30 14:33:38 by roybakker     #+#    #+#                 */
+/*   Updated: 2020/10/01 11:17:59 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "structs.h"
-#include "minishell.h"
+#include "../../minishell.h"
 
-int		main(int argc, char **argv, char **envp)
+void	redirection_error(t_data *data, char *filename, int i, int *token)
 {
-	t_data	data;
+	int errno;
 
-	if (argc != 1 || !argv)
-	{
-		print(1, "Only the executable ./minishell is sufficient\n");
-		return (-1);
-	}
-	data.env = envp;
-	while(1)
-	{
-		prompt();
-		if (parse_command(&data) != -1)
-			execution_loop(&data, 0, 0);
-	}
-	return (0);
+	print(2, "minishell: ");
+	print(2, filename);
+	print(2, " : ");
+	print(2, strerror(errno));
+
+	(*token) = data->commands[i]->token_amount;
+}
+
+void	malloc_error(t_data *data)
+{
+	print(2, "minishell : error due to malloc failure\n");
+
+	free_struct(data);
+	exit(1);
 }

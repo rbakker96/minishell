@@ -6,7 +6,7 @@
 #    By: rbakker <rbakker@student.42.fr>              +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/02/05 14:55:09 by rbakker       #+#    #+#                  #
-#    Updated: 2020/09/30 10:39:41 by roybakker     ########   odam.nl          #
+#    Updated: 2020/09/30 14:40:51 by roybakker     ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,6 +18,7 @@ SOURCES			= 	main.c \
 					2_supportive_functions/file_three.c \
 					2_supportive_functions/file_four.c \
 					2_supportive_functions/file_five.c \
+					3_error_management/execution_error/execution_error.c \
 					3_error_management/parse_error/validate_input.c \
 					3_error_management/parse_error/check_functions.c \
 					3_error_management/parse_error/parse_error.c \

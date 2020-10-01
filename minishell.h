@@ -6,7 +6,7 @@
 /*   By: roybakker <roybakker@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/01 15:55:06 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/09/30 13:10:46 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/10/01 11:10:00 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,9 +70,6 @@ int		get_array_size(char **array);
 int		redirection_check(char *str);
 int		quotes_check(char *str);
 
-
-
-
 /*
 **-----------------------------ERROR_MANAGEMENT---------------------------------
 */
@@ -82,32 +79,38 @@ int		quotes_check(char *str);
 	*/
 
 	/*
+	** execution_error.c
+	*/
+void	redirection_error(t_data *data, char *filename, int i, int *token);
+void	malloc_error(t_data *data);
+
+	/*
 	**----------------------------PARSE_ERROR-----------------------------------
 	*/
 
-/*
-** parse_error.c
-*/
-void	parse_error(char charachter);
+	/*
+	** parse_error.c
+	*/
+void	print_error(char charachter, int *ret);
 
 	/*
 	** validate_input.c
 	*/
-void	input_validation(char **line);
-void 	check_input_redirection(char *line);
-void	check_output_redirection(char *line);
-void	check_pipes(char **line, int i);
-void	check_multiline_commands(char *line, int i);
+int		input_validation(char **line);
+void 	check_input_redirection(char *line, int *ret);
+void	check_output_redirection(char *line, int *ret);
+void	check_pipes(char **line, int i, int *ret);
+void	check_multiline_commands(char *line, int i, int *ret);
 
 	/*
 	** check_functions.c
 	*/
-void	double_symbol(char *line, char c, int i);
-void	double_command(char *line, char c, int i);
-void	mixed_command(char *line, int i, int x);
-void	end_of_line_command(char *line, char c, int i);
-void	validate_qoute(char *line, int *i, int x);
-void	check_first_symbol(char *line);
+void	double_symbol(char *line, char c, int i, int *ret);
+void	double_command(char *line, char c, int i, int *ret);
+void	mixed_command(char *line, int i, int x, int *ret);
+void	end_of_line_command(char *line, char c, int i, int *ret);
+void	validate_qoute(char *line, int *i, int x, int *ret);
+void	check_first_symbol(char *line, int *ret);
 
 
 /*
@@ -117,6 +120,7 @@ void	check_first_symbol(char *line);
 /*
 ** free_struct.c
 */
+void	free_struct(t_data *data);
 void	free_array(char **array);
 void	free_command_table(t_command_table **array);
 

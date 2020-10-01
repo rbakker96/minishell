@@ -6,7 +6,7 @@
 /*   By: qli <qli@student.codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/04 15:02:22 by qli           #+#    #+#                 */
-/*   Updated: 2020/09/30 13:10:41 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/10/01 11:46:31 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,20 @@ void	identfy_command(t_data *data, int i, int *token, char *value)
 		execute_executable(data, i, token, data->commands[i]->token_amount, 0);
 }
 
+void		initialise_pipe_fd(t_data *data)
+{
+	data->pipe_fd[0] = 0;
+	data->pipe_fd[1] = 1;
+	data->pipe_fd2[0] = 0;
+	data->pipe_fd2[1] = 1;
+}
+
 void		execution_loop(t_data *data, int command, int token)
 {
-
 	while(command < data->command_amount)
 	{
 		token = 0;
+		initialise_pipe_fd(data); // pipe fds are reset when process a new command table
 		while(token < data->commands[command]->token_amount)
 		{
 			identfy_command(data, command, &token, data->commands[command]->tokens[token]);
