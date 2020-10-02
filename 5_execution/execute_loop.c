@@ -6,7 +6,7 @@
 /*   By: qli <qli@student.codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/04 15:02:22 by qli           #+#    #+#                 */
-/*   Updated: 2020/10/01 16:57:08 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/10/02 19:23:37 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ void		initialise_pipe_fd(t_data *data)
 	data->pipe_fd[1] = 1;
 	data->pipe_fd2[0] = 0;
 	data->pipe_fd2[1] = 1;
+	data->args = 0;
 }
 
 void		execution_loop(t_data *data, int command, int token)
@@ -47,7 +48,10 @@ void		execution_loop(t_data *data, int command, int token)
 		token = 0;
 		initialise_pipe_fd(data); // pipe fds are reset when process a new command table
 		while(token < data->commands[command]->token_amount)
+		{
+			data->commands[command]->error_flag = 0;
 			identfy_command(data, command, &token, data->commands[command]->tokens[token]);
+		}
 		command++;
 	}
 	free_struct(data);

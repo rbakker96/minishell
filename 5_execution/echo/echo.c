@@ -6,7 +6,7 @@
 /*   By: roybakker <roybakker@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/09 14:49:34 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/01 17:28:50 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/10/02 19:23:40 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,11 @@ void	execute_echo(t_data *data, int i, int *token, int needed_tokens)
 
 	(*token)++;
 	create_fd(data, i, (*token), &needed_tokens);
+	if (data->commands[i]->error_flag == -1)
+	{
+		(*token) = data->commands[i]->token_amount;
+		return ;
+	}
 	while(redirection_check(data->commands[i]->tokens[(*token)]) == redirected)
 		(*token) += 2;
 	newline = newline_option(data->commands[i]->tokens[(*token)], needed_tokens,

@@ -1,0 +1,43 @@
+Relative path -->
+cd test
+
+----
+
+Absolute path -->
+cd /Users/roybakker/Documents/Codam/minishell/5_execution/executable
+
+----
+
+Cd with non existing path -->
+cd asdf
+
+----
+
+To much arguments -->
+cd test with four arguments
+
+----
+
+Cd ignored with pipe -->
+cd test | cat main.c
+
+----
+
+Cd with non existing input file -->
+cd test < out99
+
+----
+
+Cd with output file and pipe -->
+cd test > out | cat main.c
+
+----
+
+Cd with non existing input file and pipe -->
+cd test < out99 | echo hallo
+
+
+---
+
+Cd with non existing path and working second command -->
+cd nothing ; echo hallo

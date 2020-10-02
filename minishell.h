@@ -6,7 +6,7 @@
 /*   By: roybakker <roybakker@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/01 15:55:06 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/01 16:57:19 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/10/02 17:11:42 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ int		quotes_check(char *str);
 	** execution_error.c
 	*/
 void	redirection_error(t_data *data, char *filename, int i, int *token);
+void	change_directory_error(t_data *data, char *filename, int i, int *token);
 void	malloc_error(t_data *data, int index, char **malloced_array);
 void	fork_error(t_data *data, int index);
 
@@ -138,7 +139,8 @@ void	identfy_command(t_data *data, int i, int *token, char *value);
 ** cd.c
 */
 void	execute_cd(t_data *data, int command, int *token, int needed_tokens);
-void	go_to_home(t_data *data, int i);
+char	*get_argument(t_data *data, int i, int *token, int needed_tokens);
+void	go_to_home(t_data *data, int i, int *token, int needed_tokens);
 
 	/*
 	**---------------------------------ECHO------------------------------------

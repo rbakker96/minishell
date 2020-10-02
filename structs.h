@@ -6,7 +6,7 @@
 /*   By: roybakker <roybakker@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/01 14:27:26 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/01 15:42:03 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/10/02 13:50:30 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ typedef struct 			s_command_table
 	char				*command;
 	char				**tokens;
 	int					token_amount;
-	int 				exit_code;
+	int 				error_flag;
 }						t_command_table;
 
 typedef struct 			s_data

@@ -6,7 +6,7 @@
 /*   By: roybakker <roybakker@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/23 14:14:27 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/09/30 14:52:19 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/10/02 18:01:12 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,7 @@ int		append_file(t_data *data, int i, int *token)
 	fd = open(filename, O_CREAT | O_WRONLY | O_APPEND, 0664);
 	if (fd == -1)
 		redirection_error(data, filename, i, token);
-	else
-		(*token) += 2;
+	(*token) += 2;
 	return (fd);
 }
 
@@ -35,8 +34,7 @@ int		overwrite_file(t_data *data, int i, int *token)
 	fd = open(filename, O_CREAT | O_WRONLY | O_TRUNC, 0664);
 	if (fd == -1)
 		redirection_error(data, filename, i, token);
-	else
-		(*token) += 2;
+	(*token) += 2;
 	return (fd);
 }
 
@@ -49,7 +47,6 @@ int		input_file(t_data *data, int i, int *token)
 	fd = open(filename, O_RDONLY);
 	if (fd == -1)
 		redirection_error(data, filename, i, token);
-	else
-		(*token) += 2;
+	(*token) += 2;
 	return (fd);
 }
