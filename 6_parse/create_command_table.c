@@ -6,26 +6,23 @@
 /*   By: roybakker <roybakker@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/02 11:00:03 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/05 15:10:09 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/10/05 21:21:15 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int	parse_command(t_data *data, char **envp)
+int		parse_command(t_data *data, char **envp)
 {
-	char 	*line;
-
 	save_environment_variables(data, envp);
-	if (get_next_line(0, &line) == -1)
+	if (get_next_line(0, &data->input) == -1)
 		return (-1);
 	// if (input_validation(&line) == -1)
 	// {
-	// 	free(line);
+	// 	free(data->input);
 	// 	return (-1);
 	// }
-	create_command_table(data, line, 0);
-	free(line);
+	create_command_table(data, data->input, 0);
 	return (0);
 }
 

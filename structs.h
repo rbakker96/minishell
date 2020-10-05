@@ -6,7 +6,7 @@
 /*   By: roybakker <roybakker@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/01 14:27:26 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/02 13:50:30 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/10/05 15:39:41 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,12 +45,9 @@ typedef struct 			s_command_table
 
 typedef struct 			s_data
 {
+	char				*input;
 	t_command_table 	**commands;
 	int					fd[2];
-	int					pipe_fd[2];
-	int					pipe_fd2[2];
-	int					pipe_before;
-	int					pipe_after;
 	char				**envp;
 	char				**args;
 	int					command_amount;

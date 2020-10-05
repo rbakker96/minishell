@@ -6,7 +6,7 @@
 /*   By: roybakker <roybakker@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/30 14:33:38 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/05 15:10:47 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/10/05 15:42:48 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void	fork_error(t_data *data, int index)
 	i = 0;
 	index++;
 	print(data, 2, "minishell : error due to fork failure\n", 0);
+	free(data->input);
 	free_array(data->envp);
 	if (data->args)
 		free_array(data->args);

@@ -1,37 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   memory_error.c                                     :+:    :+:            */
+/*   shell_expansions.c                                 :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: roybakker <roybakker@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/10/05 10:19:20 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/05 15:43:11 by roybakker     ########   odam.nl         */
+/*   Created: 2020/10/05 19:44:06 by roybakker     #+#    #+#                 */
+/*   Updated: 2020/10/05 21:13:59 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-void	malloc_error(t_data *data, int index, char **malloced_array)
+void	shell_expansions(t_data *data, int i, int token)
 {
-	int i;
+	int len;
+	char *token;
+	char *new_token;
 
-	i = 0;
-	index++;
-	print(data, 2, "minishell : error due to malloc failure\n", 0);
-	free(data->input);
-	if (malloced_array)
-		free_array(malloced_array);
-	if (data->envp)
-		free_array(data->envp);
-	if (data->args)
-		free_array(data->args);
-	while(i < index)
+	token = data->commands[i]->tokens[token];
+	while (token < data->commands[i]->token_amount)
 	{
-		free_array(data->commands[i]->tokens);
-		free(data->commands[i]);
-		i++;
+		len = expansion_len(data, token, 0, 0);
+		new_token = malloc(sizeof(char) * (len + 1));
+		if (new_token == NULL)
+		//malloc error
+		expand_token(data, token, new_token, 0);
 	}
-	free(data->commands);
-	exit(1);
 }

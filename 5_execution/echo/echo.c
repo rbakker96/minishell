@@ -6,7 +6,7 @@
 /*   By: roybakker <roybakker@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/09 14:49:34 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/05 11:22:35 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/10/05 20:47:00 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ char	*get_variable(t_data *data, char *value, int index, int i, int len)
 	int		var_len;
 
 	envp_size = get_array_size(data->envp);
-	while(value[index + len] != '\0' && value[index + len] != '\"')
+	while(value[index + len] != '\0' && value[index + len] != '\"'  && value[index + len] != ' ')
 		len++;
 	variable = ft_substr(value, index, len);
 	if (variable == NULL)
