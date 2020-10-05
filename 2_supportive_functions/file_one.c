@@ -6,54 +6,50 @@
 /*   By: roybakker <roybakker@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/02 11:27:20 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/09/30 13:25:53 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/10/05 15:12:18 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int		print(int fd, char *str) //make it a void later like print char
+void	print(t_data *data, int fd, char *str, char *malloced_str)
 {
 	int length;
 	int written;
 
 	length = ft_strlen(str);
 	written = write(fd, str, length);
-//	CLEAR STRUCT WHEN FAIL
-//
 	if (written == -1)
-		return (-1);
-	return (0);
+		write_error(data, malloced_str);
+	return ;
 }
 
-void	print_char(int fd, char c)
+void	print_char(t_data *data, int fd, char c, char *malloced_str)
 {
 	int written;
 
 	written = write(fd, &c, 1);
-//	CLEAR STRUCT WHEN FAIL
-//
 	if (written == -1)
-		return ;
+		write_error(data, malloced_str);
 	return ;
 }
 
-int		prompt(void)
+int		prompt(t_data *data)
 {
 	char *directory;
 
-	directory = get_current_directory();
-	print(1, "\033[1;32m");
-	print(1, "→ ");
-	print(1, "\033[1;36m");
-	print(1, directory);
-	print(1, " ");
-	print(1, "\033[0m");
+	print(data, 1, "\033[1;32m", 0);
+	print(data, 1, "→ ", 0);
+	print(data, 1, "\033[1;36m", 0);
+	directory = get_current_directory(data);
+	print(data, 1, directory, directory);
 	free(directory);
+	print(data, 1, " ",0 );
+	print(data, 1, "\033[0m", 0);
 	return (0);
 }
 
-char	*get_current_directory(void)
+char	*get_current_directory(t_data *data)
 {
 	char buf[PATH_MAX];
 	int index;
@@ -61,15 +57,15 @@ char	*get_current_directory(void)
 	char **directory;
 
 	path = getcwd(buf, (size_t)PATH_MAX);
-//	CLEAR STRUCT WHEN FAIL
-//
+	if (path == NULL)
+		get_directory_error(data);
 	directory = ft_split(path, '/');
-//	CLEAR STRUCT WHEN FAIL
-//
+	if(directory == NULL)
+		malloc_error(data, 0, 0);
 	index = get_array_size(directory);
 	path = ft_strdup(directory[index - 1]);
-//	CLEAR STRUCT WHEN FAIL
-//
+	if (path == NULL)
+		malloc_error(data, 0, 0);
 	free_array(directory);
 	return (path);
 }

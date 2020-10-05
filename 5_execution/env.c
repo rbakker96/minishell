@@ -6,7 +6,7 @@
 /*   By: roybakker <roybakker@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/09 14:51:19 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/01 16:56:40 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/10/05 11:19:12 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ void	execute_env(t_data *data, int *token)
 	index = 0;
 	while(data->envp[index] != 0)
 	{
-		print(1, data->envp[index]);
-		printf("\n");
+		print(data, data->fd[1], data->envp[index], 0);
+		print_char(data, data->fd[1], '\n', 0);
 		index++;
 	}
 	*token = *token + 1;

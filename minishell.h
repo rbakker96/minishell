@@ -6,7 +6,7 @@
 /*   By: roybakker <roybakker@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/01 15:55:06 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/05 09:56:14 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/10/05 10:53:27 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,10 @@
 /*
 ** file_one.c
 */
-int		print(int fd, char *str);
-void	print_char(int fd, char c);
-int		prompt(void);
-char	*get_current_directory(void);
+void	print(t_data *data, int fd, char *str, char *malloced_str);
+void	print_char(t_data *data, int fd, char c, char *malloced_str);
+int		prompt(t_data *data);
+char	*get_current_directory(t_data *data);
 
 /*
 ** file_two.c
@@ -78,12 +78,22 @@ int		quotes_check(char *str);
 	*/
 
 	/*
-	** execution_error.c
+	** external_function_error.c
+	*/
+void	fork_error(t_data *data, int index);
+void	write_error(t_data *data, char *malloced_str);
+
+	/*
+	** file_system_error.c
 	*/
 void	redirection_error(t_data *data, char *filename, int i, int *token);
 void	change_directory_error(t_data *data, char *filename, int i, int *token);
+void	get_directory_error(t_data *data);
+
+	/*
+	** memory_error.c
+	*/
 void	malloc_error(t_data *data, int index, char **malloced_array);
-void	fork_error(t_data *data, int index);
 
 	/*
 	**----------------------------PARSE_ERROR-----------------------------------

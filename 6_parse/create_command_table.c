@@ -6,7 +6,7 @@
 /*   By: roybakker <roybakker@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/02 11:00:03 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/01 15:43:39 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/10/05 15:10:09 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,11 @@ int	parse_command(t_data *data, char **envp)
 	save_environment_variables(data, envp);
 	if (get_next_line(0, &line) == -1)
 		return (-1);
-	if (input_validation(&line) == -1)
-	{
-		free(line);
-		return (-1);
-	}
+	// if (input_validation(&line) == -1)
+	// {
+	// 	free(line);
+	// 	return (-1);
+	// }
 	create_command_table(data, line, 0);
 	free(line);
 	return (0);
@@ -44,7 +44,7 @@ int		save_environment_variables(t_data *data, char **envp)
 		if (malloced_envp[index] == NULL)
 		{
 			free_array(malloced_envp);
-			print(2, "minishell : error due to malloc failure\n");
+			print(data, 2, "minishell : error due to malloc failure\n", 0);
 			exit(1);
 		}
 		index++;

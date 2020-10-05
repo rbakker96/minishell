@@ -6,7 +6,7 @@
 /*   By: qli <qli@student.codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/03 15:19:55 by qli           #+#    #+#                 */
-/*   Updated: 2020/09/30 14:22:24 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/10/05 11:16:26 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ void	check_pipes(char **line, int i, int *ret)
 		if((*line)[i - 1] != '\\' && (*line)[i] == '|' && (*line)[i + 1] == '|' )
 		{
 			str = ft_substr((*line), 0, i);
+			//malloc error
+			//
 			free((*line));
 			*line = str;
 		}

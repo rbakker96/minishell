@@ -6,7 +6,7 @@
 /*   By: roybakker <roybakker@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/19 13:23:47 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/05 09:57:04 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/10/05 15:18:54 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,8 @@ void	quoted_len(char *command, int start, int *len, int *current_char)
 
 	quotes = 1;
 	quote_type = (*current_char);
+	(*len)++;
+	*current_char = token_id(command[start + (*len)]);
 	while(quotes != 0 && command[start + (*len)] != '\0')
 	{
 		if ((*current_char) == quote_type)

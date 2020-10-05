@@ -1,24 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   parse_error.c                                      :+:    :+:            */
+/*   memory_error.c                                     :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: roybakker <roybakker@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/09/14 10:53:18 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/05 15:11:20 by roybakker     ########   odam.nl         */
+/*   Created: 2020/10/05 10:19:20 by roybakker     #+#    #+#                 */
+/*   Updated: 2020/10/05 10:59:19 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-void	print_error(char charachter, int *ret)
+void	malloc_error(t_data *data, int index, char **malloced_array)
 {
-	if (*ret != -1)
+	int i;
+
+	i = 0;
+	index++;
+	print(data, 2, "minishell : error due to malloc failure\n", 0);
+	if (malloced_array)
+		free_array(malloced_array);
+	if (data->envp)
+		free_array(data->envp);
+	if (data->args)
+		free_array(data->args);
+	while(i < index)
 	{
-		print(0, 2, "minishell: parse error near ", 0);
-		print_char(0, 2, charachter, 0);
-		print_char(0, 2, '\n', 0);
+		free_array(data->commands[i]->tokens);
+		free(data->commands[i]);
+		i++;
 	}
-	(*ret) = -1;
+	free(data->commands);
+	exit(1);
 }

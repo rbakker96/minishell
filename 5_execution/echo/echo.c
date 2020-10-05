@@ -6,7 +6,7 @@
 /*   By: roybakker <roybakker@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/09 14:49:34 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/02 19:23:40 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/10/05 11:22:35 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,12 +40,12 @@ void	execute_echo(t_data *data, int i, int *token, int needed_tokens)
 		else if (type == single_quote)
 			single_quotes(data, i, token, &index);
 		if ((*token) != (needed_tokens - 1))
-			print_char(data->fd[1], ' ');
+			print_char(data, data->fd[1], ' ', 0);
 		if ((*token) < needed_tokens)
 			(*token)++;
 	}
 	if (!newline)
-		print(data->fd[1], "\n");
+		print_char(data, data->fd[1], '\n', 0);
 	return ;
 }
 
@@ -78,9 +78,10 @@ void	echo_variable(t_data *data, int i, int *token, int *index)
 		(*index)++;
 	while (variable[x] != '\0')
 	{
-		print_char(data->fd[1], variable[x]);
+		print_char(data, data->fd[1], variable[x], variable);
 		x++;
 	}
+	free(variable);
 }
 
 char	*get_variable(t_data *data, char *value, int index, int i, int len)

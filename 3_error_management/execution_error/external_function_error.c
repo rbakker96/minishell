@@ -1,47 +1,46 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   free_struct.c                                      :+:    :+:            */
+/*   external_function_error.c                          :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: roybakker <roybakker@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/09/30 10:27:35 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/05 10:28:22 by roybakker     ########   odam.nl         */
+/*   Created: 2020/09/30 14:33:38 by roybakker     #+#    #+#                 */
+/*   Updated: 2020/10/05 15:10:47 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "../../minishell.h"
 
-void	free_struct(t_data *data)
+void	fork_error(t_data *data, int index)
 {
 	int i;
 
 	i = 0;
-	while(i < data->command_amount)
+	index++;
+	print(data, 2, "minishell : error due to fork failure\n", 0);
+	free_array(data->envp);
+	if (data->args)
+		free_array(data->args);
+	while(i < index)
 	{
 		free_array(data->commands[i]->tokens);
 		free(data->commands[i]);
 		i++;
 	}
 	free(data->commands);
-	free_array(data->envp);
-	if (data->args)
-		free_array(data->args);
+	exit(1);
 }
 
-void	free_array(char **array)
+void	write_error(t_data *data, char *malloced_str)
 {
-	int i;
-
-	i = 0;
-	if (!array)
-		return ;
-	while (array[i] != 0)
-		i++;
-	while (i >= 0)
-	{
-		free(array[i]);
-		i--;
-	}
-	free(array);
+	print(data, 2, "minishell : write function failed\n", 0);
+	if (malloced_str)
+		free(malloced_str);
+	if (data->envp)
+		free_array(data->envp);
+	if (data->args)
+		free_array(data->args);
+	free_struct(data);
+	exit(1);
 }

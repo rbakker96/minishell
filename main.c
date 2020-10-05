@@ -6,7 +6,7 @@
 /*   By: roybakker <roybakker@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/08/31 10:42:36 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/01 15:22:38 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/10/05 10:54:48 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,12 @@ int		main(int argc, char **argv, char **envp)
 
 	if (argc != 1 || !argv)
 	{
-		print(1, "Only the executable ./minishell is sufficient\n");
+		print(&data, 1, "Only the executable ./minishell is sufficient\n", 0);
 		return (-1);
 	}
 	while(1)
 	{
-		prompt();
+		prompt(&data);
 		if (parse_command(&data, envp) != -1)
 			execution_loop(&data, 0, 0);
 	}

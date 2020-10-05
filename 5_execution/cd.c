@@ -6,7 +6,7 @@
 /*   By: roybakker <roybakker@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/09 14:50:20 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/02 18:04:54 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/10/05 11:18:01 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ char	*get_argument(t_data *data, int i, int *token, int needed_tokens)
 	}
 	if (arguments > 1)
 	{
-		print(2, "minishell : cd : too many arguments\n");
+		print(data, 2, "minishell : cd : too many arguments\n", 0);
 		(*token) = data->commands[i]->token_amount;
 		return (0);
 	}
