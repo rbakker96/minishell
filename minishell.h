@@ -6,7 +6,7 @@
 /*   By: roybakker <roybakker@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/01 15:55:06 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/02 17:11:42 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/10/05 09:56:14 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ int		token_id(char c);
 void	special_char(char *command, int *i, int *token);
 void	quoted_sentence(char *command, int *i, int x);
 void	basic_word(char *command, int *i, int *token);
-int		quotes_count(char *command, int i, int x);
 
 /*
 ** file_four.c
@@ -260,5 +259,7 @@ void	save_tokens(t_data *data, char **array, char *command, int i, int len);
 int		begin_token(char *command, int i);
 int		len_token(char *command, int start, int len, int *spaces);
 int		len_sentence(char *command, int start, int len, int *spaces);
+void	non_quoted_len(char *command, int start, int *len, int *current_char);
+void	quoted_len(char *command, int start, int *len, int *current_char);
 
 #endif

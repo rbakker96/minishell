@@ -6,7 +6,7 @@
 /*   By: roybakker <roybakker@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/19 13:23:47 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/01 15:02:57 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/10/05 09:57:04 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,27 +63,52 @@ int		len_token(char *command, int start, int len, int *spaces)
 
 int		len_sentence(char *command, int start, int len, int *spaces)
 {
-	int quotes;
-	int x;
+	int current_char;
 
-	while(token_id(command[start + len]) == normal_char && command[start + len] != '\0')
-		(command[start + len] == '\\') ? len += 2 : len++;
-	if (token_id(command[start + len]) == double_quote || token_id(command[start + len]) == single_quote)
+	while(command[start + len] != '\0')
 	{
-		x = token_id(command[start + len]);
-		quotes = quotes_count(command, start, x);
-		len++;
-		while(quotes != 0 && command[start + len] != '\0')
+		current_char = token_id(command[start + len]);
+		if (current_char == normal_char)
+			non_quoted_len(command, start, &len, &current_char);
+		else if (current_char == double_quote || current_char == single_quote)
+			quoted_len(command, start, &len, &current_char);
+		if (current_char == space)
 		{
-			if (token_id(command[start + len]) == x)
-				quotes--;
-			if (command[start + len] == '\\')
-				len += 2;
-			else
-				len++;
+			(*spaces)++;
+			return (len);
 		}
 	}
-	if (token_id(command[start + len]) == space)
-		(*spaces)++;
 	return (len);
+}
+
+
+void	non_quoted_len(char *command, int start, int *len, int *current_char)
+{
+	while((*current_char) == normal_char && command[start + (*len)] != '\0')
+	{
+		if (command[start + (*len)] == '\\')
+			(*len) += 2;
+		else
+			(*len)++;
+		*current_char = token_id(command[start + (*len)]);
+	}
+}
+
+void	quoted_len(char *command, int start, int *len, int *current_char)
+{
+	int quotes;
+	int	quote_type;
+
+	quotes = 1;
+	quote_type = (*current_char);
+	while(quotes != 0 && command[start + (*len)] != '\0')
+	{
+		if ((*current_char) == quote_type)
+			quotes--;
+		if (command[start + (*len)] == '\\')
+			(*len) += 2;
+		else
+			(*len)++;
+		*current_char = token_id(command[start + (*len)]);
+	}
 }
