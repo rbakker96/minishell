@@ -1,0 +1,59 @@
+------- no pipe --------
+
+[YES]
+cat < main.c > out
+
+[YES]
+./test/linux_child > out
+./test/child > out
+
+------- pipe after & pipe before --------
+
+[YES]
+pwd | cat
+
+[YES]
+pwd | cat > out
+
+[YES]
+ls -la | grep Oct > out
+
+[YES]
+ls -la | grep Oct
+
+[YES]
+ls -la > out | grep Oct
+
+[YES]
+ls | grep Oct < input
+
+[YES]
+ls > out | grep Oct < input
+
+------- pipe both before & after --------
+
+[YES]
+ls -la | grep Oct | grep test > out
+
+[YES]
+ls -la | grep Oct | grep test | grep test_pipe
+
+[YES]
+ls -la | grep Oct | grep test | grep test_pipe > out
+
+[YES]
+ls -la | grep Oct | grep qli | grep 30 | grep test | grep test_pipe > out
+
+[YES]
+pwd | cat | grep /home/ > out
+
+[NO]
+ls -la | grep Oct > out| grep test | grep test_pipe
+
+[NO]
+ls -la | grep Oct | grep test > out | grep test_pipe
+
+[NO]
+ls -la > out| grep Oct | grep test > out | grep test_pipe
+
+ls -la | grep Oct | cat
