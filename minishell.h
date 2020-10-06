@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   minishell.h                                        :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: roybakker <roybakker@student.codam.nl>       +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2020/09/01 15:55:06 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/05 18:31:33 by roybakker     ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   minishell.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rbakker <rbakker@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/09/01 15:55:06 by roybakker         #+#    #+#             */
+/*   Updated: 2020/10/06 17:08:00 by rbakker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # include <unistd.h>
 # include <sys/types.h>
 # include <sys/wait.h>
-#include <sys/stat.h>
+# include <sys/stat.h>
 # include <errno.h>      /* for 'ENOENT' and 'ENOMEM' */
 # include <limits.h>
 # include <string.h> /* for strerror */
@@ -28,7 +28,7 @@
 # include <fcntl.h> /* for open */
 
 /*
-**---------------------------SUPPORTIVE__FUNCTIONS------------------------------
+**--FOLDER-------------------SUPPORTIVE__FUNCTIONS------------------------------
 */
 
 /*
@@ -68,54 +68,54 @@ int		redirection(char *str);
 int		get_array_size(char **array);
 int		redirection_check(char *str);
 int		quotes_check(char *str);
+int		env_var_len(char *str, int i);
 
 /*
-**-----------------------------ERROR_MANAGEMENT---------------------------------
+**--FOLDER---------------------ERROR_MANAGEMENT---------------------------------
 */
 
-	/*
-	**--------------------------EXECUTION_ERROR---------------------------------
-	*/
-
-	/*
-	** external_function_error.c
-	*/
+/*
+**--SUB_FOLDER------------------EXECUTION_ERROR---------------------------------
+*/
+/*
+** external_function_error.c
+*/
 void	fork_error(t_data *data, int index);
 void	write_error(t_data *data, char *malloced_str);
 
-	/*
-	** file_system_error.c
-	*/
+/*
+** file_system_error.c
+*/
 void	redirection_error(t_data *data, char *filename, int i, int *token);
 void	change_directory_error(t_data *data, char *filename, int i, int *token);
 void	get_directory_error(t_data *data);
 
-	/*
-	** memory_error.c
-	*/
+/*
+** memory_error.c
+*/
 void	malloc_error(t_data *data, int index, char **malloced_array);
 
-	/*
-	**----------------------------PARSE_ERROR-----------------------------------
-	*/
+/*
+**--SUB_FOLDER--------------------PARSE_ERROR-----------------------------------
+*/
 
-	/*
-	** parse_error.c
-	*/
+/*
+** parse_error.c
+*/
 void	print_error(char charachter, int *ret);
 
-	/*
-	** validate_input.c
-	*/
+/*
+** validate_input.c
+*/
 int		input_validation(char **line);
-void 	check_input_redirection(char *line, int *ret);
+void	check_input_redirection(char *line, int *ret);
 void	check_output_redirection(char *line, int *ret);
 void	check_pipes(char **line, int i, int *ret);
 void	check_multiline_commands(char *line, int i, int *ret);
 
-	/*
-	** check_functions.c
-	*/
+/*
+** check_functions.c
+*/
 void	double_symbol(char *line, char c, int i, int *ret);
 void	double_command(char *line, char c, int i, int *ret);
 void	mixed_command(char *line, int i, int x, int *ret);
@@ -123,9 +123,8 @@ void	end_of_line_command(char *line, char c, int i, int *ret);
 void	validate_qoute(char *line, int *i, int x, int *ret);
 void	check_first_symbol(char *line, int *ret);
 
-
 /*
-**-----------------------------MEMORY_MANAGEMENT---------------------------------
+**--FOLDER---------------------MEMORY_MANAGEMENT--------------------------------
 */
 
 /*
@@ -135,7 +134,7 @@ void	free_struct(t_data *data);
 void	free_array(char **array);
 
 /*
-**---------------------------------EXECUTION------------------------------------
+**--FOLDER-------------------------EXECUTION------------------------------------
 */
 
 /*
@@ -151,78 +150,104 @@ void	execute_cd(t_data *data, int command, int *token, int needed_tokens);
 char	*get_argument(t_data *data, int i, int *token, int needed_tokens);
 void	go_to_home(t_data *data, int i, int *token, int needed_tokens);
 
-	/*
-	**---------------------------------ECHO------------------------------------
-	*/
+/*
+**--SUB_FOLDER--------------------------ECHO------------------------------------
+*/
 
-	/*
-	** echo.c
-	*/
+/*
+** echo.c
+*/
 void	execute_echo(t_data *data, int i, int *token, int needed_tokens);
-int		newline_option(char *value, int needed_tokens, int *token);
-void	echo_variable(t_data *data, int i, int *token, int *index);
-char	*get_variable(t_data *data, char *value, int index, int i, int len);
+// int		newline_option(char *value, int needed_tokens, int *token);
+// void	echo_variable(t_data *data, int i, int *token, int *index);
+// char	*get_variable(t_data *data, char *value, int index, int i, int len);
 
-	/*
-	** no_quotes.c
-	*/
-void	no_quotes(t_data *data, int i, int *token, int *index);
-void	no_quotes_escape(t_data *data, int i, int *token, int *index);
+// /*
+// ** no_quotes.c
+// */
+// void	no_quotes(t_data *data, int i, int *token, int *index);
+// void	no_quotes_escape(t_data *data, int i, int *token, int *index);
 
-	/*
-	** single_quotes.c
-	*/
-void	single_quotes(t_data *data, int i, int *token, int *index);
+// /*
+// ** single_quotes.c
+// */
+// void	single_quotes(t_data *data, int i, int *token, int *index);
 
-	/*
-	** double_quotes.c
-	*/
-void	double_quotes(t_data *data, int i, int *token, int *index);
-void	double_quotes_escape(t_data *data, int i, int *token, int *index);
+// /*
+// ** double_quotes.c
+// */
+// void	double_quotes(t_data *data, int i, int *token, int *index);
+// void	double_quotes_escape(t_data *data, int i, int *token, int *index);
 
-	/*
-	**-----------------------------EXECUTABLE-----------------------------------
-	*/
+/*
+**--SUB_FOLDER---------------------EXECUTABLE-----------------------------------
+*/
 
-	/*
-	** create_arguments.c
-	*/
+/*
+** create_arguments.c
+*/
 void	create_args(t_data *data, int command, int token);
 int		check_args_num(t_data *data, int command, int token);
 
-	/*
-	** run_executable.c
-	*/
+/*
+** run_executable.c
+*/
 void	execute_executable(t_data *data, int i, int *token, int needed_tokens);
 void	execute_absolute_executable(t_data *data, int i, int *token, int x);
 int		fork_executable(t_data *data, int i);
 
-	/*
-	**---------------------------------OUTPUT-----------------------------------
-	*/
+/*
+**--SUB_FOLDER-------------------SHELL_EXPANSIONS-------------------------------
+*/
 
-	/*
-	** create_fd.c
-	*/
+/*
+** expand_functions.c
+*/
+void	single_quotes(t_data *data, char **new_token, int *i, int *x);
+void	double_quotes(t_data *data, char **new_token, int *i, int *x);
+void	escape_double_quotes(t_data *data, char **new_token, int *i, int *x);
+void	env_variable(t_data *data, char **new_token, int *i, int *x);
+void	save_env_variable(char *variable, char **new_token, int *x);
+
+/*
+** len_calculations.c
+*/
+void	single_quotes_len(char *token, int *i, int *len);
+void	double_quotes_len(t_data *data, char *token, int *i, int *len);
+int		escape_len_double_quotes(char *token, int *i, int len);
+int		env_variable_len(t_data *data, char *token, int *i, int len);
+
+/*
+** shell_expansions.c
+*/
+void	shell_expansions(t_data *data, int i, int token);
+int		expansion_len(t_data *data, int i, int len);
+void	expand_token(t_data *data, char **new_token, int i, int x);
+
+/*
+**--SUB_FOLDER-------------------------OUTPUT-----------------------------------
+*/
+
+/*
+** create_fd.c
+*/
 void	create_fd(t_data *data, int i, int token, int *needed_tokens);
 
-	/*
-	** handle_redirection_files.c
-	*/
+/*
+** handle_redirection_files.c
+*/
 int		append_file(t_data *data, int i, int *token);
 int		overwrite_file(t_data *data, int i, int *token);
 int		input_file(t_data *data, int i, int *token);
 
-	/*
-	** create_pipe.c
-	*/
-
+/*
+** create_pipe.c
+*/
 
 /*
 ** env.c
 */
 void	execute_env(t_data *data, int *token);
-
 
 /*
 ** exit.c
@@ -245,7 +270,7 @@ void	execute_pwd(t_data *data, int i, int *token, int needed_tokens);
 void	execute_unset(t_data *data, int i, int *token);
 
 /*
-**----------------------------------PARSE---------------------------------------
+**--FOLDER--------------------------PARSE---------------------------------------
 */
 
 /*

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   structs.h                                          :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: roybakker <roybakker@student.codam.nl>       +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2020/09/01 14:27:26 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/05 15:39:41 by roybakker     ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   structs.h                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rbakker <rbakker@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/09/01 14:27:26 by roybakker         #+#    #+#             */
+/*   Updated: 2020/10/06 11:10:03 by rbakker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,18 +35,19 @@ typedef enum			e_defenitions
 /*
 **---------------------------------MINISHELL------------------------------------
 */
-typedef struct 			s_command_table
+typedef struct			s_command_table
 {
 	char				*command;
 	char				**tokens;
 	int					token_amount;
-	int 				error_flag;
+	int					error_flag;
 }						t_command_table;
 
-typedef struct 			s_data
+typedef struct			s_data
 {
 	char				*input;
-	t_command_table 	**commands;
+	char				*current_token;
+	t_command_table		**commands;
 	int					fd[2];
 	char				**envp;
 	char				**args;

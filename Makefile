@@ -1,12 +1,12 @@
 # **************************************************************************** #
 #                                                                              #
-#                                                         ::::::::             #
-#    Makefile                                           :+:    :+:             #
-#                                                      +:+                     #
-#    By: rbakker <rbakker@student.42.fr>              +#+                      #
-#                                                    +#+                       #
-#    Created: 2020/02/05 14:55:09 by rbakker       #+#    #+#                  #
-#    Updated: 2020/10/05 10:22:59 by roybakker     ########   odam.nl          #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: rbakker <rbakker@student.42.fr>            +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2020/02/05 14:55:09 by rbakker           #+#    #+#              #
+#    Updated: 2020/10/06 13:09:14 by rbakker          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,11 +27,11 @@ SOURCES			= 	main.c \
 					4_memory_management/free_struct.c \
 					5_execution/cd.c \
 					5_execution/echo/echo.c \
-					5_execution/echo/no_quotes.c \
-					5_execution/echo/double_quotes.c \
-					5_execution/echo/single_quotes.c \
 					5_execution/executable/create_arguments.c \
 					5_execution/executable/run_executable.c \
+					5_execution/shell_expansions/expand_functions.c \
+					5_execution/shell_expansions/len_calculations.c \
+					5_execution/shell_expansions/shell_expansions.c \
 					5_execution/output/create_fd.c \
 					5_execution/output/handle_redirection_files.c \
 					5_execution/env.c \

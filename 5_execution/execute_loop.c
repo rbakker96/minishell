@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   execute_loop.c                                     :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: qli <qli@student.codam.nl>                   +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2020/09/04 15:02:22 by qli           #+#    #+#                 */
-/*   Updated: 2020/10/05 19:48:08 by roybakker     ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   execute_loop.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rbakker <rbakker@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/09/04 15:02:22 by qli               #+#    #+#             */
+/*   Updated: 2020/10/06 13:15:55 by rbakker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,13 +40,13 @@ void		initialise_struct_elements(t_data *data, int command)
 
 void		execution_loop(t_data *data, int command, int token)
 {
-	while(command < data->command_amount)
+	while (command < data->command_amount)
 	{
 		token = 0;
 		initialise_struct_elements(data, command);
-		while(token < data->commands[command]->token_amount)
+		while (token < data->commands[command]->token_amount)
 		{
-			//shell_expansions();
+			shell_expansions(data, command, token);
 			//preform redirections();
 			identfy_command(data, command, &token, data->commands[command]->tokens[token]);
 		}

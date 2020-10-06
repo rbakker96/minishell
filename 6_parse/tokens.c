@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   tokens.c                                           :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: roybakker <roybakker@student.codam.nl>       +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2020/09/19 13:23:47 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/05 15:18:54 by roybakker     ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   tokens.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rbakker <rbakker@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/09/19 13:23:47 by roybakker         #+#    #+#             */
+/*   Updated: 2020/10/06 17:41:58 by rbakker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int		begin_token(char *command, int i)
 
 int		len_token(char *command, int start, int len, int *spaces)
 {
-	if(token_id(command[start]) == meta_char)
+	if (token_id(command[start]) == meta_char)
 	{
 		start++;
 		len = (command[start] == '>' && command[start - 1] == '>') ? 2 : 1;
@@ -65,13 +65,15 @@ int		len_sentence(char *command, int start, int len, int *spaces)
 {
 	int current_char;
 
-	while(command[start + len] != '\0')
+	while (command[start + len] != '\0')
 	{
 		current_char = token_id(command[start + len]);
 		if (current_char == normal_char)
 			non_quoted_len(command, start, &len, &current_char);
 		else if (current_char == double_quote || current_char == single_quote)
 			quoted_len(command, start, &len, &current_char);
+		else if (token_id(command[start + len] == meta_char))
+			break ;
 		if (current_char == space)
 		{
 			(*spaces)++;
@@ -81,10 +83,9 @@ int		len_sentence(char *command, int start, int len, int *spaces)
 	return (len);
 }
 
-
 void	non_quoted_len(char *command, int start, int *len, int *current_char)
 {
-	while((*current_char) == normal_char && command[start + (*len)] != '\0')
+	while ((*current_char) == normal_char && command[start + (*len)] != '\0')
 	{
 		if (command[start + (*len)] == '\\')
 			(*len) += 2;
@@ -103,11 +104,11 @@ void	quoted_len(char *command, int start, int *len, int *current_char)
 	quote_type = (*current_char);
 	(*len)++;
 	*current_char = token_id(command[start + (*len)]);
-	while(quotes != 0 && command[start + (*len)] != '\0')
+	while (quotes != 0 && command[start + (*len)] != '\0')
 	{
 		if ((*current_char) == quote_type)
 			quotes--;
-		if (command[start + (*len)] == '\\')
+		if (command[start + (*len)] == '\\' && quote_type != 3)
 			(*len) += 2;
 		else
 			(*len)++;

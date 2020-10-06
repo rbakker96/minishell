@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   unset.c                                            :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: roybakker <roybakker@student.codam.nl>       +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2020/09/09 14:50:49 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/01 17:13:11 by roybakker     ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   unset.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rbakker <rbakker@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/09/09 14:50:49 by roybakker         #+#    #+#             */
+/*   Updated: 2020/10/06 10:33:37 by rbakker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 void	execute_unset(t_data *data, int i, int *token)
 {
-	int index;
-	int x;
-	int envp_size;
-	char *string;
-	char **new_envp;
+	int		index;
+	int		x;
+	int		envp_size;
+	char	*string;
+	char	**new_envp;
 
 	index = 0;
 	x = 0;

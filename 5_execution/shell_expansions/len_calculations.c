@@ -1,45 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   len_calculations.c                                 :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: roybakker <roybakker@student.codam.nl>       +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2020/10/05 21:08:41 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/05 21:18:01 by roybakker     ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   len_calculations.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rbakker <rbakker@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/10/05 21:08:41 by roybakker         #+#    #+#             */
+/*   Updated: 2020/10/06 17:09:11 by rbakker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-int		expansion_len(t_data *data, char *token, int i, int len)
-{
-	while (token[i] != '\0')
-	{
-		if (token[i] == '\'')
-			single_quotes_len(token, &i, &len);
-		else if (token[i] == '\"')
-			double_quotes_len(data, token, &i, &len);
-		else if (token[i] == '$')
-			len += env_variable_len(data, token, &i, i, 0);
-		else if (token[i] == '\\')
-		{
-			len++;
-			i += 2;
-		}
-		else
-		{
-			i++;
-			len++;
-		}
-	}
-	return (len);
-}
-
 void	single_quotes_len(char *token, int *i, int *len)
 {
 	(*i)++;
-	while(token[(*i)] != '\'')
+	while (token[(*i)] != '\'')
 	{
 		(*i)++;
 		(*len)++;
@@ -49,20 +25,23 @@ void	single_quotes_len(char *token, int *i, int *len)
 
 void	double_quotes_len(t_data *data, char *token, int *i, int *len)
 {
-	(i++);
+	(*i)++;
 	while (token[(*i)] != '\"')
 	{
 		if (token[(*i)] == '\\')
-			len += escape_len_double_quotes(token, i, 0);
+			(*len) += escape_len_double_quotes(token, i, 0);
 		else if (token[(*i)] == '$')
-			len += env_variable_len(data, token, &i, i, 0);
+		{
+			(*len) += env_variable_len(data, token, i, 0);
+			(*i) += env_var_len(token, (*i));
+		}
 		else
 		{
 			(*i)++;
 			(*len)++;
 		}
 	}
-	(i++);
+	(*i)++;
 }
 
 int		escape_len_double_quotes(char *token, int *i, int len)
@@ -77,27 +56,25 @@ int		escape_len_double_quotes(char *token, int *i, int len)
 	return (len);
 }
 
-int		env_variable_len(t_data *data, char *token, int *i, int x, int len)
+int		env_variable_len(t_data *data, char *token, int *i, int len)
 {
-	int		envp_size;
-	char 	*variable;
+	char	*variable;
 	int		var_len;
+	int		x;
 
 	(*i)++;
-	envp_size = get_array_size(data->envp);
-	while(token[x + (*i)] != '\0' && token[x + (*i)] != ' ' &&
-														token[x + (*i)] != '\"')
-		(*i)++;
-	variable = ft_substr(token, x, (*i));
+	var_len = 0;
+	var_len = env_var_len(token, (*i));
+	variable = ft_substr(token, (*i), var_len);
 	if (variable == NULL)
-	//malloc error
+		return (-1); // add ;ater
 	x = 0;
-	while(x < envp_size)
+	while (x < get_array_size(data->envp))
 	{
 		if (ft_strncmp(data->envp[x], variable, ft_strlen(variable)) == 0)
 		{
+			len = ft_strlen(data->envp[x]) - ft_strlen(variable) - 1;
 			free(variable);
-			len = ft_strlen(data->envp[x]) - (*i) - 1;
 			return (len);
 		}
 		x++;
