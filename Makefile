@@ -6,7 +6,7 @@
 #    By: rbakker <rbakker@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/05 14:55:09 by rbakker           #+#    #+#              #
-#    Updated: 2020/10/07 13:32:52 by rbakker          ###   ########.fr        #
+#    Updated: 2020/10/07 16:45:19 by rbakker          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,12 +18,10 @@ SOURCES			= 	main.c \
 					2_supportive_functions/file_three.c \
 					2_supportive_functions/file_four.c \
 					2_supportive_functions/file_five.c \
-					3_error_management/execution_error/external_function_error.c \
-					3_error_management/execution_error/file_system_error.c \
-					3_error_management/execution_error/memory_error.c \
-					3_error_management/parse_error/validate_input.c \
-					3_error_management/parse_error/check_functions.c \
-					3_error_management/parse_error/parse_error.c \
+					3_error_management/external_function_error.c \
+					3_error_management/file_system_error.c \
+					3_error_management/memory_error.c \
+					3_error_management/validation_error.c \
 					4_memory_management/free_struct.c \
 					5_execution/cd.c \
 					5_execution/echo.c \
@@ -43,6 +41,9 @@ SOURCES			= 	main.c \
 					6_parse/create_command_table.c \
 					6_parse/commands.c \
 					6_parse/tokens.c \
+					7_input_validation/input_validation.c \
+					7_input_validation/validate_quotes.c \
+					7_input_validation/validate_redirections.c
 
 OBJECTS 		=	${SOURCES:%.c=%.o}
 

@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   external_function_error.c                          :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: roybakker <roybakker@student.codam.nl>       +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2020/09/30 14:33:38 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/05 15:42:48 by roybakker     ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   external_function_error.c                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rbakker <rbakker@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/09/30 14:33:38 by roybakker         #+#    #+#             */
+/*   Updated: 2020/10/07 13:47:14 by rbakker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../minishell.h"
+#include "../minishell.h"
 
 void	fork_error(t_data *data, int index)
 {

@@ -6,11 +6,11 @@
 /*   By: rbakker <rbakker@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/05 10:19:20 by roybakker         #+#    #+#             */
-/*   Updated: 2020/10/07 11:43:48 by rbakker          ###   ########.fr       */
+/*   Updated: 2020/10/07 13:47:25 by rbakker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../minishell.h"
+#include "../minishell.h"
 
 void	malloc_error(t_data *data, int index, char **malloced_array)
 {

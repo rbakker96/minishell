@@ -6,11 +6,11 @@
 /*   By: rbakker <rbakker@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/05 10:18:54 by roybakker         #+#    #+#             */
-/*   Updated: 2020/10/07 11:11:14 by rbakker          ###   ########.fr       */
+/*   Updated: 2020/10/07 13:47:19 by rbakker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../minishell.h"
+#include "../minishell.h"
 
 void	redirection_error(t_data *data, char *filename, int *ret)
 {

@@ -6,13 +6,13 @@
 /*   By: rbakker <rbakker@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/04 15:02:22 by qli               #+#    #+#             */
-/*   Updated: 2020/10/07 13:29:35 by rbakker          ###   ########.fr       */
+/*   Updated: 2020/10/07 13:37:50 by rbakker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	identify_command(t_data *data, int i, int *token, char *value)
+void	execute_command(t_data *data, int i, int *token, char *value)
 {
 	if (ft_strncmp("echo", value, ft_strlen(value)) == 0)
 		execute_echo(data, i, token, data->commands[i]->token_amount);
@@ -55,7 +55,7 @@ void		execution_loop(t_data *data, int command, int token)
 				update_arguments_list(data, command, token, 0);
 				value = data->commands[command]->tokens[token];
 				if (data->commands[command]->token_amount > 0)
-					identify_command(data, command, &token, value);
+					execute_command(data, command, &token, value);
 			}
 		}
 		command++;

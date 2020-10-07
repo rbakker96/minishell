@@ -1,0 +1,38 @@
+multiline commands
+	-> missing "
+	echo "hallo
+	echo "echo   ; echo hi
+	echo "hi  \"
+
+	-> missing '
+	echo 'hi
+	echo 'hi   ; echo hi
+
+Redirections
+	-> input redirection error's
+	echo <
+	echo <   < test
+	echo <<   < test
+	echo <   ; echo hallo
+	echo <<< hallo
+
+	-> output redirection error's
+	echo >
+	echo >   > test
+	echo >>   > test
+	echo >   ; echo hallo
+	echo >>> hallo
+
+Tokens at end of line
+	echo hallo |
+	echo hallo >
+	echo hallo >>
+	echo hallo <
+	echo hallo \
+
+Tokens at begin of line
+	; echo
+	| echo
+
+Double ommand seperators
+	echo hallo ;; echo hi

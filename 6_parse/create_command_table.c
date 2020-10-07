@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   create_command_table.c                             :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: roybakker <roybakker@student.codam.nl>       +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2020/09/02 11:00:03 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/05 21:21:15 by roybakker     ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   create_command_table.c                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rbakker <rbakker@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/09/02 11:00:03 by roybakker         #+#    #+#             */
+/*   Updated: 2020/10/07 17:10:55 by rbakker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,20 +17,16 @@ int		parse_command(t_data *data, char **envp)
 	save_environment_variables(data, envp);
 	if (get_next_line(0, &data->input) == -1)
 		return (-1);
-	// if (input_validation(&line) == -1)
-	// {
-	// 	free(data->input);
-	// 	return (-1);
-	// }
+	input_validation(data);
 	create_command_table(data, data->input, 0);
 	return (0);
 }
 
 int		save_environment_variables(t_data *data, char **envp)
 {
-	int index;
-	int envp_size;
-	char **malloced_envp;
+	int		index;
+	int		envp_size;
+	char	**malloced_envp;
 
 	index = 0;
 	envp_size = get_array_size(envp);
@@ -46,7 +42,7 @@ int		save_environment_variables(t_data *data, char **envp)
 		}
 		index++;
 	}
-	malloced_envp[index ] = 0;
+	malloced_envp[index] = 0;
 	data->envp = malloced_envp;
 	return (0);
 }

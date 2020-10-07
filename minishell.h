@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/01 15:55:06 by roybakker         #+#    #+#             */
-/*   Updated: 2020/10/07 13:33:16 by rbakker          ###   ########.fr       */
+/*   Updated: 2020/10/07 17:43:22 by rbakker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,14 +69,12 @@ int		get_array_size(char **array);
 int		redirection_check(char *str);
 int		quotes_check(char *str);
 int		env_var_len(char *str, int i);
+int		command_check(char check_value, char charachter);
 
 /*
 **--FOLDER---------------------ERROR_MANAGEMENT---------------------------------
 */
 
-/*
-**--SUB_FOLDER------------------EXECUTION_ERROR---------------------------------
-*/
 /*
 ** external_function_error.c
 */
@@ -96,32 +94,9 @@ void	get_directory_error(t_data *data);
 void	malloc_error(t_data *data, int index, char **malloced_array);
 
 /*
-**--SUB_FOLDER--------------------PARSE_ERROR-----------------------------------
+** validation_error.c
 */
-
-/*
-** parse_error.c
-*/
-void	print_error(char charachter, int *ret);
-
-/*
-** validate_input.c
-*/
-int		input_validation(char **line);
-void	check_input_redirection(char *line, int *ret);
-void	check_output_redirection(char *line, int *ret);
-void	check_pipes(char **line, int i, int *ret);
-void	check_multiline_commands(char *line, int i, int *ret);
-
-/*
-** check_functions.c
-*/
-void	double_symbol(char *line, char c, int i, int *ret);
-void	double_command(char *line, char c, int i, int *ret);
-void	mixed_command(char *line, int i, int x, int *ret);
-void	end_of_line_command(char *line, char c, int i, int *ret);
-void	validate_qoute(char *line, int *i, int x, int *ret);
-void	check_first_symbol(char *line, int *ret);
+void	validation_error(t_data *data, char charachter);
 
 /*
 **--FOLDER---------------------MEMORY_MANAGEMENT--------------------------------
@@ -136,24 +111,6 @@ void	free_array(char **array);
 /*
 **--FOLDER-------------------------EXECUTION------------------------------------
 */
-
-/*
-** execution_loop.c
-*/
-void	execution_loop(t_data *data, int command, int token);
-void	identify_command(t_data *data, int i, int *token, char *value);
-
-/*
-** cd.c
-*/
-void	execute_cd(t_data *data, int command, int *token, int needed_tokens);
-char	*get_argument(t_data *data, int i, int *token, int needed_tokens);
-void	go_to_home(t_data *data, int i, int *token, int needed_tokens);
-
-/*
-** echo.c
-*/
-void	execute_echo(t_data *data, int i, int *token, int needed_tokens);
 
 /*
 **--SUB_FOLDER---------------------EXECUTABLE-----------------------------------
@@ -203,6 +160,24 @@ void	expand_token(t_data *data, char **new_token, int i, int x);
 /*
 ** ------------------------------------
 */
+
+/*
+** execution_loop.c
+*/
+void	execution_loop(t_data *data, int command, int token);
+void	execute_command(t_data *data, int i, int *token, char *value);
+
+/*
+** cd.c
+*/
+void	execute_cd(t_data *data, int command, int *token, int needed_tokens);
+char	*get_argument(t_data *data, int i, int *token, int needed_tokens);
+void	go_to_home(t_data *data, int i, int *token, int needed_tokens);
+
+/*
+** echo.c
+*/
+void	execute_echo(t_data *data, int i, int *token, int needed_tokens);
 
 /*
 ** arguments_list.c
@@ -272,5 +247,32 @@ int		len_token(char *command, int start, int len, int *spaces);
 int		len_sentence(char *command, int start, int len, int *spaces);
 void	non_quoted_len(char *command, int start, int *len, int *current_char);
 void	quoted_len(char *command, int start, int *len, int *current_char);
+
+/*
+**--FOLDER---------------------INPUT_VALIDATION---------------------------------
+*/
+
+/*
+** input_validation.c
+*/
+void	input_validation(t_data *data);
+int		validate_command_seperators(t_data *data, char *charachter);
+int		validate_end_of_line_command(t_data *data, char *charachter, int len);
+int		validate_start_of_line_command(t_data *data, char *charachter);
+
+/*
+** validate_quote.c
+*/
+int		validate_single_quotes(t_data *data, char *charachter);
+int		validate_double_quotes(t_data *data, char *charachter);
+
+/*
+** validate_redirections.c
+*/
+int		validate_input_redirection(t_data *data, char *charachter);
+int		validate_output_redirection(t_data *data, char *charachter);
+int		validate_pipes(t_data *data, char *charachter);
+int		replace_double_pipes(t_data *data);
+void	reduce_input_str(t_data *data, int reduction, int *i);
 
 #endif

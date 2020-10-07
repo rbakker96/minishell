@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/09 16:44:49 by roybakker         #+#    #+#             */
-/*   Updated: 2020/10/06 17:08:03 by rbakker          ###   ########.fr       */
+/*   Updated: 2020/10/07 16:43:10 by rbakker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int		get_array_size(char **array)
 {
-	int 	i;
+	int	i;
 
 	i = 0;
 	while (array[i] != 0)
@@ -53,4 +53,12 @@ int		env_var_len(char *str, int i)
 	while (str[i + len] != '\0' && str[i + len] != ' ' && str[i + len] != '\"')
 		len++;
 	return (len);
+}
+
+int		command_check(char check_value, char charachter)
+{
+	if (charachter == check_value || charachter == ';' || charachter == '\0')
+		return (-1);
+	else
+		return (0);
 }
