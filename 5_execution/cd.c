@@ -3,10 +3,10 @@
 /*                                                        ::::::::            */
 /*   cd.c                                               :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: roybakker <roybakker@student.codam.nl>       +#+                     */
+/*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/09 14:50:20 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/05 11:18:01 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/10/07 11:07:57 by rbakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,18 +17,18 @@ void	execute_cd(t_data *data, int i, int *token, int needed_tokens)
 	char	*value;
 
 	(*token)++;
-	create_fd(data, i, (*token), &needed_tokens);
-	if (data->commands[i]->error_flag == -1)
-	{
-		if (data->commands[i]->tokens[needed_tokens][0] == '|')
-			needed_tokens++;
-		(*token) = needed_tokens;
-		return ;
-	}
+	// create_fd(data, i, (*token), &needed_tokens);
+	// if (data->commands[i]->error_flag == -1)
+	// {
+	// 	if (data->commands[i]->tokens[needed_tokens][0] == '|')
+	// 		needed_tokens++;
+	// 	(*token) = needed_tokens;
+	// 	return ;
+	// }
 	value = get_argument(data, i, token, needed_tokens);
 	if (value == NULL)
 		return ;
-	else if(value[0] == '|')
+	else if (value[0] == '|')
 		(*token) = needed_tokens + 1;
 	else if (ft_strncmp("~", value, ft_strlen(value)) == 0)
 		go_to_home(data, i, token, needed_tokens);

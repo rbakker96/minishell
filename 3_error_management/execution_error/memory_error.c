@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   memory_error.c                                     :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: roybakker <roybakker@student.codam.nl>       +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2020/10/05 10:19:20 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/05 15:43:11 by roybakker     ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   memory_error.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rbakker <rbakker@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/10/05 10:19:20 by roybakker         #+#    #+#             */
+/*   Updated: 2020/10/07 11:43:48 by rbakker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	malloc_error(t_data *data, int index, char **malloced_array)
 		free_array(data->envp);
 	if (data->args)
 		free_array(data->args);
-	while(i < index)
+	while (i < index)
 	{
 		free_array(data->commands[i]->tokens);
 		free(data->commands[i]);

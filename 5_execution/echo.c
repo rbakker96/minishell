@@ -6,11 +6,11 @@
 /*   By: rbakker <rbakker@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/09 14:49:34 by roybakker         #+#    #+#             */
-/*   Updated: 2020/10/06 13:06:16 by rbakker          ###   ########.fr       */
+/*   Updated: 2020/10/07 13:32:36 by rbakker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../minishell.h"
+#include "../minishell.h"
 
 void	execute_echo(t_data *data, int i, int *token, int needed_tokens)
 {
@@ -22,7 +22,8 @@ void	execute_echo(t_data *data, int i, int *token, int needed_tokens)
 	newline = 1;
 	while ((*token) < needed_tokens)
 	{
-		print(data, 1, data->commands[i]->tokens[(*token)], 0);
+		print(data, data->fd[1], data->commands[i]->tokens[(*token)], 0);
+		print(data, data->fd[1], " ", 0);
 		(*token)++;
 	}
 	if (newline)

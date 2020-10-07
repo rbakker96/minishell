@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/01 15:55:06 by roybakker         #+#    #+#             */
-/*   Updated: 2020/10/06 17:08:00 by rbakker          ###   ########.fr       */
+/*   Updated: 2020/10/07 13:33:16 by rbakker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ void	write_error(t_data *data, char *malloced_str);
 /*
 ** file_system_error.c
 */
-void	redirection_error(t_data *data, char *filename, int i, int *token);
+void	redirection_error(t_data *data, char *filename, int *ret);
 void	change_directory_error(t_data *data, char *filename, int i, int *token);
 void	get_directory_error(t_data *data);
 
@@ -141,7 +141,7 @@ void	free_array(char **array);
 ** execution_loop.c
 */
 void	execution_loop(t_data *data, int command, int token);
-void	identfy_command(t_data *data, int i, int *token, char *value);
+void	identify_command(t_data *data, int i, int *token, char *value);
 
 /*
 ** cd.c
@@ -151,33 +151,9 @@ char	*get_argument(t_data *data, int i, int *token, int needed_tokens);
 void	go_to_home(t_data *data, int i, int *token, int needed_tokens);
 
 /*
-**--SUB_FOLDER--------------------------ECHO------------------------------------
-*/
-
-/*
 ** echo.c
 */
 void	execute_echo(t_data *data, int i, int *token, int needed_tokens);
-// int		newline_option(char *value, int needed_tokens, int *token);
-// void	echo_variable(t_data *data, int i, int *token, int *index);
-// char	*get_variable(t_data *data, char *value, int index, int i, int len);
-
-// /*
-// ** no_quotes.c
-// */
-// void	no_quotes(t_data *data, int i, int *token, int *index);
-// void	no_quotes_escape(t_data *data, int i, int *token, int *index);
-
-// /*
-// ** single_quotes.c
-// */
-// void	single_quotes(t_data *data, int i, int *token, int *index);
-
-// /*
-// ** double_quotes.c
-// */
-// void	double_quotes(t_data *data, int i, int *token, int *index);
-// void	double_quotes_escape(t_data *data, int i, int *token, int *index);
 
 /*
 **--SUB_FOLDER---------------------EXECUTABLE-----------------------------------
@@ -225,24 +201,24 @@ int		expansion_len(t_data *data, int i, int len);
 void	expand_token(t_data *data, char **new_token, int i, int x);
 
 /*
-**--SUB_FOLDER-------------------------OUTPUT-----------------------------------
+** ------------------------------------
 */
 
 /*
-** create_fd.c
+** arguments_list.c
 */
-void	create_fd(t_data *data, int i, int token, int *needed_tokens);
+void	update_arguments_list(t_data *data, int i, int token, int x);
+void	save_arguments_list(t_data *data, int i, char **tokens,
+															int usable_tokens);
+int		identfiy_usable_tokens(t_data *data, int i, int token);
 
 /*
-** handle_redirection_files.c
+** redirections.c
 */
-int		append_file(t_data *data, int i, int *token);
-int		overwrite_file(t_data *data, int i, int *token);
-int		input_file(t_data *data, int i, int *token);
-
-/*
-** create_pipe.c
-*/
+int		redirections(t_data *data, int i, int token);
+int		append_file(t_data *data, int i, int *token, int *ret);
+int		overwrite_file(t_data *data, int i, int *token, int *ret);
+int		input_file(t_data *data, int i, int *token, int *ret);
 
 /*
 ** env.c

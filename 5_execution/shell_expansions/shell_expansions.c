@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/05 19:44:06 by roybakker         #+#    #+#             */
-/*   Updated: 2020/10/06 17:34:18 by rbakker          ###   ########.fr       */
+/*   Updated: 2020/10/07 12:05:29 by rbakker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	shell_expansions(t_data *data, int i, int token)
 		expand_token(data, &new_token, 0, 0);
 		free(data->commands[i]->tokens[token]);
 		data->commands[i]->tokens[token] = new_token;
-		printf("new token [%d] = %s\n", token, data->commands[i]->tokens[token]);
+		printf("updated token [%d] = %s\n", token, data->commands[i]->tokens[token]);
 		token++;
 	}
 }

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   file_four.c                                        :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: roybakker <roybakker@student.codam.nl>       +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2020/09/08 14:47:32 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/01 15:46:34 by roybakker     ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   file_four.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rbakker <rbakker@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/09/08 14:47:32 by roybakker         #+#    #+#             */
+/*   Updated: 2020/10/07 11:27:16 by rbakker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int		redirection(char *str)
 	result = 0;
 	if (!str)
 		return (0);
-	if (ft_strncmp(str, "|", ft_strlen(str)) == 0 )
+	if (ft_strncmp(str, "|", ft_strlen(str)) == 0)
 		result = piped;
 	else if (ft_strncmp(str, "<", ft_strlen(str)) == 0)
 		result = input;

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   run_executable.c                                   :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: qli <qli@student.codam.nl>                   +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2020/09/24 20:12:02 by qli           #+#    #+#                 */
-/*   Updated: 2020/10/06 14:32:05 by qli           ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   run_executable.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rbakker <rbakker@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/09/24 20:12:02 by qli               #+#    #+#             */
+/*   Updated: 2020/10/07 11:09:21 by rbakker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	execute_executable(t_data *data, int i, int *token, int needed_tokens)
 {
-	create_fd(data, i, (*token), &needed_tokens);
+	// create_fd(data, i, (*token), &needed_tokens);
 	create_args(data, i, (*token));
 	if (check_relative_path(data->commands[i]->tokens[(*token)]) == 1)
 		fork_executable(data, i);
