@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   tokens.c                                           :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: rbakker <rbakker@student.42.fr>            +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/09/19 13:23:47 by roybakker         #+#    #+#             */
-/*   Updated: 2020/10/06 17:41:58 by rbakker          ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   tokens.c                                           :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: rbakker <rbakker@student.42.fr>              +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2020/09/19 13:23:47 by roybakker     #+#    #+#                 */
+/*   Updated: 2020/10/08 16:44:24 by rbakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,13 +47,13 @@ int		begin_token(char *command, int i)
 
 int		len_token(char *command, int start, int len, int *spaces)
 {
-	if (token_id(command[start]) == meta_char)
+	if (char_type(command[start]) == meta_char)
 	{
 		start++;
 		len = (command[start] == '>' && command[start - 1] == '>') ? 2 : 1;
 		if (len == 2)
 			start++;
-		if (token_id(command[start]) == space)
+		if (char_type(command[start]) == space)
 			(*spaces)++;
 	}
 	else
@@ -67,12 +67,12 @@ int		len_sentence(char *command, int start, int len, int *spaces)
 
 	while (command[start + len] != '\0')
 	{
-		current_char = token_id(command[start + len]);
+		current_char = char_type(command[start + len]);
 		if (current_char == normal_char)
 			non_quoted_len(command, start, &len, &current_char);
 		else if (current_char == double_quote || current_char == single_quote)
 			quoted_len(command, start, &len, &current_char);
-		else if (token_id(command[start + len] == meta_char))
+		else if (char_type(command[start + len] == meta_char))
 			break ;
 		if (current_char == space)
 		{
@@ -91,7 +91,7 @@ void	non_quoted_len(char *command, int start, int *len, int *current_char)
 			(*len) += 2;
 		else
 			(*len)++;
-		*current_char = token_id(command[start + (*len)]);
+		*current_char = char_type(command[start + (*len)]);
 	}
 }
 
@@ -103,7 +103,7 @@ void	quoted_len(char *command, int start, int *len, int *current_char)
 	quotes = 1;
 	quote_type = (*current_char);
 	(*len)++;
-	*current_char = token_id(command[start + (*len)]);
+	*current_char = char_type(command[start + (*len)]);
 	while (quotes != 0 && command[start + (*len)] != '\0')
 	{
 		if ((*current_char) == quote_type)
@@ -112,6 +112,6 @@ void	quoted_len(char *command, int start, int *len, int *current_char)
 			(*len) += 2;
 		else
 			(*len)++;
-		*current_char = token_id(command[start + (*len)]);
+		*current_char = char_type(command[start + (*len)]);
 	}
 }

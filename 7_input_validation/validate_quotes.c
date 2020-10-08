@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   validate_quotes.c                                  :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: rbakker <rbakker@student.42.fr>            +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/07 14:49:19 by rbakker           #+#    #+#             */
-/*   Updated: 2020/10/07 17:26:36 by rbakker          ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   validate_quotes.c                                  :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: rbakker <rbakker@student.42.fr>              +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2020/10/07 14:49:19 by rbakker       #+#    #+#                 */
+/*   Updated: 2020/10/08 14:51:11 by rbakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int		validate_single_quotes(t_data *data, char *charachter)
 			i++;
 		}
 		else
-			i++;
+			(data->input[i] == '\\') ? i += 2 : i++;
 	}
 	return (0);
 }

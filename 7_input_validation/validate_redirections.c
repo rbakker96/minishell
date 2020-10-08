@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   validate_redirections.c                            :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: rbakker <rbakker@student.42.fr>            +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/07 14:50:47 by rbakker           #+#    #+#             */
-/*   Updated: 2020/10/07 16:46:35 by rbakker          ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   validate_redirections.c                            :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: rbakker <rbakker@student.42.fr>              +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2020/10/07 14:50:47 by rbakker       #+#    #+#                 */
+/*   Updated: 2020/10/08 13:10:57 by rbakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,8 +97,8 @@ int		replace_double_pipes(t_data *data)
 				x++;
 			if (command_check('|', data->input[i + x]) == -1)
 				return (-1);
-			while (data->input[i + x] != ';' || data->input[i + x] != '\0')
-				(data->input[i] == '\\') ? i += 2 : i++;
+			while (data->input[i + x] != ';' && data->input[i + x] != '\0')
+				(data->input[i] == '\\') ? x += 2 : x++;
 			reduce_input_str(data, x, &i);
 		}
 		else
@@ -130,7 +130,7 @@ void	reduce_input_str(t_data *data, int reduction, int *i)
 		new_str[x] = data->input[x + y];
 		x++;
 	}
-	new_str[y] = '\0';
+	new_str[x] = '\0';
 	free(data->input);
 	data->input = new_str;
 	(*i) = 0;

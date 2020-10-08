@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   file_two.c                                         :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: rbakker <rbakker@student.42.fr>            +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/09/04 12:50:32 by roybakker         #+#    #+#             */
-/*   Updated: 2020/10/06 17:42:07 by rbakker          ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   file_two.c                                         :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: rbakker <rbakker@student.42.fr>              +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2020/09/04 12:50:32 by roybakker     #+#    #+#                 */
+/*   Updated: 2020/10/08 16:49:17 by rbakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,18 @@ int		get_amount_of_commands(char *line, int i)
 	count = 0;
 	while (line[i] != '\0')
 	{
-		while(line[i] == ' ')
+		while (line[i] == ' ')
 			i++;
-		if (token_id(line[i]) >= normal_char && line[i] != '\0' && line[i] != ';')
+		if (line[i] != '\0' && line[i] != ';')
 			count++;
 		while (line[i] != '\0')
 		{
-			if (line[i] == ';' && line[i - 1] != '\\')
+			if (line[i] == ';')
 				break ;
-			i++;
+			else if (line[i] == '\\')
+				i += 2;
+			else
+				i++;
 		}
 		if (line[i] != '\0')
 			i++;
@@ -41,28 +44,28 @@ int			get_amount_of_tokens(char *command, int i, int token)
 		i++;
 	while (command[i] != '\0')
 	{
-		if (token_id(command[i]) == space)
+		if (char_type(command[i]) == space)
 			i++;
-		else if (token_id(command[i]) == meta_char)
-			special_char(command, &i, &token);
+		else if (char_type(command[i]) == meta_char)
+			meta_token(command, &i, &token);
 		else
-			basic_word(command, &i, &token);
+			normal_token(command, &i, &token);
 	}
 	if (token == 0)
 		return (1);
 	return (token);
 }
 
-int			token_id(char c)
+int			char_type(char c)
 {
 	if (c == ' ')
-		return (0);
+		return (space);
 	else if (c == '>' || c == '<' || c == '|')
-		return (1);
+		return (meta_char);
 	else if (c == '\"')
-		return (2);
+		return (double_quote);
 	else if (c == '\'')
-		return (3);
+		return (single_quote);
 	else
-		return (4);
+		return (normal_char);
 }

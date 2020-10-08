@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   execute_loop.c                                     :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: rbakker <rbakker@student.42.fr>            +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/09/04 15:02:22 by qli               #+#    #+#             */
-/*   Updated: 2020/10/07 13:37:50 by rbakker          ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   execute_loop.c                                     :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: rbakker <rbakker@student.42.fr>              +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2020/09/04 15:02:22 by qli           #+#    #+#                 */
+/*   Updated: 2020/10/08 16:13:33 by rbakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,16 +47,17 @@ void		execution_loop(t_data *data, int command, int token)
 	{
 		token = 0;
 		initialise_struct_elements(data, command);
+		shell_expansions(data, command, token);
 		while (token < data->commands[command]->token_amount)
 		{
-			shell_expansions(data, command, token);
 			if (redirections(data, command, token) != -1)
 			{
 				update_arguments_list(data, command, token, 0);
+				//handeling pipes
 				value = data->commands[command]->tokens[token];
-				if (data->commands[command]->token_amount > 0)
-					execute_command(data, command, &token, value);
+				execute_command(data, command, &token, value);
 			}
+			//maybe update token to go past pipe
 		}
 		command++;
 	}

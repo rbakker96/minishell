@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: rbakker <rbakker@student.42.fr>            +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/09/01 15:55:06 by roybakker         #+#    #+#             */
-/*   Updated: 2020/10/07 17:43:22 by rbakker          ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   minishell.h                                        :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: rbakker <rbakker@student.42.fr>              +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2020/09/01 15:55:06 by roybakker     #+#    #+#                 */
+/*   Updated: 2020/10/08 16:49:17 by rbakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,14 +44,14 @@ char	*get_current_directory(t_data *data);
 */
 int		get_amount_of_commands(char *line, int i);
 int		get_amount_of_tokens(char *command, int i, int token);
-int		token_id(char c);
+int		char_type(char c);
 
 /*
 ** file_three.c
 */
-void	special_char(char *command, int *i, int *token);
+void	meta_token(char *command, int *i, int *token);
 void	quoted_sentence(char *command, int *i, int x);
-void	basic_word(char *command, int *i, int *token);
+void	normal_token(char *command, int *i, int *token);
 
 /*
 ** file_four.c
@@ -70,6 +70,7 @@ int		redirection_check(char *str);
 int		quotes_check(char *str);
 int		env_var_len(char *str, int i);
 int		command_check(char check_value, char charachter);
+int		pipe_check(char **array, int i);
 
 /*
 **--FOLDER---------------------ERROR_MANAGEMENT---------------------------------
@@ -183,8 +184,7 @@ void	execute_echo(t_data *data, int i, int *token, int needed_tokens);
 ** arguments_list.c
 */
 void	update_arguments_list(t_data *data, int i, int token, int x);
-void	save_arguments_list(t_data *data, int i, char **tokens,
-															int usable_tokens);
+int		save_list_element(char *current, char **new, int *token, int *x);
 int		identfiy_usable_tokens(t_data *data, int i, int token);
 
 /*
@@ -230,13 +230,14 @@ void	execute_unset(t_data *data, int i, int *token);
 int		parse_command(t_data *data, char **envp);
 int		save_environment_variables(t_data *data, char **envp);
 int		create_command_table(t_data *data, char *line, int i);
+int		save_single_command(t_data *data, char **commands, int i);
 
 /*
 ** commands.c
 */
 char	**save_commands(char *line, char command_amount, int i, int index);
 int		len_command(char *line, int i, int len);
-int		empty_command(char *line, int i);
+int		check_for_empty_command(char *line, int i);
 
 /*
 ** tokens.c

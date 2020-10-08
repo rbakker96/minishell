@@ -11,6 +11,7 @@ multiline commands
 Redirections
 	-> input redirection error's
 	echo <
+	echo hallo < | echo
 	echo <   < test
 	echo <<   < test
 	echo <   ; echo hallo
@@ -18,10 +19,18 @@ Redirections
 
 	-> output redirection error's
 	echo >
+	echo hallo > | test
+	echo hallo >> | echo
 	echo >   > test
 	echo >>   > test
 	echo >   ; echo hallo
 	echo >>> hallo
+
+	-> Pipe situations
+	echo hallo ||   t
+	echo hallo ||   ;
+	echo hallo ||   echo hi; echo hallo
+	echo hallo ||| hallo
 
 Tokens at end of line
 	echo hallo |
@@ -36,3 +45,5 @@ Tokens at begin of line
 
 Double ommand seperators
 	echo hallo ;; echo hi
+
+

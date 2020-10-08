@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   redirections.c                                     :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: rbakker <rbakker@student.42.fr>            +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/09/23 14:15:21 by roybakker         #+#    #+#             */
-/*   Updated: 2020/10/07 13:25:14 by rbakker          ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   redirections.c                                     :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: rbakker <rbakker@student.42.fr>              +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2020/09/23 14:15:21 by roybakker     #+#    #+#                 */
+/*   Updated: 2020/10/08 16:28:42 by rbakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,10 @@ int		redirections(t_data *data, int i, int token)
 	data->fd[0] = 0;
 	data->fd[1] = 1;
 	value = data->commands[i]->tokens[token];
-	if (value[0] == '\0')
-		return (ret);
 	while (token < data->commands[i]->token_amount && ret != -1)
 	{
+		if (value[0] == '\0')
+			return (ret);
 		if (ft_strncmp(">", value, ft_strlen(value)) == 0)
 			data->fd[1] = overwrite_file(data, i, &token, &ret);
 		else if (ft_strncmp(">>", value, ft_strlen(value)) == 0)

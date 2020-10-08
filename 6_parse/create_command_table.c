@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   create_command_table.c                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: rbakker <rbakker@student.42.fr>            +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/09/02 11:00:03 by roybakker         #+#    #+#             */
-/*   Updated: 2020/10/07 17:10:55 by rbakker          ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   create_command_table.c                             :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: rbakker <rbakker@student.42.fr>              +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2020/09/02 11:00:03 by roybakker     #+#    #+#                 */
+/*   Updated: 2020/10/08 16:42:14 by rbakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,26 +53,35 @@ int		create_command_table(t_data *data, char *line, int i)
 
 	data->command_amount = get_amount_of_commands(line, 1);
 	printf("command amount = %d\n", data->command_amount); //TAKE OUT!!!
-	data->commands = (t_command_table**)malloc(sizeof(t_command_table*) * (data->command_amount + 1));
+	data->commands = (t_command_table**)malloc(sizeof(t_command_table*) *
+													(data->command_amount + 1));
 	if (data->commands == NULL)
 		malloc_error(data, 0, 0);
 	commands = save_commands(line, data->command_amount, 0, 0);
 	if (commands == NULL)
 		malloc_error(data, 0, 0);
-	while(i < data->command_amount)
+	while (i < data->command_amount)
 	{
-		data->commands[i] = (t_command_table*)malloc(sizeof(t_command_table) * 1);
-		if (data->commands[i] == NULL)
+		if (save_single_command(data, commands, i) == -1)
 			malloc_error(data, i, commands);
-		data->commands[i]->token_amount = get_amount_of_tokens(commands[i], 0, 0);
-		printf("token amount = %d\n", data->commands[i]->token_amount); //TAKE OUT!!!
-		data->commands[i]->tokens = (char**)malloc(sizeof(char*) * (data->commands[i]->token_amount + 1));
-		if (data->commands[i]->tokens == NULL)
-			malloc_error(data, i, commands);
-		save_tokens(data, commands, commands[i], i, 0);
 		i++;
 	}
 	data->commands[i] = NULL;
 	free_array(commands);
+	return (0);
+}
+
+int		save_single_command(t_data *data, char **commands, int i)
+{
+	data->commands[i] = (t_command_table*)malloc(sizeof(t_command_table) * 1);
+	if (data->commands[i] == NULL)
+		return (-1);
+	data->commands[i]->token_amount = get_amount_of_tokens(commands[i], 0, 0);
+	printf("token amount = %d\n", data->commands[i]->token_amount); //TAKE OUT!!!
+	data->commands[i]->tokens = (char**)malloc(sizeof(char*) *
+										(data->commands[i]->token_amount + 1));
+	if (data->commands[i]->tokens == NULL)
+		return (-1);
+	save_tokens(data, commands, commands[i], i, 0);
 	return (0);
 }

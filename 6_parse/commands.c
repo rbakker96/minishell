@@ -6,7 +6,7 @@
 /*   By: roybakker <roybakker@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/19 13:23:31 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/01 13:51:50 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/10/08 16:34:18 by rbakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ char	**save_commands(char *line, char command_amount, int i, int index)
 	while (line[i] != '\0' && index < command_amount)
 	{
 		len = len_command(line, i, 0);
-		if (empty_command(line, i) == 0)
+		if (check_for_empty_command(line, i) == 0)
 		{
 			commands[index] = ft_substr(line, i, len);
 			if (commands[index] == NULL)
@@ -35,27 +35,28 @@ char	**save_commands(char *line, char command_amount, int i, int index)
 			index++;
 		}
 		i += len;
-		if(line[i] != '\0')
+		if (line[i] != '\0')
 			i++;
 	}
 	commands[index] = 0;
-	return(commands);
+	return (commands);
 }
 
 int		len_command(char *line, int i, int len)
 {
-	while(line[i + len] != ';' && line[i + len] != '\0')
+	while (line[i + len] != ';' && line[i + len] != '\0')
 	{
-		len++;
-		if (line[i + len] == ';' && line[i + len - 1] == '\\')
+		if (line[i + len] == '\\')
+			i += 2;
+		else
 			len++;
 	}
 	return (len);
 }
 
-int		empty_command(char *line, int i)
+int		check_for_empty_command(char *line, int i)
 {
-	while(line[i] != ';' && line[i] != '\0')
+	while (line[i] != ';' && line[i] != '\0')
 	{
 		if (line[i] != ' ')
 			return (0);
