@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/19 13:23:47 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/08 16:44:24 by rbakker       ########   odam.nl         */
+/*   Updated: 2020/10/08 21:24:20 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,28 +47,14 @@ int		begin_token(char *command, int i)
 
 int		len_token(char *command, int start, int len, int *spaces)
 {
-	if (char_type(command[start]) == meta_char)
-	{
-		start++;
-		len = (command[start] == '>' && command[start - 1] == '>') ? 2 : 1;
-		if (len == 2)
-			start++;
-		if (char_type(command[start]) == space)
-			(*spaces)++;
-	}
-	else
-		len = len_sentence(command, start, len, spaces);
-	return (len);
-}
-
-int		len_sentence(char *command, int start, int len, int *spaces)
-{
 	int current_char;
 
 	while (command[start + len] != '\0')
 	{
 		current_char = char_type(command[start + len]);
-		if (current_char == normal_char)
+		if (current_char == meta_char)
+			meta_char_len(command, start, &len, &current_char);
+		else if (current_char == normal_char)
 			non_quoted_len(command, start, &len, &current_char);
 		else if (current_char == double_quote || current_char == single_quote)
 			quoted_len(command, start, &len, &current_char);
@@ -81,6 +67,13 @@ int		len_sentence(char *command, int start, int len, int *spaces)
 		}
 	}
 	return (len);
+}
+
+void	meta_char_len(char *command, int start, int *len, int *current_char)
+{
+	(*len) = (command[start + (*len)] == '>' &&
+								command[start + (*len) + 1] == '>') ? 2 : 1;
+	*current_char = char_type(command[start + (*len)]);
 }
 
 void	non_quoted_len(char *command, int start, int *len, int *current_char)

@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/07 11:15:58 by rbakker       #+#    #+#                 */
-/*   Updated: 2020/10/08 16:13:59 by rbakker       ########   odam.nl         */
+/*   Updated: 2020/10/08 21:33:33 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	update_arguments_list(t_data *data, int i, int token, int x)
 	int		usable_tokens;
 	char	**tokens;
 
-	usable_tokens = identfiy_usable_tokens(data, i, 0);
+	usable_tokens = count_usable_tokens(data, i, 0);
 	tokens = malloc(sizeof(char*) * usable_tokens + 1);
 	if (tokens == NULL)
 		malloc_error(data, data->commands[i]->token_amount, 0);
@@ -53,14 +53,15 @@ void	update_arguments_list(t_data *data, int i, int token, int x)
 	print_array(data->commands[i]->tokens); // remove later
 }
 
-int		save_list_element(char *current, char **new, int *token, int *x)
+int		save_list_element(char *current_token, char **saved_token, int *token,
+																		int *x)
 {
-	if (current[0] == '\0')
+	if (current_token[0] == '\0')
 		(*token)++;
 	else
 	{
-		(*new) = ft_strdup(current);
-		if ((*new) == NULL)
+		(*saved_token) = ft_strdup(current_token);
+		if ((*saved_token) == NULL)
 			return (0);
 		(*token)++;
 		(*x)++;
@@ -68,7 +69,7 @@ int		save_list_element(char *current, char **new, int *token, int *x)
 	return (1);
 }
 
-int		identfiy_usable_tokens(t_data *data, int i, int token)
+int		count_usable_tokens(t_data *data, int i, int token)
 {
 	int		amount;
 

@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/01 15:55:06 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/08 16:49:17 by rbakker       ########   odam.nl         */
+/*   Updated: 2020/10/08 21:33:39 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -184,8 +184,9 @@ void	execute_echo(t_data *data, int i, int *token, int needed_tokens);
 ** arguments_list.c
 */
 void	update_arguments_list(t_data *data, int i, int token, int x);
-int		save_list_element(char *current, char **new, int *token, int *x);
-int		identfiy_usable_tokens(t_data *data, int i, int token);
+int		save_list_element(char *current_token, char **saved_token, int *token,
+																		int *x);
+int		count_usable_tokens(t_data *data, int i, int token);
 
 /*
 ** redirections.c
@@ -245,7 +246,7 @@ int		check_for_empty_command(char *line, int i);
 void	save_tokens(t_data *data, char **array, char *command, int i, int len);
 int		begin_token(char *command, int i);
 int		len_token(char *command, int start, int len, int *spaces);
-int		len_sentence(char *command, int start, int len, int *spaces);
+void	meta_char_len(char *command, int start, int *len, int *current_char);
 void	non_quoted_len(char *command, int start, int *len, int *current_char);
 void	quoted_len(char *command, int start, int *len, int *current_char);
 
