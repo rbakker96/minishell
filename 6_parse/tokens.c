@@ -6,13 +6,13 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/19 13:23:47 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/08 21:24:20 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/10/09 17:42:03 by qli           ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	save_tokens(t_data *data, char **array, char *command, int i, int len)
+void	save_tokens(t_data *data, char **array, char *command, int cmd, int len)
 {
 	int start;
 	int index;
@@ -23,26 +23,26 @@ void	save_tokens(t_data *data, char **array, char *command, int i, int len)
 	index = 0;
 	while (command[c] == ' ' && command[c] != '\0')
 		c++;
-	while (command[c] != '\0' && index < data->commands[i]->token_amount)
+	while (command[c] != '\0' && index < data->commands[cmd]->token_amount)
 	{
 		spaces = 0;
 		start = begin_token(command, c);
 		len = len_token(command, start, 0, &spaces);
-		data->commands[i]->tokens[index] = ft_substr(command, start, len);
-		printf("token [%d] = [%s]\n", index, data->commands[i]->tokens[index]);
-		if (data->commands[i]->tokens[index] == NULL)
-			malloc_error(data, i, array);
+		data->commands[cmd]->tokens[index] = ft_substr(command, start, len);
+		printf("token [%d] = [%s]\n", index, data->commands[cmd]->tokens[index]);
+		if (data->commands[cmd]->tokens[index] == NULL)
+			malloc_error(data, cmd, array);
 		c += len + spaces;
 		index++;
 	}
-	data->commands[i]->tokens[index] = 0;
+	data->commands[cmd]->tokens[index] = 0;
 }
 
-int		begin_token(char *command, int i)
+int		begin_token(char *command, int cmd)
 {
-	while (command[i] == ' ' && command[i] != '\0')
-		i++;
-	return (i);
+	while (command[cmd] == ' ' && command[cmd] != '\0')
+		cmd++;
+	return (cmd);
 }
 
 int		len_token(char *command, int start, int len, int *spaces)

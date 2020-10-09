@@ -6,24 +6,24 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/24 20:12:02 by qli           #+#    #+#                 */
-/*   Updated: 2020/10/08 14:33:41 by rbakker       ########   odam.nl         */
+/*   Updated: 2020/10/09 17:06:44 by qli           ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-void	execute_executable(t_data *data, int i, int *token, int needed_tokens)
+void	execute_executable(t_data *data, int cmd, int *token, int needed_tokens)
 {
-	// create_fd(data, i, (*token), &needed_tokens);
-	create_args(data, i, (*token));
-	if (check_relative_path(data->commands[i]->tokens[(*token)]) == 1)
-		fork_executable(data, i);
+	// create_fd(data, cmd, (*token), &needed_tokens);
+	create_args(data, cmd, (*token));
+	if (check_relative_path(data->commands[cmd]->tokens[(*token)]) == 1)
+		fork_executable(data, cmd);
 	else
-		execute_absolute_executable(data, i, token, 0);
+		execute_absolute_executable(data, cmd, token, 0);
 	(*token) = needed_tokens;
 }
 
-void	execute_absolute_executable(t_data *data, int i, int *token, int x)
+void	execute_absolute_executable(t_data *data, int cmd, int *token, int x)
 {
 	char	**path;
 	char	*path_token;
@@ -31,7 +31,7 @@ void	execute_absolute_executable(t_data *data, int i, int *token, int x)
 	path = ft_split(find_path(data), ':');
 	if (path == NULL)
 		malloc_error(data, data->command_amount, 0);
-	path_token = ft_strjoin("/", data->commands[i]->tokens[(*token)]);
+	path_token = ft_strjoin("/", data->commands[cmd]->tokens[(*token)]);
 	if (path_token == NULL)
 		malloc_error(data, data->command_amount, path);
 	while (path[x] != NULL)
@@ -40,9 +40,9 @@ void	execute_absolute_executable(t_data *data, int i, int *token, int x)
 		if (data->args[0] == NULL)
 		{
 			free(path_token);
-			malloc_error(data, i, path);
+			malloc_error(data, cmd, path);
 		}
-		if (!fork_executable(data, i))
+		if (!fork_executable(data, cmd))
 			break ;
 		x++;
 	}
@@ -50,7 +50,7 @@ void	execute_absolute_executable(t_data *data, int i, int *token, int x)
 	free(path_token);
 }
 
-int		fork_executable(t_data *data, int i)
+int		fork_executable(t_data *data, int cmd)
 {
 	int		pid;
 	int		status;
@@ -58,7 +58,7 @@ int		fork_executable(t_data *data, int i)
 
 	pid = fork();
 	if (pid == -1)
-		fork_error(data, i);
+		fork_error(data, cmd);
 	if (pid == 0)
 	{
 		dup2(data->fd[0], 0);

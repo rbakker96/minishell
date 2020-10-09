@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   structs.h                                          :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: rbakker <rbakker@student.42.fr>            +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/09/01 14:27:26 by roybakker         #+#    #+#             */
-/*   Updated: 2020/10/06 18:03:27 by rbakker          ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   structs.h                                          :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: rbakker <rbakker@student.42.fr>              +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2020/09/01 14:27:26 by roybakker     #+#    #+#                 */
+/*   Updated: 2020/10/09 15:07:55 by qli           ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,8 @@ typedef struct			s_data
 	char				*current_token;
 	t_command_table		**commands;
 	int					fd[2];
+	int					**pipefd;
+	int					pipe_num;
 	char				**envp;
 	char				**args;
 	int					command_amount;

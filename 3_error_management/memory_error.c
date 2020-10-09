@@ -1,23 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   memory_error.c                                     :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: rbakker <rbakker@student.42.fr>            +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/05 10:19:20 by roybakker         #+#    #+#             */
-/*   Updated: 2020/10/07 13:47:25 by rbakker          ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   memory_error.c                                     :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: rbakker <rbakker@student.42.fr>              +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2020/10/05 10:19:20 by roybakker     #+#    #+#                 */
+/*   Updated: 2020/10/09 17:03:12 by qli           ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	malloc_error(t_data *data, int index, char **malloced_array)
+void	malloc_error(t_data *data, int cmd, char **malloced_array)
 {
 	int i;
 
 	i = 0;
-	index++;
+	cmd++;
 	print(data, 2, "minishell : error due to malloc failure\n", 0);
 	free(data->input);
 	if (malloced_array)
@@ -26,7 +26,7 @@ void	malloc_error(t_data *data, int index, char **malloced_array)
 		free_array(data->envp);
 	if (data->args)
 		free_array(data->args);
-	while (i < index)
+	while (i < cmd)
 	{
 		free_array(data->commands[i]->tokens);
 		free(data->commands[i]);

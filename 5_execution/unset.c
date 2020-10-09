@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   unset.c                                            :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: rbakker <rbakker@student.42.fr>            +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/09/09 14:50:49 by roybakker         #+#    #+#             */
-/*   Updated: 2020/10/06 10:33:37 by rbakker          ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   unset.c                                            :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: rbakker <rbakker@student.42.fr>              +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2020/09/09 14:50:49 by roybakker     #+#    #+#                 */
+/*   Updated: 2020/10/09 17:38:16 by qli           ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	execute_unset(t_data *data, int i, int *token)
+void	execute_unset(t_data *data, int cmd, int *token)
 {
 	int		index;
 	int		x;
@@ -23,7 +23,7 @@ void	execute_unset(t_data *data, int i, int *token)
 	index = 0;
 	x = 0;
 	envp_size = get_array_size(data->envp);
-	string = data->commands[i]->tokens[(*token) + 1];
+	string = data->commands[cmd]->tokens[(*token) + 1];
 	new_envp = (char**)malloc(sizeof(char*) * (envp_size + 1));
 	while (index < envp_size)
 	{

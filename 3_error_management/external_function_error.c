@@ -1,29 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   external_function_error.c                          :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: rbakker <rbakker@student.42.fr>            +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/09/30 14:33:38 by roybakker         #+#    #+#             */
-/*   Updated: 2020/10/07 13:47:14 by rbakker          ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   external_function_error.c                          :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: rbakker <rbakker@student.42.fr>              +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2020/09/30 14:33:38 by roybakker     #+#    #+#                 */
+/*   Updated: 2020/10/09 17:02:49 by qli           ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	fork_error(t_data *data, int index)
+void	fork_error(t_data *data, int cmd)
 {
 	int i;
 
 	i = 0;
-	index++;
+	cmd++;
 	print(data, 2, "minishell : error due to fork failure\n", 0);
 	free(data->input);
 	free_array(data->envp);
 	if (data->args)
 		free_array(data->args);
-	while(i < index)
+	while(i < cmd)
 	{
 		free_array(data->commands[i]->tokens);
 		free(data->commands[i]);

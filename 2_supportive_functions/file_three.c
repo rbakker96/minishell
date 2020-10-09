@@ -6,47 +6,47 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/02 14:39:39 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/08 20:57:29 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/10/09 16:58:24 by qli           ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	meta_token(char *command, int *i, int *token)
+void	meta_token(char *command, int *cmd, int *token)
 {
 	(*token)++;
-	if (command[(*i)] == '>' && command[(*i) + 1] == '>')
-		(*i) += 2;
+	if (command[(*cmd)] == '>' && command[(*cmd) + 1] == '>')
+		(*cmd) += 2;
 	else
-		(*i)++;
+		(*cmd)++;
 }
 
-void	quoted_sentence(char *command, int *i, int quote_type)
+void	quoted_sentence(char *command, int *cmd, int quote_type)
 {
 	int quotes;
 
 	quotes = 1;
-	(*i)++;
-	while (quotes != 0 && command[(*i)] != '\0')
+	(*cmd)++;
+	while (quotes != 0 && command[(*cmd)] != '\0')
 	{
-		if (char_type(command[(*i)]) == quote_type)
+		if (char_type(command[(*cmd)]) == quote_type)
 			quotes--;
-		(command[(*i)] == '\\' && quote_type != single_quote) ? (*i) += 2 :
-																(*i)++;
+		(command[(*cmd)] == '\\' && quote_type != single_quote) ? (*cmd) += 2 :
+																(*cmd)++;
 	}
 }
 
-void	normal_token(char *command, int *i, int *token)
+void	normal_token(char *command, int *cmd, int *token)
 {
 	(*token)++;
-	while (command[(*i)] != '\0' && command[(*i)] != ' ')
+	while (command[(*cmd)] != '\0' && command[(*cmd)] != ' ')
 	{
-		while (char_type(command[(*i)]) == normal_char && command[(*i)] != '\0')
-			(command[(*i)] == '\\') ? (*i) += 2 : (*i)++;
-		if (char_type(command[(*i)]) == single_quote ||
-			char_type(command[(*i)]) == double_quote)
-			quoted_sentence(command, i, char_type(command[(*i)]));
-		if (char_type(command[(*i)] == meta_char))
+		while (char_type(command[(*cmd)]) == normal_char && command[(*cmd)] != '\0')
+			(command[(*cmd)] == '\\') ? (*cmd) += 2 : (*cmd)++;
+		if (char_type(command[(*cmd)]) == single_quote ||
+			char_type(command[(*cmd)]) == double_quote)
+			quoted_sentence(command, cmd, char_type(command[(*cmd)]));
+		if (char_type(command[(*cmd)] == meta_char))
 			break ;
 	}
 }

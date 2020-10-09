@@ -1,12 +1,12 @@
 # **************************************************************************** #
 #                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: rbakker <rbakker@student.42.fr>            +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2020/02/05 14:55:09 by rbakker           #+#    #+#              #
-#    Updated: 2020/10/07 16:45:19 by rbakker          ###   ########.fr        #
+#                                                         ::::::::             #
+#    Makefile                                           :+:    :+:             #
+#                                                      +:+                     #
+#    By: rbakker <rbakker@student.42.fr>              +#+                      #
+#                                                    +#+                       #
+#    Created: 2020/02/05 14:55:09 by rbakker       #+#    #+#                  #
+#    Updated: 2020/10/09 15:07:10 by qli           ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,6 +38,7 @@ SOURCES			= 	main.c \
 					5_execution/unset.c \
 					5_execution/execute_loop.c \
 					5_execution/pwd.c \
+					5_execution/pipe/create_pipe_fd.c \
 					6_parse/create_command_table.c \
 					6_parse/commands.c \
 					6_parse/tokens.c \

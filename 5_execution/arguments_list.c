@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/07 11:15:58 by rbakker       #+#    #+#                 */
-/*   Updated: 2020/10/08 21:33:33 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/10/09 17:10:49 by qli           ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,29 +28,29 @@ void	print_array(char **array)
 	}
 }
 
-void	update_arguments_list(t_data *data, int i, int token, int x)
+void	update_arguments_list(t_data *data, int cmd, int token, int x)
 {
 	int		usable_tokens;
 	char	**tokens;
 
-	usable_tokens = count_usable_tokens(data, i, 0);
-	tokens = malloc(sizeof(char*) * usable_tokens + 1);
+	usable_tokens = count_usable_tokens(data, cmd, 0);
+	tokens = malloc(sizeof(char*) * (usable_tokens + 1));
 	if (tokens == NULL)
-		malloc_error(data, data->commands[i]->token_amount, 0);
+		malloc_error(data, data->commands[cmd]->token_amount, 0);
 	x = 0;
 	while (x < usable_tokens)
 	{
-		if (pipe_check(data->commands[i]->tokens, token) == -1)
+		if (pipe_check(data->commands[cmd]->tokens, token) == -1)
 			token += 2;
-		else if (save_list_element(data->commands[i]->tokens[token], &tokens[x],
+		else if (save_list_element(data->commands[cmd]->tokens[token], &tokens[x],
 				&token, &x) == 0)
-			malloc_error(data, data->commands[i]->token_amount, tokens);
+			malloc_error(data, data->commands[cmd]->token_amount, tokens);
 	}
 	tokens[x] = 0;
-	free_array(data->commands[i]->tokens);
-	data->commands[i]->tokens = tokens;
-	data->commands[i]->token_amount = usable_tokens;
-	print_array(data->commands[i]->tokens); // remove later
+	free_array(data->commands[cmd]->tokens);
+	data->commands[cmd]->tokens = tokens;
+	data->commands[cmd]->token_amount = usable_tokens;
+	print_array(data->commands[cmd]->tokens); // remove later
 }
 
 int		save_list_element(char *current_token, char **saved_token, int *token,
@@ -69,18 +69,18 @@ int		save_list_element(char *current_token, char **saved_token, int *token,
 	return (1);
 }
 
-int		count_usable_tokens(t_data *data, int i, int token)
+int		count_usable_tokens(t_data *data, int cmd, int token)
 {
 	int		amount;
 
 	amount = 0;
-	while (token < data->commands[i]->token_amount)
+	while (token < data->commands[cmd]->token_amount)
 	{
-		if (data->commands[i]->tokens[token][0] == '|')
+		if (data->commands[cmd]->tokens[token][0] == '|')
 			break ;
-		if (data->commands[i]->tokens[token][0] == '\0')
+		if (data->commands[cmd]->tokens[token][0] == '\0')
 			token++;
-		else if (redirection(data->commands[i]->tokens[token]) > 5)
+		else if (redirection(data->commands[cmd]->tokens[token]) > 5)
 			token += 2;
 		else
 		{
@@ -88,7 +88,7 @@ int		count_usable_tokens(t_data *data, int i, int token)
 			amount++;
 		}
 	}
-	while (token < data->commands[i]->token_amount)
+	while (token < data->commands[cmd]->token_amount)
 	{
 		token++;
 		amount++;

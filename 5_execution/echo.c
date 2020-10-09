@@ -1,28 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   echo.c                                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: rbakker <rbakker@student.42.fr>            +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/09/09 14:49:34 by roybakker         #+#    #+#             */
-/*   Updated: 2020/10/07 13:32:36 by rbakker          ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   echo.c                                             :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: rbakker <rbakker@student.42.fr>              +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2020/09/09 14:49:34 by roybakker     #+#    #+#                 */
+/*   Updated: 2020/10/09 17:14:05 by qli           ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	execute_echo(t_data *data, int i, int *token, int needed_tokens)
+void	execute_echo(t_data *data, int cmd, int *token, int needed_tokens)
 {
 	char	*value;
 	int		newline;
 
 	(*token)++;
-	value = data->commands[i]->tokens[(*token)];
+	value = data->commands[cmd]->tokens[(*token)];
 	newline = 1;
 	while ((*token) < needed_tokens)
 	{
-		print(data, data->fd[1], data->commands[i]->tokens[(*token)], 0);
+		print(data, data->fd[1], data->commands[cmd]->tokens[(*token)], 0);
 		print(data, data->fd[1], " ", 0);
 		(*token)++;
 	}
@@ -32,33 +32,33 @@ void	execute_echo(t_data *data, int i, int *token, int needed_tokens)
 }
 
 
-// void	execute_echo(t_data *data, int i, int *token, int needed_tokens)
+// void	execute_echo(t_data *data, int cmd, int *token, int needed_tokens)
 // {
 // 	int		newline;
 // 	int		type;
 // 	int		index;
 
 // 	(*token)++;
-// 	create_fd(data, i, (*token), &needed_tokens);
-// 	if (data->commands[i]->error_flag == -1)
+// 	create_fd(data, cmd, (*token), &needed_tokens);
+// 	if (data->commands[cmd]->error_flag == -1)
 // 	{
-// 		(*token) = data->commands[i]->token_amount;
+// 		(*token) = data->commands[cmd]->token_amount;
 // 		return ;
 // 	}
-// 	while(redirection_check(data->commands[i]->tokens[(*token)]) == redirected)
+// 	while(redirection_check(data->commands[cmd]->tokens[(*token)]) == redirected)
 // 		(*token) += 2;
-// 	newline = newline_option(data->commands[i]->tokens[(*token)], needed_tokens,
+// 	newline = newline_option(data->commands[cmd]->tokens[(*token)], needed_tokens,
 // 																		token);
 // 	while((*token) < needed_tokens)
 // 	{
-// 		type = quotes_check(data->commands[i]->tokens[(*token)]);
+// 		type = quotes_check(data->commands[cmd]->tokens[(*token)]);
 // 		index = 0;
 // 		if (type == normal_char)
-// 			no_quotes(data, i, token, &index);
+// 			no_quotes(data, cmd, token, &index);
 // 		else if (type == double_quote)
-// 			double_quotes(data, i, token, &index);
+// 			double_quotes(data, cmd, token, &index);
 // 		else if (type == single_quote)
-// 			single_quotes(data, i, token, &index);
+// 			single_quotes(data, cmd, token, &index);
 // 		if ((*token) != (needed_tokens - 1))
 // 			print_char(data, data->fd[1], ' ', 0);
 // 		if ((*token) < needed_tokens)
@@ -82,14 +82,14 @@ void	execute_echo(t_data *data, int i, int *token, int needed_tokens)
 // 		return (0);
 // }
 
-// void	echo_variable(t_data *data, int i, int *token, int *index)
+// void	echo_variable(t_data *data, int cmd, int *token, int *index)
 // {
 // 	char 	*value;
 // 	char 	*variable;
 // 	int		x;
 
 // 	x = 0;
-// 	value = data->commands[i]->tokens[(*token)];
+// 	value = data->commands[cmd]->tokens[(*token)];
 // 	(*index)++;
 // 	variable = get_variable(data, value, (*index), 0, 0);
 // 	if (variable == NULL)
@@ -104,7 +104,7 @@ void	execute_echo(t_data *data, int i, int *token, int needed_tokens)
 // 	free(variable);
 // }
 
-// char	*get_variable(t_data *data, char *value, int index, int i, int len)
+// char	*get_variable(t_data *data, char *value, int index, int cmd, int len)
 // {
 // 	char	*variable;
 // 	int		envp_size;
@@ -116,18 +116,18 @@ void	execute_echo(t_data *data, int i, int *token, int needed_tokens)
 // 	variable = ft_substr(value, index, len);
 // 	if (variable == NULL)
 // 		return (0);
-// 	while (i < envp_size)
+// 	while (cmd < envp_size)
 // 	{
-// 		if (ft_strncmp(data->envp[i], variable, ft_strlen(variable)) == 0)
+// 		if (ft_strncmp(data->envp[cmd], variable, ft_strlen(variable)) == 0)
 // 		{
 // 			free(variable);
-// 			var_len = ft_strlen(data->envp[i]);
-// 			variable = ft_substr(data->envp[i], (len + 1), (var_len - len - 1));
+// 			var_len = ft_strlen(data->envp[cmd]);
+// 			variable = ft_substr(data->envp[cmd], (len + 1), (var_len - len - 1));
 // 			if (variable == NULL)
 // 				return (0);
 // 			return (variable);
 // 		}
-// 		i++;
+// 		cmd++;
 // 	}
 // 	free(variable);
 // 	return (0);

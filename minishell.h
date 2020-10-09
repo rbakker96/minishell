@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/01 15:55:06 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/08 21:33:39 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/10/09 17:43:37 by qli           ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@
 # include <fcntl.h> /* for open */
 
 /*
-**--FOLDER-------------------SUPPORTIVE__FUNCTIONS------------------------------
+**--FOLDER-------------------2_SUPPORTIVE__FUNCTIONS------------------------------
 */
 
 /*
@@ -43,15 +43,15 @@ char	*get_current_directory(t_data *data);
 ** file_two.c
 */
 int		get_amount_of_commands(char *line, int i);
-int		get_amount_of_tokens(char *command, int i, int token);
+int		get_amount_of_tokens(char *command, int cmd, int token);
 int		char_type(char c);
 
 /*
 ** file_three.c
 */
-void	meta_token(char *command, int *i, int *token);
-void	quoted_sentence(char *command, int *i, int x);
-void	normal_token(char *command, int *i, int *token);
+void	meta_token(char *command, int *cmd, int *token);
+void	quoted_sentence(char *command, int *cmd, int x);
+void	normal_token(char *command, int *cmd, int *token);
 
 /*
 ** file_four.c
@@ -73,13 +73,13 @@ int		command_check(char check_value, char charachter);
 int		pipe_check(char **array, int i);
 
 /*
-**--FOLDER---------------------ERROR_MANAGEMENT---------------------------------
+**--FOLDER---------------------3_ERROR_MANAGEMENT---------------------------------
 */
 
 /*
 ** external_function_error.c
 */
-void	fork_error(t_data *data, int index);
+void	fork_error(t_data *data, int cmd);
 void	write_error(t_data *data, char *malloced_str);
 
 /*
@@ -92,7 +92,7 @@ void	get_directory_error(t_data *data);
 /*
 ** memory_error.c
 */
-void	malloc_error(t_data *data, int index, char **malloced_array);
+void	malloc_error(t_data *data, int cmd, char **malloced_array);
 
 /*
 ** validation_error.c
@@ -100,7 +100,7 @@ void	malloc_error(t_data *data, int index, char **malloced_array);
 void	validation_error(t_data *data, char charachter);
 
 /*
-**--FOLDER---------------------MEMORY_MANAGEMENT--------------------------------
+**--FOLDER---------------------4_MEMORY_MANAGEMENT--------------------------------
 */
 
 /*
@@ -110,28 +110,40 @@ void	free_struct(t_data *data);
 void	free_array(char **array);
 
 /*
-**--FOLDER-------------------------EXECUTION------------------------------------
+**--FOLDER-------------------------5_EXECUTION------------------------------------
 */
 
 /*
-**--SUB_FOLDER---------------------EXECUTABLE-----------------------------------
+**--SUB_FOLDER-----------------------EXECUTABLE-----------------------------------
 */
 
 /*
 ** create_arguments.c
 */
-void	create_args(t_data *data, int command, int token);
-int		check_args_num(t_data *data, int command, int token);
+void	create_args(t_data *data, int cmd, int token);
+int		check_args_num(t_data *data, int cmd, int token);
 
 /*
 ** run_executable.c
 */
-void	execute_executable(t_data *data, int i, int *token, int needed_tokens);
-void	execute_absolute_executable(t_data *data, int i, int *token, int x);
-int		fork_executable(t_data *data, int i);
+void	execute_executable(t_data *data, int cmd, int *token, int needed_tokens);
+void	execute_absolute_executable(t_data *data, int cmd, int *token, int x);
+int		fork_executable(t_data *data, int cmd);
 
 /*
-**--SUB_FOLDER-------------------SHELL_EXPANSIONS-------------------------------
+**--SUB_FOLDER-----------------------PIPE-----------------------------------------
+*/
+
+/*
+** create_pipe.c
+*/
+void    create_pipe_fd(t_data *data, int cmd);
+void    calculate_pipe_num(t_data *data, int cmd);
+void	malloc_pipe_fd(t_data *data, int cmd);
+
+
+/*
+**--SUB_FOLDER-------------------SHELL_EXPANSIONS---------------------------------
 */
 
 /*
@@ -163,38 +175,24 @@ void	expand_token(t_data *data, char **new_token, int i, int x);
 */
 
 /*
-** execution_loop.c
+** arguments_list.c
 */
-void	execution_loop(t_data *data, int command, int token);
-void	execute_command(t_data *data, int i, int *token, char *value);
+void	update_arguments_list(t_data *data, int cmd, int token, int x);
+int		save_list_element(char *current_token, char **saved_token, int *token,
+																		int *x);
+int		count_usable_tokens(t_data *data, int cmd, int token);
 
 /*
 ** cd.c
 */
-void	execute_cd(t_data *data, int command, int *token, int needed_tokens);
-char	*get_argument(t_data *data, int i, int *token, int needed_tokens);
-void	go_to_home(t_data *data, int i, int *token, int needed_tokens);
+void	execute_cd(t_data *data, int cmd, int *token, int needed_tokens);
+char	*get_argument(t_data *data, int cmd, int *token, int needed_tokens);
+void	go_to_home(t_data *data, int cmd, int *token, int needed_tokens);
 
 /*
 ** echo.c
 */
-void	execute_echo(t_data *data, int i, int *token, int needed_tokens);
-
-/*
-** arguments_list.c
-*/
-void	update_arguments_list(t_data *data, int i, int token, int x);
-int		save_list_element(char *current_token, char **saved_token, int *token,
-																		int *x);
-int		count_usable_tokens(t_data *data, int i, int token);
-
-/*
-** redirections.c
-*/
-int		redirections(t_data *data, int i, int token);
-int		append_file(t_data *data, int i, int *token, int *ret);
-int		overwrite_file(t_data *data, int i, int *token, int *ret);
-int		input_file(t_data *data, int i, int *token, int *ret);
+void	execute_echo(t_data *data, int cmd, int *token, int needed_tokens);
 
 /*
 ** env.c
@@ -202,36 +200,42 @@ int		input_file(t_data *data, int i, int *token, int *ret);
 void	execute_env(t_data *data, int *token);
 
 /*
+** execution_loop.c
+*/
+void	execution_loop(t_data *data, int cmd, int token);
+void	execute_command(t_data *data, int cmd, int *token, char *value);
+
+/*
 ** exit.c
 */
-void	execute_exit(t_data *data, int i, int *token);
+void	execute_exit(t_data *data, int cmd, int *token);
 
 /*
 ** export.c
 */
-void	execute_export(t_data *data, int i, int *token);
+void	execute_export(t_data *data, int cmd, int *token);
 
 /*
 ** pwd.c
 */
-void	execute_pwd(t_data *data, int i, int *token, int needed_tokens);
+void	execute_pwd(t_data *data, int cmd, int *token, int needed_tokens);
+
+/*
+** redirections.c
+*/
+int		redirections(t_data *data, int cmd, int token);
+int		append_file(t_data *data, int cmd, int *token, int *ret);
+int		overwrite_file(t_data *data, int cmd, int *token, int *ret);
+int		input_file(t_data *data, int cmd, int *token, int *ret);
 
 /*
 ** unset.c
 */
-void	execute_unset(t_data *data, int i, int *token);
+void	execute_unset(t_data *data, int cmd, int *token);
 
 /*
-**--FOLDER--------------------------PARSE---------------------------------------
+**--FOLDER--------------------------6_PARSE---------------------------------------
 */
-
-/*
-** create_command_table.c
-*/
-int		parse_command(t_data *data, char **envp);
-int		save_environment_variables(t_data *data, char **envp);
-int		create_command_table(t_data *data, char *line, int i);
-int		save_single_command(t_data *data, char **commands, int i);
 
 /*
 ** commands.c
@@ -241,17 +245,25 @@ int		len_command(char *line, int i, int len);
 int		check_for_empty_command(char *line, int i);
 
 /*
+** create_command_table.c
+*/
+int		parse_command(t_data *data, char **envp);
+int		save_environment_variables(t_data *data, char **envp);
+int		create_command_table(t_data *data, char *line, int cmd);
+int		save_single_command(t_data *data, char **commands, int cmd);
+
+/*
 ** tokens.c
 */
-void	save_tokens(t_data *data, char **array, char *command, int i, int len);
-int		begin_token(char *command, int i);
+void	save_tokens(t_data *data, char **array, char *command, int cmd, int len);
+int		begin_token(char *command, int cmd);
 int		len_token(char *command, int start, int len, int *spaces);
 void	meta_char_len(char *command, int start, int *len, int *current_char);
 void	non_quoted_len(char *command, int start, int *len, int *current_char);
 void	quoted_len(char *command, int start, int *len, int *current_char);
 
 /*
-**--FOLDER---------------------INPUT_VALIDATION---------------------------------
+**--FOLDER---------------------7_INPUT_VALIDATION---------------------------------
 */
 
 /*

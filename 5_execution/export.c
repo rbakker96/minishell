@@ -6,13 +6,13 @@
 /*   By: roybakker <roybakker@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/09 14:50:36 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/01 17:00:46 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/10/09 17:36:32 by qli           ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	execute_export(t_data *data, int i, int *token)
+void	execute_export(t_data *data, int cmd, int *token)
 {
 	int index;
 	int envp_size;
@@ -28,7 +28,7 @@ void	execute_export(t_data *data, int i, int *token)
 			malloc_error(data, data->command_amount, new_envp);
 		index++;
 	}
-	new_envp[index] = data->commands[i]->tokens[(*token) + 1];
+	new_envp[index] = data->commands[cmd]->tokens[(*token) + 1];
 	new_envp[index + 1] = 0;
 	data->envp = new_envp;
 }
