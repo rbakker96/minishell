@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/01 15:55:06 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/09 17:43:37 by qli           ########   odam.nl         */
+/*   Updated: 2020/10/09 21:25:00 by qli           ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,18 +128,35 @@ int		check_args_num(t_data *data, int cmd, int token);
 */
 void	execute_executable(t_data *data, int cmd, int *token, int needed_tokens);
 void	execute_absolute_executable(t_data *data, int cmd, int *token, int x);
-int		fork_executable(t_data *data, int cmd);
+int		fork_executable(t_data *data, int cmd, int token);
 
 /*
 **--SUB_FOLDER-----------------------PIPE-----------------------------------------
 */
 
 /*
-** create_pipe.c
+** create_pipe_fd.c
 */
 void    create_pipe_fd(t_data *data, int cmd);
 void    calculate_pipe_num(t_data *data, int cmd);
 void	malloc_pipe_fd(t_data *data, int cmd);
+
+/*
+** create_pipe_fd.c
+*/
+void	set_child_pipe_fds(t_data *data, int cmd, int token);
+int		check_token_pipe_pos(t_data *data, int cmd, int token);
+void	set_parent_pipe_fds(t_data *data, int cmd, int token);
+
+/*
+** child_pipe_fd_setup.c
+*/
+void	child_first_pipe_setup(t_data *data, int cmd, int token_pos);
+
+/*
+** parent_pipe_fd_setup.c
+*/
+void	parent_first_pipe_setup(t_data *data, int cmd, int token_pos);
 
 
 /*

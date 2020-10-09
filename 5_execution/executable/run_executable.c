@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/24 20:12:02 by qli           #+#    #+#                 */
-/*   Updated: 2020/10/09 17:06:44 by qli           ########   odam.nl         */
+/*   Updated: 2020/10/09 21:35:02 by qli           ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	execute_executable(t_data *data, int cmd, int *token, int needed_tokens)
 	// create_fd(data, cmd, (*token), &needed_tokens);
 	create_args(data, cmd, (*token));
 	if (check_relative_path(data->commands[cmd]->tokens[(*token)]) == 1)
-		fork_executable(data, cmd);
+		fork_executable(data, cmd, *token);
 	else
 		execute_absolute_executable(data, cmd, token, 0);
 	(*token) = needed_tokens;
@@ -42,7 +42,7 @@ void	execute_absolute_executable(t_data *data, int cmd, int *token, int x)
 			free(path_token);
 			malloc_error(data, cmd, path);
 		}
-		if (!fork_executable(data, cmd))
+		if (!fork_executable(data, cmd, *token))
 			break ;
 		x++;
 	}
@@ -50,12 +50,13 @@ void	execute_absolute_executable(t_data *data, int cmd, int *token, int x)
 	free(path_token);
 }
 
-int		fork_executable(t_data *data, int cmd)
+int		fork_executable(t_data *data, int cmd, int token)
 {
 	int		pid;
 	int		status;
 	int		errno;
 
+	printf("Current token is %s\n", data->commands[cmd]->tokens[token]);
 	pid = fork();
 	if (pid == -1)
 		fork_error(data, cmd);
@@ -63,9 +64,11 @@ int		fork_executable(t_data *data, int cmd)
 	{
 		dup2(data->fd[0], 0);
 		dup2(data->fd[1], 1);
+//		set_child_pipe_fds(data, cmd, token);
 		execve(data->args[0], data->args, data->envp);
 		exit(1);
 	}
+//	set_parent_pipe_fds(data, cmd, token);
 	wait(&status);
 	return (status);
 }
