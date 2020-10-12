@@ -6,7 +6,7 @@
 #    By: rbakker <rbakker@student.42.fr>              +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/02/05 14:55:09 by rbakker       #+#    #+#                  #
-#    Updated: 2020/10/09 21:21:51 by qli           ########   odam.nl          #
+#    Updated: 2020/10/12 13:22:46 by rbakker       ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,6 +18,7 @@ SOURCES			= 	main.c \
 					2_supportive_functions/file_three.c \
 					2_supportive_functions/file_four.c \
 					2_supportive_functions/file_five.c \
+					2_supportive_functions/file_six.c \
 					3_error_management/external_function_error.c \
 					3_error_management/file_system_error.c \
 					3_error_management/memory_error.c \

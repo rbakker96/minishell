@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/19 13:23:47 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/12 11:44:44 by rbakker       ########   odam.nl         */
+/*   Updated: 2020/10/12 12:01:22 by rbakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,17 +53,18 @@ int		len_token(char *command, int start, int len, int *spaces)
 	{
 		current_char = char_type(command[start + len]);
 		if (current_char == meta_char)
+		{
 			meta_char_len(command, start, &len, &current_char);
+			break ;
+		}
 		else if (current_char == normal_char)
 			non_quoted_len(command, start, &len, &current_char);
 		else if (current_char == double_quote || current_char == single_quote)
 			quoted_len(command, start, &len, &current_char);
-		else if (char_type(command[start + len] == meta_char))
-			break ;
 		if (current_char == space)
 		{
 			(*spaces)++;
-			return (len);
+			break ;
 		}
 	}
 	return (len);

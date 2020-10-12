@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/09 16:44:49 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/08 16:12:52 by rbakker       ########   odam.nl         */
+/*   Updated: 2020/10/12 13:23:06 by rbakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,27 +59,6 @@ int		command_check(char check_value, char charachter)
 {
 	if (charachter == check_value || charachter == '|' || charachter == ';' ||
 		charachter == '\0')
-		return (-1);
-	else
-		return (0);
-}
-
-int		pipe_check(char **tokens, int i)
-{
-	int x;
-
-	x = i;
-	while (x > 0)
-	{
-		if (tokens[x][0] == '|')
-			return (0);
-		x--;
-	}
-	if (tokens[i][0] == '\0')
-		return (0);
-	if (ft_strncmp(tokens[i], "<", ft_strlen(tokens[i]) == 0 ||
-		ft_strncmp(tokens[i], ">", ft_strlen(tokens[i])) == 0 ||
-		ft_strncmp(tokens[i], ">>", ft_strlen(tokens[i])) == 0))
 		return (-1);
 	else
 		return (0);
