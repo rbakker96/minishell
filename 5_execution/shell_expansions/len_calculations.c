@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   len_calculations.c                                 :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: rbakker <rbakker@student.42.fr>            +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/05 21:08:41 by roybakker         #+#    #+#             */
-/*   Updated: 2020/10/06 17:09:11 by rbakker          ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   len_calculations.c                                 :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: rbakker <rbakker@student.42.fr>              +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2020/10/05 21:08:41 by roybakker     #+#    #+#                 */
+/*   Updated: 2020/10/12 11:23:00 by rbakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ int		env_variable_len(t_data *data, char *token, int *i, int len)
 	var_len = env_var_len(token, (*i));
 	variable = ft_substr(token, (*i), var_len);
 	if (variable == NULL)
-		return (-1); // add ;ater
+		malloc_error(data, data->command_amount, 0);
 	x = 0;
 	while (x < get_array_size(data->envp))
 	{

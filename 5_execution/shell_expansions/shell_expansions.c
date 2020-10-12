@@ -1,35 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   shell_expansions.c                                 :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: rbakker <rbakker@student.42.fr>            +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/05 19:44:06 by roybakker         #+#    #+#             */
-/*   Updated: 2020/10/07 12:05:29 by rbakker          ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   shell_expansions.c                                 :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: rbakker <rbakker@student.42.fr>              +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2020/10/05 19:44:06 by roybakker     #+#    #+#                 */
+/*   Updated: 2020/10/12 11:25:11 by rbakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-void	shell_expansions(t_data *data, int i, int token)
+void	shell_expansions(t_data *data, int cmd, int tkn)
 {
 	int		len;
 	char	*new_token;
 
 	len = 0;
-	while (token < data->commands[i]->token_amount)
+	while (tkn < data->commands[cmd]->token_amount)
 	{
-		data->current_token = data->commands[i]->tokens[token];
+		data->current_token = data->commands[cmd]->tokens[tkn];
 		len = expansion_len(data, 0, 0);
 		new_token = malloc(sizeof(char) * (len + 1));
 		if (new_token == NULL)
-			return ; // add later
+			malloc_error(data, data->command_amount, 0);
 		expand_token(data, &new_token, 0, 0);
-		free(data->commands[i]->tokens[token]);
-		data->commands[i]->tokens[token] = new_token;
-		printf("updated token [%d] = %s\n", token, data->commands[i]->tokens[token]);
-		token++;
+		free(data->commands[cmd]->tokens[tkn]);
+		data->commands[cmd]->tokens[tkn] = new_token;
+		printf("updated token [%d] = %s\n", tkn, data->commands[cmd]->tokens[tkn]);
+		tkn++;
 	}
 }
 

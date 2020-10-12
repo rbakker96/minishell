@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/01 15:55:06 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/09 21:25:00 by qli           ########   odam.nl         */
+/*   Updated: 2020/10/12 11:57:09 by rbakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,15 +43,15 @@ char	*get_current_directory(t_data *data);
 ** file_two.c
 */
 int		get_amount_of_commands(char *line, int i);
-int		get_amount_of_tokens(char *command, int cmd, int token);
+int		get_amount_of_tokens(char *command, int cmd, int tkn);
 int		char_type(char c);
 
 /*
 ** file_three.c
 */
-void	meta_token(char *command, int *cmd, int *token);
+void	meta_token(char *command, int *cmd, int *tkn);
 void	quoted_sentence(char *command, int *cmd, int x);
-void	normal_token(char *command, int *cmd, int *token);
+void	normal_token(char *command, int *cmd, int *tkn);
 
 /*
 ** file_four.c
@@ -86,7 +86,7 @@ void	write_error(t_data *data, char *malloced_str);
 ** file_system_error.c
 */
 void	redirection_error(t_data *data, char *filename, int *ret);
-void	change_directory_error(t_data *data, char *filename, int i, int *token);
+void	change_directory_error(t_data *data, char *filename, int i, int *tkn);
 void	get_directory_error(t_data *data);
 
 /*
@@ -120,15 +120,15 @@ void	free_array(char **array);
 /*
 ** create_arguments.c
 */
-void	create_args(t_data *data, int cmd, int token);
-int		check_args_num(t_data *data, int cmd, int token);
+void	create_args(t_data *data, int cmd, int tkn);
+int		check_args_num(t_data *data, int cmd, int tkn);
 
 /*
 ** run_executable.c
 */
-void	execute_executable(t_data *data, int cmd, int *token, int needed_tokens);
-void	execute_absolute_executable(t_data *data, int cmd, int *token, int x);
-int		fork_executable(t_data *data, int cmd, int token);
+void	execute_executable(t_data *data, int cmd, int *tkn, int needed_tokens);
+void	execute_absolute_executable(t_data *data, int cmd, int *tkn, int x);
+int		fork_executable(t_data *data, int cmd, int tkn);
 
 /*
 **--SUB_FOLDER-----------------------PIPE-----------------------------------------
@@ -137,16 +137,16 @@ int		fork_executable(t_data *data, int cmd, int token);
 /*
 ** create_pipe_fd.c
 */
-void    create_pipe_fd(t_data *data, int cmd);
-void    calculate_pipe_num(t_data *data, int cmd);
+void	create_pipe_fd(t_data *data, int cmd);
+void	calculate_pipe_num(t_data *data, int cmd);
 void	malloc_pipe_fd(t_data *data, int cmd);
 
 /*
 ** create_pipe_fd.c
 */
-void	set_child_pipe_fds(t_data *data, int cmd, int token);
-int		check_token_pipe_pos(t_data *data, int cmd, int token);
-void	set_parent_pipe_fds(t_data *data, int cmd, int token);
+void	set_child_pipe_fds(t_data *data, int cmd, int tkn);
+int		check_token_pipe_pos(t_data *data, int cmd, int tkn);
+void	set_parent_pipe_fds(t_data *data, int cmd, int tkn);
 
 /*
 ** child_pipe_fd_setup.c
@@ -183,7 +183,7 @@ int		env_variable_len(t_data *data, char *token, int *i, int len);
 /*
 ** shell_expansions.c
 */
-void	shell_expansions(t_data *data, int i, int token);
+void	shell_expansions(t_data *data, int i, int tkn);
 int		expansion_len(t_data *data, int i, int len);
 void	expand_token(t_data *data, char **new_token, int i, int x);
 
@@ -194,61 +194,61 @@ void	expand_token(t_data *data, char **new_token, int i, int x);
 /*
 ** arguments_list.c
 */
-void	update_arguments_list(t_data *data, int cmd, int token, int x);
-int		save_list_element(char *current_token, char **saved_token, int *token,
+void	update_arguments_list(t_data *data, int cmd, int tkn, int x);
+int		save_list_element(char *current_token, char **saved_token, int *tkn,
 																		int *x);
-int		count_usable_tokens(t_data *data, int cmd, int token);
+int		count_usable_tokens(t_data *data, int cmd, int tkn);
 
 /*
 ** cd.c
 */
-void	execute_cd(t_data *data, int cmd, int *token, int needed_tokens);
-char	*get_argument(t_data *data, int cmd, int *token, int needed_tokens);
-void	go_to_home(t_data *data, int cmd, int *token, int needed_tokens);
+void	execute_cd(t_data *data, int cmd, int *tkn, int needed_tokens);
+char	*get_argument(t_data *data, int cmd, int *tkn, int needed_tokens);
+void	go_to_home(t_data *data, int cmd, int *tkn, int needed_tokens);
 
 /*
 ** echo.c
 */
-void	execute_echo(t_data *data, int cmd, int *token, int needed_tokens);
+void	execute_echo(t_data *data, int cmd, int *tkn, int needed_tokens);
 
 /*
 ** env.c
 */
-void	execute_env(t_data *data, int *token);
+void	execute_env(t_data *data, int *tkn);
 
 /*
 ** execution_loop.c
 */
-void	execution_loop(t_data *data, int cmd, int token);
-void	execute_command(t_data *data, int cmd, int *token, char *value);
+void	execution_loop(t_data *data, int cmd, int tkn);
+void	execute_command(t_data *data, int cmd, int *tkn, char *value);
 
 /*
 ** exit.c
 */
-void	execute_exit(t_data *data, int cmd, int *token);
+void	execute_exit(t_data *data, int cmd, int *tkn);
 
 /*
 ** export.c
 */
-void	execute_export(t_data *data, int cmd, int *token);
+void	execute_export(t_data *data, int cmd, int *tkn);
 
 /*
 ** pwd.c
 */
-void	execute_pwd(t_data *data, int cmd, int *token, int needed_tokens);
+void	execute_pwd(t_data *data, int cmd, int *tkn, int needed_tokens);
 
 /*
 ** redirections.c
 */
-int		redirections(t_data *data, int cmd, int token);
-int		append_file(t_data *data, int cmd, int *token, int *ret);
-int		overwrite_file(t_data *data, int cmd, int *token, int *ret);
-int		input_file(t_data *data, int cmd, int *token, int *ret);
+int		redirections(t_data *data, int cmd, int tkn);
+int		append_file(t_data *data, int cmd, int *tkn, int *ret);
+int		overwrite_file(t_data *data, int cmd, int *tkn, int *ret);
+int		input_file(t_data *data, int cmd, int *tkn, int *ret);
 
 /*
 ** unset.c
 */
-void	execute_unset(t_data *data, int cmd, int *token);
+void	execute_unset(t_data *data, int cmd, int *tkn);
 
 /*
 **--FOLDER--------------------------6_PARSE---------------------------------------

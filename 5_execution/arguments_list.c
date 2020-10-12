@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/07 11:15:58 by rbakker       #+#    #+#                 */
-/*   Updated: 2020/10/09 17:10:49 by qli           ########   odam.nl         */
+/*   Updated: 2020/10/12 11:26:47 by rbakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	print_array(char **array)
 	}
 }
 
-void	update_arguments_list(t_data *data, int cmd, int token, int x)
+void	update_arguments_list(t_data *data, int cmd, int tkn, int x)
 {
 	int		usable_tokens;
 	char	**tokens;
@@ -40,10 +40,10 @@ void	update_arguments_list(t_data *data, int cmd, int token, int x)
 	x = 0;
 	while (x < usable_tokens)
 	{
-		if (pipe_check(data->commands[cmd]->tokens, token) == -1)
-			token += 2;
-		else if (save_list_element(data->commands[cmd]->tokens[token], &tokens[x],
-				&token, &x) == 0)
+		if (pipe_check(data->commands[cmd]->tokens, tkn) == -1)
+			tkn += 2;
+		else if (save_list_element(data->commands[cmd]->tokens[tkn], &tokens[x],
+				&tkn, &x) == 0)
 			malloc_error(data, data->commands[cmd]->token_amount, tokens);
 	}
 	tokens[x] = 0;
@@ -53,44 +53,44 @@ void	update_arguments_list(t_data *data, int cmd, int token, int x)
 	print_array(data->commands[cmd]->tokens); // remove later
 }
 
-int		save_list_element(char *current_token, char **saved_token, int *token,
+int		save_list_element(char *current_token, char **saved_token, int *tkn,
 																		int *x)
 {
 	if (current_token[0] == '\0')
-		(*token)++;
+		(*tkn)++;
 	else
 	{
 		(*saved_token) = ft_strdup(current_token);
 		if ((*saved_token) == NULL)
 			return (0);
-		(*token)++;
+		(*tkn)++;
 		(*x)++;
 	}
 	return (1);
 }
 
-int		count_usable_tokens(t_data *data, int cmd, int token)
+int		count_usable_tokens(t_data *data, int cmd, int tkn)
 {
 	int		amount;
 
 	amount = 0;
-	while (token < data->commands[cmd]->token_amount)
+	while (tkn < data->commands[cmd]->token_amount)
 	{
-		if (data->commands[cmd]->tokens[token][0] == '|')
+		if (data->commands[cmd]->tokens[tkn][0] == '|')
 			break ;
-		if (data->commands[cmd]->tokens[token][0] == '\0')
-			token++;
-		else if (redirection(data->commands[cmd]->tokens[token]) > 5)
-			token += 2;
+		if (data->commands[cmd]->tokens[tkn][0] == '\0')
+			tkn++;
+		else if (redirection(data->commands[cmd]->tokens[tkn]) > 5)
+			tkn += 2;
 		else
 		{
-			token++;
+			tkn++;
 			amount++;
 		}
 	}
-	while (token < data->commands[cmd]->token_amount)
+	while (tkn < data->commands[cmd]->token_amount)
 	{
-		token++;
+		tkn++;
 		amount++;
 	}
 	return (amount);

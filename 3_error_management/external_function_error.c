@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/30 14:33:38 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/09 17:02:49 by qli           ########   odam.nl         */
+/*   Updated: 2020/10/12 11:16:12 by rbakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	fork_error(t_data *data, int cmd)
 	free_array(data->envp);
 	if (data->args)
 		free_array(data->args);
-	while(i < cmd)
+	while (i < cmd)
 	{
 		free_array(data->commands[i]->tokens);
 		free(data->commands[i]);

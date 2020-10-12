@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   expand_functions.c                                 :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: rbakker <rbakker@student.42.fr>            +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/05 21:11:22 by roybakker         #+#    #+#             */
-/*   Updated: 2020/10/06 17:10:18 by rbakker          ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   expand_functions.c                                 :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: rbakker <rbakker@student.42.fr>              +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2020/10/05 21:11:22 by roybakker     #+#    #+#                 */
+/*   Updated: 2020/10/12 11:22:11 by rbakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ void	env_variable(t_data *data, char **new_token, int *i, int *x)
 	var_len = env_var_len(token, (*i));
 	variable = ft_substr(token, (*i), var_len);
 	if (variable == NULL)
-		return ; // add later
+		malloc_error(data, data->command_amount, 0);
 	z = 0;
 	while (z < get_array_size(data->envp))
 	{
