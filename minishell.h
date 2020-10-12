@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/01 15:55:06 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/12 16:26:45 by rbakker       ########   odam.nl         */
+/*   Updated: 2020/10/12 16:32:23 by rbakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -289,7 +289,7 @@ void	non_quoted_len(char *command, int start, int *len, int *current_char);
 void	quoted_len(char *command, int start, int *len, int *current_char);
 
 /*
-**--FOLDER---------------------7_INPUT_VALIDATION---------------------------------
+**--FOLDER---------------------7_INPUT_VALIDATION-------------------------------
 */
 
 /*
