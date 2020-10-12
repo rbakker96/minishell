@@ -6,7 +6,7 @@
 /*   By: roybakker <roybakker@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/19 13:23:31 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/12 11:41:38 by rbakker       ########   odam.nl         */
+/*   Updated: 2020/10/12 15:37:34 by rbakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int		len_command(char *line, int i, int len)
 	while (line[i + len] != ';' && line[i + len] != '\0')
 	{
 		if (line[i + len] == '\\')
-			i += 2;
+			len += 2;
 		else
 			len++;
 	}

@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/01 15:55:06 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/12 14:19:25 by qli           ########   odam.nl         */
+/*   Updated: 2020/10/12 16:26:45 by rbakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -281,7 +281,7 @@ int		save_single_command(t_data *data, char **commands, int cmd);
 /*
 ** tokens.c
 */
-void	save_tokens(t_data *data, char **array, char *command, int cmd, int len);
+void	save_tokens(t_data *data, char **array, char *command, int cmd);
 int		begin_token(char *command, int cmd);
 int		len_token(char *command, int start, int len, int *spaces);
 void	meta_char_len(char *command, int start, int *len, int *current_char);

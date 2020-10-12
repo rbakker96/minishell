@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/24 20:12:02 by qli           #+#    #+#                 */
-/*   Updated: 2020/10/12 13:40:00 by qli           ########   odam.nl         */
+/*   Updated: 2020/10/12 15:45:46 by rbakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,8 @@ int		fork_executable(t_data *data, int cmd, int tkn)
 	int		status;
 	int		errno;
 
-	printf("Current token is %s\n", data->commands[cmd]->tokens[tkn]);
+	if (tkn)
+		tkn++;
 	pid = fork();
 	if (pid == -1)
 		fork_error(data, cmd);
