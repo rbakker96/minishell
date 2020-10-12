@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/12 16:36:24 by rbakker       #+#    #+#                 */
-/*   Updated: 2020/10/12 16:36:32 by rbakker       ########   odam.nl         */
+/*   Updated: 2020/10/12 17:45:41 by rbakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,19 +16,19 @@
 void	execute_command(t_data *data, int cmd, int *tkn, char *value)
 {
 	printf("current token is [%s]\n", data->commands[cmd]->tokens[*tkn]);
-	if (ft_strncmp("echo", value, ft_strlen(value)) == 0)
+	if (compare_command("echo", value, 4) == 0)
 		execute_echo(data, cmd, tkn, 0);
-	else if (ft_strncmp("cd", value, ft_strlen(value)) == 0)
+	else if (compare_command("cd", value, 4) == 0)
 		execute_cd(data, cmd, tkn, data->commands[cmd]->token_amount);
-	else if (ft_strncmp("pwd", value, ft_strlen(value)) == 0)
+	else if (compare_command("pwd", value, 4) == 0)
 		execute_pwd(data, cmd, tkn, data->commands[cmd]->token_amount);
-	else if (ft_strncmp("export", value, ft_strlen(value)) == 0)
+	else if (compare_command("export", value, 4) == 0)
 		execute_export(data, cmd, tkn);
-	else if (ft_strncmp("unset", value, ft_strlen(value)) == 0)
+	else if (compare_command("unset", value, 4) == 0)
 		execute_unset(data, cmd, tkn);
-	else if (ft_strncmp("env", value, ft_strlen(value)) == 0)
+	else if (compare_command("env", value, 4) == 0)
 		execute_env(data, tkn);
-	else if (ft_strncmp("exit", value, ft_strlen(value)) == 0)
+	else if (compare_command("exit", value, 4) == 0)
 		execute_exit(data, cmd, tkn);
 	else
 		execute_executable(data, cmd, tkn);

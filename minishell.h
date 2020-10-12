@@ -6,11 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/01 15:55:06 by roybakker     #+#    #+#                 */
-<<<<<<< HEAD
-/*   Updated: 2020/10/12 16:32:23 by rbakker       ########   odam.nl         */
-=======
-/*   Updated: 2020/10/12 16:34:31 by qli           ########   odam.nl         */
->>>>>>> 9028a02d17ee098e1c07fe8ce6047a639154d6ba
+/*   Updated: 2020/10/12 17:51:01 by rbakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,9 +74,11 @@ int		command_check(char check_value, char charachter);
 /*
 ** file_six.c
 */
+int		compare_command(char *command, char *token_command, int len);
 int		pipe_check(char **array, int i);
 int		calculate_needed_tokens(t_data *data, int cmd, int tkn);
 void	update_token_position(t_data *data, int cmd, int *tkn);
+int		create_path_array(t_data *data, int cmd, int tkn, int x);
 
 /*
 **--FOLDER---------------------3_ERROR_MANAGEMENT-------------------------------
@@ -91,6 +89,7 @@ void	update_token_position(t_data *data, int cmd, int *tkn);
 */
 void	fork_error(t_data *data, int cmd);
 void	write_error(t_data *data, char *malloced_str);
+void	run_executable_error(t_data *data, char *name);
 
 /*
 ** file_system_error.c
