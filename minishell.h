@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/01 15:55:06 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/12 13:23:24 by rbakker       ########   odam.nl         */
+/*   Updated: 2020/10/12 13:48:50 by rbakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,12 +157,16 @@ void	set_parent_pipe_fds(t_data *data, int cmd, int tkn);
 /*
 ** child_pipe_fd_setup.c
 */
-void	child_first_pipe_setup(t_data *data, int cmd, int token_pos);
+void	child_first_pipe_setup(t_data *data, int token_pos);
+void	child_between_pipe_setup(t_data *data, int token_pos);
+void	child_last_pipe_setup(t_data *data, int token_pos);
 
 /*
 ** parent_pipe_fd_setup.c
 */
-void	parent_first_pipe_setup(t_data *data, int cmd, int token_pos);
+void	parent_first_pipe_setup(t_data *data, int token_pos);
+void	parent_last_pipe_setup(t_data *data, int token_pos);
+void	parent_between_pipe_setup(t_data *data, int token_pos);
 
 /*
 **--SUB_FOLDER-------------------SHELL_EXPANSIONS-------------------------------
