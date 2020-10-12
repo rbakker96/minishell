@@ -6,15 +6,15 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/02 14:39:39 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/09 16:58:24 by qli           ########   odam.nl         */
+/*   Updated: 2020/10/12 11:15:40 by rbakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	meta_token(char *command, int *cmd, int *token)
+void	meta_token(char *command, int *cmd, int *tkn)
 {
-	(*token)++;
+	(*tkn)++;
 	if (command[(*cmd)] == '>' && command[(*cmd) + 1] == '>')
 		(*cmd) += 2;
 	else
@@ -36,9 +36,9 @@ void	quoted_sentence(char *command, int *cmd, int quote_type)
 	}
 }
 
-void	normal_token(char *command, int *cmd, int *token)
+void	normal_token(char *command, int *cmd, int *tkn)
 {
-	(*token)++;
+	(*tkn)++;
 	while (command[(*cmd)] != '\0' && command[(*cmd)] != ' ')
 	{
 		while (char_type(command[(*cmd)]) == normal_char && command[(*cmd)] != '\0')

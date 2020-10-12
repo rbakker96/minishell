@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/04 12:50:32 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/09 17:00:38 by qli           ########   odam.nl         */
+/*   Updated: 2020/10/12 11:14:18 by rbakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int		get_amount_of_commands(char *line, int i)
 	return (count);
 }
 
-int			get_amount_of_tokens(char *command, int cmd, int token)
+int			get_amount_of_tokens(char *command, int cmd, int tkn)
 {
 	while (command[cmd] == ' ' && command[cmd] != '\0')
 		cmd++;
@@ -47,13 +47,13 @@ int			get_amount_of_tokens(char *command, int cmd, int token)
 		if (char_type(command[cmd]) == space)
 			cmd++;
 		else if (char_type(command[cmd]) == meta_char)
-			meta_token(command, &cmd, &token);
+			meta_token(command, &cmd, &tkn);
 		else
-			normal_token(command, &cmd, &token);
+			normal_token(command, &cmd, &tkn);
 	}
-	if (token == 0)
+	if (tkn == 0)
 		return (1);
-	return (token);
+	return (tkn);
 }
 
 int			char_type(char c)

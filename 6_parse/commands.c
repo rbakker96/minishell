@@ -6,7 +6,7 @@
 /*   By: roybakker <roybakker@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/19 13:23:31 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/08 16:34:18 by rbakker       ########   odam.nl         */
+/*   Updated: 2020/10/12 11:41:38 by rbakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 char	**save_commands(char *line, char command_amount, int i, int index)
 {
-	char 	**commands;
+	char	**commands;
 	int		len;
 
 	commands = (char**)malloc(sizeof(char*) * (command_amount + 1));
