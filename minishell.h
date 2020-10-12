@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/01 15:55:06 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/12 13:37:31 by qli           ########   odam.nl         */
+/*   Updated: 2020/10/12 13:48:50 by rbakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@
 # include <fcntl.h> /* for open */
 
 /*
-**--FOLDER-------------------2_SUPPORTIVE__FUNCTIONS------------------------------
+**--FOLDER-----------------2_SUPPORTIVE__FUNCTIONS------------------------------
 */
 
 /*
@@ -70,10 +70,16 @@ int		redirection_check(char *str);
 int		quotes_check(char *str);
 int		env_var_len(char *str, int i);
 int		command_check(char check_value, char charachter);
-int		pipe_check(char **array, int i);
 
 /*
-**--FOLDER---------------------3_ERROR_MANAGEMENT---------------------------------
+** file_six.c
+*/
+int		pipe_check(char **array, int i);
+int		calculate_needed_tokens(t_data *data, int cmd, int tkn);
+void	update_token_position(t_data *data, int cmd, int *tkn);
+
+/*
+**--FOLDER---------------------3_ERROR_MANAGEMENT-------------------------------
 */
 
 /*
@@ -100,7 +106,7 @@ void	malloc_error(t_data *data, int cmd, char **malloced_array);
 void	validation_error(t_data *data, char charachter);
 
 /*
-**--FOLDER---------------------4_MEMORY_MANAGEMENT--------------------------------
+**--FOLDER---------------------4_MEMORY_MANAGEMENT------------------------------
 */
 
 /*
@@ -110,11 +116,11 @@ void	free_struct(t_data *data);
 void	free_array(char **array);
 
 /*
-**--FOLDER-------------------------5_EXECUTION------------------------------------
+**--FOLDER------------------------5_EXECUTION-----------------------------------
 */
 
 /*
-**--SUB_FOLDER-----------------------EXECUTABLE-----------------------------------
+**--SUB_FOLDER---------------------EXECUTABLE-----------------------------------
 */
 
 /*
@@ -131,7 +137,7 @@ void	execute_absolute_executable(t_data *data, int cmd, int *tkn, int x);
 int		fork_executable(t_data *data, int cmd, int tkn);
 
 /*
-**--SUB_FOLDER-----------------------PIPE-----------------------------------------
+**--SUB_FOLDER----------------------PIPE----------------------------------------
 */
 
 /*
@@ -162,9 +168,8 @@ void	parent_first_pipe_setup(t_data *data, int token_pos);
 void	parent_last_pipe_setup(t_data *data, int token_pos);
 void	parent_between_pipe_setup(t_data *data, int token_pos);
 
-
 /*
-**--SUB_FOLDER-------------------SHELL_EXPANSIONS---------------------------------
+**--SUB_FOLDER-------------------SHELL_EXPANSIONS-------------------------------
 */
 
 /*
@@ -255,7 +260,7 @@ int		input_file(t_data *data, int cmd, int *tkn, int *ret);
 void	execute_unset(t_data *data, int cmd, int *tkn);
 
 /*
-**--FOLDER--------------------------6_PARSE---------------------------------------
+**--FOLDER--------------------------6_PARSE-------------------------------------
 */
 
 /*
