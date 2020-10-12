@@ -6,7 +6,11 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/04 15:02:22 by qli           #+#    #+#                 */
+<<<<<<< HEAD
 /*   Updated: 2020/10/12 15:44:38 by qli           ########   odam.nl         */
+=======
+/*   Updated: 2020/10/12 15:16:41 by rbakker       ########   odam.nl         */
+>>>>>>> 8b6654b08b7dc973e4c411a4876da951f16507b0
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,11 +50,10 @@ void		execution_loop(t_data *data, int cmd, int tkn)
 {
 	char	*value;
 
-	value = data->commands[cmd]->tokens[tkn];
 	while (cmd < data->command_amount)
 	{
 		initialise_struct_elements(data, cmd);
-		shell_expansions(data, cmd, tkn);
+		shell_expansions(data, cmd, 0);
 		create_pipe_fd(data, cmd);
 		while (tkn < data->commands[cmd]->token_amount)
 		{

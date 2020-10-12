@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/02 11:00:03 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/09 17:40:45 by qli           ########   odam.nl         */
+/*   Updated: 2020/10/12 16:26:10 by rbakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int		create_command_table(t_data *data, char *line, int cmd)
 {
 	char	**commands;
 
-	data->command_amount = get_amount_of_commands(line, 1);
+	data->command_amount = get_amount_of_commands(line, 0);
 	printf("command amount = %d\n", data->command_amount); //TAKE OUT!!!
 	data->commands = (t_command_table**)malloc(sizeof(t_command_table*) *
 													(data->command_amount + 1));
@@ -82,6 +82,6 @@ int		save_single_command(t_data *data, char **commands, int cmd)
 										(data->commands[cmd]->token_amount + 1));
 	if (data->commands[cmd]->tokens == NULL)
 		return (-1);
-	save_tokens(data, commands, commands[cmd], cmd, 0);
+	save_tokens(data, commands, commands[cmd], cmd);
 	return (0);
 }
