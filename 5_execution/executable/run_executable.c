@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/24 20:12:02 by qli           #+#    #+#                 */
-/*   Updated: 2020/10/12 18:01:26 by qli           ########   odam.nl         */
+/*   Updated: 2020/10/12 18:04:30 by qli           ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,15 @@
 void	execute_executable(t_data *data, int cmd, int *tkn)
 {
 	int	needed_tokens;
+	int errno;
 
 	needed_tokens = calculate_needed_tokens(data, cmd, (*tkn));
 	create_args(data, cmd, (*tkn));
 	if (check_relative_path(data->commands[cmd]->tokens[(*tkn)]) == 1)
-		fork_executable(data, cmd);
+	{
+		if (fork_executable(data, cmd))
+			run_executable_error(data, data->commands[cmd]->tokens[(*tkn)]);
+	}
 	else
 		execute_absolute_executable(data, cmd, tkn, 0);
 	(*tkn) = needed_tokens;
@@ -28,38 +32,19 @@ void	execute_executable(t_data *data, int cmd, int *tkn)
 
 void	execute_absolute_executable(t_data *data, int cmd, int *tkn, int x)
 {
-	char	**path;
-	char	*path_token;
-
-	path = ft_split(find_path(data), ':');
-	if (path == NULL)
-		malloc_error(data, data->command_amount, 0);
-	path_token = ft_strjoin("/", data->commands[cmd]->tokens[(*tkn)]);
-	if (path_token == NULL)
-		malloc_error(data, data->command_amount, path);
-	while (path[x] != NULL)
+	while (create_path_array(data, cmd, (*tkn), x) != -1)
 	{
-		data->args[0] = ft_strjoin(path[x], path_token);
-		if (data->args[0] == NULL)
-		{
-			free(path_token);
-			malloc_error(data, cmd, path);
-		}
-		// printf("data->pipe_pos is %d\n", data->pipe_pos);
-		// printf("data->pipe_num is %d\n", data->pipe_num);
 		if (!fork_executable(data, cmd))
-			break ;
+			return ;
 		x++;
 	}
-	free_array(path);
-	free(path_token);
+	run_executable_error(data, data->commands[cmd]->tokens[(*tkn)]);
 }
 
 int		fork_executable(t_data *data, int cmd)
 {
 	int		pid;
 	int		status;
-	int		errno;
 
 	pid = fork();
 	if (pid == -1)

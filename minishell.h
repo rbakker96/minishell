@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/01 15:55:06 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/12 16:48:49 by qli           ########   odam.nl         */
+/*   Updated: 2020/10/12 18:04:30 by qli           ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,9 +74,11 @@ int		command_check(char check_value, char charachter);
 /*
 ** file_six.c
 */
+int		compare_command(char *command, char *token_command, int len);
 int		pipe_check(char **array, int i);
 int		calculate_needed_tokens(t_data *data, int cmd, int tkn);
 void	update_token_position(t_data *data, int cmd, int *tkn);
+int		create_path_array(t_data *data, int cmd, int tkn, int x);
 
 /*
 **--FOLDER---------------------3_ERROR_MANAGEMENT-------------------------------
@@ -87,6 +89,7 @@ void	update_token_position(t_data *data, int cmd, int *tkn);
 */
 void	fork_error(t_data *data, int cmd);
 void	write_error(t_data *data, char *malloced_str);
+void	run_executable_error(t_data *data, char *name);
 
 /*
 ** file_system_error.c
@@ -288,7 +291,7 @@ void	non_quoted_len(char *command, int start, int *len, int *current_char);
 void	quoted_len(char *command, int start, int *len, int *current_char);
 
 /*
-**--FOLDER---------------------7_INPUT_VALIDATION---------------------------------
+**--FOLDER---------------------7_INPUT_VALIDATION-------------------------------
 */
 
 /*
