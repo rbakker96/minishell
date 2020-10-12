@@ -6,7 +6,11 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/01 15:55:06 by roybakker     #+#    #+#                 */
+<<<<<<< HEAD
 /*   Updated: 2020/10/12 16:32:23 by rbakker       ########   odam.nl         */
+=======
+/*   Updated: 2020/10/12 16:34:31 by qli           ########   odam.nl         */
+>>>>>>> 9028a02d17ee098e1c07fe8ce6047a639154d6ba
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,9 +136,9 @@ int		check_args_num(t_data *data, int cmd, int tkn);
 /*
 ** run_executable.c
 */
-void	execute_executable(t_data *data, int cmd, int *tkn, int needed_tokens);
+void	execute_executable(t_data *data, int cmd, int *tkn);
 void	execute_absolute_executable(t_data *data, int cmd, int *tkn, int x);
-int		fork_executable(t_data *data, int cmd, int tkn);
+int		fork_executable(t_data *data, int cmd);
 
 /*
 **--SUB_FOLDER----------------------PIPE----------------------------------------
@@ -150,23 +154,22 @@ void	malloc_pipe_fd(t_data *data, int cmd);
 /*
 ** create_pipe_fd.c
 */
-void	set_child_pipe_fds(t_data *data, int cmd, int tkn);
-int		check_token_pipe_pos(t_data *data, int cmd, int tkn);
-void	set_parent_pipe_fds(t_data *data, int cmd, int tkn);
+void	set_child_pipe_fds(t_data *data);
+void	set_parent_pipe_fds(t_data *data);
 
 /*
 ** child_pipe_fd_setup.c
 */
-void	child_first_pipe_setup(t_data *data, int token_pos);
-void	child_between_pipe_setup(t_data *data, int token_pos);
-void	child_last_pipe_setup(t_data *data, int token_pos);
+void	child_first_pipe_setup(t_data *data, int pipe_pos);
+void	child_between_pipe_setup(t_data *data, int pipe_pos);
+void	child_last_pipe_setup(t_data *data, int pipe_pos);
 
 /*
 ** parent_pipe_fd_setup.c
 */
-void	parent_first_pipe_setup(t_data *data, int token_pos);
-void	parent_last_pipe_setup(t_data *data, int token_pos);
-void	parent_between_pipe_setup(t_data *data, int token_pos);
+void	parent_first_pipe_setup(t_data *data, int pipe_pos);
+void	parent_last_pipe_setup(t_data *data, int pipe_pos);
+void	parent_between_pipe_setup(t_data *data, int pipe_pos);
 
 /*
 **--SUB_FOLDER-------------------SHELL_EXPANSIONS-------------------------------
