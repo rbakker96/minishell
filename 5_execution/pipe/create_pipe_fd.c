@@ -6,7 +6,7 @@
 /*   By: qli <qli@student.codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/09 15:02:51 by qli           #+#    #+#                 */
-/*   Updated: 2020/10/09 17:46:16 by qli           ########   odam.nl         */
+/*   Updated: 2020/10/12 14:43:31 by qli           ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	calculate_pipe_num(t_data *data, int cmd)
 	value = data->commands[cmd]->tokens[i];
 	while (i < data->commands[cmd]->token_amount)
 	{
-		if (ft_strncmp("|", value, ft_strlen(value)) == 0)
+		if (value[0] != '\0' && ft_strncmp("|", value, ft_strlen(value)) == 0)
 		{
 			data->pipe_num++;
 		}

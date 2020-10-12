@@ -6,12 +6,13 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/04 15:02:22 by qli           #+#    #+#                 */
-/*   Updated: 2020/10/12 13:45:14 by rbakker       ########   odam.nl         */
+/*   Updated: 2020/10/12 15:01:56 by qli           ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
+//update token position in each execute function
 void	execute_command(t_data *data, int cmd, int *tkn, char *value)
 {
 	printf("current token is [%s]\n", data->commands[cmd]->tokens[*tkn]);
@@ -38,7 +39,8 @@ void		initialise_struct_elements(t_data *data, int cmd)
 {
 	data->args = 0;
 	data->commands[cmd]->error_flag = 0;
-	data->pipe_num = 0; //reset pipe number for each command
+	data->pipe_num = 0;
+	data->pos_num = 0;
 }
 
 void		execution_loop(t_data *data, int cmd, int tkn)
@@ -48,20 +50,20 @@ void		execution_loop(t_data *data, int cmd, int tkn)
 	value = data->commands[cmd]->tokens[tkn];
 	while (cmd < data->command_amount)
 	{
-		tkn = 0;
 		initialise_struct_elements(data, cmd);
 		shell_expansions(data, cmd, tkn);
+		create_pipe_fd(data, cmd);
 		while (tkn < data->commands[cmd]->token_amount)
 		{
 			if (redirections(data, cmd, tkn) != -1)
 			{
-				update_arguments_list(data, cmd, tkn, 0);
-				//create_pipe_fd(data, cmd);
+				update_token_list(data, cmd, tkn, 0);
 				tkn = 0;
 				value = data->commands[cmd]->tokens[tkn];
-				execute_command(data, cmd, &tkn, value);
+				if (value != NULL)
+					execute_command(data, cmd, &tkn, value);
+				data->pos_num++;
 			}
-			//maybe update token to go past pipe
 		}
 		cmd++;
 	}

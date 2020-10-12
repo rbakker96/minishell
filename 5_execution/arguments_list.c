@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/07 11:15:58 by rbakker       #+#    #+#                 */
-/*   Updated: 2020/10/12 13:44:42 by rbakker       ########   odam.nl         */
+/*   Updated: 2020/10/12 14:19:25 by qli           ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	print_array(char **array)
 	}
 }
 
-void	update_arguments_list(t_data *data, int cmd, int tkn, int x)
+void	update_token_list(t_data *data, int cmd, int tkn, int x)
 {
 	int		usable_tokens;
 	char	**tokens;

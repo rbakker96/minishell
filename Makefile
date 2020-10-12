@@ -6,11 +6,7 @@
 #    By: rbakker <rbakker@student.42.fr>              +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/02/05 14:55:09 by rbakker       #+#    #+#                  #
-<<<<<<< HEAD
-#    Updated: 2020/10/12 14:01:22 by qli           ########   odam.nl          #
-=======
-#    Updated: 2020/10/12 13:22:46 by rbakker       ########   odam.nl          #
->>>>>>> 5b4bc518d4f7d1f43ef378889db4b41cd2d95ce3
+#    Updated: 2020/10/12 14:04:01 by qli           ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
