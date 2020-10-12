@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/24 20:12:02 by qli           #+#    #+#                 */
-/*   Updated: 2020/10/12 13:37:31 by qli           ########   odam.nl         */
+/*   Updated: 2020/10/12 13:40:00 by qli           ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,13 +61,13 @@ int		fork_executable(t_data *data, int cmd, int tkn)
 		fork_error(data, cmd);
 	if (pid == 0)
 	{
-		// dup2(data->fd[0], 0);
-		// dup2(data->fd[1], 1);
-		set_child_pipe_fds(data, cmd, token);
+		dup2(data->fd[0], 0);
+		dup2(data->fd[1], 1);
+		//set_child_pipe_fds(data, cmd, tkn);
 		execve(data->args[0], data->args, data->envp);
 		exit(1);
 	}
-	set_parent_pipe_fds(data, cmd, token);
+	//set_parent_pipe_fds(data, cmd, tkn);
 	wait(&status);
 	return (status);
 }
