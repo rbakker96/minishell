@@ -6,32 +6,47 @@
 /*   By: qli <qli@student.codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/09 21:21:36 by qli           #+#    #+#                 */
-/*   Updated: 2020/10/12 16:28:46 by qli           ########   odam.nl         */
+/*   Updated: 2020/10/12 18:00:55 by qli           ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-void	parent_first_pipe_setup(t_data *data, int pipe_pos)
+void	parent_first_pipe_setup(t_data *data)
 {
-	// fd of out file always change, even though the fd already exist
+	int pos;
+
+	pos = data->pipe_pos;
 	if (data->pipe_num > 0)
 	{
-		close(data->pipefd[pipe_pos][0]);
-		close(data->pipefd[pipe_pos][1]);
+		printf("PARENT - 1\n");
+		printf("read end is %d\n", data->pipefd[pos][0]);
+		printf("write end is %d\n", data->pipefd[pos][1]);
+		close(data->pipefd[pos][0]);
+		close(data->pipefd[pos][1]);
 	}
 }
 
-void	parent_between_pipe_setup(t_data *data, int pipe_pos)
+void	parent_last_pipe_setup(t_data *data)
 {
-	close(data->pipefd[pipe_pos - 1][0]);
-	close(data->pipefd[pipe_pos - 1][1]);
-	close(data->pipefd[pipe_pos][0]);
-	close(data->pipefd[pipe_pos][1]);	
+	int pos;
+
+	pos = data->pipe_pos;
+	printf("PARENT - 3\n");
+	printf("read end is %d\n", data->pipefd[pos - 1][0]);
+	printf("write end is %d\n", data->pipefd[pos - 1][1]);
+	close(data->pipefd[pos - 1][0]);
+	close(data->pipefd[pos - 1][1]);	
 }
 
-void	parent_last_pipe_setup(t_data *data, int pipe_pos)
+void	parent_between_pipe_setup(t_data *data)
 {
-	close(data->pipefd[pipe_pos - 1][0]);
-	close(data->pipefd[pipe_pos - 1][1]);	
+	int pos;
+
+	pos = data->pipe_pos;
+	printf("PARENT - 2\n");
+	close(data->pipefd[pos - 1][0]);
+	close(data->pipefd[pos - 1][1]);
+	close(data->pipefd[pos][0]);
+	close(data->pipefd[pos][1]);	
 }

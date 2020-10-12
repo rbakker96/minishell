@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/24 20:12:02 by qli           #+#    #+#                 */
-/*   Updated: 2020/10/12 16:34:31 by qli           ########   odam.nl         */
+/*   Updated: 2020/10/12 18:01:26 by qli           ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,8 @@ void	execute_absolute_executable(t_data *data, int cmd, int *tkn, int x)
 			free(path_token);
 			malloc_error(data, cmd, path);
 		}
-		printf("data->pipe_pos is %d\n", data->pipe_pos);
+		// printf("data->pipe_pos is %d\n", data->pipe_pos);
+		// printf("data->pipe_num is %d\n", data->pipe_num);
 		if (!fork_executable(data, cmd))
 			break ;
 		x++;
@@ -65,11 +66,13 @@ int		fork_executable(t_data *data, int cmd)
 		fork_error(data, cmd);
 	else if (pid == 0)
 	{
-		//set_child_pipe_fds(data);
+		dup2(data->fd[0], 0);
+		dup2(data->fd[1], 1);
+		// set_child_pipe_fds(data);
 		execve(data->args[0], data->args, data->envp);
-		exit(1);
+		exit (1);
 	}
-	//set_parent_pipe_fds(data);
+	set_parent_pipe_fds(data);
 	wait(&status);
 	return (status);
 }
