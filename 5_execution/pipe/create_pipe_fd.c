@@ -6,7 +6,7 @@
 /*   By: qli <qli@student.codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/09 15:02:51 by qli           #+#    #+#                 */
-/*   Updated: 2020/10/12 14:43:31 by qli           ########   odam.nl         */
+/*   Updated: 2020/10/13 13:28:07 by qli           ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,8 @@ void	malloc_pipe_fd(t_data *data, int cmd)
 		// add error management
 		if (pipe_ret == -1)
 			fork_error(data, cmd);
-		printf("data->pipefd[i][0] is %d\n", data->pipefd[i][0]);
-		printf("data->pipefd[i][1] is %d\n", data->pipefd[i][1]);
+		printf("data->pipefd[0][0] is %d\n", data->pipefd[0][0]);
+		printf("data->pipefd[0][1] is %d\n", data->pipefd[0][1]);
 		i++;
 	}
 	data->pipefd[i] = NULL;

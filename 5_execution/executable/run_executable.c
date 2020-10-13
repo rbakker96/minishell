@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/24 20:12:02 by qli           #+#    #+#                 */
-/*   Updated: 2020/10/12 18:04:30 by qli           ########   odam.nl         */
+/*   Updated: 2020/10/13 17:25:52 by qli           ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 void	execute_executable(t_data *data, int cmd, int *tkn)
 {
 	int	needed_tokens;
-	int errno;
 
 	needed_tokens = calculate_needed_tokens(data, cmd, (*tkn));
 	create_args(data, cmd, (*tkn));
@@ -32,10 +31,15 @@ void	execute_executable(t_data *data, int cmd, int *tkn)
 
 void	execute_absolute_executable(t_data *data, int cmd, int *tkn, int x)
 {
+	struct	stat stats;
+
 	while (create_path_array(data, cmd, (*tkn), x) != -1)
 	{
-		if (!fork_executable(data, cmd))
+		if (stat(data->args[0], &stats) == 0)
+		{
+			fork_executable(data, cmd);
 			return ;
+		}
 		x++;
 	}
 	run_executable_error(data, data->commands[cmd]->tokens[(*tkn)]);
@@ -49,15 +53,15 @@ int		fork_executable(t_data *data, int cmd)
 	pid = fork();
 	if (pid == -1)
 		fork_error(data, cmd);
-	else if (pid == 0)
+	if (pid == 0)
 	{
-		dup2(data->fd[0], 0);
-		dup2(data->fd[1], 1);
-		// set_child_pipe_fds(data);
+		set_child_pipe_fds(data);
 		execve(data->args[0], data->args, data->envp);
 		exit (1);
 	}
-	set_parent_pipe_fds(data);
+	//set_parent_pipe_fds(data);
+	close(data->pipefd[0][0]);
+	close(data->pipefd[0][1]);
 	wait(&status);
 	return (status);
 }
