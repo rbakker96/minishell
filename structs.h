@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/01 14:27:26 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/12 17:36:55 by rbakker       ########   odam.nl         */
+/*   Updated: 2020/10/13 16:44:21 by rbakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,12 +35,20 @@ typedef enum			e_defenitions
 /*
 **---------------------------------MINISHELL------------------------------------
 */
+
+typedef struct			s_pipe
+{
+	int					fd[2];
+}						t_pipe;
+
 typedef struct			s_command_table
 {
 	char				*command;
 	char				**tokens;
 	int					token_amount;
-	int					error_flag;
+	int					**fd;
+	int					pipe_amount;
+	int					pipe_index;
 }						t_command_table;
 
 typedef struct			s_data

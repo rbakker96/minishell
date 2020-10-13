@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/01 15:55:06 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/12 18:04:30 by qli           ########   odam.nl         */
+/*   Updated: 2020/10/13 15:56:53 by rbakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -214,13 +214,13 @@ int		count_usable_tokens(t_data *data, int cmd, int tkn);
 ** cd.c
 */
 void	execute_cd(t_data *data, int cmd, int *tkn, int needed_tokens);
-char	*get_argument(t_data *data, int cmd, int *tkn, int needed_tokens);
-void	go_to_home(t_data *data, int cmd, int *tkn, int needed_tokens);
+void	go_to_home(t_data *data, int cmd, int *tkn);
 
 /*
 ** echo.c
 */
 void	execute_echo(t_data *data, int cmd, int *tkn, int needed_tokens);
+int		newline_option(char *value, int needed_tokens, int *tkn);
 
 /*
 ** env.c
@@ -316,5 +316,13 @@ int		validate_output_redirection(t_data *data, char *charachter);
 int		validate_pipes(t_data *data, char *charachter);
 int		replace_double_pipes(t_data *data);
 void	reduce_input_str(t_data *data, int reduction, int *i);
+
+
+
+
+
+void	initialize_pipes(t_data *data, int cmd);
+int		get_pipes_amount(t_data *data, int cmd);
+void	pipes_forked_proces(t_data *data, int cmd);
 
 #endif

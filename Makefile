@@ -6,7 +6,7 @@
 #    By: rbakker <rbakker@student.42.fr>              +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/02/05 14:55:09 by rbakker       #+#    #+#                  #
-#    Updated: 2020/10/12 14:04:01 by qli           ########   odam.nl          #
+#    Updated: 2020/10/13 15:57:38 by rbakker       ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,6 +43,8 @@ SOURCES			= 	main.c \
 					5_execution/pipe/set_pipe_fd.c \
 					5_execution/pipe/child_pipe_fd_setup.c \
 					5_execution/pipe/parent_pipe_fd_setup.c \
+					5_execution/pipe2/initialize_pipes.c \
+					5_execution/pipe2/pipes_forked_proces.c \
 					6_parse/create_command_table.c \
 					6_parse/commands.c \
 					6_parse/tokens.c \

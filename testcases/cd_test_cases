@@ -33,7 +33,7 @@ cd test > out | cat main.c
 
 ----
 
-Cd with non existing input file and pipe -->
+Cd with non existing input file and pipe --> DOESN'T WORK YET! WAIT FOR PIPE THING
 cd test < out99 | echo hallo
 
 
