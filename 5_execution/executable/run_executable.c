@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/24 20:12:02 by qli           #+#    #+#                 */
-/*   Updated: 2020/10/12 18:04:30 by qli           ########   odam.nl         */
+/*   Updated: 2020/10/13 17:04:04 by rbakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ void	execute_executable(t_data *data, int cmd, int *tkn)
 	else
 		execute_absolute_executable(data, cmd, tkn, 0);
 	(*tkn) = needed_tokens;
+//	data->commands[cmd]->pipe_index++;
 	update_token_position(data, cmd, tkn);
 }
 
@@ -53,11 +54,12 @@ int		fork_executable(t_data *data, int cmd)
 	{
 		dup2(data->fd[0], 0);
 		dup2(data->fd[1], 1);
-		// set_child_pipe_fds(data);
+		pipes_forked_proces(data, cmd);
+//		set_child_pipe_fds(data);
 		execve(data->args[0], data->args, data->envp);
-		exit (1);
+		exit(1);
 	}
-	set_parent_pipe_fds(data);
 	wait(&status);
+	printf("status = %d\n", status);
 	return (status);
 }

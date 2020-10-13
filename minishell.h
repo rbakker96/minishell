@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/01 15:55:06 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/13 12:02:33 by rbakker       ########   odam.nl         */
+/*   Updated: 2020/10/13 15:56:53 by rbakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -316,5 +316,13 @@ int		validate_output_redirection(t_data *data, char *charachter);
 int		validate_pipes(t_data *data, char *charachter);
 int		replace_double_pipes(t_data *data);
 void	reduce_input_str(t_data *data, int reduction, int *i);
+
+
+
+
+
+void	initialize_pipes(t_data *data, int cmd);
+int		get_pipes_amount(t_data *data, int cmd);
+void	pipes_forked_proces(t_data *data, int cmd);
 
 #endif

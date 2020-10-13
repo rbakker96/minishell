@@ -6,7 +6,7 @@
 /*   By: qli <qli@student.codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/09 21:04:03 by qli           #+#    #+#                 */
-/*   Updated: 2020/10/12 17:54:16 by qli           ########   odam.nl         */
+/*   Updated: 2020/10/13 15:17:00 by rbakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	child_first_pipe_setup(t_data *data)
 	{
 		printf("CHILD - 1\n");
 		dup2(data->fd[0], 0);
-		dup2(data->fd[1], 1);		
+		dup2(data->fd[1], 1);
 	}
 	else if (data->pipe_num > 0 && data->fd[1] == 1)
 	{
@@ -39,7 +39,7 @@ void	child_first_pipe_setup(t_data *data)
 		dup2(data->fd[0], 0);
 		dup2(data->fd[1], 1);
 		close(data->pipefd[pos][0]);
-		close(data->pipefd[pos][1]);	
+		close(data->pipefd[pos][1]);
 	}
 }
 
@@ -90,7 +90,7 @@ void	child_between_pipe_setup(t_data *data)
 		dup2(data->fd[0], 0);
 		close(data->pipefd[pos][0]);
 		dup2(data->pipefd[pos][1], 1);
-		close(data->pipefd[pos][1]);		
+		close(data->pipefd[pos][1]);
 	}
 	else if (data->fd[0] == 0 && data->fd[1] != 1)
 	{
@@ -100,7 +100,7 @@ void	child_between_pipe_setup(t_data *data)
 		close(data->pipefd[pos - 1][0]);
 		close(data->pipefd[pos][0]);
 		close(data->pipefd[pos][1]);
-		dup2(data->fd[1], 1);	
+		dup2(data->fd[1], 1);
 	}
 	else if (data->fd[0] != 0 && data->fd[1] != 1)
 	{
@@ -110,6 +110,6 @@ void	child_between_pipe_setup(t_data *data)
 		close(data->pipefd[pos][0]);
 		close(data->pipefd[pos][1]);
 		dup2(data->fd[0], 0);
-		dup2(data->fd[1], 1);	
+		dup2(data->fd[1], 1);
 	}
 }
