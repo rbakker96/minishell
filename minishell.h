@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/01 15:55:06 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/12 17:51:01 by rbakker       ########   odam.nl         */
+/*   Updated: 2020/10/13 11:17:07 by rbakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -214,13 +214,13 @@ int		count_usable_tokens(t_data *data, int cmd, int tkn);
 ** cd.c
 */
 void	execute_cd(t_data *data, int cmd, int *tkn, int needed_tokens);
-char	*get_argument(t_data *data, int cmd, int *tkn, int needed_tokens);
-void	go_to_home(t_data *data, int cmd, int *tkn, int needed_tokens);
+void	go_to_home(t_data *data, int cmd, int *tkn);
 
 /*
 ** echo.c
 */
 void	execute_echo(t_data *data, int cmd, int *tkn, int needed_tokens);
+int		newline_option(char *value, int needed_tokens, int *tkn);
 
 /*
 ** env.c

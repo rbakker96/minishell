@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/09 14:50:20 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/12 11:42:30 by rbakker       ########   odam.nl         */
+/*   Updated: 2020/10/13 11:59:11 by rbakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,62 +16,38 @@ void	execute_cd(t_data *data, int cmd, int *tkn, int needed_tokens)
 {
 	char	*value;
 
+	needed_tokens = calculate_needed_tokens(data, cmd, (*tkn));
 	(*tkn)++;
-	value = get_argument(data, cmd, tkn, needed_tokens);
-	if (value == NULL)
-		return ;
-	else if (value[0] == '|')
-		(*tkn) = needed_tokens + 1;
-	else if (ft_strncmp("~", value, ft_strlen(value)) == 0)
-		go_to_home(data, cmd, tkn, needed_tokens);
+	value = data->commands[cmd]->tokens[(*tkn)];
+	if (data->commands[cmd]->tokens[needed_tokens] != NULL &&
+		data->commands[cmd]->tokens[needed_tokens][0] == '|')
+		(*tkn) = needed_tokens;
+	else if (needed_tokens > 2)
+		print(data, 2, "minishell : cd : too many arguments\n", 0);
+	else if (needed_tokens == 1 || compare_command("~", value, 1) == 0)
+		go_to_home(data, cmd, tkn);
 	else if (chdir(value) == -1)
 		change_directory_error(data, value, cmd, tkn);
-	else
-		(*tkn) = needed_tokens;
+	(*tkn) = needed_tokens;
+	update_token_position(data, cmd, tkn);
 }
 
-char	*get_argument(t_data *data, int cmd, int *tkn, int needed_tokens)
-{
-	int		arguments;
-	char	*value;
-
-	arguments = 0;
-	value = data->commands[cmd]->tokens[needed_tokens];
-	if (value && ft_strncmp("|", value, 1) == 0)
-		return ("|");
-	while ((*tkn) < needed_tokens)
-	{
-		if (redirection(data->commands[cmd]->tokens[(*tkn)]) > 0)
-			(*tkn) += 2;
-		else
-		{
-			value = data->commands[cmd]->tokens[(*tkn)];
-			arguments++;
-			(*tkn)++;
-		}
-	}
-	if (arguments > 1)
-	{
-		print(data, 2, "minishell : cd : too many arguments\n", 0);
-		(*tkn) = data->commands[cmd]->token_amount;
-		return (0);
-	}
-	return (value);
-}
-
-void	go_to_home(t_data *data, int cmd, int *tkn, int needed_tokens)
+void	go_to_home(t_data *data, int cmd, int *tkn)
 {
 	char	*home_path;
 	int		x;
 
 	x = 0;
+	printf("test\n");
 	while (data->envp[x] != NULL)
 	{
 		if (ft_strncmp("HOME", data->envp[x], 4) == 0)
+		{
 			home_path = data->envp[x] + 5;
+			break ;
+		}
 		x++;
 	}
 	if (chdir(home_path) == -1)
 		change_directory_error(data, home_path, cmd, tkn);
-	(*tkn) = needed_tokens;
 }
