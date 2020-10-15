@@ -6,11 +6,11 @@
 /*   By: roybakker <roybakker@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/09 14:50:36 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/12 11:42:15 by rbakker       ########   odam.nl         */
+/*   Updated: 2020/10/15 17:47:57 by rbakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "../../minishell.h"
 
 void	execute_export(t_data *data, int cmd, int *tkn)
 {

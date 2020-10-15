@@ -6,11 +6,11 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/23 14:15:21 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/13 11:46:17 by rbakker       ########   odam.nl         */
+/*   Updated: 2020/10/15 17:47:52 by rbakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "../../minishell.h"
 
 int		redirections(t_data *data, int cmd, int tkn)
 {

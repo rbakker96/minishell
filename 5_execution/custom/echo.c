@@ -6,11 +6,11 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/09 14:49:34 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/13 11:00:56 by rbakker       ########   odam.nl         */
+/*   Updated: 2020/10/15 17:48:01 by rbakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "../../minishell.h"
 
 void	execute_echo(t_data *data, int cmd, int *tkn, int needed_tokens)
 {

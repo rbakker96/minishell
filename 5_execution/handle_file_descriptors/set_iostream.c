@@ -1,20 +1,13 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   exit.c                                             :+:    :+:            */
+/*   set_iostream.c                                     :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: roybakker <roybakker@student.codam.nl>       +#+                     */
+/*   By: rbakker <rbakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/09/09 14:51:32 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/15 17:47:58 by rbakker       ########   odam.nl         */
+/*   Created: 2020/10/15 17:46:32 by rbakker       #+#    #+#                 */
+/*   Updated: 2020/10/15 17:47:46 by rbakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
-
-void	execute_exit(t_data *data, int cmd, int *tkn)
-{
-	if (data && cmd && (*tkn))
-		print(data, 1, ".", 0);
-	return ;
-}
