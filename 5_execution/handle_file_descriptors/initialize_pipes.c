@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/13 14:29:01 by rbakker       #+#    #+#                 */
-/*   Updated: 2020/10/13 16:50:58 by rbakker       ########   odam.nl         */
+/*   Updated: 2020/10/15 17:34:20 by rbakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,44 +14,40 @@
 
 void	initialize_pipes(t_data *data, int cmd)
 {
-	int		pipe_amount;
+	int		pipe_nb;
 	int		i;
 
 	i = 0;
-	pipe_amount = get_pipes_amount(data, cmd);
-	printf("pipe amount = %d\n", pipe_amount);
-	data->commands[cmd]->fd = (int **)malloc(sizeof(int *) * (pipe_amount + 1));
-	if (data->commands[cmd]->fd == NULL)
+	pipe_nb = get_pipes_amount(data, cmd, 0);
+	printf("pipe amount = %d\n", pipe_nb);
+	data->commands[cmd]->pipes = (int **)malloc(sizeof(int *) * (pipe_nb + 1));
+	if (data->commands[cmd]->pipes == NULL)
 		malloc_error(data, data->command_amount, 0);
-	while (i < pipe_amount)
+	while (i < pipe_nb)
 	{
-		data->commands[cmd]->fd[i] = (int *)malloc(sizeof(int) * 2);
-		if (data->commands[cmd]->fd == NULL)
+		data->commands[cmd]->pipes[i] = (int *)malloc(sizeof(int) * 2);
+		if (data->commands[cmd]->pipes == NULL)
 			malloc_error(data, data->command_amount, 0);
-		if (pipe(data->commands[cmd]->fd[i]) == -1)
+		if (pipe(data->commands[cmd]->pipes[i]) == -1)
 			printf("pipe error\n"); // change later
-		printf("\npipe fd [%d][0] = %d\n", i, data->commands[cmd]->fd[i][0]);
-		printf("pipe fd [%d][1] = %d\n\n", i, data->commands[cmd]->fd[i][1]);
 		i++;
 	}
-	data->commands[cmd]->fd[i] = NULL;
-	data->commands[cmd]->pipe_index = 0;
+	data->commands[cmd]->pipes[i] = NULL;
+	data->commands[cmd]->pipe_pos = 0;
 }
 
-int		get_pipes_amount(t_data *data, int cmd)
+int		get_pipes_amount(t_data *data, int cmd, int i)
 {
 	char	*value;
-	int		i;
 
-	i = 0;
 	value = data->commands[cmd]->tokens[i];
-	data->commands[cmd]->pipe_amount = 0;
+	data->commands[cmd]->pipe_nb = 0;
 	while (i < data->commands[cmd]->token_amount)
 	{
 		if (value[0] != '\0' && ft_strncmp("|", value, ft_strlen(value)) == 0)
-			data->commands[cmd]->pipe_amount++;
+			data->commands[cmd]->pipe_nb++;
 		i++;
 		value = data->commands[cmd]->tokens[i];
 	}
-	return (data->commands[cmd]->pipe_amount);
+	return (data->commands[cmd]->pipe_nb);
 }

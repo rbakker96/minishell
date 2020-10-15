@@ -6,7 +6,7 @@
 #    By: rbakker <rbakker@student.42.fr>              +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/02/05 14:55:09 by rbakker       #+#    #+#                  #
-#    Updated: 2020/10/13 15:57:38 by rbakker       ########   odam.nl          #
+#    Updated: 2020/10/15 17:22:31 by rbakker       ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,27 +24,9 @@ SOURCES			= 	main.c \
 					3_error_management/memory_error.c \
 					3_error_management/validation_error.c \
 					4_memory_management/free_struct.c \
-					5_execution/cd.c \
-					5_execution/echo.c \
-					5_execution/executable/create_arguments.c \
-					5_execution/executable/run_executable.c \
-					5_execution/shell_expansions/expand_functions.c \
-					5_execution/shell_expansions/len_calculations.c \
-					5_execution/shell_expansions/shell_expansions.c \
-					5_execution/arguments_list.c \
-					5_execution/redirections.c \
-					5_execution/env.c \
-					5_execution/exit.c \
-					5_execution/export.c \
-					5_execution/unset.c \
-					5_execution/execute_loop.c \
-					5_execution/pwd.c \
-					5_execution/pipe/create_pipe_fd.c \
-					5_execution/pipe/set_pipe_fd.c \
-					5_execution/pipe/child_pipe_fd_setup.c \
-					5_execution/pipe/parent_pipe_fd_setup.c \
-					5_execution/pipe2/initialize_pipes.c \
-					5_execution/pipe2/pipes_forked_proces.c \
+
+
+
 					6_parse/create_command_table.c \
 					6_parse/commands.c \
 					6_parse/tokens.c \

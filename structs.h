@@ -6,12 +6,16 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/01 14:27:26 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/13 16:44:21 by rbakker       ########   odam.nl         */
+/*   Updated: 2020/10/15 17:31:09 by rbakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCTS_H
 # define STRUCTS_H
+# define STDIN 0
+# define READ 0
+# define STDOUT 1
+# define WRITE 1
 
 /*
 **--------------------------------GENERAL---------------------------------------
@@ -36,18 +40,13 @@ typedef enum			e_defenitions
 **---------------------------------MINISHELL------------------------------------
 */
 
-typedef struct			s_pipe
-{
-	int					fd[2];
-}						t_pipe;
-
 typedef struct			s_command_table
 {
 	char				*command;
 	char				**tokens;
 	int					token_amount;
-	int					**fd;
-	int					pipe_amount;
+	int					**pipes;
+	int					pipe_nb;
 	int					pipe_index;
 }						t_command_table;
 
@@ -57,9 +56,6 @@ typedef struct			s_data
 	char				*current_token;
 	t_command_table		**commands;
 	int					fd[2];
-	int					**pipefd;
-	int					pipe_num;
-	int					pipe_pos;
 	char				**envp;
 	char				**args;
 	int					command_amount;

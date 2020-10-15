@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/01 15:55:06 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/13 15:56:53 by rbakker       ########   odam.nl         */
+/*   Updated: 2020/10/15 17:43:34 by rbakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,7 +123,7 @@ void	free_array(char **array);
 */
 
 /*
-**--SUB_FOLDER---------------------EXECUTABLE-----------------------------------
+**--SUB_FOLDER---------------------BUILD_IN-----------------------------------
 */
 
 /*
@@ -140,35 +140,64 @@ void	execute_absolute_executable(t_data *data, int cmd, int *tkn, int x);
 int		fork_executable(t_data *data, int cmd);
 
 /*
-**--SUB_FOLDER----------------------PIPE----------------------------------------
+**--SUB_FOLDER-----------------------CUSTOM-------------------------------------
 */
 
 /*
-** create_pipe_fd.c
+** cd.c
 */
-void	create_pipe_fd(t_data *data, int cmd);
-void	calculate_pipe_num(t_data *data, int cmd);
-void	malloc_pipe_fd(t_data *data, int cmd);
+void	execute_cd(t_data *data, int cmd, int *tkn, int needed_tokens);
+void	go_to_home(t_data *data, int cmd, int *tkn);
 
 /*
-** create_pipe_fd.c
+** echo.c
 */
-void	set_child_pipe_fds(t_data *data);
-void	set_parent_pipe_fds(t_data *data);
+void	execute_echo(t_data *data, int cmd, int *tkn, int needed_tokens);
+int		newline_option(char *value, int needed_tokens, int *tkn);
 
 /*
-** child_pipe_fd_setup.c
+** env.c
 */
-void	child_first_pipe_setup(t_data *data);
-void	child_between_pipe_setup(t_data *data);
-void	child_last_pipe_setup(t_data *data);
+void	execute_env(t_data *data, int *tkn);
 
 /*
-** parent_pipe_fd_setup.c
+** exit.c
 */
-void	parent_first_pipe_setup(t_data *data);
-void	parent_last_pipe_setup(t_data *data);
-void	parent_between_pipe_setup(t_data *data);
+void	execute_exit(t_data *data, int cmd, int *tkn);
+
+/*
+** export.c
+*/
+void	execute_export(t_data *data, int cmd, int *tkn);
+
+/*
+** pwd.c
+*/
+void	execute_pwd(t_data *data, int cmd, int *tkn, int needed_tokens);
+
+/*
+** unset.c
+*/
+void	execute_unset(t_data *data, int cmd, int *tkn);
+
+
+/*
+**--SUB_FOLDER---------------HANDLE_FILE_DESCRIPTORS----------------------------
+*/
+
+/*
+** redirections.c
+*/
+int		redirections(t_data *data, int cmd, int tkn);
+int		append_file(t_data *data, int cmd, int *tkn, int *ret);
+int		overwrite_file(t_data *data, int cmd, int *tkn, int *ret);
+int		input_file(t_data *data, int cmd, int *tkn, int *ret);
+
+/*
+** initialize_pipes.c
+*/
+void	initialize_pipes(t_data *data, int cmd);
+int		get_pipes_amount(t_data *data, int cmd, int i);
 
 /*
 **--SUB_FOLDER-------------------SHELL_EXPANSIONS-------------------------------
@@ -194,12 +223,12 @@ int		env_variable_len(t_data *data, char *token, int *i, int len);
 /*
 ** shell_expansions.c
 */
-void	shell_expansions(t_data *data, int i, int tkn);
+void	preform_shell_expansions(t_data *data, int i, int tkn);
 int		expansion_len(t_data *data, int i, int len);
 void	expand_token(t_data *data, char **new_token, int i, int x);
 
 /*
-** ------------------------------------
+**-----------------------
 */
 
 /*
@@ -211,55 +240,10 @@ int		save_list_element(char *current_token, char **saved_token, int *tkn,
 int		count_usable_tokens(t_data *data, int cmd, int tkn);
 
 /*
-** cd.c
-*/
-void	execute_cd(t_data *data, int cmd, int *tkn, int needed_tokens);
-void	go_to_home(t_data *data, int cmd, int *tkn);
-
-/*
-** echo.c
-*/
-void	execute_echo(t_data *data, int cmd, int *tkn, int needed_tokens);
-int		newline_option(char *value, int needed_tokens, int *tkn);
-
-/*
-** env.c
-*/
-void	execute_env(t_data *data, int *tkn);
-
-/*
 ** execution_loop.c
 */
 void	execution_loop(t_data *data, int cmd, int tkn);
 void	execute_command(t_data *data, int cmd, int *tkn, char *value);
-
-/*
-** exit.c
-*/
-void	execute_exit(t_data *data, int cmd, int *tkn);
-
-/*
-** export.c
-*/
-void	execute_export(t_data *data, int cmd, int *tkn);
-
-/*
-** pwd.c
-*/
-void	execute_pwd(t_data *data, int cmd, int *tkn, int needed_tokens);
-
-/*
-** redirections.c
-*/
-int		redirections(t_data *data, int cmd, int tkn);
-int		append_file(t_data *data, int cmd, int *tkn, int *ret);
-int		overwrite_file(t_data *data, int cmd, int *tkn, int *ret);
-int		input_file(t_data *data, int cmd, int *tkn, int *ret);
-
-/*
-** unset.c
-*/
-void	execute_unset(t_data *data, int cmd, int *tkn);
 
 /*
 **--FOLDER--------------------------6_PARSE-------------------------------------
@@ -316,13 +300,5 @@ int		validate_output_redirection(t_data *data, char *charachter);
 int		validate_pipes(t_data *data, char *charachter);
 int		replace_double_pipes(t_data *data);
 void	reduce_input_str(t_data *data, int reduction, int *i);
-
-
-
-
-
-void	initialize_pipes(t_data *data, int cmd);
-int		get_pipes_amount(t_data *data, int cmd);
-void	pipes_forked_proces(t_data *data, int cmd);
 
 #endif

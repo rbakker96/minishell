@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/12 16:36:24 by rbakker       #+#    #+#                 */
-/*   Updated: 2020/10/15 16:59:33 by qli           ########   odam.nl         */
+/*   Updated: 2020/10/15 17:28:38 by rbakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,6 @@ void	execute_command(t_data *data, int cmd, int *tkn, char *value)
 		execute_executable(data, cmd, tkn);
 }
 
-void		initialise_struct_elements(t_data *data)
-{
-	data->args = 0;
-	data->pipe_num = 0;
-	data->pipe_pos = 0;
-}
 
 void		execution_loop(t_data *data, int cmd, int tkn)
 {
@@ -47,10 +41,8 @@ void		execution_loop(t_data *data, int cmd, int tkn)
 
 	while (cmd < data->command_amount)
 	{
-		initialise_struct_elements(data);
-		shell_expansions(data, cmd, 0);
-		//create_pipe_fd(data, cmd); - ROY
-		// initialize_pipes(data, cmd); - ROY
+		preform_shell_expansions(data, cmd, 0);
+		initialize_pipes(data, cmd);
 		tkn = 0;
 		while (tkn < data->commands[cmd]->token_amount)
 		{

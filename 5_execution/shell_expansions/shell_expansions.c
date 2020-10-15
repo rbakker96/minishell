@@ -6,13 +6,13 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/05 19:44:06 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/12 11:25:11 by rbakker       ########   odam.nl         */
+/*   Updated: 2020/10/15 17:26:42 by rbakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-void	shell_expansions(t_data *data, int cmd, int tkn)
+void	preform_shell_expansions(t_data *data, int cmd, int tkn)
 {
 	int		len;
 	char	*new_token;

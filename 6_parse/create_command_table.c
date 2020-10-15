@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/02 11:00:03 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/12 16:26:10 by rbakker       ########   odam.nl         */
+/*   Updated: 2020/10/15 17:17:48 by rbakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ int		parse_command(t_data *data, char **envp)
 		return (-1);
 	input_validation(data);
 	create_command_table(data, data->input, 0);
+	data->args = 0;
 	return (0);
 }
 

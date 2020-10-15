@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/08/31 10:42:36 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/12 15:15:56 by rbakker       ########   odam.nl         */
+/*   Updated: 2020/10/15 17:16:46 by rbakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,7 @@ int		main(int argc, char **argv, char **envp)
 	t_data	data;
 
 	if (argc != 1 || !argv)
-	{
-		print(&data, 1, "Only the executable ./minishell is sufficient\n", 0);
 		return (-1);
-	}
 	while (1)
 	{
 		prompt(&data);
