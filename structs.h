@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/01 14:27:26 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/15 17:31:09 by rbakker       ########   odam.nl         */
+/*   Updated: 2020/10/15 17:53:05 by rbakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 
 typedef enum			e_defenitions
 {
+	not_used = -1,
 	space = 0,
 	meta_char = 1,
 	double_quote = 2,
@@ -47,7 +48,7 @@ typedef struct			s_command_table
 	int					token_amount;
 	int					**pipes;
 	int					pipe_nb;
-	int					pipe_index;
+	int					pipe_pos;
 }						t_command_table;
 
 typedef struct			s_data
@@ -55,7 +56,7 @@ typedef struct			s_data
 	char				*input;
 	char				*current_token;
 	t_command_table		**commands;
-	int					fd[2];
+	int					iostream[2];
 	char				**envp;
 	char				**args;
 	int					command_amount;

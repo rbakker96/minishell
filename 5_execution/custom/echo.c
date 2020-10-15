@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/09 14:49:34 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/15 17:48:01 by rbakker       ########   odam.nl         */
+/*   Updated: 2020/10/15 18:07:22 by rbakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ void	execute_echo(t_data *data, int cmd, int *tkn, int needed_tokens)
 	newline = newline_option(value, needed_tokens, tkn);
 	while ((*tkn) < needed_tokens)
 	{
-		print(data, data->fd[1], data->commands[cmd]->tokens[(*tkn)], 0);
+		print(data, data->iostream[1], data->commands[cmd]->tokens[(*tkn)], 0);
 		if ((*tkn) != (needed_tokens - 1))
-			print(data, data->fd[1], " ", 0);
+			print(data, data->iostream[1], " ", 0);
 		(*tkn)++;
 	}
 	if (newline)

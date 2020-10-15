@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/12 16:36:24 by rbakker       #+#    #+#                 */
-/*   Updated: 2020/10/15 17:28:38 by rbakker       ########   odam.nl         */
+/*   Updated: 2020/10/15 18:08:11 by rbakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ void	execute_command(t_data *data, int cmd, int *tkn, char *value)
 		execute_executable(data, cmd, tkn);
 }
 
-
 void		execution_loop(t_data *data, int cmd, int tkn)
 {
 	char	*value;
@@ -46,7 +45,7 @@ void		execution_loop(t_data *data, int cmd, int tkn)
 		tkn = 0;
 		while (tkn < data->commands[cmd]->token_amount)
 		{
-			//set iostream to replace -> redirections(data, cmd, tkn) != -1 - ROY
+			// set iostream to replace -> redirections(data, cmd, tkn) != -1 - ROY
 			// update_token_list(data, cmd, tkn, 0); //remove > < tokens, do not remove non-existing tokens - ROY
 			// data->iostream[READ] / data->iostream[WRITE]
 			tkn = 0;

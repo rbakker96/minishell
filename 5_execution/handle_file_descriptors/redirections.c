@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/23 14:15:21 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/15 17:47:52 by rbakker       ########   odam.nl         */
+/*   Updated: 2020/10/15 18:07:22 by rbakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,19 +18,19 @@ int		redirections(t_data *data, int cmd, int tkn)
 	int		ret;
 
 	ret = 0;
-	data->fd[0] = 0;
-	data->fd[1] = 1;
+	data->iostream[0] = 0;
+	data->iostream[1] = 1;
 	value = data->commands[cmd]->tokens[tkn];
 	while (tkn < data->commands[cmd]->token_amount && ret != -1)
 	{
 		if (value[0] == '\0')
 			return (ret);
 		if (ft_strncmp(">", value, ft_strlen(value)) == 0)
-			data->fd[1] = overwrite_file(data, cmd, &tkn, &ret);
+			data->iostream[1] = overwrite_file(data, cmd, &tkn, &ret);
 		else if (ft_strncmp(">>", value, ft_strlen(value)) == 0)
-			data->fd[1] = append_file(data, cmd, &tkn, &ret);
+			data->iostream[1] = append_file(data, cmd, &tkn, &ret);
 		else if (ft_strncmp("<", value, ft_strlen(value)) == 0)
-			data->fd[0] = input_file(data, cmd, &tkn, &ret);
+			data->iostream[0] = input_file(data, cmd, &tkn, &ret);
 		else if (value[0] == '|')
 			break ;
 		else
