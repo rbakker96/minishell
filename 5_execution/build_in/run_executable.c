@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/24 20:12:02 by qli           #+#    #+#                 */
-/*   Updated: 2020/10/15 18:10:17 by rbakker       ########   odam.nl         */
+/*   Updated: 2020/10/15 19:36:23 by qli           ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,53 +14,39 @@
 
 void	execute_executable(t_data *data, int cmd, int *tkn)
 {
-	int	needed_tokens;
-
-	needed_tokens = calculate_needed_tokens(data, cmd, (*tkn));
-	create_args(data, cmd, (*tkn));
-	if (check_relative_path(data->commands[cmd]->tokens[(*tkn)]) == 1)
-	{
-		if (fork_executable(data, cmd))
-			run_executable_error(data, data->commands[cmd]->tokens[(*tkn)]);
-	}
+	create_args(data, cmd, *tkn); 
+	// LOOK FURTHER: can we free the args before executing the child, if not, as need to move this to earlier stages
+	// apparently execve wipes all the address memory of a child process
+	// but maybe need to free the allocated memory when execve fails
+	if (check_relative_path(data->commands[cmd]->tokens[*tkn]) == 1)
+		run_executable(data, cmd);
+		// if (run_executable(data, cmd)) // QUESTION: what does this mean?
+		// 	run_executable_error(data, data->commands[cmd]->tokens[*tkn]); // this error is probably needed to be captured earlier
 	else
-		execute_absolute_executable(data, cmd, tkn, 0);
-	(*tkn) = needed_tokens;
-	update_token_position(data, cmd, tkn);
+		execute_absolute_executable(data, cmd, tkn);
 }
 
-void	execute_absolute_executable(t_data *data, int cmd, int *tkn, int x)
+void	execute_absolute_executable(t_data *data, int cmd, int *tkn)
 {
-	struct stat stats;
+	struct	stat stats;
+	int		i;
 
-	while (create_path_array(data, cmd, (*tkn), x) != -1)
+	i = 0;
+	while (create_path_array(data, cmd, *tkn, i) != -1)
 	{
 		if (stat(data->args[0], &stats) == 0)
 		{
-			fork_executable(data, cmd);
+			run_executable(data, cmd);
 			return ;
 		}
-		x++;
+		i++;
 	}
-	run_executable_error(data, data->commands[cmd]->tokens[(*tkn)]);
+	// run_executable_error(data, data->commands[cmd]->tokens[*tkn]);  // this error is probably needed to be captured earlier
 }
 
-int		fork_executable(t_data *data, int cmd)
+void		run_executable(t_data *data, int cmd)
 {
-	int pid;
-	int status;
-
-	pid = fork();
-	if (pid == -1)
-		fork_error(data, cmd);
-	if (pid == 0)
-	{
-		dup2(data->iostream[0], 0);
-		dup2(data->iostream[1], 1);
-		execve(data->args[0], data->args, data->envp);
-		exit(1);
-	}
-	wait(&status);
-	printf("status = %d\n", status);
-	return (status);
+	dup2(data->iostream[0], 0);
+	dup2(data->iostream[1], 1);
+	execve(data->args[0], data->args, data->envp);
 }

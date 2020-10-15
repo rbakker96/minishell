@@ -6,12 +6,13 @@
 /*   By: rbakker <rbakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/13 14:29:01 by rbakker       #+#    #+#                 */
-/*   Updated: 2020/10/15 17:34:20 by rbakker       ########   odam.nl         */
+/*   Updated: 2020/10/15 19:16:09 by qli           ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
+// discuss whether we need + 1 for an int array as they don't need to end with NULL
 void	initialize_pipes(t_data *data, int cmd)
 {
 	int		pipe_nb;

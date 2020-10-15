@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/01 15:55:06 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/15 17:43:34 by rbakker       ########   odam.nl         */
+/*   Updated: 2020/10/15 19:26:48 by qli           ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,8 +136,8 @@ int		check_args_num(t_data *data, int cmd, int tkn);
 ** run_executable.c
 */
 void	execute_executable(t_data *data, int cmd, int *tkn);
-void	execute_absolute_executable(t_data *data, int cmd, int *tkn, int x);
-int		fork_executable(t_data *data, int cmd);
+void	execute_absolute_executable(t_data *data, int cmd, int *tkn);
+void	run_executable(t_data *data, int cmd);
 
 /*
 **--SUB_FOLDER-----------------------CUSTOM-------------------------------------
@@ -182,7 +182,7 @@ void	execute_unset(t_data *data, int cmd, int *tkn);
 
 
 /*
-**--SUB_FOLDER---------------HANDLE_FILE_DESCRIPTORS----------------------------
+**--SUB_FOLDER--------------------HANDLE_FDS-------------------------------------
 */
 
 /*
@@ -198,6 +198,13 @@ int		input_file(t_data *data, int cmd, int *tkn, int *ret);
 */
 void	initialize_pipes(t_data *data, int cmd);
 int		get_pipes_amount(t_data *data, int cmd, int i);
+
+/*
+** close_pipe_fds.c
+*/
+void	close_not_used_fds(t_data *data, int cmd);
+void	close_child_used_fds(t_data *data, int cmd);
+
 
 /*
 **--SUB_FOLDER-------------------SHELL_EXPANSIONS-------------------------------
@@ -243,7 +250,7 @@ int		count_usable_tokens(t_data *data, int cmd, int tkn);
 ** execution_loop.c
 */
 void	execution_loop(t_data *data, int cmd, int tkn);
-void	execute_command(t_data *data, int cmd, int *tkn, char *value);
+void	execute_command(t_data *data, int cmd, int *tkn);
 
 /*
 **--FOLDER--------------------------6_PARSE-------------------------------------
