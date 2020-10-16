@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/07 11:15:58 by rbakker       #+#    #+#                 */
-/*   Updated: 2020/10/16 13:52:07 by qli           ########   odam.nl         */
+/*   Updated: 2020/10/16 16:38:23 by rbakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,30 +28,31 @@ void	print_array(char **array)
 	}
 }
 
-void	update_token_list(t_data *data, int cmd, int tkn)
+void	update_token_list(t_data *data, int cmd, int *tkn)
 {
 	int		usable_tokens;
 	char	**tokens;
 	int		i;
 
 	i = 0;
-	usable_tokens = count_usable_tokens(data, cmd, tkn);
+	usable_tokens = count_usable_tokens(data, cmd, (*tkn));
 	printf("usable tokens = %d\n", usable_tokens);
 	tokens = malloc(sizeof(char*) * (usable_tokens + 1));
 	if (tokens == NULL)
 		malloc_error(data, data->commands[cmd]->token_amount, 0);
 	while (i < usable_tokens)
 	{
-		if (check_token_usability(data->commands[cmd]->tokens, tkn) == -1)
-			tkn += 2;
-		else if (save_list_element(data->commands[cmd]->tokens[tkn], &tokens[i],
-				&tkn, &i) == -1)
+		if (check_token_usability(data->commands[cmd]->tokens, (*tkn)) == -1)
+			(*tkn) += 2;
+		else if (save_list_element(data->commands[cmd]->tokens[(*tkn)],
+											&tokens[i], tkn, &i) == -1)
 			malloc_error(data, data->commands[cmd]->token_amount, tokens);
 	}
 	tokens[i] = 0;
 	free_array(data->commands[cmd]->tokens);
 	data->commands[cmd]->tokens = tokens;
 	data->commands[cmd]->token_amount = usable_tokens;
+	(*tkn) = 0;
 	print_array(data->commands[cmd]->tokens); // remove later
 }
 

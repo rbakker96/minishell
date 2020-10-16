@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/01 15:55:06 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/16 14:19:33 by rbakker       ########   odam.nl         */
+/*   Updated: 2020/10/16 18:01:58 by rbakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # include <sys/stat.h>
 # include <errno.h>      /* for 'ENOENT' and 'ENOMEM' */
 # include <limits.h>
+# include <dirent.h>
 # include <string.h> /* for strerror */
 # include <sys/stat.h> /* for open */
 # include <fcntl.h> /* for open */
@@ -78,7 +79,6 @@ int		compare_command(char *command, char *token_command, int len);
 int		check_token_usability(char **array, int i);
 int		calculate_needed_tokens(t_data *data, int cmd, int tkn);
 void	update_token_position(t_data *data, int cmd, int *tkn);
-int		create_path_array(t_data *data, int cmd, int tkn, int x);
 
 /*
 **--FOLDER---------------------3_ERROR_MANAGEMENT-------------------------------
@@ -131,14 +131,12 @@ void	free_array(char **array);
 */
 void	create_args(t_data *data, int cmd, int tkn);
 int		check_args_num(t_data *data, int cmd, int tkn);
+char	*get_abs_path(t_data *data, int cmd, int tkn, int x);
 
 /*
 ** run_executable.c
 */
-void	execute_executable(t_data *data, int cmd, int *tkn);
-void	run_empty_executable(t_data *data);
-void	execute_absolute_executable(t_data *data, int cmd, int *tkn);
-void	run_executable(t_data *data);
+void	run_executable(t_data *data, int cmd, int *tkn);
 
 /*
 **--SUB_FOLDER-----------------------CUSTOM-------------------------------------
@@ -182,7 +180,7 @@ void	execute_pwd(t_data *data, int cmd, int *tkn, int needed_tokens);
 void	execute_unset(t_data *data, int cmd, int *tkn);
 
 /*
-**--SUB_FOLDER--------------------HANDLE_FDS-------------------------------------
+**--SUB_FOLDER-------------------HANDLE_FDS-------------------------------------
 */
 
 /*
@@ -246,7 +244,7 @@ void	expand_token(t_data *data, char **new_token, int i, int x);
 /*
 ** arguments_list.c
 */
-void	update_token_list(t_data *data, int cmd, int tkn);
+void	update_token_list(t_data *data, int cmd, int *tkn);
 int		save_list_element(char *current_token, char **saved_token, int *tkn,
 																		int *x);
 int		count_usable_tokens(t_data *data, int cmd, int tkn);
@@ -255,7 +253,8 @@ int		count_usable_tokens(t_data *data, int cmd, int tkn);
 ** execution_loop.c
 */
 void	execution_loop(t_data *data, int cmd, int tkn);
-void	execute_command(t_data *data, int cmd, int *tkn);
+void	run_command(t_data *data, int cmd, int *tkn);
+void	identify_command(t_data *data, int cmd, int *tkn);
 
 /*
 **--FOLDER--------------------------6_PARSE-------------------------------------

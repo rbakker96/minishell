@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/12 13:11:44 by rbakker       #+#    #+#                 */
-/*   Updated: 2020/10/16 14:40:29 by rbakker       ########   odam.nl         */
+/*   Updated: 2020/10/16 18:01:24 by rbakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,28 +77,4 @@ void	update_token_position(t_data *data, int cmd, int *tkn)
 	else if (data->commands[cmd]->tokens[(*tkn)][0] == '|')
 		(*tkn)++;
 	return ;
-}
-
-int		create_path_array(t_data *data, int cmd, int tkn, int x)
-{
-	char	**path;
-	char	*path_token;
-
-	path = ft_split(find_path(data), ':');
-	if (path == NULL)
-		malloc_error(data, data->command_amount, 0);
-	if (path[x] == NULL)
-	{
-		free_array(path);
-		return (-1);
-	}
-	path_token = ft_strjoin("/", data->commands[cmd]->tokens[tkn]);
-	if (path_token == NULL)
-		malloc_error(data, data->command_amount, path);
-	data->args[0] = ft_strjoin(path[x], path_token);
-	free_array(path);
-	free(path_token);
-	if (data->args[0] == NULL)
-		malloc_error(data, cmd, 0);
-	return (0);
 }

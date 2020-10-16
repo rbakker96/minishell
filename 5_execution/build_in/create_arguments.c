@@ -6,7 +6,7 @@
 /*   By: qli <qli@student.codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/25 15:05:59 by qli           #+#    #+#                 */
-/*   Updated: 2020/10/12 11:17:52 by rbakker       ########   odam.nl         */
+/*   Updated: 2020/10/16 18:00:53 by rbakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,14 @@ void	create_args(t_data *data, int cmd, int tkn)
 	data->args = (char **)malloc(sizeof(char *) * (args_num + 1));
 	if (data->args == NULL)
 		malloc_error(data, data->command_amount, 0);
-	data->args[0] = ft_strdup(data->commands[cmd]->tokens[tkn]);
-	if (data->args[0] == NULL)
-		malloc_error(data, data->command_amount, 0);
+	if (!check_relative_path(data->commands[cmd]->tokens[tkn]))
+		data->args[0] = get_abs_path(data, cmd, tkn, 0);
+	else
+	{
+		data->args[0] = ft_strdup(data->commands[cmd]->tokens[tkn]);
+		if (data->args[0] == NULL)
+			malloc_error(data, data->command_amount, 0);
+	}
 	while (x < args_num)
 	{
 		data->args[x] = ft_strdup(data->commands[cmd]->tokens[tkn + x]);
@@ -52,4 +57,32 @@ int		check_args_num(t_data *data, int cmd, int tkn)
 		args_num++;
 	}
 	return (args_num);
+}
+
+char	*get_abs_path(t_data *data, int cmd, int tkn, int x)
+{
+	char		**path;
+	char		*path_token;
+	char		*abs_path;
+	struct stat stats;
+
+	path = ft_split(find_path(data), ':');
+	if (path == NULL)
+		malloc_error(data, data->command_amount, 0);
+	path_token = ft_strjoin("/", data->commands[cmd]->tokens[tkn]);
+	if (path_token == NULL)
+		malloc_error(data, data->command_amount, path);
+	while (path[x] != NULL)
+	{
+		abs_path = ft_strjoin(path[x], path_token);
+		if (abs_path == NULL)
+		{
+			free(path_token);
+			malloc_error(data, data->command_amount, path);
+		}
+		if (stat(abs_path, &stats) == 0)
+			return (abs_path);
+		x++;
+	}
+	return (0);
 }

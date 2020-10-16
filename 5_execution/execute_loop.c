@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/12 16:36:24 by rbakker       #+#    #+#                 */
-/*   Updated: 2020/10/16 15:27:01 by rbakker       ########   odam.nl         */
+/*   Updated: 2020/10/16 16:49:04 by rbakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 void	execution_loop(t_data *data, int cmd, int tkn)
 {
-	int		pid;
 	int		wpid;
 	int		status;
 
@@ -22,26 +21,7 @@ void	execution_loop(t_data *data, int cmd, int tkn)
 	{
 		preform_shell_expansions(data, cmd, 0);
 		initialize_pipes(data, cmd);
-		tkn = 0;
-		while (tkn < data->commands[cmd]->token_amount)
-		{
-			if (set_iostream(data, cmd, tkn) == -1)
-				break ;
-			update_token_list(data, cmd, tkn);
-			tkn = 0;
-			pid = fork();
-			if (pid == -1)
-				exit(1);
-			if (pid == 0)
-			{
-				close_not_used_fds(data, cmd);
-				execute_command(data, cmd, &tkn);
-				exit(1);
-			}
-			close_used_fds(data, cmd);
-			update_token_position(data, cmd, &tkn);
-			data->commands[cmd]->pipe_pos++;
-		}
+		run_command(data, cmd, &tkn);
 		close_all_fds(data, cmd);
 		while ((wpid = wait(&status)) > 0);
 		cmd++;
@@ -49,7 +29,35 @@ void	execution_loop(t_data *data, int cmd, int tkn)
 	free_struct(data);
 }
 
-void	execute_command(t_data *data, int cmd, int *tkn)
+void	run_command(t_data *data, int cmd, int *tkn)
+{
+	int		pid;
+
+	while ((*tkn) < data->commands[cmd]->token_amount)
+	{
+		if (set_iostream(data, cmd, (*tkn)) == -1)
+			break ;
+		update_token_list(data, cmd, tkn);
+		pid = fork();
+		if (pid == -1)
+			exit(1);
+		if (pid == 0)
+		{
+			close_not_used_fds(data, cmd);
+			if (dup2(data->iostream[READ], STDIN) == -1)
+				exit(1);
+			if (dup2(data->iostream[WRITE], STDOUT) == -1)
+				exit(1);
+			identify_command(data, cmd, tkn);
+			exit(1);
+		}
+		close_used_fds(data, cmd);
+		update_token_position(data, cmd, tkn);
+		data->commands[cmd]->pipe_pos++;
+	}
+}
+
+void	identify_command(t_data *data, int cmd, int *tkn)
 {
 	char	*value;
 
@@ -70,5 +78,5 @@ void	execute_command(t_data *data, int cmd, int *tkn)
 	else if (compare_command("exit", value, 4) == 0)
 		execute_exit(data, cmd, tkn);
 	else
-		execute_executable(data, cmd, tkn);
+		run_executable(data, cmd, tkn);
 }
