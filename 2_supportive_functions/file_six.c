@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/12 13:11:44 by rbakker       #+#    #+#                 */
-/*   Updated: 2020/10/16 13:50:51 by qli           ########   odam.nl         */
+/*   Updated: 2020/10/16 14:40:29 by rbakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,9 +59,19 @@ int		calculate_needed_tokens(t_data *data, int cmd, int tkn)
 
 void	update_token_position(t_data *data, int cmd, int *tkn)
 {
+	int		count;
 	char	*value;
 
+	count = 0;
 	value = data->commands[cmd]->tokens[(*tkn)];
+	while (value[0] != '|')
+	{
+		count++;
+		(*tkn)++;
+		value = data->commands[cmd]->tokens[(*tkn)];
+		if (value == NULL)
+			break ;
+	}
 	if (value == NULL)
 		return ;
 	else if (data->commands[cmd]->tokens[(*tkn)][0] == '|')
