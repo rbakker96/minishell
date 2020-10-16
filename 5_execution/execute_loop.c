@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/12 16:36:24 by rbakker       #+#    #+#                 */
-/*   Updated: 2020/10/16 13:57:29 by rbakker       ########   odam.nl         */
+/*   Updated: 2020/10/16 14:11:38 by rbakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void		execution_loop(t_data *data, int cmd, int tkn)
 				exit(1);
 			if (pid == 0)
 			{
-				close_not_used_fds(data, cmd); // complete
+				close_unused_fds(data, cmd); // complete
 				execute_command(data, cmd, &tkn); // to update the execute executable function
 				exit(1);
 			}

@@ -6,13 +6,13 @@
 /*   By: qli <qli@student.codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/15 18:50:30 by qli           #+#    #+#                 */
-/*   Updated: 2020/10/16 14:00:53 by rbakker       ########   odam.nl         */
+/*   Updated: 2020/10/16 14:11:38 by rbakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-void	close_not_used_fds(t_data *data, int cmd)
+void	close_unused_fds(t_data *data, int cmd)
 {
 	int	i;
 	int	j;

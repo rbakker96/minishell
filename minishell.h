@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/01 15:55:06 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/16 14:00:06 by rbakker       ########   odam.nl         */
+/*   Updated: 2020/10/16 14:11:38 by rbakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -207,7 +207,7 @@ int		get_pipes_amount(t_data *data, int cmd, int i);
 /*
 ** close_pipe_fds.c
 */
-void	close_not_used_fds(t_data *data, int cmd);
+void	close_unused_fds(t_data *data, int cmd);
 void	close_used_fds(t_data *data, int cmd);
 
 /*

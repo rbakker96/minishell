@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/15 17:46:32 by rbakker       #+#    #+#                 */
-/*   Updated: 2020/10/16 14:01:14 by rbakker       ########   odam.nl         */
+/*   Updated: 2020/10/16 14:11:38 by rbakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 int		set_iostream(t_data *data, int cmd, int tkn)
 {
-	data->iostream[READ] = not_used; // discuss why we need to set it as -1 later
-	data->iostream[WRITE] = not_used;
+	data->iostream[READ] = 0; // discuss why we need to set it as -1 later
+	data->iostream[WRITE] = 1;
 	if (data->commands[cmd]->pipe_nb > 0)
 		set_pipe_fds(data, cmd);
 	if (data->commands[cmd]->token_amount > 0)
@@ -55,8 +55,8 @@ int		set_redirection_fds(t_data *data, int cmd, int tkn)
 	char	*value;
 	int		fd[2];
 
-	fd[READ] = not_used;
-	fd[WRITE] = not_used;
+	fd[READ] = unused;
+	fd[WRITE] = unused;
 	value = data->commands[cmd]->tokens[tkn];
 	while (tkn < data->commands[cmd]->token_amount && fd[READ] != -1
 													&& fd[WRITE] != -1)
@@ -72,9 +72,9 @@ int		set_redirection_fds(t_data *data, int cmd, int tkn)
 	}
 	if (fd[READ] == -1 || fd[WRITE] == -1)
 		return (-1);
-	if (fd[READ] != not_used)
+	if (fd[READ] != unused)
 		data->iostream[READ] = fd[READ];
-	if (fd[WRITE] != not_used)
+	if (fd[WRITE] != unused)
 		data->iostream[WRITE] = fd[WRITE];
 	return (0);
 }
