@@ -6,13 +6,12 @@
 /*   By: qli <qli@student.codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/15 18:50:30 by qli           #+#    #+#                 */
-/*   Updated: 2020/10/15 19:23:23 by qli           ########   odam.nl         */
+/*   Updated: 2020/10/16 12:08:23 by qli           ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-//close all pipe fds that is not 0 / 1 / READ / WRITE STREAM
 void	close_not_used_fds(t_data *data, int cmd)
 {
 	int	i;
@@ -28,9 +27,7 @@ void	close_not_used_fds(t_data *data, int cmd)
 		while (j < 1)
 		{
 			if (data->commands[cmd]->pipes[i][j] != data->iostream[READ] \
-			&& data->commands[cmd]->pipes[i][j] != data->iostream[WRITE] \
-			&& data->commands[cmd]->pipes[i][j] != STDIN \
-			&& data->commands[cmd]->pipes[i][j] != STDOUT)
+			&& data->commands[cmd]->pipes[i][j] != data->iostream[WRITE])
 				close(data->commands[cmd]->pipes[i][j]);
 			j++;
 		}
@@ -38,13 +35,12 @@ void	close_not_used_fds(t_data *data, int cmd)
 	}
 }
 
-//close READ / WRITE STREAM
 void	close_child_used_fds(t_data *data, int cmd)
 {
 	if (data->commands[cmd]->pipe_nb == 0)
 		return ;
-	if (data->iostream[READ] != 0)
+	if (data->iostream[READ] != STDIN)
 		close(data->iostream[READ]);
-	if (data->iostream[WRITE] != 1)
-		close(data->iostream[WRITE]);	
+	if (data->iostream[WRITE] != STDOUT)
+		close(data->iostream[WRITE]);
 }

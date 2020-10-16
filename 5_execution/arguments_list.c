@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/07 11:15:58 by rbakker       #+#    #+#                 */
-/*   Updated: 2020/10/12 14:19:25 by qli           ########   odam.nl         */
+/*   Updated: 2020/10/16 13:52:07 by qli           ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,26 +28,27 @@ void	print_array(char **array)
 	}
 }
 
-void	update_token_list(t_data *data, int cmd, int tkn, int x)
+void	update_token_list(t_data *data, int cmd, int tkn)
 {
 	int		usable_tokens;
 	char	**tokens;
+	int		i;
 
+	i = 0;
 	usable_tokens = count_usable_tokens(data, cmd, tkn);
 	printf("usable tokens = %d\n", usable_tokens);
 	tokens = malloc(sizeof(char*) * (usable_tokens + 1));
 	if (tokens == NULL)
 		malloc_error(data, data->commands[cmd]->token_amount, 0);
-	x = 0;
-	while (x < usable_tokens)
+	while (i < usable_tokens)
 	{
-		if (pipe_check(data->commands[cmd]->tokens, tkn) == -1)
+		if (check_token_usability(data->commands[cmd]->tokens, tkn) == -1)
 			tkn += 2;
-		else if (save_list_element(data->commands[cmd]->tokens[tkn], &tokens[x],
-				&tkn, &x) == 0)
+		else if (save_list_element(data->commands[cmd]->tokens[tkn], &tokens[i],
+				&tkn, &i) == -1)
 			malloc_error(data, data->commands[cmd]->token_amount, tokens);
 	}
-	tokens[x] = 0;
+	tokens[i] = 0;
 	free_array(data->commands[cmd]->tokens);
 	data->commands[cmd]->tokens = tokens;
 	data->commands[cmd]->token_amount = usable_tokens;
@@ -57,17 +58,12 @@ void	update_token_list(t_data *data, int cmd, int tkn, int x)
 int		save_list_element(char *current_token, char **saved_token, int *tkn,
 																		int *x)
 {
-	if (current_token[0] == '\0')
-		(*tkn)++;
-	else
-	{
-		(*saved_token) = ft_strdup(current_token);
-		if ((*saved_token) == NULL)
-			return (0);
-		(*tkn)++;
-		(*x)++;
-	}
-	return (1);
+	(*saved_token) = ft_strdup(current_token);
+	if ((*saved_token) == NULL)
+		return (-1);
+	(*tkn)++;
+	(*x)++;
+	return (0);
 }
 
 int		count_usable_tokens(t_data *data, int cmd, int tkn)
@@ -79,9 +75,7 @@ int		count_usable_tokens(t_data *data, int cmd, int tkn)
 	{
 		if (data->commands[cmd]->tokens[tkn][0] == '|')
 			break ;
-		if (data->commands[cmd]->tokens[tkn][0] == '\0')
-			tkn++;
-		else if (redirection(data->commands[cmd]->tokens[tkn]) > 5)
+		else if (redirection(data->commands[cmd]->tokens[tkn]) > piped)
 			tkn += 2;
 		else
 		{

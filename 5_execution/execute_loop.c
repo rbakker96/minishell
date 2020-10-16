@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/12 16:36:24 by rbakker       #+#    #+#                 */
-/*   Updated: 2020/10/15 19:35:46 by qli           ########   odam.nl         */
+/*   Updated: 2020/10/16 13:53:45 by qli           ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,36 +20,33 @@ void		execution_loop(t_data *data, int cmd, int tkn)
 
 	while (cmd < data->command_amount)
 	{
-		// discuss whether it's best to keep the 0 in local functions
 		preform_shell_expansions(data, cmd, 0);
 		initialize_pipes(data, cmd);
 		tkn = 0;
 		while (tkn < data->commands[cmd]->token_amount)
 		{
 			// set iostream to replace -> redirections(data, cmd, tkn) != -1 - ROY
-			// QUESTION: Are all unrequired redirection fds already closed after this step?
-			// update_token_list(data, cmd, tkn, 0); //remove > < tokens, do not remove non-existing tokens - ROY
-			// QUESTION: updated token list will handle the token update right?
-			// data->iostream[READ] / data->iostream[WRITE]
+			update_token_list(data, cmd, tkn);
 			tkn = 0;
-			// QING process below
 			pid = fork();
 			if (pid == -1)
 				fork_error(data, cmd);
 			else if (pid == 0)
 			{
-				close_not_used_fds(data, cmd); // complete
-				execute_command(data, cmd, &tkn); // to update the execute executable function
-				// maybe need to free all the malloced memory available in the child process
-				exit(1);
+				close_not_used_fds(data, cmd);
+				execute_command(data, cmd, &tkn);
+				// free_struct(data); // also make sure to free args
+				exit(1); // change the exit code later
 			}
 			else
 			{
-				close_used_fds(data, cmd); // complete
+				close_used_fds(data, cmd);
 				data->commands[cmd]->pipe_pos++;
-				wait(&status);
+				// if wait returns -1, need to handle run_executable_error
+				// need to double check whether we closed all open files
 			}
 		}
+		wait(&status);
 		cmd++;
 	}
 	free_struct(data);
