@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/01 14:27:26 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/15 17:53:05 by rbakker       ########   odam.nl         */
+/*   Updated: 2020/10/16 13:31:59 by rbakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 
 typedef enum			e_defenitions
 {
-	not_used = -1,
+	not_used = -2,
 	space = 0,
 	meta_char = 1,
 	double_quote = 2,

@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/01 15:55:06 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/15 19:26:48 by qli           ########   odam.nl         */
+/*   Updated: 2020/10/16 13:25:03 by rbakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ void	run_executable_error(t_data *data, char *name);
 /*
 ** file_system_error.c
 */
-void	redirection_error(t_data *data, char *filename, int *ret);
+void	redirection_error(t_data *data, char *filename);
 void	change_directory_error(t_data *data, char *filename, int i, int *tkn);
 void	get_directory_error(t_data *data);
 
@@ -137,7 +137,7 @@ int		check_args_num(t_data *data, int cmd, int tkn);
 */
 void	execute_executable(t_data *data, int cmd, int *tkn);
 void	execute_absolute_executable(t_data *data, int cmd, int *tkn);
-void	run_executable(t_data *data, int cmd);
+void	run_executable(t_data *data);
 
 /*
 **--SUB_FOLDER-----------------------CUSTOM-------------------------------------
@@ -180,18 +180,22 @@ void	execute_pwd(t_data *data, int cmd, int *tkn, int needed_tokens);
 */
 void	execute_unset(t_data *data, int cmd, int *tkn);
 
-
 /*
 **--SUB_FOLDER--------------------HANDLE_FDS-------------------------------------
 */
 
 /*
-** redirections.c
+** set_iostream.c
 */
-int		redirections(t_data *data, int cmd, int tkn);
-int		append_file(t_data *data, int cmd, int *tkn, int *ret);
-int		overwrite_file(t_data *data, int cmd, int *tkn, int *ret);
-int		input_file(t_data *data, int cmd, int *tkn, int *ret);
+int		set_iostream(t_data *data, int cmd, int tkn);
+void	set_pipe_fds(t_data *data, int cmd);
+int		set_redirection_fds(t_data *data, int cmd, int tkn);
+
+/*
+** initialize_redirections.c
+*/
+void	create_output_file(t_data *data, int cmd, int *tkn, int *fd);
+void	create_input_file(t_data *data, int cmd, int *tkn, int *fd);
 
 /*
 ** initialize_pipes.c
@@ -203,8 +207,7 @@ int		get_pipes_amount(t_data *data, int cmd, int i);
 ** close_pipe_fds.c
 */
 void	close_not_used_fds(t_data *data, int cmd);
-void	close_child_used_fds(t_data *data, int cmd);
-
+void	close_used_fds(t_data *data, int cmd);
 
 /*
 **--SUB_FOLDER-------------------SHELL_EXPANSIONS-------------------------------

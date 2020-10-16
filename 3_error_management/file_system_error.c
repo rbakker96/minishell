@@ -6,13 +6,13 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/05 10:18:54 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/13 14:30:48 by rbakker       ########   odam.nl         */
+/*   Updated: 2020/10/16 11:10:20 by rbakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	redirection_error(t_data *data, char *filename, int *ret)
+void	redirection_error(t_data *data, char *filename)
 {
 	int errno;
 
@@ -21,7 +21,6 @@ void	redirection_error(t_data *data, char *filename, int *ret)
 	print(data, 2, " : ", 0);
 	print(data, 2, strerror(errno), 0);
 	print_char(data, 2, '\n', 0);
-	(*ret) = -1;
 }
 
 void	get_directory_error(t_data *data)

@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/12 16:36:24 by rbakker       #+#    #+#                 */
-/*   Updated: 2020/10/15 19:35:46 by qli           ########   odam.nl         */
+/*   Updated: 2020/10/16 13:30:15 by rbakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 void		execution_loop(t_data *data, int cmd, int tkn)
 {
-	char	*value;
 	int		pid;
 	int		status;
 
@@ -26,30 +25,23 @@ void		execution_loop(t_data *data, int cmd, int tkn)
 		tkn = 0;
 		while (tkn < data->commands[cmd]->token_amount)
 		{
-			// set iostream to replace -> redirections(data, cmd, tkn) != -1 - ROY
-			// QUESTION: Are all unrequired redirection fds already closed after this step?
-			// update_token_list(data, cmd, tkn, 0); //remove > < tokens, do not remove non-existing tokens - ROY
-			// QUESTION: updated token list will handle the token update right?
-			// data->iostream[READ] / data->iostream[WRITE]
+			if (set_iostream(data, cmd, tkn) == -1)
+				break ;
+			update_token_list(data, cmd, tkn, 0);
 			tkn = 0;
-			// QING process below
 			pid = fork();
 			if (pid == -1)
-				fork_error(data, cmd);
-			else if (pid == 0)
+				exit(1);
+			if (pid == 0)
 			{
 				close_not_used_fds(data, cmd); // complete
 				execute_command(data, cmd, &tkn); // to update the execute executable function
-				// maybe need to free all the malloced memory available in the child process
 				exit(1);
 			}
-			else
-			{
-				close_used_fds(data, cmd); // complete
-				data->commands[cmd]->pipe_pos++;
-				wait(&status);
-			}
+			close_used_fds(data, cmd); // complete
+			data->commands[cmd]->pipe_pos++;
 		}
+		wait(&status);
 		cmd++;
 	}
 	free_struct(data);

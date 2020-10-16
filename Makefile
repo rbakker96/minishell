@@ -6,7 +6,7 @@
 #    By: rbakker <rbakker@student.42.fr>              +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/02/05 14:55:09 by rbakker       #+#    #+#                  #
-#    Updated: 2020/10/15 17:22:31 by rbakker       ########   odam.nl          #
+#    Updated: 2020/10/16 13:26:28 by rbakker       ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,9 +24,24 @@ SOURCES			= 	main.c \
 					3_error_management/memory_error.c \
 					3_error_management/validation_error.c \
 					4_memory_management/free_struct.c \
-
-
-
+					5_execution/build_in/create_arguments.c \
+					5_execution/build_in/run_executable.c \
+					5_execution/custom/cd.c \
+					5_execution/custom/echo.c \
+					5_execution/custom/env.c \
+					5_execution/custom/exit.c \
+					5_execution/custom/export.c \
+					5_execution/custom/pwd.c \
+					5_execution/custom/unset.c \
+					5_execution/handle_fds/close_pipe_fds.c \
+					5_execution/handle_fds/initialize_pipes.c \
+					5_execution/handle_fds/initialize_redirections.c \
+					5_execution/handle_fds/set_iostream.c \
+					5_execution/shell_expansions/expand_functions.c \
+					5_execution/shell_expansions/len_calculations.c \
+					5_execution/shell_expansions/shell_expansions.c \
+					5_execution/arguments_list.c \
+					5_execution/execute_loop.c \
 					6_parse/create_command_table.c \
 					6_parse/commands.c \
 					6_parse/tokens.c \
