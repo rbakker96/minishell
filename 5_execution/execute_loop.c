@@ -6,15 +6,16 @@
 /*   By: rbakker <rbakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/12 16:36:24 by rbakker       #+#    #+#                 */
-/*   Updated: 2020/10/16 15:01:15 by rbakker       ########   odam.nl         */
+/*   Updated: 2020/10/16 15:27:01 by rbakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void		execution_loop(t_data *data, int cmd, int tkn)
+void	execution_loop(t_data *data, int cmd, int tkn)
 {
 	int		pid;
+	int		wpid;
 	int		status;
 
 	while (cmd < data->command_amount)
@@ -42,7 +43,7 @@ void		execution_loop(t_data *data, int cmd, int tkn)
 			data->commands[cmd]->pipe_pos++;
 		}
 		close_all_fds(data, cmd);
-		wait(&status);
+		while ((wpid = wait(&status)) > 0);
 		cmd++;
 	}
 	free_struct(data);

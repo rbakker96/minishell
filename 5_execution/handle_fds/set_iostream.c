@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/15 17:46:32 by rbakker       #+#    #+#                 */
-/*   Updated: 2020/10/16 14:11:38 by rbakker       ########   odam.nl         */
+/*   Updated: 2020/10/16 15:13:20 by rbakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	set_pipe_fds(t_data *data, int cmd)
 		data->iostream[READ] = data->commands[cmd]->pipes[pipe_pos - 1][STDIN];
 		data->iostream[WRITE] = data->commands[cmd]->pipes[pipe_pos][STDOUT];
 	}
-	else if (pipe_pos > pipe_nb || pipe_pos == pipe_nb) // can this be combined to (pipe_pos >= pipe_nb)
+	else if (pipe_pos >= pipe_nb)
 	{
 		data->iostream[READ] = data->commands[cmd]->pipes[pipe_pos - 1][STDIN];
 	}
