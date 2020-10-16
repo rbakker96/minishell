@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/12 16:36:24 by rbakker       #+#    #+#                 */
-/*   Updated: 2020/10/16 13:30:15 by rbakker       ########   odam.nl         */
+/*   Updated: 2020/10/16 13:57:29 by rbakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ void		execution_loop(t_data *data, int cmd, int tkn)
 
 	while (cmd < data->command_amount)
 	{
-		// discuss whether it's best to keep the 0 in local functions
 		preform_shell_expansions(data, cmd, 0);
 		initialize_pipes(data, cmd);
 		tkn = 0;
@@ -27,7 +26,7 @@ void		execution_loop(t_data *data, int cmd, int tkn)
 		{
 			if (set_iostream(data, cmd, tkn) == -1)
 				break ;
-			update_token_list(data, cmd, tkn, 0);
+			update_token_list(data, cmd, tkn);
 			tkn = 0;
 			pid = fork();
 			if (pid == -1)

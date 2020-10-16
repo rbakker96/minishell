@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/01 15:55:06 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/16 13:25:03 by rbakker       ########   odam.nl         */
+/*   Updated: 2020/10/16 14:00:06 by rbakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ int		command_check(char check_value, char charachter);
 ** file_six.c
 */
 int		compare_command(char *command, char *token_command, int len);
-int		pipe_check(char **array, int i);
+int		check_token_usability(char **array, int i);
 int		calculate_needed_tokens(t_data *data, int cmd, int tkn);
 void	update_token_position(t_data *data, int cmd, int *tkn);
 int		create_path_array(t_data *data, int cmd, int tkn, int x);
@@ -136,6 +136,7 @@ int		check_args_num(t_data *data, int cmd, int tkn);
 ** run_executable.c
 */
 void	execute_executable(t_data *data, int cmd, int *tkn);
+void	run_empty_executable(t_data *data);
 void	execute_absolute_executable(t_data *data, int cmd, int *tkn);
 void	run_executable(t_data *data);
 
@@ -244,7 +245,7 @@ void	expand_token(t_data *data, char **new_token, int i, int x);
 /*
 ** arguments_list.c
 */
-void	update_token_list(t_data *data, int cmd, int tkn, int x);
+void	update_token_list(t_data *data, int cmd, int tkn);
 int		save_list_element(char *current_token, char **saved_token, int *tkn,
 																		int *x);
 int		count_usable_tokens(t_data *data, int cmd, int tkn);
