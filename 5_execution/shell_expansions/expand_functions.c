@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/05 21:11:22 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/19 14:25:39 by qli           ########   odam.nl         */
+/*   Updated: 2020/10/19 21:09:58 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,11 @@ void	double_quotes(t_data *data, char **new_token, int *i, int *x)
 			escape_double_quotes(data, new_token, i, x);
 		else if (token[(*i)] == '$')
 		{
-			env_variable(data, new_token, i, x);
-			(*i) += env_var_len(token, (*i));
+			if (data->current_token[(*i) + 1] == '?')
+				exit_code(data, new_token, x);
+			else
+				env_variable(data, new_token, (*i), x);
+			(*i) += token_var_len(token, (*i));
 		}
 		else
 		{
@@ -75,18 +78,18 @@ void	escape_double_quotes(t_data *data, char **new_token, int *i, int *x)
 	}
 }
 
-void	env_variable(t_data *data, char **new_token, int *i, int *x)
+void	env_variable(t_data *data, char **new_token, int i, int *x)
 {
 	char	*token;
 	int		var_len;
 	char	*variable;
 	int		z;
 
-	(*i)++;
+	i++;
 	var_len = 0;
 	token = data->current_token;
-	var_len = env_var_len(token, (*i));
-	variable = ft_substr(token, (*i), var_len);
+	var_len = token_var_len(token, i);
+	variable = ft_substr(token, i, var_len);
 	if (variable == NULL)
 		malloc_error(data, data->command_amount, 0);
 	z = 0;

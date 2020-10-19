@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/05 21:08:41 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/12 11:23:00 by rbakker       ########   odam.nl         */
+/*   Updated: 2020/10/19 21:08:58 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,11 @@ void	double_quotes_len(t_data *data, char *token, int *i, int *len)
 			(*len) += escape_len_double_quotes(token, i, 0);
 		else if (token[(*i)] == '$')
 		{
-			(*len) += env_variable_len(data, token, i, 0);
-			(*i) += env_var_len(token, (*i));
+			if (data->current_token[(*i) + 1] == '?')
+				(*len) += exit_code_len(data, 0);
+			else
+				(*len) += env_var_len(data, token, (*i), 0);
+			(*i) += token_var_len(token, (*i));
 		}
 		else
 		{
@@ -56,16 +59,16 @@ int		escape_len_double_quotes(char *token, int *i, int len)
 	return (len);
 }
 
-int		env_variable_len(t_data *data, char *token, int *i, int len)
+int		env_var_len(t_data *data, char *token, int i, int len)
 {
 	char	*variable;
 	int		var_len;
 	int		x;
 
-	(*i)++;
+	i++;
 	var_len = 0;
-	var_len = env_var_len(token, (*i));
-	variable = ft_substr(token, (*i), var_len);
+	var_len = token_var_len(token, i);
+	variable = ft_substr(token, i, var_len);
 	if (variable == NULL)
 		malloc_error(data, data->command_amount, 0);
 	x = 0;
@@ -80,5 +83,17 @@ int		env_variable_len(t_data *data, char *token, int *i, int len)
 		x++;
 	}
 	free(variable);
+	return (len);
+}
+
+int		exit_code_len(t_data *data, int len)
+{
+	char *exit_code;
+
+	exit_code = ft_itoa(data->exit_code);
+	if (exit_code == NULL)
+		malloc_error(data, data->command_amount, 0);
+	len = ft_strlen(exit_code);
+	free(exit_code);
 	return (len);
 }

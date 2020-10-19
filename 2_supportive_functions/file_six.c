@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/12 13:11:44 by rbakker       #+#    #+#                 */
-/*   Updated: 2020/10/19 15:30:22 by rbakker       ########   odam.nl         */
+/*   Updated: 2020/10/19 20:00:39 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,9 @@ int		check_token_usability(char **tokens, int i)
 			return (0);
 		x--;
 	}
-	if (ft_strncmp(tokens[i], "<", ft_strlen(tokens[i]) == 0 ||
-		ft_strncmp(tokens[i], ">", ft_strlen(tokens[i])) == 0 ||
-		ft_strncmp(tokens[i], ">>", ft_strlen(tokens[i])) == 0))
+	if (compare_command("<", tokens[i], 1) == 0 ||
+		compare_command(">", tokens[i], 1) == 0 ||
+		compare_command(">>", tokens[i], 2) == 0)
 		return (-1);
 	else
 		return (0);

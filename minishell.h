@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/01 15:55:06 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/19 18:08:04 by qli           ########   odam.nl         */
+/*   Updated: 2020/10/19 21:10:12 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ int		redirection(char *str);
 int		get_array_size(char **array);
 int		redirection_check(char *str);
 int		quotes_check(char *str);
-int		env_var_len(char *str, int i);
+int		token_var_len(char *str, int i);
 int		command_check(char check_value, char charachter);
 
 /*
@@ -221,7 +221,7 @@ void	close_all_fds(t_data *data, int cmd);
 void	single_quotes(t_data *data, char **new_token, int *i, int *x);
 void	double_quotes(t_data *data, char **new_token, int *i, int *x);
 void	escape_double_quotes(t_data *data, char **new_token, int *i, int *x);
-void	env_variable(t_data *data, char **new_token, int *i, int *x);
+void	env_variable(t_data *data, char **new_token, int i, int *x);
 void	save_env_variable(char *variable, char **new_token, int *x);
 
 /*
@@ -230,7 +230,8 @@ void	save_env_variable(char *variable, char **new_token, int *x);
 void	single_quotes_len(char *token, int *i, int *len);
 void	double_quotes_len(t_data *data, char *token, int *i, int *len);
 int		escape_len_double_quotes(char *token, int *i, int len);
-int		env_variable_len(t_data *data, char *token, int *i, int len);
+int		env_var_len(t_data *data, char *token, int i, int len);
+int		exit_code_len(t_data *data, int len);
 
 /*
 ** shell_expansions.c
@@ -238,6 +239,7 @@ int		env_variable_len(t_data *data, char *token, int *i, int len);
 void	preform_shell_expansions(t_data *data, int i, int tkn);
 int		expansion_len(t_data *data, int i, int len);
 void	expand_token(t_data *data, char **new_token, int i, int x);
+void	exit_code(t_data *data, char **new_token, int *x);
 
 /*
 **-----------------------

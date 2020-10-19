@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/09 16:44:49 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/12 13:23:06 by rbakker       ########   odam.nl         */
+/*   Updated: 2020/10/19 20:32:08 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int		quotes_check(char *str)
 		return (normal_char);
 }
 
-int		env_var_len(char *str, int i)
+int		token_var_len(char *str, int i)
 {
 	int len;
 

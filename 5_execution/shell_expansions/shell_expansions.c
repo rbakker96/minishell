@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/05 19:44:06 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/15 17:26:42 by rbakker       ########   odam.nl         */
+/*   Updated: 2020/10/19 21:09:38 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,17 +43,15 @@ int		expansion_len(t_data *data, int i, int len)
 			double_quotes_len(data, data->current_token, &i, &len);
 		else if (data->current_token[i] == '$')
 		{
-			len += env_variable_len(data, data->current_token, &i, 0);
-			i += env_var_len(data->current_token, i);
-		}
-		else if (data->current_token[i] == '\\')
-		{
-			len++;
-			i += 2;
+			if (data->current_token[i + 1] == '?')
+				len += exit_code_len(data, 0);
+			else
+				len += env_var_len(data, data->current_token, i, 0);
+			i += token_var_len(data->current_token, i);
 		}
 		else
 		{
-			i++;
+			(data->current_token[i] == '\\') ? i += 2 : i++;
 			len++;
 		}
 	}
@@ -70,22 +68,37 @@ void	expand_token(t_data *data, char **new_token, int i, int x)
 			double_quotes(data, new_token, &i, &x);
 		else if (data->current_token[i] == '$')
 		{
-			env_variable(data, new_token, &i, &x);
-			i += env_var_len(data->current_token, i);
-		}
-		else if (data->current_token[i] == '\\')
-		{
-			i++;
-			(*new_token)[x] = data->current_token[i];
-			x++;
-			i++;
+			if (data->current_token[i + 1] == '?')
+				exit_code(data, new_token, &x);
+			else
+				env_variable(data, new_token, i, &x);
+			i += token_var_len(data->current_token, i);
 		}
 		else
 		{
+			(data->current_token[i] == '\\') ? i++ : i;
 			(*new_token)[x] = data->current_token[i];
 			x++;
 			i++;
 		}
 	}
 	(*new_token)[x] = '\0';
+}
+
+void	exit_code(t_data *data, char **new_token, int *x)
+{
+	char	*exit_code;
+	int		i;
+
+	i = 0;
+	exit_code = ft_itoa(data->exit_code);
+	if (exit_code == NULL)
+		malloc_error(data, data->command_amount, 0);
+	while (exit_code[i] != '\0')
+	{
+		(*new_token)[(*x)] = exit_code[i];
+		(*x)++;
+		i++;
+	}
+	free(exit_code);
 }
