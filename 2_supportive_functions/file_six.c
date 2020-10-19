@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/12 13:11:44 by rbakker       #+#    #+#                 */
-/*   Updated: 2020/10/19 14:46:13 by rbakker       ########   odam.nl         */
+/*   Updated: 2020/10/19 15:20:47 by rbakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void	update_token_position(t_data *data, int cmd, int *tkn)
 		(*tkn)++;
 }
 
-int		identify_buildin(t_data *data, int cmd, int tkn)
+int		identify_custom(t_data *data, int cmd, int tkn)
 {
 	char *value;
 

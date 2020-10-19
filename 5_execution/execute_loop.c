@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/12 16:36:24 by rbakker       #+#    #+#                 */
-/*   Updated: 2020/10/19 15:13:33 by rbakker       ########   odam.nl         */
+/*   Updated: 2020/10/19 15:27:38 by rbakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,16 @@ void	execution_loop(t_data *data, int cmd, int tkn)
 			if (set_iostream(data, cmd, tkn) == -1)
 				break ;
 			update_token_list(data, cmd, &tkn);
-			if (!data->commands[cmd]->pipe_nb && identify_buildin(data, cmd, tkn))
+			if (!data->commands[cmd]->pipe_nb && identify_custom(data, cmd, tkn))
 				execute_command(data, cmd, &tkn);
 			else
 				fork_command(data, cmd, &tkn);
+			close_used_fds(data, cmd);
+			update_token_position(data, cmd, &tkn);
+			data->commands[cmd]->pipe_pos++;
 		}
 		close_all_fds(data, cmd);
-		while (wait(&status) > 0);
+		while (wait(&status) > 0) //removed ;
 		if (WIFEXITED(status))
 		{
 			printf("exit->code set by WEXITSTATUS\n");
@@ -66,9 +69,6 @@ void	fork_command(t_data *data, int cmd, int *tkn)
 		execute_command(data, cmd, tkn);
 		exit(0); //needs to set the exit code for custom functions
 	}
-	close_used_fds(data, cmd);
-	update_token_position(data, cmd, tkn);
-	data->commands[cmd]->pipe_pos++;
 }
 
 void	execute_command(t_data *data, int cmd, int *tkn)

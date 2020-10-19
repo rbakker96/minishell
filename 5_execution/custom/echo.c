@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/09 14:49:34 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/15 18:07:22 by rbakker       ########   odam.nl         */
+/*   Updated: 2020/10/19 15:27:47 by rbakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ void	execute_echo(t_data *data, int cmd, int *tkn, int needed_tokens)
 	}
 	if (newline)
 		print_char(data, 1, '\n', 0);
-	update_token_position(data, cmd, tkn);
 }
 
 int		newline_option(char *value, int needed_tokens, int *tkn)
