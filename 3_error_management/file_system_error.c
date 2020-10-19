@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/05 10:18:54 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/19 14:03:53 by rbakker       ########   odam.nl         */
+/*   Updated: 2020/10/19 15:12:07 by rbakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ void	redirection_error(t_data *data, char *filename)
 {
 	int errno;
 
+	printf("exit->code set in redirestion_error\n");
+	data->exit_code = 1; //exit code
 	print(data, 2, "minishell : ", 0);
 	print(data, 2, filename, 0);
 	print(data, 2, " : ", 0);
@@ -34,6 +36,8 @@ void	change_directory_error(t_data *data, char *filename)
 {
 	int errno;
 
+	printf("exit->code set in change_directory_error\n");
+	data->exit_code = 1; //exit code
 	print(data, 2, "minishell : ", 0);
 	print(data, 2, filename, 0);
 	print(data, 2, " : ", 0);

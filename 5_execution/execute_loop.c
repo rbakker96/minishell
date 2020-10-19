@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/12 16:36:24 by rbakker       #+#    #+#                 */
-/*   Updated: 2020/10/19 15:09:30 by rbakker       ########   odam.nl         */
+/*   Updated: 2020/10/19 15:13:33 by rbakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,19 +32,22 @@ void	execution_loop(t_data *data, int cmd, int tkn)
 		}
 		close_all_fds(data, cmd);
 		while (wait(&status) > 0);
-		if (WIFEXITED(status)) //returns a nonzero value if the child process terminated normally with exit
-			printf("Child exited with exit status %d.\n", WEXITSTATUS(status));
-			//if WIFEXITED is true of status, WEXITSTATUS returns the low-order 8 bits of the exit status value from the child process
-		if (WCOREDUMP(status) > 0) //returns a nonzero value if the child process terminated and produced a core dump
-			printf("The child process terminated and produced a core dump. \n");
-		if (WIFSTOPPED(status)) //returns a nonzero value if the child process is stopped
-			printf("Child stopped because of signal number %d.\n", WSTOPSIG(status));
-			// If WIFSTOPPED is true of status, WSTOPSIG returns the signal number of the signal that caused the child process to stop.
+		if (WIFEXITED(status))
+		{
+			printf("exit->code set by WEXITSTATUS\n");
+			data->exit_code = WEXITSTATUS(status);
+		}
+		// if (WCOREDUMP(status) > 0)
+		// {
+		// 	printf("HERE 3\n");
+		// 	data->exit_code = 1;
+		// }
+		// if (WIFSTOPPED(status))
+		// 	printf("Child stopped because of signal number %d.\n", WSTOPSIG(status));
 		cmd++;
 	}
 	free_struct(data);
 }
-
 
 void	fork_command(t_data *data, int cmd, int *tkn)
 {

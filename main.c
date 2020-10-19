@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/08/31 10:42:36 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/15 17:16:46 by rbakker       ########   odam.nl         */
+/*   Updated: 2020/10/19 14:41:10 by qli           ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ int		main(int argc, char **argv, char **envp)
 {
 	t_data	data;
 
+	data.exit_code = 0; // initialise once
 	if (argc != 1 || !argv)
 		return (-1);
 	while (1)
@@ -24,6 +25,7 @@ int		main(int argc, char **argv, char **envp)
 		prompt(&data);
 		if (parse_command(&data, envp) != -1)
 			execution_loop(&data, 0, 0);
+		printf("data.exit_code is %d\n", data.exit_code);
 	}
 	return (0);
 }
