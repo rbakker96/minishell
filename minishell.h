@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/01 15:55:06 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/19 15:20:40 by rbakker       ########   odam.nl         */
+/*   Updated: 2020/10/19 15:54:42 by qli           ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,9 +96,8 @@ void	run_executable_error(t_data *data, char *name);
 /*
 ** file_system_error.c
 */
-void	redirection_error(t_data *data, char *filename);
-void	change_directory_error(t_data *data, char *filename);
 void	get_directory_error(t_data *data);
+void	print_errno_str(t_data *data, int cmd, char *filename);
 
 /*
 ** memory_error.c
@@ -149,7 +148,7 @@ void	run_executable(t_data *data, int cmd, int *tkn);
 ** cd.c
 */
 void	execute_cd(t_data *data, int cmd, int *tkn, int needed_tokens);
-void	go_to_home(t_data *data);
+void	go_to_home(t_data *data, int cmd);
 
 /*
 ** echo.c
