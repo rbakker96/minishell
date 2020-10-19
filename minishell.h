@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/01 15:55:06 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/19 12:53:39 by rbakker       ########   odam.nl         */
+/*   Updated: 2020/10/19 15:09:43 by rbakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,7 @@ int		compare_command(char *command, char *token_command, int len);
 int		check_token_usability(char **array, int i);
 int		calculate_needed_tokens(t_data *data, int cmd, int tkn);
 void	update_token_position(t_data *data, int cmd, int *tkn);
+int		identify_buildin(t_data *data, int cmd, int tkn);
 
 /*
 **--FOLDER---------------------3_ERROR_MANAGEMENT-------------------------------
@@ -96,7 +97,7 @@ void	run_executable_error(t_data *data, char *name);
 ** file_system_error.c
 */
 void	redirection_error(t_data *data, char *filename);
-void	change_directory_error(t_data *data, char *filename, int i, int *tkn);
+void	change_directory_error(t_data *data, char *filename);
 void	get_directory_error(t_data *data);
 
 /*
@@ -148,7 +149,7 @@ void	run_executable(t_data *data, int cmd, int *tkn);
 ** cd.c
 */
 void	execute_cd(t_data *data, int cmd, int *tkn, int needed_tokens);
-void	go_to_home(t_data *data, int cmd, int *tkn);
+void	go_to_home(t_data *data);
 
 /*
 ** echo.c
@@ -255,8 +256,8 @@ int		count_usable_tokens(t_data *data, int cmd, int tkn);
 ** execution_loop.c
 */
 void	execution_loop(t_data *data, int cmd, int tkn);
-void	run_command(t_data *data, int cmd, int *tkn);
-void	identify_command(t_data *data, int cmd, int *tkn);
+void	fork_command(t_data *data, int cmd, int *tkn);
+void	execute_command(t_data *data, int cmd, int *tkn);
 
 /*
 **--FOLDER--------------------------6_PARSE-------------------------------------

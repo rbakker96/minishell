@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/02 14:39:39 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/12 11:15:40 by rbakker       ########   odam.nl         */
+/*   Updated: 2020/10/19 13:55:40 by rbakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	normal_token(char *command, int *cmd, int *tkn)
 		if (char_type(command[(*cmd)]) == single_quote ||
 			char_type(command[(*cmd)]) == double_quote)
 			quoted_sentence(command, cmd, char_type(command[(*cmd)]));
-		if (char_type(command[(*cmd)] == meta_char))
+		if (char_type(command[(*cmd)]) == meta_char)
 			break ;
 	}
 }

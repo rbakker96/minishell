@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/12 13:11:44 by rbakker       #+#    #+#                 */
-/*   Updated: 2020/10/16 18:01:24 by rbakker       ########   odam.nl         */
+/*   Updated: 2020/10/19 14:46:13 by rbakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,8 @@ void	update_token_position(t_data *data, int cmd, int *tkn)
 
 	count = 0;
 	value = data->commands[cmd]->tokens[(*tkn)];
+	if (value == NULL)
+		return ;
 	while (value[0] != '|')
 	{
 		count++;
@@ -76,5 +78,21 @@ void	update_token_position(t_data *data, int cmd, int *tkn)
 		return ;
 	else if (data->commands[cmd]->tokens[(*tkn)][0] == '|')
 		(*tkn)++;
-	return ;
+}
+
+int		identify_buildin(t_data *data, int cmd, int tkn)
+{
+	char *value;
+
+	value = data->commands[cmd]->tokens[tkn];
+	if (compare_command("echo", value, 4) == 0 	 ||
+		compare_command("cd", value, 2) == 0 	 ||
+		compare_command("pwd", value, 3) == 0 	 ||
+		compare_command("export", value, 6) == 0 ||
+		compare_command("unset", value, 5) == 0  ||
+		compare_command("env", value, 3) == 0 	 ||
+		compare_command("exit", value, 4) == 0)
+		return (1);
+	else
+		return (0);
 }

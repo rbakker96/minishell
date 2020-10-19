@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/05 10:18:54 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/19 13:30:17 by qli           ########   odam.nl         */
+/*   Updated: 2020/10/19 14:03:53 by rbakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	get_directory_error(t_data *data)
 	exit(1);
 }
 
-void	change_directory_error(t_data *data, char *filename, int i, int *tkn)
+void	change_directory_error(t_data *data, char *filename)
 {
 	int errno;
 
@@ -39,5 +39,4 @@ void	change_directory_error(t_data *data, char *filename, int i, int *tkn)
 	print(data, 2, " : ", 0);
 	print(data, 2, strerror(errno), 0);
 	print_char(data, 2, '\n', 0);
-	(*tkn) = data->commands[i]->token_amount;
 }

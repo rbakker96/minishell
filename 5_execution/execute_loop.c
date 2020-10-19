@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/12 16:36:24 by rbakker       #+#    #+#                 */
-/*   Updated: 2020/10/19 13:42:26 by qli           ########   odam.nl         */
+/*   Updated: 2020/10/19 15:09:30 by rbakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,16 @@ void	execution_loop(t_data *data, int cmd, int tkn)
 	{
 		preform_shell_expansions(data, cmd, 0);
 		initialize_pipes(data, cmd);
-		run_command(data, cmd, &tkn);
+		while (tkn < data->commands[cmd]->token_amount)
+		{
+			if (set_iostream(data, cmd, tkn) == -1)
+				break ;
+			update_token_list(data, cmd, &tkn);
+			if (!data->commands[cmd]->pipe_nb && identify_buildin(data, cmd, tkn))
+				execute_command(data, cmd, &tkn);
+			else
+				fork_command(data, cmd, &tkn);
+		}
 		close_all_fds(data, cmd);
 		while (wait(&status) > 0);
 		if (WIFEXITED(status)) //returns a nonzero value if the child process terminated normally with exit
@@ -30,41 +39,36 @@ void	execution_loop(t_data *data, int cmd, int tkn)
 			printf("The child process terminated and produced a core dump. \n");
 		if (WIFSTOPPED(status)) //returns a nonzero value if the child process is stopped
 			printf("Child stopped because of signal number %d.\n", WSTOPSIG(status));
-			// If WIFSTOPPED is true of status, WSTOPSIG returns the signal number of the signal that caused the child process to stop. 
+			// If WIFSTOPPED is true of status, WSTOPSIG returns the signal number of the signal that caused the child process to stop.
 		cmd++;
 	}
 	free_struct(data);
 }
 
-void	run_command(t_data *data, int cmd, int *tkn)
-{
-	int		pid;
 
-	while ((*tkn) < data->commands[cmd]->token_amount)
+void	fork_command(t_data *data, int cmd, int *tkn)
+{
+	int pid;
+
+	pid = fork();
+	if (pid == -1)
+		exit(1);
+	if (pid == 0)
 	{
-		if (set_iostream(data, cmd, (*tkn)) == -1)
-			break ;
-		update_token_list(data, cmd, tkn);
-		pid = fork();
-		if (pid == -1)
+		close_not_used_fds(data, cmd);
+		if (dup2(data->iostream[READ], STDIN) == -1)
 			exit(1);
-		if (pid == 0)
-		{
-			close_not_used_fds(data, cmd);
-			if (dup2(data->iostream[READ], STDIN) == -1)
-				exit(1);
-			if (dup2(data->iostream[WRITE], STDOUT) == -1)
-				exit(1);
-			identify_command(data, cmd, tkn);
-			exit(1); //needs to set the exit code for custom functions
-		}
-		close_used_fds(data, cmd);
-		update_token_position(data, cmd, tkn);
-		data->commands[cmd]->pipe_pos++;
+		if (dup2(data->iostream[WRITE], STDOUT) == -1)
+			exit(1);
+		execute_command(data, cmd, tkn);
+		exit(0); //needs to set the exit code for custom functions
 	}
+	close_used_fds(data, cmd);
+	update_token_position(data, cmd, tkn);
+	data->commands[cmd]->pipe_pos++;
 }
 
-void	identify_command(t_data *data, int cmd, int *tkn)
+void	execute_command(t_data *data, int cmd, int *tkn)
 {
 	char	*value;
 
