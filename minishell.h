@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/01 15:55:06 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/19 21:10:12 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/10/19 21:19:51 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -248,7 +248,7 @@ void	exit_code(t_data *data, char **new_token, int *x);
 /*
 ** arguments_list.c
 */
-void	update_token_list(t_data *data, int cmd, int *tkn);
+int		update_token_list(t_data *data, int cmd, int *tkn);
 int		save_list_element(char *old_token, char **new_token, int *tkn, int *x);
 int		count_usable_tokens(t_data *data, int cmd, int tkn);
 
