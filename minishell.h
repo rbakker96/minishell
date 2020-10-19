@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/01 15:55:06 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/16 18:01:58 by rbakker       ########   odam.nl         */
+/*   Updated: 2020/10/19 12:53:39 by rbakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 # include <stdlib.h>
 # include "1_supportive_lib/libft/libft.h"
 # include "1_supportive_lib/gnl/get_next_line.h"
+# include "1_supportive_lib/ft_printf/ft_printf.h"
 # include "structs.h"
 # include <stdio.h> //to remove
 # include <unistd.h>
@@ -132,6 +133,7 @@ void	free_array(char **array);
 void	create_args(t_data *data, int cmd, int tkn);
 int		check_args_num(t_data *data, int cmd, int tkn);
 char	*get_abs_path(t_data *data, int cmd, int tkn, int x);
+char	*check_path_array(t_data *data, char **path, char *path_token, int x);
 
 /*
 ** run_executable.c
@@ -292,7 +294,7 @@ void	quoted_len(char *command, int start, int *len, int *current_char);
 /*
 ** input_validation.c
 */
-void	input_validation(t_data *data);
+int		input_validation(t_data *data);
 int		validate_command_seperators(t_data *data, char *charachter);
 int		validate_end_of_line_command(t_data *data, char *charachter, int len);
 int		validate_start_of_line_command(t_data *data, char *charachter);

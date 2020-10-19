@@ -6,7 +6,7 @@
 /*   By: qli <qli@student.codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/25 15:05:59 by qli           #+#    #+#                 */
-/*   Updated: 2020/10/16 18:00:53 by rbakker       ########   odam.nl         */
+/*   Updated: 2020/10/19 11:38:22 by rbakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,6 @@ char	*get_abs_path(t_data *data, int cmd, int tkn, int x)
 	char		**path;
 	char		*path_token;
 	char		*abs_path;
-	struct stat stats;
 
 	path = ft_split(find_path(data), ':');
 	if (path == NULL)
@@ -74,15 +73,34 @@ char	*get_abs_path(t_data *data, int cmd, int tkn, int x)
 		malloc_error(data, data->command_amount, path);
 	while (path[x] != NULL)
 	{
-		abs_path = ft_strjoin(path[x], path_token);
-		if (abs_path == NULL)
-		{
-			free(path_token);
-			malloc_error(data, data->command_amount, path);
-		}
-		if (stat(abs_path, &stats) == 0)
+		abs_path = check_path_array(data, path, path_token, x);
+		if (abs_path)
 			return (abs_path);
 		x++;
 	}
+	free(path_token);
+	free_array(path);
+	return (0);
+}
+
+char	*check_path_array(t_data *data, char **path, char *path_token, int x)
+{
+	char		*abs_path;
+	struct stat stats;
+
+	abs_path = ft_strjoin(path[x], path_token);
+	if (abs_path == NULL)
+	{
+		free(path_token);
+		malloc_error(data, data->command_amount, path);
+	}
+	if (stat(abs_path, &stats) == 0)
+	{
+		free(abs_path);
+		free(path_token);
+		free_array(path);
+		return (abs_path);
+	}
+	free(abs_path);
 	return (0);
 }

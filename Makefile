@@ -6,7 +6,7 @@
 #    By: rbakker <rbakker@student.42.fr>              +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/02/05 14:55:09 by rbakker       #+#    #+#                  #
-#    Updated: 2020/10/16 13:26:28 by rbakker       ########   odam.nl          #
+#    Updated: 2020/10/19 11:46:59 by rbakker       ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -51,10 +51,11 @@ SOURCES			= 	main.c \
 
 OBJECTS 		=	${SOURCES:%.c=%.o}
 
-INLCUDES 		= 	-L1_supportive_lib/gnl -lgnl -L1_supportive_lib/libft -lft
-EXTERNAL_LIBS	=	1_supportive_lib/libft/libft.a 1_supportive_lib/gnl/libgnl.a
+INLCUDES 		= 	-L1_supportive_lib/gnl -lgnl -L1_supportive_lib/libft -lft -L1_supportive_lib/ft_printf -lftprintf
+EXTERNAL_LIBS	=	1_supportive_lib/libft/libft.a 1_supportive_lib/gnl/libgnl.a 1_supportive_lib/ft_printf/libftprintf.a
 LIBFT			=	1_supportive_lib/libft
 GNL				=	1_supportive_lib/gnl
+FT_PRINTF		=	1_supportive_lib/ft_printf
 
 FLAGS 			=	-Wall -Wextra -Werror
 COMPILE			=	gcc
@@ -79,6 +80,9 @@ $(NAME): $(OBJECTS)
 	@echo "$(WHITE)LIBFT			$(WHITE)"
 	@make -C $(LIBFT)
 	@echo "$(WHITE)----------------------------------------------------"
+	@echo "$(WHITE)FT_PRINTF			$(WHITE)"
+	@make -C $(FT_PRINTF)
+	@echo "$(WHITE)----------------------------------------------------"
 	@echo "$(GREEN)----------------------------------------------------"
 	@$(COMPILE) $(FLAGS) $(INLCUDES) $(OBJECTS) $(EXTERNAL_LIBS) -o $(NAME)
 	@echo "Executable				./minishell"
@@ -93,6 +97,9 @@ $(NAME): $(OBJECTS)
 	@echo "$(WHITE)----------------------------------------------------"
 	@echo "$(WHITE)LIBFT			$(WHITE)"
 	@make -C $(LIBFT)
+	@echo "$(WHITE)----------------------------------------------------"
+	@echo "$(WHITE)FT_PRINTF			$(WHITE)"
+	@make -C $(FT_PRINTF)
 	@echo "$(WHITE)----------------------------------------------------"
 	@echo "$(GREEN)----------------------------------------------------"
 	@$(COMPILE) $(FLAGS) $(INLCUDES) -o $(NAME) $(OBJECTS)
@@ -112,6 +119,9 @@ clean:
 	@echo "$(WHITE)REMOVED O-FILES LIBFT"
 	@echo "$(RED)----------------------------------------------------"
 	@make clean -C $(LIBFT)
+	@echo "$(WHITE)REMOVED O-FILES FT_PRINTF"
+	@echo "$(RED)----------------------------------------------------"
+	@make clean -C $(FT_PRINTF)
 	@echo "$(WHITE)REMOVED O-FILES MINISHELL"
 	@echo "$(RED)----------------------------------------------------"
 	@/bin/rm -f $(OBJECTS)
@@ -124,6 +134,9 @@ fclean: clean
 	@echo "$(WHITE)DELETE LIBFT.A"
 	@echo "$(RED)----------------------------------------------------"
 	@make fclean -C $(LIBFT)
+	@echo "$(WHITE)DELETE FT_PRINTF.A"
+	@echo "$(RED)----------------------------------------------------"
+	@make fclean -C $(FT_PRINTF)
 	@echo "$(WHITE)DELETE ./MINISHELL"
 	@echo "$(RED)----------------------------------------------------"
 	@/bin/rm -f $(NAME)
