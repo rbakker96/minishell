@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/15 17:46:32 by rbakker       #+#    #+#                 */
-/*   Updated: 2020/10/16 15:13:20 by rbakker       ########   odam.nl         */
+/*   Updated: 2020/10/19 14:52:16 by qli           ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,17 @@
 
 int		set_iostream(t_data *data, int cmd, int tkn)
 {
-	data->iostream[READ] = 0; // discuss why we need to set it as -1 later
+	data->iostream[READ] = 0;
 	data->iostream[WRITE] = 1;
 	if (data->commands[cmd]->pipe_nb > 0)
 		set_pipe_fds(data, cmd);
 	if (data->commands[cmd]->token_amount > 0)
 	{
 		if (set_redirection_fds(data, cmd, tkn) == -1)
+		{
+			data->exit_code = 1; //set exit code
 			return (-1);
+		}
 	}
 	printf("iostream read = %d\n", data->iostream[READ]);
 	printf("iostream write = %d\n", data->iostream[WRITE]);
