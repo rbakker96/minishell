@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/09 14:50:20 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/15 17:48:02 by rbakker       ########   odam.nl         */
+/*   Updated: 2020/10/19 13:35:50 by qli           ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,12 @@ void	execute_cd(t_data *data, int cmd, int *tkn, int needed_tokens)
 	if (data->commands[cmd]->tokens[needed_tokens] != NULL &&
 		data->commands[cmd]->tokens[needed_tokens][0] == '|')
 		(*tkn) = needed_tokens;
-	else if (needed_tokens > 2)
-		print(data, 2, "minishell : cd : too many arguments\n", 0);
+	// else if (needed_tokens > 2)
+	// 	print(data, 2, "minishell : cd : too many arguments\n", 0);
+	// too many arguments still works --> error when directory does not exist --> opendir function
 	else if (needed_tokens == 1 || compare_command("~", value, 1) == 0)
 		go_to_home(data, cmd, tkn);
-	else if (chdir(value) == -1)
+	else if (chdir(value) == -1) // print out errno
 		change_directory_error(data, value, cmd, tkn);
 	(*tkn) = needed_tokens;
 	update_token_position(data, cmd, tkn);

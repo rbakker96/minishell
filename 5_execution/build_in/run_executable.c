@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/24 20:12:02 by qli           #+#    #+#                 */
-/*   Updated: 2020/10/16 18:06:14 by rbakker       ########   odam.nl         */
+/*   Updated: 2020/10/19 13:36:39 by qli           ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,4 +26,5 @@ void	run_executable(t_data *data, int cmd, int *tkn)
 		exit (127); // no abs path
 	}
 	execve(data->args[0], data->args, data->envp);
+	// print errno
 }

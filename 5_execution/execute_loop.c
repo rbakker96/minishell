@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/12 16:36:24 by rbakker       #+#    #+#                 */
-/*   Updated: 2020/10/16 16:49:04 by rbakker       ########   odam.nl         */
+/*   Updated: 2020/10/19 13:42:26 by qli           ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 void	execution_loop(t_data *data, int cmd, int tkn)
 {
-	int		wpid;
 	int		status;
 
 	while (cmd < data->command_amount)
@@ -23,7 +22,15 @@ void	execution_loop(t_data *data, int cmd, int tkn)
 		initialize_pipes(data, cmd);
 		run_command(data, cmd, &tkn);
 		close_all_fds(data, cmd);
-		while ((wpid = wait(&status)) > 0);
+		while (wait(&status) > 0);
+		if (WIFEXITED(status)) //returns a nonzero value if the child process terminated normally with exit
+			printf("Child exited with exit status %d.\n", WEXITSTATUS(status));
+			//if WIFEXITED is true of status, WEXITSTATUS returns the low-order 8 bits of the exit status value from the child process
+		if (WCOREDUMP(status) > 0) //returns a nonzero value if the child process terminated and produced a core dump
+			printf("The child process terminated and produced a core dump. \n");
+		if (WIFSTOPPED(status)) //returns a nonzero value if the child process is stopped
+			printf("Child stopped because of signal number %d.\n", WSTOPSIG(status));
+			// If WIFSTOPPED is true of status, WSTOPSIG returns the signal number of the signal that caused the child process to stop. 
 		cmd++;
 	}
 	free_struct(data);
@@ -49,7 +56,7 @@ void	run_command(t_data *data, int cmd, int *tkn)
 			if (dup2(data->iostream[WRITE], STDOUT) == -1)
 				exit(1);
 			identify_command(data, cmd, tkn);
-			exit(1);
+			exit(1); //needs to set the exit code for custom functions
 		}
 		close_used_fds(data, cmd);
 		update_token_position(data, cmd, tkn);
