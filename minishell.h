@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/01 15:55:06 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/19 15:54:42 by qli           ########   odam.nl         */
+/*   Updated: 2020/10/19 18:08:04 by qli           ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ int		compare_command(char *command, char *token_command, int len);
 int		check_token_usability(char **array, int i);
 int		calculate_needed_tokens(t_data *data, int cmd, int tkn);
 void	update_token_position(t_data *data, int cmd, int *tkn);
-int		identify_custom(t_data *data, int cmd, int tkn);
+int		custom_cmd(t_data *data, int cmd, int tkn);
 
 /*
 **--FOLDER---------------------3_ERROR_MANAGEMENT-------------------------------
@@ -247,8 +247,7 @@ void	expand_token(t_data *data, char **new_token, int i, int x);
 ** arguments_list.c
 */
 void	update_token_list(t_data *data, int cmd, int *tkn);
-int		save_list_element(char *current_token, char **saved_token, int *tkn,
-																		int *x);
+int		save_list_element(char *old_token, char **new_token, int *tkn, int *x);
 int		count_usable_tokens(t_data *data, int cmd, int tkn);
 
 /*

@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/07 11:15:58 by rbakker       #+#    #+#                 */
-/*   Updated: 2020/10/16 16:38:23 by rbakker       ########   odam.nl         */
+/*   Updated: 2020/10/19 15:44:12 by rbakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,11 +56,12 @@ void	update_token_list(t_data *data, int cmd, int *tkn)
 	print_array(data->commands[cmd]->tokens); // remove later
 }
 
-int		save_list_element(char *current_token, char **saved_token, int *tkn,
-																		int *x)
+int		save_list_element(char *old_token, char **new_token, int *tkn, int *x)
 {
-	(*saved_token) = ft_strdup(current_token);
-	if ((*saved_token) == NULL)
+	printf("token = %s\n", old_token);
+	(*new_token) = ft_strdup(old_token);
+	printf("test\n");
+	if ((*new_token) == NULL)
 		return (-1);
 	(*tkn)++;
 	(*x)++;
