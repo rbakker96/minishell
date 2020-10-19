@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   input_validation.c                                 :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: rbakker <rbakker@student.42.fr>            +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/07 13:52:27 by rbakker           #+#    #+#             */
-/*   Updated: 2020/10/07 17:43:43 by rbakker          ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   input_validation.c                                 :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: rbakker <rbakker@student.42.fr>              +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2020/10/07 13:52:27 by rbakker       #+#    #+#                 */
+/*   Updated: 2020/10/19 12:54:02 by rbakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	input_validation(t_data *data) //mixed commands need to be added
+int		input_validation(t_data *data)
 {
 	char	charachter;
 
@@ -25,7 +25,11 @@ void	input_validation(t_data *data) //mixed commands need to be added
 		validate_command_seperators(data, &charachter) == -1 ||
 		validate_end_of_line_command(data, &charachter, 0) == -1 ||
 		validate_start_of_line_command(data, &charachter) == -1)
+	{
 		validation_error(data, charachter);
+		return (-1);
+	}
+	return (0);
 }
 
 int		validate_command_seperators(t_data *data, char *charachter)
