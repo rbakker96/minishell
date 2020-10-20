@@ -220,3 +220,25 @@ cat <int1 <int2 < int3
 
 # if file exist, it will do nothing with the input
 < int
+
+####################################################################
+#                           EXIT STATUS	                           #
+####################################################################
+
+# 126 exit code -> it's a directory
+./test
+
+# 127 exit code -> permission denied
+./test/child_no_permission
+
+# 0 exit code
+./test/child
+
+# 127 exit code -> command not found
+adsafdsfas
+
+# 0 exit code -> expansion to nothing
+$hihihi
+
+# 0 exit code -> echo \n
+echo $hkskks
