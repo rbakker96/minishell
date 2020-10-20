@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/01 15:55:06 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/20 11:12:56 by rbakker       ########   odam.nl         */
+/*   Updated: 2020/10/20 11:38:43 by rbakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,7 @@ void	run_executable_error(t_data *data, char *name);
 void	get_directory_error(t_data *data);
 void	print_errno(t_data *data, int cmd, char *filename, int exit_code);
 void	retrive_child_exit_status(t_data *data, int status);
+void	command_not_found_error(t_data *data, int cmd, int tkn);
 
 /*
 ** memory_error.c

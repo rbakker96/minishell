@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/24 20:12:02 by qli           #+#    #+#                 */
-/*   Updated: 2020/10/20 10:14:20 by qli           ########   odam.nl         */
+/*   Updated: 2020/10/20 10:56:14 by qli           ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,7 @@ void	run_executable(t_data *data, int cmd, int *tkn)
 		close(data->iostream[WRITE]);
 	}
 	if (data->args[0] == NULL)
-	{
-		// 		printf("HEREssd\n");
-		// print_errno(data, cmd, data->args[0], 127);
-		ft_printf("minishell : command not found\n"); //this needs to change to print to 2
-		printf("came here\n");
-		exit (127); // no abs path
-		//update print errno str function
-	}
+		command_not_found_error(data, cmd, *tkn);
 	execve(data->args[0], data->args, data->envp);
-	// print_errno(data, cmd, data->args[0], 1);
 	exit(1);
 }
