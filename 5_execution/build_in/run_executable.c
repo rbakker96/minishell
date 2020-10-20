@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/24 20:12:02 by qli           #+#    #+#                 */
-/*   Updated: 2020/10/20 10:56:14 by qli           ########   odam.nl         */
+/*   Updated: 2020/10/20 14:25:26 by qli           ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,18 @@
 
 void	run_executable(t_data *data, int cmd, int *tkn)
 {
-	create_args(data, cmd, *tkn);
-	if (data->commands[cmd]->tokens[*tkn][0] == '\0')
+	char *value;
+
+	value = data->commands[cmd]->tokens[*tkn];
+	if (value[0] == '\0')
 	{
 		close(data->iostream[READ]);
 		close(data->iostream[WRITE]);
 	}
+	else
+		create_args(data, cmd, *tkn);
 	if (data->args[0] == NULL)
-		command_not_found_error(data, cmd, *tkn);
+		print_special_errno(data, value, "command not found", 127);
 	execve(data->args[0], data->args, data->envp);
 	exit(1);
 }

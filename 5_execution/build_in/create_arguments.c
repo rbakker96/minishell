@@ -6,7 +6,7 @@
 /*   By: qli <qli@student.codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/25 15:05:59 by qli           #+#    #+#                 */
-/*   Updated: 2020/10/20 11:35:30 by qli           ########   odam.nl         */
+/*   Updated: 2020/10/20 14:25:11 by qli           ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ void	create_args(t_data *data, int cmd, int tkn)
 		data->args[0] = get_abs_path(data, cmd, tkn, 0);
 	else
 	{
+		check_file_permission(data, data->commands[cmd]->tokens[tkn]);
 		data->args[0] = ft_strdup(data->commands[cmd]->tokens[tkn]);
 		if (data->args[0] == NULL)
 			malloc_error(data, data->command_amount, 0);
@@ -96,6 +97,7 @@ char	*check_path_array(t_data *data, char **path, char *path_token, int x)
 	}
 	if (stat(abs_path, &stats) == 0)
 	{
+		check_file_permission(data, abs_path);
 		free(path_token);
 		free_array(path);
 		return (abs_path);

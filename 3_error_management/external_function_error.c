@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/30 14:33:38 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/19 11:57:02 by rbakker       ########   odam.nl         */
+/*   Updated: 2020/10/20 14:27:35 by qli           ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,15 @@ void	write_error(t_data *data, char *malloced_str)
 	exit(1);
 }
 
-void	run_executable_error(t_data *data, char *name)
+void	print_special_errno(t_data *data, char *cmd, char *msg, int exit_code)
 {
-	print(data, 2, "minishell: ", 0);
-	print(data, 2, name, 0);
-	print(data, 2, ": command not found\n", 0);
+	print(data, 2, "minishell : ", 0);
+	print(data, 2, cmd, 0);
+	print(data, 2, " : ", 0);
+	print(data, 2, msg, 0);
+	print_char(data, 2, '\n', 0);
+	free(data->args);
+	data->args = NULL;
+	free_struct(data);
+	exit(exit_code);
 }

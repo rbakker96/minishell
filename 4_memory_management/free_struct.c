@@ -6,7 +6,7 @@
 /*   By: roybakker <roybakker@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/30 10:27:35 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/19 12:59:01 by rbakker       ########   odam.nl         */
+/*   Updated: 2020/10/20 13:25:47 by qli           ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@ void	free_struct(t_data *data)
 	}
 	if (data->command_amount != 0)
 		free(data->commands);
-	free_array(data->args);
+	if (data->args)
+		free_array(data->args);
 	free(data->input);
 	free_array(data->envp);
 }
