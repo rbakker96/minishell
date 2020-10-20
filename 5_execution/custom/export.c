@@ -6,7 +6,7 @@
 /*   By: roybakker <roybakker@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/09 14:50:36 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/20 18:09:28 by rbakker       ########   odam.nl         */
+/*   Updated: 2020/10/20 21:06:53 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ void	execute_export(t_data *data, int cmd, int tkn)
 	new_envp = (char**)malloc(sizeof(char*) * (envp_size + 1));
 	if (new_envp == NULL)
 		malloc_error(data, data->command_amount, 0);
-	copy_current_envp(data, &new_envp);
-	add_new_env_to_envp(data, &new_envp, cmd, tkn);
+	copy_current_envp(data, new_envp);
+	add_new_env_to_envp(data, new_envp, cmd, tkn);
 	free_array(data->envp);
 	data->envp = new_envp;
 }
@@ -49,7 +49,7 @@ int		get_envp_size(t_data *data, int cmd, int tkn)
 	return (size);
 }
 
-void	copy_current_envp(t_data *data, char ***new_envp)
+void	copy_current_envp(t_data *data, char **new_envp)
 {
 	int envp_size;
 	int index;
@@ -58,9 +58,9 @@ void	copy_current_envp(t_data *data, char ***new_envp)
 	envp_size = get_array_size(data->envp);
 	while (index < envp_size)
 	{
-		(*new_envp)[index] = ft_strdup(data->envp[index]);
-		if ((*new_envp)[index] == NULL)
-			malloc_error(data, data->command_amount, (*new_envp));
+		new_envp[index] = ft_strdup(data->envp[index]);
+		if (new_envp[index] == NULL)
+			malloc_error(data, data->command_amount, new_envp);
 		index++;
 	}
 }
@@ -80,7 +80,7 @@ int		validate_export_token(char *token)
 		return (error);
 }
 
-void	add_new_env_to_envp(t_data *data, char ***new_envp, int cmd, int tkn)
+void	add_new_env_to_envp(t_data *data, char **new_envp, int cmd, int tkn)
 {
 	int envp_size;
 	int ret;
@@ -88,19 +88,18 @@ void	add_new_env_to_envp(t_data *data, char ***new_envp, int cmd, int tkn)
 
 	i = get_array_size(data->envp);
 	envp_size = get_envp_size(data, cmd, tkn);
-	while (i < envp_size)
+	while (tkn < calculate_needed_tokens(data, cmd, 0))
 	{
 		ret = validate_export_token(data->commands[cmd]->tokens[tkn]);
 		if (ret == valid)
 		{
-			(*new_envp)[i] = ft_strdup(data->commands[cmd]->tokens[tkn]);
-			if ((*new_envp)[i] == NULL)
-				malloc_error(data, data->command_amount, (*new_envp));
+			new_envp[i] = ft_strdup(data->commands[cmd]->tokens[tkn]);
+			if (new_envp[i] == NULL)
+				malloc_error(data, data->command_amount, new_envp);
 			i++;
 		}
 		else if (ret == error)
-			print_special_errno(data, data->commands[cmd]->tokens[tkn],
-										"not a valid identifier", 1);
+			print_export_error(data, data->commands[cmd]->tokens[tkn]);
 		tkn++;
 	}
 	new_envp[i] = 0;
