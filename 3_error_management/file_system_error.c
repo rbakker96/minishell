@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/05 10:18:54 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/19 15:57:50 by qli           ########   odam.nl         */
+/*   Updated: 2020/10/20 08:40:48 by qli           ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	get_directory_error(t_data *data)
 	exit(1);
 }
 
-void	print_errno_str(t_data *data, int cmd, char *filename)
+void	print_errno(t_data *data, int cmd, char *filename, int exit_code)
 {
 	int errno;
 
@@ -29,7 +29,10 @@ void	print_errno_str(t_data *data, int cmd, char *filename)
 	print(data, 2, strerror(errno), 0);
 	print_char(data, 2, '\n', 0);
 	if (data->commands[cmd]->pipe_nb == 0)
-		data->exit_code = 1;
+		data->exit_code = exit_code;
 	else
-		exit(1);
+	{
+		free_struct(data); // free struct before exiting
+		exit(exit_code);
+	}
 }

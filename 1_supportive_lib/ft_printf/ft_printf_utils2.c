@@ -5,8 +5,8 @@
 /*                                                     +:+                    */
 /*   By: rbakker <rbakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/12/19 17:30:51 by rbakker        #+#    #+#                */
-/*   Updated: 2020/01/13 12:36:55 by rbakker       ########   odam.nl         */
+/*   Created: 2019/12/19 17:30:51 by rbakker       #+#    #+#                 */
+/*   Updated: 2020/10/20 08:34:00 by qli           ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ int		hex_len(unsigned long value)
 	int				number;
 
 	number = 0;
-	if (value == 0)
+	division = 0;
+	if (value == 0 && division == 0) // need to add this to silence warning
 		return (1);
 	while (value != 0)
 	{

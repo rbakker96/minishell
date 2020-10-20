@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/01 15:55:06 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/19 21:19:51 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/10/20 08:27:28 by qli           ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ void	run_executable_error(t_data *data, char *name);
 ** file_system_error.c
 */
 void	get_directory_error(t_data *data);
-void	print_errno_str(t_data *data, int cmd, char *filename);
+void	print_errno(t_data *data, int cmd, char *filename, int exit_code);
 
 /*
 ** memory_error.c

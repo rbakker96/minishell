@@ -6,7 +6,7 @@
 /*   By: qli <qli@student.codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/15 18:50:30 by qli           #+#    #+#                 */
-/*   Updated: 2020/10/16 16:35:04 by rbakker       ########   odam.nl         */
+/*   Updated: 2020/10/20 08:38:07 by qli           ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ void	close_not_used_fds(t_data *data, int cmd)
 	}
 }
 
-//close READ / WRITE STREAM
 void	close_used_fds(t_data *data, int cmd)
 {
 	if (data->commands[cmd]->pipe_nb == 0)
@@ -55,8 +54,8 @@ void	close_all_fds(t_data *data, int cmd)
 	i = 0;
 	while (i < data->commands[cmd]->pipe_nb)
 	{
-		close(data->commands[cmd]->pipes[i][0]);
-		close(data->commands[cmd]->pipes[i][1]);
+		close(data->commands[cmd]->pipes[i][READ]);
+		close(data->commands[cmd]->pipes[i][WRITE]);
 		i++;
 	}
 }
