@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/01 15:55:06 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/20 10:09:29 by qli           ########   odam.nl         */
+/*   Updated: 2020/10/20 11:12:56 by rbakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,6 +150,7 @@ void	run_executable(t_data *data, int cmd, int *tkn);
 */
 void	execute_cd(t_data *data, int cmd, int *tkn, int needed_tokens);
 void	go_to_home(t_data *data, int cmd);
+int		directory_validation(t_data *data, int cmd, int tkn, int needed_tokens);
 
 /*
 ** echo.c
