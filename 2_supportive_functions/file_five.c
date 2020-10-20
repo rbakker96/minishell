@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/09 16:44:49 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/19 20:32:08 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/10/20 15:30:20 by rbakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,8 @@ int		token_var_len(char *str, int i)
 	int len;
 
 	len = 0;
-	while (str[i + len] != '\0' && str[i + len] != ' ' && str[i + len] != '\"')
+	while (str[i + len] != '\0' && !ft_isspace(str[i + len]) &&
+			str[i + len] != '\"' && str[i + len] != '=')
 		len++;
 	return (len);
 }

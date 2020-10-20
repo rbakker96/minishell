@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/12 16:36:24 by rbakker       #+#    #+#                 */
-/*   Updated: 2020/10/20 14:05:53 by rbakker       ########   odam.nl         */
+/*   Updated: 2020/10/20 17:49:41 by rbakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ void	execute_command(t_data *data, int cmd, int tkn)
 	else if (compare_command("pwd", value, 3) == 0)
 		execute_pwd(data, cmd, tkn, 0);
 	else if (compare_command("export", value, 6) == 0)
-		execute_export(data, cmd, tkn, 0);
+		execute_export(data, cmd, tkn);
 	else if (compare_command("unset", value, 5) == 0)
 		execute_unset(data, cmd, tkn, 0);
 	else if (compare_command("env", value, 3) == 0)

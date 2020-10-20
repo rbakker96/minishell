@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/01 15:55:06 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/20 14:45:09 by rbakker       ########   odam.nl         */
+/*   Updated: 2020/10/20 18:04:18 by rbakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -172,7 +172,11 @@ void	execute_exit(t_data *data, int cmd, int tkn, int needed_tokens);
 /*
 ** export.c
 */
-void	execute_export(t_data *data, int cmd, int tkn, int needed_tokens);
+void	execute_export(t_data *data, int cmd, int tkn);
+int		get_envp_size(t_data *data, int cmd, int tkn);
+void	copy_current_envp(t_data *data, char ***new_envp);
+int		validate_export_token(char *token);
+void	add_new_env_to_envp(t_data *data, char ***new_envp, int cmd, int tkn);
 
 /*
 ** pwd.c
