@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/12 16:36:24 by rbakker       #+#    #+#                 */
-/*   Updated: 2020/10/20 13:53:08 by rbakker       ########   odam.nl         */
+/*   Updated: 2020/10/20 14:05:53 by rbakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@ void	execution_loop(t_data *data, int cmd, int tkn)
 				update_token_list(data, cmd, &tkn) == -1)
 				break ;
 			if (!data->commands[cmd]->pipe_nb && custom_cmd(data, cmd, tkn))
-				execute_command(data, cmd, &tkn);
+				execute_command(data, cmd, tkn);
 			else
-				fork_command(data, cmd, &tkn);
+				fork_command(data, cmd, tkn);
 			close_used_fds(data, cmd);
 			update_token_position(data, cmd, &tkn);
 			data->commands[cmd]->pipe_pos++;
@@ -39,7 +39,7 @@ void	execution_loop(t_data *data, int cmd, int tkn)
 	free_struct(data);
 }
 
-void	fork_command(t_data *data, int cmd, int *tkn)
+void	fork_command(t_data *data, int cmd, int tkn)
 {
 	int pid;
 
@@ -76,11 +76,11 @@ void	wait_for_child_process(t_data *data)
 	}
 }
 
-void	execute_command(t_data *data, int cmd, int *tkn)
+void	execute_command(t_data *data, int cmd, int tkn)
 {
 	char	*value;
 
-	value = data->commands[cmd]->tokens[*tkn];
+	value = data->commands[cmd]->tokens[tkn];
 	printf("current token is [%s]\n", value);
 	data->exit_code = 0;
 	if (compare_command("echo", value, 4) == 0)
@@ -90,13 +90,13 @@ void	execute_command(t_data *data, int cmd, int *tkn)
 	else if (compare_command("pwd", value, 3) == 0)
 		execute_pwd(data, cmd, tkn, 0);
 	else if (compare_command("export", value, 6) == 0)
-		execute_export(data, cmd, tkn);
+		execute_export(data, cmd, tkn, 0);
 	else if (compare_command("unset", value, 5) == 0)
-		execute_unset(data, cmd, tkn);
+		execute_unset(data, cmd, tkn, 0);
 	else if (compare_command("env", value, 3) == 0)
-		execute_env(data, cmd, (*tkn), 0);
+		execute_env(data, cmd, tkn, 0);
 	else if (compare_command("exit", value, 4) == 0)
-		execute_exit(data, cmd, tkn);
+		execute_exit(data, cmd, tkn, 0);
 	else
 		run_executable(data, cmd, tkn);
 }

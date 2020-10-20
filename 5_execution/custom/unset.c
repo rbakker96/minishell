@@ -6,13 +6,13 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/09 14:50:49 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/15 17:47:54 by rbakker       ########   odam.nl         */
+/*   Updated: 2020/10/20 14:41:11 by rbakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-void	execute_unset(t_data *data, int cmd, int *token)
+void	execute_unset(t_data *data, int cmd, int tkn, int needed_tokens)
 {
 	int		index;
 	int		x;
@@ -22,8 +22,10 @@ void	execute_unset(t_data *data, int cmd, int *token)
 
 	index = 0;
 	x = 0;
+	if (needed_tokens)
+		x = 0;
 	envp_size = get_array_size(data->envp);
-	string = data->commands[cmd]->tokens[(*token) + 1];
+	string = data->commands[cmd]->tokens[tkn + 1];
 	new_envp = (char**)malloc(sizeof(char*) * (envp_size + 1));
 	while (index < envp_size)
 	{

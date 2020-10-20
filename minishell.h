@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/01 15:55:06 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/20 13:53:41 by rbakker       ########   odam.nl         */
+/*   Updated: 2020/10/20 14:38:16 by rbakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,7 +139,7 @@ char	*check_path_array(t_data *data, char **path, char *path_token, int x);
 /*
 ** run_executable.c
 */
-void	run_executable(t_data *data, int cmd, int *tkn);
+void	run_executable(t_data *data, int cmd, int tkn);
 
 /*
 **--SUB_FOLDER-----------------------CUSTOM-------------------------------------
@@ -148,14 +148,14 @@ void	run_executable(t_data *data, int cmd, int *tkn);
 /*
 ** cd.c
 */
-void	execute_cd(t_data *data, int cmd, int *tkn, int needed_tokens);
+void	execute_cd(t_data *data, int cmd, int tkn, int needed_tokens);
 void	go_to_home(t_data *data, int cmd);
 int		directory_validation(t_data *data, int cmd, int tkn, int needed_tokens);
 
 /*
 ** echo.c
 */
-void	execute_echo(t_data *data, int cmd, int *tkn, int needed_tokens);
+void	execute_echo(t_data *data, int cmd, int tkn, int needed_tokens);
 int		newline_option(char *value, int needed_tokens, int *tkn);
 
 /*
@@ -166,22 +166,22 @@ void	execute_env(t_data *data, int cmd, int tkn, int needed_tokens);
 /*
 ** exit.c
 */
-void	execute_exit(t_data *data, int cmd, int *tkn);
+void	execute_exit(t_data *data, int cmd, int tkn, int needed_tokens);
 
 /*
 ** export.c
 */
-void	execute_export(t_data *data, int cmd, int *tkn);
+void	execute_export(t_data *data, int cmd, int tkn, int needed_tokens);
 
 /*
 ** pwd.c
 */
-void	execute_pwd(t_data *data, int cmd, int *tkn, int needed_tokens);
+void	execute_pwd(t_data *data, int cmd, int tkn, int needed_tokens);
 
 /*
 ** unset.c
 */
-void	execute_unset(t_data *data, int cmd, int *tkn);
+void	execute_unset(t_data *data, int cmd, int tkn, int needed_tokens);
 
 /*
 **--SUB_FOLDER-------------------HANDLE_FDS-------------------------------------
@@ -258,9 +258,9 @@ int		count_usable_tokens(t_data *data, int cmd, int tkn);
 ** execution_loop.c
 */
 void	execution_loop(t_data *data, int cmd, int tkn);
-void	fork_command(t_data *data, int cmd, int *tkn);
+void	fork_command(t_data *data, int cmd, int tkn);
 void	wait_for_child_process(t_data *data);
-void	execute_command(t_data *data, int cmd, int *tkn);
+void	execute_command(t_data *data, int cmd, int tkn);
 
 /*
 **--FOLDER--------------------------6_PARSE-------------------------------------
