@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/24 20:12:02 by qli           #+#    #+#                 */
-/*   Updated: 2020/10/20 14:31:14 by qli           ########   odam.nl         */
+/*   Updated: 2020/10/20 14:37:09 by qli           ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void	run_executable(t_data *data, int cmd, int *tkn)
 	{
 		close(data->iostream[READ]);
 		close(data->iostream[WRITE]);
+		exit(0);
 	}
 	else
 		create_args(data, cmd, *tkn);

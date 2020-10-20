@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/01 15:55:06 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/20 14:34:15 by qli           ########   odam.nl         */
+/*   Updated: 2020/10/20 14:35:00 by qli           ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 # include <sys/types.h>
 # include <sys/wait.h>
 # include <sys/stat.h>
-# include <errno.h>      /* for 'ENOENT' and 'ENOMEM' */
+# include <errno.h> /* for 'ENOENT' and 'ENOMEM' */
 # include <limits.h>
 # include <dirent.h>
 # include <string.h> /* for strerror */
