@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/01 15:55:06 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/20 11:38:43 by rbakker       ########   odam.nl         */
+/*   Updated: 2020/10/20 13:53:41 by rbakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,6 @@ void	run_executable_error(t_data *data, char *name);
 */
 void	get_directory_error(t_data *data);
 void	print_errno(t_data *data, int cmd, char *filename, int exit_code);
-void	retrive_child_exit_status(t_data *data, int status);
 void	command_not_found_error(t_data *data, int cmd, int tkn);
 
 /*
@@ -162,7 +161,7 @@ int		newline_option(char *value, int needed_tokens, int *tkn);
 /*
 ** env.c
 */
-void	execute_env(t_data *data, int *tkn);
+void	execute_env(t_data *data, int cmd, int tkn, int needed_tokens);
 
 /*
 ** exit.c
@@ -260,6 +259,7 @@ int		count_usable_tokens(t_data *data, int cmd, int tkn);
 */
 void	execution_loop(t_data *data, int cmd, int tkn);
 void	fork_command(t_data *data, int cmd, int *tkn);
+void	wait_for_child_process(t_data *data);
 void	execute_command(t_data *data, int cmd, int *tkn);
 
 /*
