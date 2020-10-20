@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/01 15:55:06 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/20 14:38:16 by rbakker       ########   odam.nl         */
+/*   Updated: 2020/10/20 14:45:09 by rbakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 # include <sys/types.h>
 # include <sys/wait.h>
 # include <sys/stat.h>
-# include <errno.h>      /* for 'ENOENT' and 'ENOMEM' */
+# include <errno.h> /* for 'ENOENT' and 'ENOMEM' */
 # include <limits.h>
 # include <dirent.h>
 # include <string.h> /* for strerror */
@@ -91,14 +91,15 @@ int		custom_cmd(t_data *data, int cmd, int tkn);
 */
 void	fork_error(t_data *data, int cmd);
 void	write_error(t_data *data, char *malloced_str);
-void	run_executable_error(t_data *data, char *name);
+void	print_special_errno(t_data *data, char *cmd, char *msg, int exit_code);
 
 /*
 ** file_system_error.c
 */
 void	get_directory_error(t_data *data);
 void	print_errno(t_data *data, int cmd, char *filename, int exit_code);
-void	command_not_found_error(t_data *data, int cmd, int tkn);
+void	print_builtin_errno(t_data *data, char *filename, int exit_code);
+void	check_file_permission(t_data *data, char *path);
 
 /*
 ** memory_error.c
