@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/12 16:36:24 by rbakker       #+#    #+#                 */
-/*   Updated: 2020/10/19 21:22:50 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/10/20 10:13:06 by qli           ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,18 +35,7 @@ void	execution_loop(t_data *data, int cmd, int tkn)
 		}
 		close_all_fds(data, cmd);
 		while (wait(&status) > 0)
-		if (WIFEXITED(status))
-		{
-			printf("exit->code set by WEXITSTATUS\n");
-			data->exit_code = WEXITSTATUS(status);
-		}
-		// if (WCOREDUMP(status) > 0)
-		// {
-		// 	printf("HERE 3\n");
-		// 	data->exit_code = 1;
-		// }
-		// if (WIFSTOPPED(status))
-		// 	printf("Child stopped because of signal number %d.\n", WSTOPSIG(status));
+		retrive_child_exit_status(data, status);
 		cmd++;
 	}
 	free_struct(data);
