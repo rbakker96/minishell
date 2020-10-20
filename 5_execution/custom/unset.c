@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/09 14:50:49 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/20 14:41:11 by rbakker       ########   odam.nl         */
+/*   Updated: 2020/10/20 21:40:23 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,9 @@ void	execute_unset(t_data *data, int cmd, int tkn, int needed_tokens)
 
 	index = 0;
 	x = 0;
-	if (needed_tokens)
-		x = 0;
+	needed_tokens =calculate_needed_tokens(data, cmd, tkn);
+	if (needed_tokens == 1)
+		return ;
 	envp_size = get_array_size(data->envp);
 	string = data->commands[cmd]->tokens[tkn + 1];
 	new_envp = (char**)malloc(sizeof(char*) * (envp_size + 1));
@@ -43,6 +44,9 @@ void	execute_unset(t_data *data, int cmd, int tkn, int needed_tokens)
 	data->envp = new_envp;
 }
 
-// have to update token correctly
-// have to check if input value of export is correct
-// free old env if needed
+
+//thing to do
+// -> whole variable until = sign needs to be the same
+// -> if centrain the unset value is there malloc one spot les
+// -> if no arguments nothing happens if not found nothing happens
+// -> look at other egde cases what can be input and what causes error message
