@@ -6,21 +6,11 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/05 10:18:54 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/20 14:30:09 by qli           ########   odam.nl         */
+/*   Updated: 2020/10/20 14:33:22 by qli           ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-
-void	retrive_child_exit_status(t_data *data, int status)
-{
-	if (WIFEXITED(status))
-		data->exit_code = WEXITSTATUS(status);
-	if (WCOREDUMP(status) > 0)
-		data->exit_code = 1;
-	if (WIFSTOPPED(status))
-		data->exit_code = WSTOPSIG(status);
-}
 
 void	check_file_permission(t_data *data, char *path)
 {

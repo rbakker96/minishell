@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/01 15:55:06 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/20 14:27:35 by qli           ########   odam.nl         */
+/*   Updated: 2020/10/20 14:34:15 by qli           ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,6 @@ void	print_special_errno(t_data *data, char *cmd, char *msg, int exit_code);
 void	get_directory_error(t_data *data);
 void	print_errno(t_data *data, int cmd, char *filename, int exit_code);
 void	print_builtin_errno(t_data *data, char *filename, int exit_code);
-void	retrive_child_exit_status(t_data *data, int status);
 void	check_file_permission(t_data *data, char *path);
 
 /*
@@ -152,6 +151,7 @@ void	run_executable(t_data *data, int cmd, int *tkn);
 */
 void	execute_cd(t_data *data, int cmd, int *tkn, int needed_tokens);
 void	go_to_home(t_data *data, int cmd);
+int		directory_validation(t_data *data, int cmd, int tkn, int needed_tokens);
 
 /*
 ** echo.c
@@ -162,7 +162,7 @@ int		newline_option(char *value, int needed_tokens, int *tkn);
 /*
 ** env.c
 */
-void	execute_env(t_data *data, int *tkn);
+void	execute_env(t_data *data, int cmd, int tkn, int needed_tokens);
 
 /*
 ** exit.c
@@ -260,6 +260,7 @@ int		count_usable_tokens(t_data *data, int cmd, int tkn);
 */
 void	execution_loop(t_data *data, int cmd, int tkn);
 void	fork_command(t_data *data, int cmd, int *tkn);
+void	wait_for_child_process(t_data *data);
 void	execute_command(t_data *data, int cmd, int *tkn);
 
 /*

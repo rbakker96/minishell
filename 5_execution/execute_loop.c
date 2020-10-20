@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/12 16:36:24 by rbakker       #+#    #+#                 */
-/*   Updated: 2020/10/20 11:06:03 by qli           ########   odam.nl         */
+/*   Updated: 2020/10/20 13:53:08 by rbakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,11 @@
 
 void	execution_loop(t_data *data, int cmd, int tkn)
 {
-	int		status;
-
 	while (cmd < data->command_amount)
 	{
 		preform_shell_expansions(data, cmd, 0);
 		initialize_pipes(data, cmd);
+		tkn = 0;
 		while (tkn < data->commands[cmd]->token_amount)
 		{
 			if (set_iostream(data, cmd, tkn) == -1  ||
@@ -34,8 +33,7 @@ void	execution_loop(t_data *data, int cmd, int tkn)
 			data->commands[cmd]->pipe_pos++;
 		}
 		close_all_fds(data, cmd);
-		while (wait(&status) > 0)
-		retrive_child_exit_status(data, status);
+		wait_for_child_process(data);
 		cmd++;
 	}
 	free_struct(data);
@@ -60,6 +58,24 @@ void	fork_command(t_data *data, int cmd, int *tkn)
 	}
 }
 
+void	wait_for_child_process(t_data *data)
+{
+	int status;
+
+	while (wait(&status) > 0)
+	{
+		if (WIFEXITED(status))
+		{
+			printf("exit->code set by WEXITSTATUS\n"); // to remove
+			data->exit_code = WEXITSTATUS(status);
+		}
+		if (WCOREDUMP(status) > 0)
+			data->exit_code = 1;
+		if (WIFSTOPPED(status))
+			data->exit_code = WSTOPSIG(status);
+	}
+}
+
 void	execute_command(t_data *data, int cmd, int *tkn)
 {
 	char	*value;
@@ -78,7 +94,7 @@ void	execute_command(t_data *data, int cmd, int *tkn)
 	else if (compare_command("unset", value, 5) == 0)
 		execute_unset(data, cmd, tkn);
 	else if (compare_command("env", value, 3) == 0)
-		execute_env(data, tkn);
+		execute_env(data, cmd, (*tkn), 0);
 	else if (compare_command("exit", value, 4) == 0)
 		execute_exit(data, cmd, tkn);
 	else

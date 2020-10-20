@@ -6,7 +6,7 @@
 /*   By: qli <qli@student.codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/25 15:05:59 by qli           #+#    #+#                 */
-/*   Updated: 2020/10/20 14:25:11 by qli           ########   odam.nl         */
+/*   Updated: 2020/10/20 14:32:25 by qli           ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,13 +31,14 @@ void	create_args(t_data *data, int cmd, int tkn)
 		if (data->args[0] == NULL)
 			malloc_error(data, data->command_amount, 0);
 	}
-	while (x < args_num)
-	{
-		data->args[x] = ft_strdup(data->commands[cmd]->tokens[tkn + x]);
-		if (data->args[x] == NULL)
-			malloc_error(data, data->command_amount, 0);
-		x++;
-	}
+	if (data->args[0])
+		while (x < args_num)
+		{
+			data->args[x] = ft_strdup(data->commands[cmd]->tokens[tkn + x]);
+			if (data->args[x] == NULL)
+				malloc_error(data, data->command_amount, 0);
+			x++;
+		}
 	data->args[args_num] = NULL;
 }
 
