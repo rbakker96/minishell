@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/12 16:36:24 by rbakker       #+#    #+#                 */
-/*   Updated: 2020/10/20 10:13:06 by qli           ########   odam.nl         */
+/*   Updated: 2020/10/20 11:06:03 by qli           ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ void	execute_command(t_data *data, int cmd, int *tkn)
 
 	value = data->commands[cmd]->tokens[*tkn];
 	printf("current token is [%s]\n", value);
+	data->exit_code = 0;
 	if (compare_command("echo", value, 4) == 0)
 		execute_echo(data, cmd, tkn, 0);
 	else if (compare_command("cd", value, 2) == 0)

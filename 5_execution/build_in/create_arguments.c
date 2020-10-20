@@ -6,7 +6,7 @@
 /*   By: qli <qli@student.codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/25 15:05:59 by qli           #+#    #+#                 */
-/*   Updated: 2020/10/19 11:38:22 by rbakker       ########   odam.nl         */
+/*   Updated: 2020/10/20 11:35:30 by qli           ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,6 @@ char	*check_path_array(t_data *data, char **path, char *path_token, int x)
 	}
 	if (stat(abs_path, &stats) == 0)
 	{
-		free(abs_path);
 		free(path_token);
 		free_array(path);
 		return (abs_path);
