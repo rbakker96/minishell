@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/05 21:08:41 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/19 21:08:58 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/10/21 13:36:39 by rbakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,6 @@ int		env_var_len(t_data *data, char *token, int i, int len)
 	int		x;
 
 	i++;
-	var_len = 0;
 	var_len = token_var_len(token, i);
 	variable = ft_substr(token, i, var_len);
 	if (variable == NULL)

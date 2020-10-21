@@ -6,7 +6,7 @@
 /*   By: roybakker <roybakker@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/09 14:51:32 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/20 14:39:29 by rbakker       ########   odam.nl         */
+/*   Updated: 2020/10/21 15:28:06 by rbakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,51 @@
 
 void	execute_exit(t_data *data, int cmd, int tkn, int needed_tokens)
 {
-	if (data && cmd && tkn && needed_tokens)
-		print(data, 1, ".", 0);
-	return ;
+	int exit_code;
+
+	needed_tokens = calculate_needed_tokens(data, cmd, tkn);
+	if (needed_tokens == 1)
+	{
+		free_struct(data);
+		exit(0);
+	}
+	if (numeric_arg_check(data, cmd) == -1)
+		return ;
+	if (needed_tokens > 2)
+	{
+		too_many_args(data);
+		return ;
+	}
+	exit_code = ft_atoi(data->commands[cmd]->tokens[1]);
+	free_struct(data);
+	exit(exit_code);
+}
+
+int		numeric_arg_check(t_data *data, int cmd)
+{
+	int		len;
+	int		len_comparison;
+	char	*value;
+
+	value = data->commands[cmd]->tokens[1];
+	len_comparison = ft_strlen(value);
+	len = 0;
+	while (ft_isdigit(value[len]))
+		len++;
+	if (len != len_comparison)
+	{
+		print(data, 2, "exit\n", 0);
+		print(data, 2, "bash: exit: ", 0);
+		print(data, 2, value, 0);
+		print(data, 2, ": numeric argument required\n", 0);
+		data->exit_code = 1;
+		return (-1);
+	}
+	return (0);
+}
+
+void	too_many_args(t_data *data)
+{
+	print(data, 2, "bash: exit: too many arguments\nexit\n", 0);
+	data->exit_code = 1;
 }

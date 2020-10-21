@@ -6,23 +6,56 @@
 /*   By: roybakker <roybakker@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/09 14:50:36 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/20 14:40:11 by rbakker       ########   odam.nl         */
+/*   Updated: 2020/10/20 21:06:53 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-void	execute_export(t_data *data, int cmd, int tkn, int needed_tokens)
+void	execute_export(t_data *data, int cmd, int tkn)
 {
-	int index;
+	int		envp_size;
+	char	**new_envp;
+
+	envp_size = get_envp_size(data, cmd, tkn);
+	new_envp = (char**)malloc(sizeof(char*) * (envp_size + 1));
+	if (new_envp == NULL)
+		malloc_error(data, data->command_amount, 0);
+	copy_current_envp(data, new_envp);
+	add_new_env_to_envp(data, new_envp, cmd, tkn);
+	free_array(data->envp);
+	data->envp = new_envp;
+}
+
+int		get_envp_size(t_data *data, int cmd, int tkn)
+{
+	char	*value;
+	int		needed_tokens;
+	int		size;
+	int		i;
+
+	size = get_array_size(data->envp);
+	needed_tokens = calculate_needed_tokens(data, cmd, tkn);
+	while (tkn < needed_tokens)
+	{
+		i = 0;
+		value = data->commands[cmd]->tokens[tkn];
+		while (ft_isalpha(value[i]))
+			i++;
+		if (value[i] == '=')
+			size++;
+		tkn++;
+	}
+	return (size);
+}
+
+void	copy_current_envp(t_data *data, char **new_envp)
+{
 	int envp_size;
-	char **new_envp;
+	int index;
 
 	index = 0;
-	if (!needed_tokens)
-		index = 0;
 	envp_size = get_array_size(data->envp);
-	new_envp = (char**)malloc(sizeof(char*) * (envp_size + 2));
 	while (index < envp_size)
 	{
 		new_envp[index] = ft_strdup(data->envp[index]);
@@ -30,10 +63,44 @@ void	execute_export(t_data *data, int cmd, int tkn, int needed_tokens)
 			malloc_error(data, data->command_amount, new_envp);
 		index++;
 	}
-	new_envp[index] = data->commands[cmd]->tokens[tkn + 1];
-	new_envp[index + 1] = 0;
-	data->envp = new_envp;
 }
-// have to update token correctly
-// have to check if input value of export is correct
-// free old env if needed
+
+int		validate_export_token(char *token)
+{
+	int i;
+
+	i = 0;
+	while (ft_isalpha(token[i]))
+		i++;
+	if (token[i] == '=' && i != 0)
+		return (valid);
+	else if (token[i] == '\0')
+		return (0);
+	else
+		return (error);
+}
+
+void	add_new_env_to_envp(t_data *data, char **new_envp, int cmd, int tkn)
+{
+	int envp_size;
+	int ret;
+	int i;
+
+	i = get_array_size(data->envp);
+	envp_size = get_envp_size(data, cmd, tkn);
+	while (tkn < calculate_needed_tokens(data, cmd, 0))
+	{
+		ret = validate_export_token(data->commands[cmd]->tokens[tkn]);
+		if (ret == valid)
+		{
+			new_envp[i] = ft_strdup(data->commands[cmd]->tokens[tkn]);
+			if (new_envp[i] == NULL)
+				malloc_error(data, data->command_amount, new_envp);
+			i++;
+		}
+		else if (ret == error)
+			print_export_error(data, data->commands[cmd]->tokens[tkn]);
+		tkn++;
+	}
+	new_envp[i] = 0;
+}

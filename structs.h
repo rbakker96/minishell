@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/01 14:27:26 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/21 17:02:59 by qli           ########   odam.nl         */
+/*   Updated: 2020/10/21 18:00:25 by qli           ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,9 @@ typedef enum			e_defenitions
 	overwrite = 7,
 	append = 8,
 	redirected = 9,
-	succes = 10
+	succes = 10,
+	valid = 11,
+	error = 12
 }						t_defenitions;
 
 /*
