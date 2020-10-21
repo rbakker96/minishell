@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/12 16:36:24 by rbakker       #+#    #+#                 */
-/*   Updated: 2020/10/21 20:06:12 by qli           ########   odam.nl         */
+/*   Updated: 2020/10/21 20:13:02 by qli           ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,13 +65,13 @@ void	wait_for_child_process(void)
 	while (wait(&status) > 0)
 	{
 		if (WIFEXITED(status))
-			g_exit_signal = WEXITSTATUS(status);
+			g_exit_code = WEXITSTATUS(status);
 		if (WCOREDUMP(status) > 0)
-			g_exit_signal = 1;
+			g_exit_code = 1;
 		if (WIFSTOPPED(status))
-			g_exit_signal = WSTOPSIG(status);
-		if (g_exit_signal == 2 || g_exit_signal == 3)
-			g_exit_signal = 128 + g_exit_signal;
+			g_exit_code = WSTOPSIG(status);
+		if (g_exit_code == 2 || g_exit_code == 3)
+			g_exit_code = 128 + g_exit_code;
 	}
 }
 
@@ -81,7 +81,7 @@ void	execute_command(t_data *data, int cmd, int tkn)
 
 	value = data->commands[cmd]->tokens[tkn];
 	// printf("current token is [%s]\n", value);
-	g_exit_signal = 0;
+	g_exit_code = 0;
 	if (compare_command("echo", value, 4) == 0)
 		execute_echo(data, cmd, tkn, 0);
 	else if (compare_command("cd", value, 2) == 0)

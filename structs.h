@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/01 14:27:26 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/21 20:08:22 by qli           ########   odam.nl         */
+/*   Updated: 2020/10/21 20:13:02 by qli           ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 **--------------------------------GENERAL---------------------------------------
 */
 
-extern	int				g_exit_signal;
+extern	int				g_exit_code;
 extern	char			*g_dir_path;
 extern	int				g_pid;
 

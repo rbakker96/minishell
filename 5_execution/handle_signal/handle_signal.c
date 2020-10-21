@@ -6,20 +6,20 @@
 /*   By: qli <qli@student.codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/21 13:15:18 by qli           #+#    #+#                 */
-/*   Updated: 2020/10/21 20:06:21 by qli           ########   odam.nl         */
+/*   Updated: 2020/10/21 20:13:02 by qli           ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-int		g_exit_signal = 0;
+int		g_exit_code = 0;
 
 void	handle_all_signal(void)
 {
 	if (signal(SIGINT, &sigint_handler) == SIG_ERR)
-		g_exit_signal = 1;
+		g_exit_code = 1;
 	if (signal(SIGQUIT, &sigquit_handler) == SIG_ERR)
-		g_exit_signal = 1;
+		g_exit_code = 1;
 }
 
 void	print_prompt(void)
@@ -33,15 +33,15 @@ void	sigint_handler(int signum)
 	int	ret;
 
 	ret = 0;
-	g_exit_signal = 2;
+	g_exit_code = 2;
 	if (g_pid == 0)
 	{
-		g_exit_signal = 1;
+		g_exit_code = 1;
 		print_prompt();
 	}
 	else
 	{
-		ret = kill(g_pid, g_exit_signal);
+		ret = kill(g_pid, g_exit_code);
 		if (ret == 0)
 		{
 			write(1, "\n", 1);
@@ -49,7 +49,7 @@ void	sigint_handler(int signum)
 		}
 		else
 		{
-			g_exit_signal = 1;
+			g_exit_code = 1;
 			print_prompt();
 		}
 	}
@@ -61,15 +61,15 @@ void	sigquit_handler(int signum)
 	int	ret;
 
 	ret = 0;
-	g_exit_signal = 3;
+	g_exit_code = 3;
 	if (g_pid == 0)
 	{
 		write(1, "\b\b  \b\b", 6);
-		g_exit_signal = 0;
+		g_exit_code = 0;
 	}
 	else
 	{
-		ret = kill(g_pid, g_exit_signal);
+		ret = kill(g_pid, g_exit_code);
 		if (ret == 0)
 		{
 			write(1, "Quit: 3\n", 8);
@@ -78,7 +78,7 @@ void	sigquit_handler(int signum)
 		else
 		{
 			write(1, "\b\b  \b\b", 6);
-			g_exit_signal = 0;
+			g_exit_code = 0;
 		}
 	}
 	signal(signum, sigquit_handler);

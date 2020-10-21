@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/05 10:18:54 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/21 19:41:27 by qli           ########   odam.nl         */
+/*   Updated: 2020/10/21 20:13:02 by qli           ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	print_errno(t_data *data, int cmd, char *filename, int exit_code)
 	print(data, 2, strerror(errno), 0);
 	print_char(data, 2, '\n', 0);
 	if (data->commands[cmd]->pipe_nb == 0)
-		g_exit_signal = exit_code;
+		g_exit_code = exit_code;
 	else
 	{
 		free_struct(data);
