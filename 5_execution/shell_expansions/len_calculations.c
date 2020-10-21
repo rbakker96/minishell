@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/05 21:08:41 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/21 13:36:39 by rbakker       ########   odam.nl         */
+/*   Updated: 2020/10/21 19:35:13 by qli           ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ int		exit_code_len(t_data *data, int len)
 {
 	char *exit_code;
 
-	exit_code = ft_itoa(data->exit_code);
+	exit_code = ft_itoa(g_exit_signal);
 	if (exit_code == NULL)
 		malloc_error(data, data->command_amount, 0);
 	len = ft_strlen(exit_code);

@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/01 14:27:26 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/21 18:32:12 by qli           ########   odam.nl         */
+/*   Updated: 2020/10/21 20:08:22 by qli           ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,6 @@ typedef struct			s_data
 	char				**envp;
 	char				**args;
 	int					command_amount;
-	int					exit_code;
-	int					pid;
 }						t_data;
 
 #endif

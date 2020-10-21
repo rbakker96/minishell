@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/12 16:36:24 by rbakker       #+#    #+#                 */
-/*   Updated: 2020/10/21 18:00:51 by qli           ########   odam.nl         */
+/*   Updated: 2020/10/21 20:06:12 by qli           ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	execution_loop(t_data *data, int cmd, int tkn)
 			data->commands[cmd]->pipe_pos++;
 		}
 		close_all_fds(data, cmd);
-		wait_for_child_process(data);
+		wait_for_child_process();
 		cmd++;
 	}
 	free_struct(data);
@@ -58,20 +58,20 @@ void	fork_command(t_data *data, int cmd, int tkn)
 	}
 }
 
-void	wait_for_child_process(t_data *data)
+void	wait_for_child_process(void)
 {
 	int status;
 
 	while (wait(&status) > 0)
 	{
 		if (WIFEXITED(status))
-			data->exit_code = WEXITSTATUS(status);
+			g_exit_signal = WEXITSTATUS(status);
 		if (WCOREDUMP(status) > 0)
-			data->exit_code = 1;
+			g_exit_signal = 1;
 		if (WIFSTOPPED(status))
-			data->exit_code = WSTOPSIG(status);
-		if (g_exit_signal > 0)
-			data->exit_code = 128 + g_exit_signal;
+			g_exit_signal = WSTOPSIG(status);
+		if (g_exit_signal == 2 || g_exit_signal == 3)
+			g_exit_signal = 128 + g_exit_signal;
 	}
 }
 
@@ -81,10 +81,7 @@ void	execute_command(t_data *data, int cmd, int tkn)
 
 	value = data->commands[cmd]->tokens[tkn];
 	// printf("current token is [%s]\n", value);
-	if (g_exit_signal == 2)
-		data->exit_code = 1;
-	else
-		data->exit_code = 0;
+	g_exit_signal = 0;
 	if (compare_command("echo", value, 4) == 0)
 		execute_echo(data, cmd, tkn, 0);
 	else if (compare_command("cd", value, 2) == 0)

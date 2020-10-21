@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/30 14:33:38 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/20 21:02:22 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/10/21 19:34:02 by qli           ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	print_export_error(t_data *data, char *cmd)
 	print(data, 2, "minishell : export : '", 0);
 	print(data, 2, cmd, 0);
 	print(data, 2, "': not a valid identifier\n", 0);
-	data->exit_code = 1;
+	g_exit_signal = 1;
 }
 
 void	print_special_errno(t_data *data, char *cmd, char *msg, int exit_code)

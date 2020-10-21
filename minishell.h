@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/01 15:55:06 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/21 17:59:59 by qli           ########   odam.nl         */
+/*   Updated: 2020/10/21 20:06:47 by qli           ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -225,16 +225,17 @@ void	close_used_fds(t_data *data, int cmd);
 void	close_all_fds(t_data *data, int cmd);
 
 /*
-**--SUB_FOLDER-------------------HANDLE_SIGNALS----------------------------------
+**--SUB_FOLDER-------------------HANDLE_SIGNALS---------------------------------
 */
 
 /*
 ** handle_signal.c
 */
 
-void	handle_all_signal(t_data *data);
+void	handle_all_signal(void);
 void	sigint_handler(int signum);
 void	sigquit_handler(int signum);
+void	print_prompt(void);
 
 /*
 **--SUB_FOLDER-------------------SHELL_EXPANSIONS-------------------------------
@@ -282,7 +283,7 @@ int		count_usable_tokens(t_data *data, int cmd, int tkn);
 */
 void	execution_loop(t_data *data, int cmd, int tkn);
 void	fork_command(t_data *data, int cmd, int tkn);
-void	wait_for_child_process(t_data *data);
+void	wait_for_child_process(void);
 void	execute_command(t_data *data, int cmd, int tkn);
 
 /*

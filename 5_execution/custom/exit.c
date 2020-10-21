@@ -6,7 +6,7 @@
 /*   By: roybakker <roybakker@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/09 14:51:32 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/21 15:28:06 by rbakker       ########   odam.nl         */
+/*   Updated: 2020/10/21 19:34:49 by qli           ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int		numeric_arg_check(t_data *data, int cmd)
 		print(data, 2, "bash: exit: ", 0);
 		print(data, 2, value, 0);
 		print(data, 2, ": numeric argument required\n", 0);
-		data->exit_code = 1;
+		g_exit_signal = 1;
 		return (-1);
 	}
 	return (0);
@@ -60,5 +60,5 @@ int		numeric_arg_check(t_data *data, int cmd)
 void	too_many_args(t_data *data)
 {
 	print(data, 2, "bash: exit: too many arguments\nexit\n", 0);
-	data->exit_code = 1;
+	g_exit_signal = 1;
 }
