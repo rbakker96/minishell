@@ -6,7 +6,7 @@
 /*   By: qli <qli@student.codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/21 13:15:18 by qli           #+#    #+#                 */
-/*   Updated: 2020/10/21 18:37:47 by qli           ########   odam.nl         */
+/*   Updated: 2020/10/21 18:39:01 by qli           ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	sigint_handler(int signum)
 	ret = 0;
 	g_exit_signal = 2;
 	if (g_pid == 0)
-		print_prompt();	
+		print_prompt();
 	else
 	{
 		ret = kill(g_pid, g_exit_signal);
