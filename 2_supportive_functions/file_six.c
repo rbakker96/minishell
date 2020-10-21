@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/12 13:11:44 by rbakker       #+#    #+#                 */
-/*   Updated: 2020/10/19 20:00:39 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/10/21 13:57:01 by rbakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int		calculate_needed_tokens(t_data *data, int cmd, int tkn)
 		tkn++;
 		value = data->commands[cmd]->tokens[tkn];
 	}
-	return (count++);
+	return (count);
 }
 
 void	update_token_position(t_data *data, int cmd, int *tkn)

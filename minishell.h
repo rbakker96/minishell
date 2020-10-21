@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/01 15:55:06 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/20 20:55:57 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/10/21 13:33:34 by rbakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -188,6 +188,9 @@ void	execute_pwd(t_data *data, int cmd, int tkn, int needed_tokens);
 ** unset.c
 */
 void	execute_unset(t_data *data, int cmd, int tkn, int needed_tokens);
+void	copy_remaining_vars(t_data *data, char **new_envp, int cmd, int tkn);
+int		compare_var(t_data *data, int cmd, int tkn, char *envp_var);
+int		nb_of_matching_var(t_data *data, int cmd, int tkn, int needed_tokens);
 
 /*
 **--SUB_FOLDER-------------------HANDLE_FDS-------------------------------------
