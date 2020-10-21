@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/02 11:00:03 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/21 17:59:48 by qli           ########   odam.nl         */
+/*   Updated: 2020/10/21 18:22:56 by qli           ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ int		parse_command(t_data *data, char **envp)
 		return (-1);
 	if (data->input[0] == '\0')
 	{
-		//free_struct(data);
+		//free_struct(data); // need to solve free protection
+		write(1, "exit\n", 5);
 		exit(0);
 	}
 	create_command_table(data, data->input, 0);
