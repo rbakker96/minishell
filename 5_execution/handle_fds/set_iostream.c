@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/15 17:46:32 by rbakker       #+#    #+#                 */
-/*   Updated: 2020/10/19 14:52:16 by qli           ########   odam.nl         */
+/*   Updated: 2020/10/20 15:00:44 by qli           ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,13 @@ int		set_iostream(t_data *data, int cmd, int tkn)
 	{
 		if (set_redirection_fds(data, cmd, tkn) == -1)
 		{
-			data->exit_code = 1; //set exit code
+			data->exit_code = 1;
 			return (-1);
 		}
 	}
 	printf("iostream read = %d\n", data->iostream[READ]);
 	printf("iostream write = %d\n", data->iostream[WRITE]);
+	data->exit_code = 0;
 	return (0);
 }
 

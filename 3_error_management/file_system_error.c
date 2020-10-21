@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/05 10:18:54 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/20 14:33:22 by qli           ########   odam.nl         */
+/*   Updated: 2020/10/20 15:16:17 by qli           ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	check_file_permission(t_data *data, char *path)
 	}
 	else
 	{
-		if ((stats.st_mode & S_IFDIR) == 16384) //need to check 16384
+		if ((stats.st_mode & S_IFDIR) == 16384) //hex(4000)
 			print_special_errno(data, path, "is a directory", 126);
 		if ((stats.st_mode & S_IXUSR) == 0)
 			print_special_errno(data, path, "Permission denied", 126);

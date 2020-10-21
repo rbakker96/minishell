@@ -6,7 +6,7 @@
 #    By: rbakker <rbakker@student.42.fr>              +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/02/05 14:55:09 by rbakker       #+#    #+#                  #
-#    Updated: 2020/10/19 11:46:59 by rbakker       ########   odam.nl          #
+#    Updated: 2020/10/21 13:29:46 by qli           ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,6 +37,7 @@ SOURCES			= 	main.c \
 					5_execution/handle_fds/initialize_pipes.c \
 					5_execution/handle_fds/initialize_redirections.c \
 					5_execution/handle_fds/set_iostream.c \
+					5_execution/handle_signal/handle_signal.c \
 					5_execution/shell_expansions/expand_functions.c \
 					5_execution/shell_expansions/len_calculations.c \
 					5_execution/shell_expansions/shell_expansions.c \

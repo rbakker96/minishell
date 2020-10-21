@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/01 15:55:06 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/20 14:45:09 by rbakker       ########   odam.nl         */
+/*   Updated: 2020/10/21 13:29:05 by qli           ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,13 @@
 # include <unistd.h>
 # include <sys/types.h>
 # include <sys/wait.h>
-# include <sys/stat.h>
 # include <errno.h> /* for 'ENOENT' and 'ENOMEM' */
 # include <limits.h>
 # include <dirent.h>
 # include <string.h> /* for strerror */
 # include <sys/stat.h> /* for open */
 # include <fcntl.h> /* for open */
+# include <signal.h>
 
 /*
 **--FOLDER-----------------2_SUPPORTIVE__FUNCTIONS------------------------------
@@ -215,6 +215,18 @@ void	close_used_fds(t_data *data, int cmd);
 void	close_all_fds(t_data *data, int cmd);
 
 /*
+**--SUB_FOLDER-------------------HANDLE_SIGNALS----------------------------------
+*/
+
+/*
+** handle_signal.c
+*/
+
+void	handle_all_signal(t_data *data);
+void	sigint_handler(int signum);
+void	sigquit_handler(int signum);
+
+/*
 **--SUB_FOLDER-------------------SHELL_EXPANSIONS-------------------------------
 */
 
@@ -318,5 +330,7 @@ int		validate_output_redirection(t_data *data, char *charachter);
 int		validate_pipes(t_data *data, char *charachter);
 int		replace_double_pipes(t_data *data);
 void	reduce_input_str(t_data *data, int reduction, int *i);
+
+void handle_sigint(int sig);
 
 #endif

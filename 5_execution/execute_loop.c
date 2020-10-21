@@ -6,11 +6,13 @@
 /*   By: rbakker <rbakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/12 16:36:24 by rbakker       #+#    #+#                 */
-/*   Updated: 2020/10/20 14:05:53 by rbakker       ########   odam.nl         */
+/*   Updated: 2020/10/21 16:53:05 by qli           ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
+
+int		g_pid = 0;
 
 void	execution_loop(t_data *data, int cmd, int tkn)
 {
@@ -21,7 +23,7 @@ void	execution_loop(t_data *data, int cmd, int tkn)
 		tkn = 0;
 		while (tkn < data->commands[cmd]->token_amount)
 		{
-			if (set_iostream(data, cmd, tkn) == -1  ||
+			if (set_iostream(data, cmd, tkn) == -1 ||
 				update_token_list(data, cmd, &tkn) == -1)
 				break ;
 			if (!data->commands[cmd]->pipe_nb && custom_cmd(data, cmd, tkn))
@@ -41,12 +43,10 @@ void	execution_loop(t_data *data, int cmd, int tkn)
 
 void	fork_command(t_data *data, int cmd, int tkn)
 {
-	int pid;
-
-	pid = fork();
-	if (pid == -1)
+	g_pid = fork();
+	if (g_pid == -1)
 		exit(1);
-	if (pid == 0)
+	if (g_pid == 0)
 	{
 		close_not_used_fds(data, cmd);
 		if (dup2(data->iostream[READ], STDIN) == -1)
@@ -65,14 +65,13 @@ void	wait_for_child_process(t_data *data)
 	while (wait(&status) > 0)
 	{
 		if (WIFEXITED(status))
-		{
-			printf("exit->code set by WEXITSTATUS\n"); // to remove
 			data->exit_code = WEXITSTATUS(status);
-		}
 		if (WCOREDUMP(status) > 0)
 			data->exit_code = 1;
 		if (WIFSTOPPED(status))
 			data->exit_code = WSTOPSIG(status);
+		if (g_exit_signal > 0)
+			data->exit_code = 128 + g_exit_signal;
 	}
 }
 
@@ -81,8 +80,11 @@ void	execute_command(t_data *data, int cmd, int tkn)
 	char	*value;
 
 	value = data->commands[cmd]->tokens[tkn];
-	printf("current token is [%s]\n", value);
-	data->exit_code = 0;
+	// printf("current token is [%s]\n", value);
+	if (g_exit_signal == 2)
+		data->exit_code = 1;
+	else
+		data->exit_code = 0;
 	if (compare_command("echo", value, 4) == 0)
 		execute_echo(data, cmd, tkn, 0);
 	else if (compare_command("cd", value, 2) == 0)

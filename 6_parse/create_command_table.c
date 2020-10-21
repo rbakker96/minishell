@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/02 11:00:03 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/19 21:15:52 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/10/21 17:58:43 by qli           ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,15 @@
 
 int		parse_command(t_data *data, char **envp)
 {
-	save_environment_variables(data, envp);
+	if (!data->envp)
+		save_environment_variables(data, envp);
 	if (get_next_line(0, &data->input) == -1 || input_validation(data) == -1)
 		return (-1);
+	if (data->input[0] == '\0')
+	{
+		//free_struct(data);
+		exit(0);
+	}
 	create_command_table(data, data->input, 0);
 	return (0);
 }
