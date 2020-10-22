@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/01 14:27:26 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/22 13:20:23 by rbakker       ########   odam.nl         */
+/*   Updated: 2020/10/22 16:21:39 by rbakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ typedef enum			e_defenitions
 
 typedef struct			s_command_table
 {
-	char				*command;
 	char				**tokens;
 	int					token_nb;
 	int					**pipes;
