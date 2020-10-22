@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/13 14:29:01 by rbakker       #+#    #+#                 */
-/*   Updated: 2020/10/22 13:19:30 by rbakker       ########   odam.nl         */
+/*   Updated: 2020/10/22 16:35:53 by qli           ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	initialize_pipes(t_data *data, int cmd)
 
 	i = 0;
 	pipe_nb = get_pipes_amount(data, cmd, 0);
-	printf("pipe amount = %d\n", pipe_nb);
+	// printf("pipe amount = %d\n", pipe_nb);
 	data->commands[cmd]->pipes = (int **)malloc(sizeof(int *) * (pipe_nb + 1));
 	if (data->commands[cmd]->pipes == NULL)
 		malloc_error(data, data->command_nb, 0);
@@ -30,8 +30,8 @@ void	initialize_pipes(t_data *data, int cmd)
 			malloc_error(data, data->command_nb, 0);
 		if (pipe(data->commands[cmd]->pipes[i]) == -1)
 			printf("pipe error\n"); // change later
-		printf("pipe [%d][READ] = %d\n", i, data->commands[cmd]->pipes[i][0]);
-		printf("pipe [%d][WRITE] = %d\n", i, data->commands[cmd]->pipes[i][1]);
+		// printf("pipe [%d][READ] = %d\n", i, data->commands[cmd]->pipes[i][0]);
+		// printf("pipe [%d][WRITE] = %d\n", i, data->commands[cmd]->pipes[i][1]);
 		i++;
 	}
 	data->commands[cmd]->pipes[i] = NULL;
