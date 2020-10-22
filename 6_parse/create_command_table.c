@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/02 11:00:03 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/21 18:22:56 by qli           ########   odam.nl         */
+/*   Updated: 2020/10/22 11:17:47 by rbakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,9 @@ int		parse_command(t_data *data, char **envp)
 		save_environment_variables(data, envp);
 	if (get_next_line(0, &data->input) == -1 || input_validation(data) == -1)
 		return (-1);
-	if (data->input[0] == '\0')
+	if (data->input[0] == '\0' && g_signal == 1)
 	{
+		printf("signal value = %d\n", g_signal);
 		//free_struct(data); // need to solve free protection
 		write(1, "exit\n", 5);
 		exit(0);

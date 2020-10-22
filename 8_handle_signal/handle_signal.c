@@ -6,15 +6,15 @@
 /*   By: qli <qli@student.codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/21 13:15:18 by qli           #+#    #+#                 */
-/*   Updated: 2020/10/21 20:13:02 by qli           ########   odam.nl         */
+/*   Updated: 2020/10/22 11:21:24 by rbakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../minishell.h"
+#include "../minishell.h"
 
 int		g_exit_code = 0;
 
-void	handle_all_signal(void)
+void	signal_handler(void)
 {
 	if (signal(SIGINT, &sigint_handler) == SIG_ERR)
 		g_exit_code = 1;
