@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/07 11:15:58 by rbakker       #+#    #+#                 */
-/*   Updated: 2020/10/22 15:16:13 by rbakker       ########   odam.nl         */
+/*   Updated: 2020/10/22 17:22:51 by rbakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,15 +28,12 @@ void	print_array(char **array)
 	}
 }
 
-int		update_token_list(t_data *data, int cmd, int *tkn)
+int		update_token_list(t_data *data, int cmd, int *tkn, int i)
 {
 	int		usable_tokens;
 	char	**tokens;
-	int		i;
 
-	i = 0;
 	usable_tokens = count_usable_tokens(data, cmd, (*tkn));
-	printf("usable tokens = %d\n", usable_tokens);
 	tokens = malloc(sizeof(char*) * (usable_tokens + 1));
 	if (tokens == NULL)
 		malloc_error(data, 0);
@@ -46,17 +43,18 @@ int		update_token_list(t_data *data, int cmd, int *tkn)
 			(*tkn) += 2;
 		else if (save_list_element(data->commands[cmd]->tokens[(*tkn)],
 											&tokens[i], tkn, &i) == -1)
+		{
+			tokens[i + 1] = 0;
 			malloc_error(data, tokens);
+		}
 	}
 	tokens[i] = 0;
 	free_array(data->commands[cmd]->tokens);
 	data->commands[cmd]->tokens = tokens;
 	data->commands[cmd]->token_nb = usable_tokens;
 	(*tkn) = 0;
-	if (usable_tokens == 0)
-		return (-1);
-	return (0);
 	print_array(data->commands[cmd]->tokens); // remove later
+	return (usable_tokens);
 }
 
 int		save_list_element(char *old_token, char **new_token, int *tkn, int *x)

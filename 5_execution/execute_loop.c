@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/12 16:36:24 by rbakker       #+#    #+#                 */
-/*   Updated: 2020/10/22 15:09:09 by rbakker       ########   odam.nl         */
+/*   Updated: 2020/10/22 17:29:40 by rbakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	execution_loop(t_data *data, int cmd, int tkn)
 		while (tkn < data->commands[cmd]->token_nb)
 		{
 			if (set_iostream(data, cmd, tkn) == -1 ||
-				update_token_list(data, cmd, &tkn) == -1)
+				!update_token_list(data, cmd, &tkn, 0))
 				break ;
 			if (!data->commands[cmd]->pipe_nb && custom_cmd(data, cmd, tkn))
 				execute_command(data, cmd, tkn);
@@ -52,6 +52,7 @@ void	fork_command(t_data *data, int cmd, int tkn)
 		if (dup2(data->iostream[WRITE], STDOUT) == -1)
 			exit(1);
 		execute_command(data, cmd, tkn);
+		clear_memory(data);
 		exit(0);
 	}
 }

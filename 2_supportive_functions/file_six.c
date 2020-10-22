@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/12 13:11:44 by rbakker       #+#    #+#                 */
-/*   Updated: 2020/10/22 14:31:21 by qli           ########   odam.nl         */
+/*   Updated: 2020/10/22 16:57:07 by rbakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int		compare_command(char *command, char *token_command, int len)
 
 	token_len = ft_strlen(token_command);
 	if (token_len != len)
-		return (-1); // needs to confirm
+		return (-1);
 	return (ft_strncmp(command, token_command, len));
 }
 
@@ -36,7 +36,7 @@ int		check_token_usability(char **tokens, int i)
 	if (compare_command("<", tokens[i], 1) == 0 ||
 		compare_command(">", tokens[i], 1) == 0 ||
 		compare_command(">>", tokens[i], 2) == 0)
-		return (-1); // needs to confirm
+		return (-1);
 	else
 		return (0);
 }

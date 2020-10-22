@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/01 14:27:26 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/22 16:21:39 by rbakker       ########   odam.nl         */
+/*   Updated: 2020/10/22 16:52:47 by rbakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,13 +58,13 @@ typedef struct			s_command_table
 
 typedef struct			s_data
 {
-	char				*input;
-	char				*current_token;
-	t_command_table		**commands;
 	int					iostream[2];
+	char				*input;
 	char				**envp;
 	char				**args;
+	t_command_table		**commands;
 	int					command_nb;
+	char				*current_token;
 }						t_data;
 
 #endif

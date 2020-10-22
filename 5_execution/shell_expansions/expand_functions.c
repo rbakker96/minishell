@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/05 21:11:22 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/22 15:18:09 by rbakker       ########   odam.nl         */
+/*   Updated: 2020/10/22 16:30:24 by rbakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,19 +63,15 @@ void	escape_double_quotes(t_data *data, char **new_token, int *i, int *x)
 	(*i)++;
 	if (token[(*i)] == '$' || token[(*i)] == '`' || \
 		token[(*i)] == '\"' || token[(*i)] == '\\')
-	{
 		(*new_token)[(*x)] = token[(*i)];
-		(*x)++;
-		(*i)++;
-	}
 	else
 	{
 		(*new_token)[(*x) - 1] = token[(*i)];
 		(*i)++;
 		(*new_token)[(*x)] = token[(*i)];
-		(*x)++;
-		(*i)++;
 	}
+	(*x)++;
+	(*i)++;
 }
 
 void	env_variable(t_data *data, char **new_token, int i, int *x)
