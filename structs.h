@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/01 14:27:26 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/22 11:47:39 by qli           ########   odam.nl         */
+/*   Updated: 2020/10/22 13:20:23 by rbakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ typedef struct			s_command_table
 {
 	char				*command;
 	char				**tokens;
-	int					token_amount;
+	int					token_nb;
 	int					**pipes;
 	int					pipe_nb;
 	int					pipe_pos;
@@ -65,7 +65,7 @@ typedef struct			s_data
 	int					iostream[2];
 	char				**envp;
 	char				**args;
-	int					command_amount;
+	int					command_nb;
 }						t_data;
 
 #endif

@@ -6,21 +6,21 @@
 /*   By: roybakker <roybakker@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/19 13:23:31 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/12 15:37:34 by rbakker       ########   odam.nl         */
+/*   Updated: 2020/10/22 13:18:34 by rbakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-char	**save_commands(char *line, char command_amount, int i, int index)
+char	**save_commands(char *line, char command_nb, int i, int index)
 {
 	char	**commands;
 	int		len;
 
-	commands = (char**)malloc(sizeof(char*) * (command_amount + 1));
+	commands = (char**)malloc(sizeof(char*) * (command_nb + 1));
 	if (commands == NULL)
 		return (0);
-	while (line[i] != '\0' && index < command_amount)
+	while (line[i] != '\0' && index < command_nb)
 	{
 		len = len_command(line, i, 0);
 		if (check_for_empty_command(line, i) == 0)

@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/05 21:08:41 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/21 20:13:02 by qli           ########   odam.nl         */
+/*   Updated: 2020/10/22 13:18:34 by rbakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ int		env_var_len(t_data *data, char *token, int i, int len)
 	var_len = token_var_len(token, i);
 	variable = ft_substr(token, i, var_len);
 	if (variable == NULL)
-		malloc_error(data, data->command_amount, 0);
+		malloc_error(data, data->command_nb, 0);
 	x = 0;
 	while (x < get_array_size(data->envp))
 	{
@@ -91,7 +91,7 @@ int		exit_code_len(t_data *data, int len)
 
 	exit_code = ft_itoa(g_exit_code);
 	if (exit_code == NULL)
-		malloc_error(data, data->command_amount, 0);
+		malloc_error(data, data->command_nb, 0);
 	len = ft_strlen(exit_code);
 	free(exit_code);
 	return (len);

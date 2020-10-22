@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/01 15:55:06 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/22 11:03:36 by rbakker       ########   odam.nl         */
+/*   Updated: 2020/10/22 13:18:34 by rbakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -280,7 +280,7 @@ void	execute_command(t_data *data, int cmd, int tkn);
 /*
 ** commands.c
 */
-char	**save_commands(char *line, char command_amount, int i, int index);
+char	**save_commands(char *line, char command_nb, int i, int index);
 int		len_command(char *line, int i, int len);
 int		check_for_empty_command(char *line, int i);
 
