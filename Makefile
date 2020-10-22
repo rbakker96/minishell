@@ -6,7 +6,7 @@
 #    By: rbakker <rbakker@student.42.fr>              +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/02/05 14:55:09 by rbakker       #+#    #+#                  #
-#    Updated: 2020/10/21 13:29:46 by qli           ########   odam.nl          #
+#    Updated: 2020/10/22 11:03:03 by rbakker       ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,7 +37,6 @@ SOURCES			= 	main.c \
 					5_execution/handle_fds/initialize_pipes.c \
 					5_execution/handle_fds/initialize_redirections.c \
 					5_execution/handle_fds/set_iostream.c \
-					5_execution/handle_signal/handle_signal.c \
 					5_execution/shell_expansions/expand_functions.c \
 					5_execution/shell_expansions/len_calculations.c \
 					5_execution/shell_expansions/shell_expansions.c \
@@ -48,7 +47,8 @@ SOURCES			= 	main.c \
 					6_parse/tokens.c \
 					7_input_validation/input_validation.c \
 					7_input_validation/validate_quotes.c \
-					7_input_validation/validate_redirections.c
+					7_input_validation/validate_redirections.c \
+					8_handle_signal/handle_signal.c
 
 OBJECTS 		=	${SOURCES:%.c=%.o}
 

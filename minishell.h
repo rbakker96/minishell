@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/01 15:55:06 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/21 20:06:47 by qli           ########   odam.nl         */
+/*   Updated: 2020/10/22 11:03:36 by rbakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -225,19 +225,6 @@ void	close_used_fds(t_data *data, int cmd);
 void	close_all_fds(t_data *data, int cmd);
 
 /*
-**--SUB_FOLDER-------------------HANDLE_SIGNALS---------------------------------
-*/
-
-/*
-** handle_signal.c
-*/
-
-void	handle_all_signal(void);
-void	sigint_handler(int signum);
-void	sigquit_handler(int signum);
-void	print_prompt(void);
-
-/*
 **--SUB_FOLDER-------------------SHELL_EXPANSIONS-------------------------------
 */
 
@@ -342,6 +329,16 @@ int		validate_pipes(t_data *data, char *charachter);
 int		replace_double_pipes(t_data *data);
 void	reduce_input_str(t_data *data, int reduction, int *i);
 
-void handle_sigint(int sig);
+/*
+**--FOLDER------------------8_HANDLE_SIGNALS------------------------------------
+*/
+
+/*
+** handle_signal.c
+*/
+void	signal_handler(void);
+void	sigint_handler(int signum);
+void	sigquit_handler(int signum);
+void	print_prompt(void);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/08/31 10:42:36 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/21 20:13:02 by qli           ########   odam.nl         */
+/*   Updated: 2020/10/22 11:48:37 by qli           ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int		main(int argc, char **argv, char **envp)
 
 	if (argc != 1 || !argv)
 		return (-1);
-	handle_all_signal();
+	signal_handler();
 	g_dir_path = get_current_directory(&data); // need to deal with free
 	while (1)
 	{
