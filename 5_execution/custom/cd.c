@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/09 14:50:20 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/22 17:38:02 by qli           ########   odam.nl         */
+/*   Updated: 2020/10/22 20:22:48 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ void	execute_cd(t_data *data, int cmd, int tkn, int needed_tokens)
 		go_to_home(data, cmd);
 	else if (chdir(value) == -1)
 		print_errno(data, cmd, value, 1);
-	free(g_dir_path); // ROY TO DOUBLE CHECK
-	g_dir_path = get_current_directory(data); // ROY TO DOUBLE CHECK
+	free(g_dir_path);
+	g_dir_path = get_current_directory(data);
 }
 
 int		directory_validation(t_data *data, int cmd, int tkn, int needed_tokens)

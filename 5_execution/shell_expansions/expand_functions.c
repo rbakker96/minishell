@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/05 21:11:22 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/22 16:30:24 by rbakker       ########   odam.nl         */
+/*   Updated: 2020/10/22 21:33:39 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,8 @@ void	env_variable(t_data *data, char **new_token, int i, int *x)
 	z = 0;
 	while (z < get_array_size(data->envp))
 	{
-		if (ft_strncmp(data->envp[z], variable, ft_strlen(variable)) == 0)
+		if (ft_strncmp(data->envp[z], variable, ft_strlen(variable)) == 0
+							&& data->envp[z][ft_strlen(variable)] == '=')
 		{
 			save_env_variable(data->envp[z], new_token, x);
 			break ;

@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/01 15:55:06 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/22 17:40:56 by rbakker       ########   odam.nl         */
+/*   Updated: 2020/10/22 20:41:23 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -199,7 +199,7 @@ void	add_new_env_to_envp(t_data *data, char **new_envp, int cmd, int tkn);
 /*
 ** pwd.c
 */
-void	execute_pwd(t_data *data, int cmd, int tkn, int needed_tokens);
+void	execute_pwd(t_data *data, int cmd);
 
 /*
 ** unset.c
