@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/02 11:00:03 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/21 18:22:56 by qli           ########   odam.nl         */
+/*   Updated: 2020/10/22 11:41:46 by qli           ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,18 @@
 
 int		parse_command(t_data *data, char **envp)
 {
+	int ret;
+
+	ret = 0;
 	if (!data->envp)
 		save_environment_variables(data, envp);
-	if (get_next_line(0, &data->input) == -1 || input_validation(data) == -1)
+	ret = get_next_line(0, &data->input);
+	if (ret == -1 || input_validation(data) == -1)
+	{
+		g_exit_code = 1;
 		return (-1);
-	if (data->input[0] == '\0')
+	}
+	if (ret == 0)
 	{
 		//free_struct(data); // need to solve free protection
 		write(1, "exit\n", 5);
@@ -59,7 +66,7 @@ int		create_command_table(t_data *data, char *line, int cmd)
 	char	**commands;
 
 	data->command_amount = get_amount_of_commands(line, 0);
-	printf("command amount = %d\n", data->command_amount); //TAKE OUT!!!
+	// printf("command amount = %d\n", data->command_amount); //TAKE OUT!!!
 	data->commands = (t_command_table**)malloc(sizeof(t_command_table*) *
 													(data->command_amount + 1));
 	if (data->commands == NULL)
