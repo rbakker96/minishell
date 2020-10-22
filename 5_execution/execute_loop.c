@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/12 16:36:24 by rbakker       #+#    #+#                 */
-/*   Updated: 2020/10/22 14:15:38 by qli           ########   odam.nl         */
+/*   Updated: 2020/10/22 14:28:20 by rbakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	execution_loop(t_data *data, int cmd, int tkn)
 		wait_for_child_process();
 		cmd++;
 	}
-	free_struct(data);
+	clear_used_memory(data);
 }
 
 void	fork_command(t_data *data, int cmd, int tkn)

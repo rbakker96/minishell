@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/02 11:00:03 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/22 14:57:31 by qli           ########   odam.nl         */
+/*   Updated: 2020/10/22 14:58:44 by qli           ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int		parse_command(t_data *data, char **envp)
 	}
 	else if (ret == 0)
 	{
-		//free_struct(data); // need to solve free protection
+		//clear_memory(data); // need to solve free protection
 		write(2, "exit\n", 5);
 		exit(0);
 	}
@@ -46,15 +46,13 @@ int		save_environment_variables(t_data *data, char **envp)
 	index = 0;
 	envp_size = get_array_size(envp);
 	malloced_envp = (char**)malloc(sizeof(char*) * (envp_size + 1));
+	if (malloced_envp == NULL)
+		envp_malloc_error(data, 0);
 	while (index < envp_size)
 	{
 		malloced_envp[index] = ft_strdup(envp[index]);
 		if (malloced_envp[index] == NULL)
-		{
-			free_array(malloced_envp);
-			print(data, 2, "minishell : error due to malloc failure\n", 0);
-			exit(1);
-		}
+			envp_malloc_error(data, malloced_envp);
 		index++;
 	}
 	malloced_envp[index] = 0;

@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/01 15:55:06 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/22 14:15:25 by qli           ########   odam.nl         */
+/*   Updated: 2020/10/22 14:29:15 by rbakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,10 +68,8 @@ int		redirection(char *str);
 ** file_five.c
 */
 int		get_array_size(char **array);
-int		redirection_check(char *str);
-int		quotes_check(char *str);
+int		get_command_table_size(t_command_table **array);
 int		token_var_len(char *str, int i);
-int		command_check(char check_value, char character);
 
 /*
 ** file_six.c
@@ -81,6 +79,13 @@ int		check_token_usability(char **array, int i);
 int		calculate_needed_tokens(t_data *data, int cmd, int tkn);
 void	update_token_position(t_data *data, int cmd, int *tkn);
 int		custom_cmd(t_data *data, int cmd, int tkn);
+
+/*
+** file_seven.c
+*/
+int		command_check(char check_value, char charachter);
+int		redirection_check(char *str);
+int		quotes_check(char *str);
 
 /*
 **--FOLDER---------------------3_ERROR_MANAGEMENT-------------------------------
@@ -106,6 +111,7 @@ void	check_file_permission(t_data *data, char *path);
 ** memory_error.c
 */
 void	malloc_error(t_data *data, int cmd, char **malloced_array);
+void	envp_malloc_error(t_data *data, char **failed_envp);
 
 /*
 ** validation_error.c
@@ -117,10 +123,18 @@ void	validation_error(t_data *data, char character, int exit_code);
 */
 
 /*
-** free_struct.c
+** memory_management.c
 */
-void	free_struct(t_data *data);
+void	initialize(t_data *data);
+void	clear_memory(t_data *data);
+void	clear_used_memory(t_data *data);
+
+/*
+** free_functions.c
+*/
+void	free_string(char *string);
 void	free_array(char **array);
+void	free_command_table(t_data *data);
 
 /*
 **--FOLDER------------------------5_EXECUTION-----------------------------------
@@ -310,22 +324,22 @@ void	quoted_len(char *command, int start, int *len, int *current_char);
 ** input_validation.c
 */
 int		input_validation(t_data *data);
-int		validate_command_seperators(t_data *data, char *character);
-int		validate_end_of_line_command(t_data *data, char *character, int len);
-int		validate_start_of_line_command(t_data *data, char *character);
+int		validate_command_seperators(t_data *data, char *charachter);
+int		validate_end_of_line_command(t_data *data, char *charachter, int len);
+int		validate_start_of_line_command(t_data *data, char *charachter);
 
 /*
 ** validate_quote.c
 */
-int		validate_single_quotes(t_data *data, char *character);
-int		validate_double_quotes(t_data *data, char *character);
+int		validate_single_quotes(t_data *data, char *charachter);
+int		validate_double_quotes(t_data *data, char *charachter);
 
 /*
 ** validate_redirections.c
 */
-int		validate_input_redirection(t_data *data, char *character);
-int		validate_output_redirection(t_data *data, char *character);
-int		validate_pipes(t_data *data, char *character);
+int		validate_input_redirection(t_data *data, char *charachter);
+int		validate_output_redirection(t_data *data, char *charachter);
+int		validate_pipes(t_data *data, char *charachter);
 int		replace_double_pipes(t_data *data);
 void	reduce_input_str(t_data *data, int reduction, int *i);
 

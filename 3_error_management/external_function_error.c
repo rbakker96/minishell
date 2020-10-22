@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/30 14:33:38 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/21 20:13:02 by qli           ########   odam.nl         */
+/*   Updated: 2020/10/22 14:00:43 by rbakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	write_error(t_data *data, char *malloced_str)
 		free_array(data->envp);
 	if (data->args)
 		free_array(data->args);
-	free_struct(data);
+	clear_memory(data);
 	exit(1);
 }
 
@@ -63,6 +63,6 @@ void	print_special_errno(t_data *data, char *cmd, char *msg, int exit_code)
 	print_char(data, 2, '\n', 0);
 	free(data->args);
 	data->args = NULL;
-	free_struct(data);
+	clear_memory(data);
 	exit(exit_code);
 }

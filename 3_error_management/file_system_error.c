@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/05 10:18:54 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/21 20:13:02 by qli           ########   odam.nl         */
+/*   Updated: 2020/10/22 14:00:43 by rbakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	print_errno(t_data *data, int cmd, char *filename, int exit_code)
 		g_exit_code = exit_code;
 	else
 	{
-		free_struct(data);
+		clear_memory(data);
 		exit(exit_code);
 	}
 }
@@ -58,13 +58,13 @@ void	print_builtin_errno(t_data *data, char *filename, int exit_code)
 	print(data, 2, " : ", 0);
 	print(data, 2, strerror(errno), 0);
 	print_char(data, 2, '\n', 0);
-	free_struct(data);
+	clear_memory(data);
 	exit(exit_code);
 }
 
 void	get_directory_error(t_data *data)
 {
 	print(data, 2, "minishell : getcwd function failed\n", 0);
-	free_struct(data);
+	clear_memory(data);
 	exit(1);
 }
