@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/09 14:49:34 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/20 14:38:39 by rbakker       ########   odam.nl         */
+/*   Updated: 2020/10/22 16:17:47 by qli           ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	execute_echo(t_data *data, int cmd, int tkn, int needed_tokens)
 			print(data, data->iostream[1], " ", 0);
 		tkn++;
 	}
-	if (newline)
+	if (!newline)
 		print_char(data, 1, '\n', 0);
 }
 
@@ -39,8 +39,8 @@ int		newline_option(char *value, int needed_tokens, int *tkn)
 	else if (compare_command("-n", value, 2) == 0)
 	{
 		((*tkn) < needed_tokens) ? (*tkn)++ : (*tkn);
-		return (0);
+		return (1);
 	}
 	else
-		return (1);
+		return (0);
 }

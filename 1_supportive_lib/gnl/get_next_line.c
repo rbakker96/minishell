@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/11/11 10:55:43 by rbakker       #+#    #+#                 */
-/*   Updated: 2020/10/22 14:31:21 by qli           ########   odam.nl         */
+/*   Updated: 2020/10/22 16:08:44 by qli           ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,21 +73,21 @@ int				get_next_line(int fd, char **line)
 	int			fail;
 
 	if (fd < 0 || !line || read(fd, 0, 0) == -1)
-		return (-1); // needs to confirm
+		return (-1);
 	while (!line_break(buf))
 	{
 		res = read(fd, b, BUFFER_SIZE);
 		b[res] = '\0';
 		fail = (buf == 0) ? cpy(&buf, b) : join_free(&buf, b, 0, 0);
 		if (fail == -1)
-			return (-1); // needs to confirm
+			return (-1);
 		if (res == 0)
 			break ;
 	}
 	if (save_line(&buf, line, 0, 0) == -1)
-		return (-1); // needs to confirm
+		return (-1);
 	res = line_break(buf);
 	if (save_remainder(&buf, 0, 0, 0) == -1)
-		return (-1); // needs to confirm
+		return (-1);
 	return (generate_output(res, &buf));
 }

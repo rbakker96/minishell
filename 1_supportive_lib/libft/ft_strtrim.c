@@ -6,7 +6,7 @@
 /*   By: rbakker <marvin@codam.nl>                    +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/11/04 08:45:07 by rbakker       #+#    #+#                 */
-/*   Updated: 2020/10/22 14:31:21 by qli           ########   odam.nl         */
+/*   Updated: 2020/10/22 16:08:44 by qli           ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static int		start(char const *s1, char const *set)
 		i++;
 	}
 	if (s1[0] == set[0])
-		return (-1); // needs to confirm
+		return (-1);
 	return (0);
 }
 

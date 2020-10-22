@@ -6,7 +6,7 @@
 /*   By: roybakker <roybakker@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/19 13:23:31 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/22 15:58:44 by rbakker       ########   odam.nl         */
+/*   Updated: 2020/10/22 17:39:45 by qli           ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ char	**save_commands(char *line, char command_nb, int i, int index)
 				free_array(commands);
 				return (0);
 			}
-			printf("command [%d] = [%s]\n", index, commands[index]); //TAKE OUT!!!
+			// printf("command [%d] = [%s]\n", index, commands[index]); //TAKE OUT!!!
 			index++;
 		}
 		i += len;

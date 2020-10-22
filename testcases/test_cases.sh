@@ -197,11 +197,11 @@ cat main.c > out > out1 > out2 ; cat
 
 # if int does not exist, it will say no file or directory
 # if int exist, cat main.c will be executed. < int will be disregarded 
-cat main.c < int
+cat main.c < input
 
 # if int does not exist, error message
 # if int exist, this command does not do anything. cat main.c goes into the pipe, however, it is not used by < int following the pipe
-cat main.c | < int
+cat main.c | < input
 
 # if any input file does not exist, error messsagev
 # if all files exist, cat will display info from int3 (the last input file)

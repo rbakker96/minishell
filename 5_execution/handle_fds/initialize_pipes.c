@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/13 14:29:01 by rbakker       #+#    #+#                 */
-/*   Updated: 2020/10/22 16:51:07 by rbakker       ########   odam.nl         */
+/*   Updated: 2020/10/22 17:45:37 by rbakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ void	initialize_pipes(t_data *data, int cmd)
 			malloc_error(data, 0);
 		if (pipe(data->commands[cmd]->pipes[i]) == -1)
 			malloc_error(data, 0);
-		printf("pipe [%d][READ] = %d\n", i, data->commands[cmd]->pipes[i][0]);
-		printf("pipe [%d][WRITE] = %d\n", i, data->commands[cmd]->pipes[i][1]);
+		//printf("pipe [%d][READ] = %d\n", i, data->commands[cmd]->pipes[i][0]);
+		//printf("pipe [%d][WRITE] = %d\n", i, data->commands[cmd]->pipes[i][1]);
 		i++;
 	}
 	data->commands[cmd]->pipes[i] = NULL;
