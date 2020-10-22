@@ -6,7 +6,7 @@
 #    By: rbakker <rbakker@student.42.fr>              +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/02/05 14:55:09 by rbakker       #+#    #+#                  #
-#    Updated: 2020/10/22 11:03:03 by rbakker       ########   odam.nl          #
+#    Updated: 2020/10/22 14:15:53 by rbakker       ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,11 +19,13 @@ SOURCES			= 	main.c \
 					2_supportive_functions/file_four.c \
 					2_supportive_functions/file_five.c \
 					2_supportive_functions/file_six.c \
+					2_supportive_functions/file_seven.c \
 					3_error_management/external_function_error.c \
 					3_error_management/file_system_error.c \
 					3_error_management/memory_error.c \
 					3_error_management/validation_error.c \
-					4_memory_management/free_struct.c \
+					4_memory_management/memory_management.c \
+					4_memory_management/free_functions.c \
 					5_execution/build_in/create_arguments.c \
 					5_execution/build_in/run_executable.c \
 					5_execution/custom/cd.c \

@@ -6,7 +6,7 @@
 /*   By: roybakker <roybakker@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/09 14:51:32 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/21 20:13:02 by qli           ########   odam.nl         */
+/*   Updated: 2020/10/22 14:00:43 by rbakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	execute_exit(t_data *data, int cmd, int tkn, int needed_tokens)
 	needed_tokens = calculate_needed_tokens(data, cmd, tkn);
 	if (needed_tokens == 1)
 	{
-		free_struct(data);
+		clear_memory(data);
 		exit(0);
 	}
 	if (numeric_arg_check(data, cmd) == -1)
@@ -30,7 +30,7 @@ void	execute_exit(t_data *data, int cmd, int tkn, int needed_tokens)
 		return ;
 	}
 	exit_code = ft_atoi(data->commands[cmd]->tokens[1]);
-	free_struct(data);
+	clear_memory(data);
 	exit(exit_code);
 }
 

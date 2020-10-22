@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/09 16:44:49 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/20 15:30:20 by rbakker       ########   odam.nl         */
+/*   Updated: 2020/10/22 14:15:28 by rbakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,32 +17,23 @@ int		get_array_size(char **array)
 	int	i;
 
 	i = 0;
+	if (!array)
+		return (0);
 	while (array[i] != 0)
 		i++;
 	return (i);
 }
 
-int		redirection_check(char *str)
+int		get_command_table_size(t_command_table **array)
 {
-	if (!str)
-		return (0);
-	else if (ft_strncmp(str, "<", ft_strlen(str)) == 0)
-		return (redirected);
-	else if (ft_strncmp(str, ">", ft_strlen(str)) == 0)
-		return (redirected);
-	else if (ft_strncmp(str, ">>", ft_strlen(str)) == 0)
-		return (redirected);
-	return (0);
-}
+	int	i;
 
-int		quotes_check(char *str)
-{
-	if (str[0] == '\"')
-		return (double_quote);
-	else if (str[0] == '\'')
-		return (single_quote);
-	else
-		return (normal_char);
+	i = 0;
+	if (!array)
+		return (0);
+	while (array[i] != 0)
+		i++;
+	return (i);
 }
 
 int		token_var_len(char *str, int i)
@@ -54,13 +45,4 @@ int		token_var_len(char *str, int i)
 			str[i + len] != '\"' && str[i + len] != '=')
 		len++;
 	return (len);
-}
-
-int		command_check(char check_value, char charachter)
-{
-	if (charachter == check_value || charachter == '|' || charachter == ';' ||
-		charachter == '\0')
-		return (-1);
-	else
-		return (0);
 }
