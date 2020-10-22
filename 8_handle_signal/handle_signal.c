@@ -6,7 +6,7 @@
 /*   By: qli <qli@student.codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/21 13:15:18 by qli           #+#    #+#                 */
-/*   Updated: 2020/10/22 11:21:24 by rbakker       ########   odam.nl         */
+/*   Updated: 2020/10/22 14:13:56 by qli           ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	signal_handler(void)
 
 void	print_prompt(void)
 {
-	write(1, "\b\b  \b\b", 6);
+	write(2, "\b\b  \b\b", 6);
 	ft_printf("\n\033[1;32m→\033[1;36m %s\033[0m ", g_dir_path);
 }
 
@@ -44,7 +44,7 @@ void	sigint_handler(int signum)
 		ret = kill(g_pid, g_exit_code);
 		if (ret == 0)
 		{
-			write(1, "\n", 1);
+			write(2, "\n", 1);
 			g_pid = 0;
 		}
 		else
@@ -64,7 +64,7 @@ void	sigquit_handler(int signum)
 	g_exit_code = 3;
 	if (g_pid == 0)
 	{
-		write(1, "\b\b  \b\b", 6);
+		write(2, "\b\b  \b\b", 6);
 		g_exit_code = 0;
 	}
 	else
@@ -72,12 +72,12 @@ void	sigquit_handler(int signum)
 		ret = kill(g_pid, g_exit_code);
 		if (ret == 0)
 		{
-			write(1, "Quit: 3\n", 8);
+			write(2, "Quit: 3\n", 8);
 			g_pid = 0;
 		}
 		else
 		{
-			write(1, "\b\b  \b\b", 6);
+			write(2, "\b\b  \b\b", 6);
 			g_exit_code = 0;
 		}
 	}

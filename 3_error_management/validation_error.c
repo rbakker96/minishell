@@ -6,17 +6,17 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/07 14:10:52 by rbakker       #+#    #+#                 */
-/*   Updated: 2020/10/21 20:13:02 by qli           ########   odam.nl         */
+/*   Updated: 2020/10/22 13:57:09 by qli           ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	validation_error(t_data *data, char charachter)
+void	validation_error(t_data *data, char character, int exit_code)
 {
-	print(data, 2, "minishell: parse error near ", 0);
-	print_char(data, 2, charachter, 0);
-	print_char(data, 2, '\n', 0);
-	g_exit_code = 1;
-	free_struct(data);
+	g_exit_code = exit_code;
+	print(data, 2, "minishell: syntax error near unexpected token `", 0);
+	print(data, 2, &character, 0);
+	print(data, 2, "'\n", 0);
+	//free_struct(data); --> this can give seg fault when running multiple echo > commands
 }

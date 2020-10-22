@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/09 16:44:49 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/20 15:30:20 by rbakker       ########   odam.nl         */
+/*   Updated: 2020/10/22 13:39:33 by qli           ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,10 +56,10 @@ int		token_var_len(char *str, int i)
 	return (len);
 }
 
-int		command_check(char check_value, char charachter)
+int		command_check(char check_value, char character)
 {
-	if (charachter == check_value || charachter == '|' || charachter == ';' ||
-		charachter == '\0')
+	if (character == check_value || character == '|' || character == ';' ||
+		character == '\0')
 		return (-1);
 	else
 		return (0);

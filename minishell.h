@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/01 15:55:06 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/22 11:03:36 by rbakker       ########   odam.nl         */
+/*   Updated: 2020/10/22 13:42:41 by qli           ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ int		get_array_size(char **array);
 int		redirection_check(char *str);
 int		quotes_check(char *str);
 int		token_var_len(char *str, int i);
-int		command_check(char check_value, char charachter);
+int		command_check(char check_value, char character);
 
 /*
 ** file_six.c
@@ -110,7 +110,7 @@ void	malloc_error(t_data *data, int cmd, char **malloced_array);
 /*
 ** validation_error.c
 */
-void	validation_error(t_data *data, char charachter);
+void	validation_error(t_data *data, char character, int exit_code);
 
 /*
 **--FOLDER---------------------4_MEMORY_MANAGEMENT------------------------------
@@ -310,22 +310,22 @@ void	quoted_len(char *command, int start, int *len, int *current_char);
 ** input_validation.c
 */
 int		input_validation(t_data *data);
-int		validate_command_seperators(t_data *data, char *charachter);
-int		validate_end_of_line_command(t_data *data, char *charachter, int len);
-int		validate_start_of_line_command(t_data *data, char *charachter);
+int		validate_command_seperators(t_data *data, char *character);
+int		validate_end_of_line_command(t_data *data, char *character, int len);
+int		validate_start_of_line_command(t_data *data, char *character);
 
 /*
 ** validate_quote.c
 */
-int		validate_single_quotes(t_data *data, char *charachter);
-int		validate_double_quotes(t_data *data, char *charachter);
+int		validate_single_quotes(t_data *data, char *character);
+int		validate_double_quotes(t_data *data, char *character);
 
 /*
 ** validate_redirections.c
 */
-int		validate_input_redirection(t_data *data, char *charachter);
-int		validate_output_redirection(t_data *data, char *charachter);
-int		validate_pipes(t_data *data, char *charachter);
+int		validate_input_redirection(t_data *data, char *character);
+int		validate_output_redirection(t_data *data, char *character);
+int		validate_pipes(t_data *data, char *character);
 int		replace_double_pipes(t_data *data);
 void	reduce_input_str(t_data *data, int reduction, int *i);
 
