@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/07 11:15:58 by rbakker       #+#    #+#                 */
-/*   Updated: 2020/10/22 15:00:15 by qli           ########   odam.nl         */
+/*   Updated: 2020/10/22 15:16:13 by rbakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,14 +39,14 @@ int		update_token_list(t_data *data, int cmd, int *tkn)
 	printf("usable tokens = %d\n", usable_tokens);
 	tokens = malloc(sizeof(char*) * (usable_tokens + 1));
 	if (tokens == NULL)
-		malloc_error(data, data->commands[cmd]->token_nb, 0);
+		malloc_error(data, 0);
 	while (i < usable_tokens)
 	{
 		if (check_token_usability(data->commands[cmd]->tokens, (*tkn)) == -1)
 			(*tkn) += 2;
 		else if (save_list_element(data->commands[cmd]->tokens[(*tkn)],
 											&tokens[i], tkn, &i) == -1)
-			malloc_error(data, data->commands[cmd]->token_nb, tokens);
+			malloc_error(data, tokens);
 	}
 	tokens[i] = 0;
 	free_array(data->commands[cmd]->tokens);

@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/02 11:00:03 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/22 15:06:33 by rbakker       ########   odam.nl         */
+/*   Updated: 2020/10/22 16:08:05 by rbakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,14 +69,17 @@ int		create_command_table(t_data *data, char *line, int cmd)
 	data->commands = (t_command_table**)malloc(sizeof(t_command_table*) *
 													(data->command_nb + 1));
 	if (data->commands == NULL)
-		malloc_error(data, 0, 0);
+		malloc_error(data, 0);
 	commands = save_commands(line, data->command_nb, 0, 0);
 	if (commands == NULL)
-		malloc_error(data, 0, 0);
+		malloc_error(data, 0);
 	while (cmd < data->command_nb)
 	{
 		if (save_single_command(data, commands, cmd) == -1)
-			malloc_error(data, cmd, commands);
+		{
+			data->commands[cmd + 1] = NULL;
+			malloc_error(data, commands);
+		}
 		cmd++;
 	}
 	data->commands[cmd] = NULL;
@@ -89,6 +92,7 @@ int		save_single_command(t_data *data, char **commands, int cmd)
 	data->commands[cmd] = (t_command_table*)malloc(sizeof(t_command_table) * 1);
 	if (data->commands[cmd] == NULL)
 		return (-1);
+	initialize_command(data, cmd);
 	data->commands[cmd]->token_nb = get_amount_of_tokens(commands[cmd], 0, 0);
 	printf("token amount = %d\n", data->commands[cmd]->token_nb); //TAKE OUT
 	data->commands[cmd]->tokens = (char**)malloc(sizeof(char*) *

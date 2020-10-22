@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/07 14:50:47 by rbakker       #+#    #+#                 */
-/*   Updated: 2020/10/22 14:38:25 by qli           ########   odam.nl         */
+/*   Updated: 2020/10/22 15:19:27 by rbakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,7 @@ void	reduce_input_str(t_data *data, int reduction, int *i)
 	len = ft_strlen(data->input) - reduction;
 	new_str = malloc(sizeof(char) * (len + 1));
 	if (new_str == NULL)
-		malloc_error(data, 0, 0);
+		malloc_error(data, 0);
 	while (data->input[x] != '|')
 	{
 		new_str[x] = data->input[x];
