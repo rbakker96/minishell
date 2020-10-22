@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/01 15:55:06 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/22 14:29:15 by rbakker       ########   odam.nl         */
+/*   Updated: 2020/10/22 15:58:52 by rbakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,7 @@ void	check_file_permission(t_data *data, char *path);
 /*
 ** memory_error.c
 */
-void	malloc_error(t_data *data, int cmd, char **malloced_array);
+void	malloc_error(t_data *data, char **malloced_array);
 void	envp_malloc_error(t_data *data, char **failed_envp);
 
 /*
@@ -134,6 +134,7 @@ void	clear_used_memory(t_data *data);
 */
 void	free_string(char *string);
 void	free_array(char **array);
+void	free_int_array(int **array);
 void	free_command_table(t_data *data);
 
 /*
@@ -297,6 +298,7 @@ void	execute_command(t_data *data, int cmd, int tkn);
 char	**save_commands(char *line, char command_nb, int i, int index);
 int		len_command(char *line, int i, int len);
 int		check_for_empty_command(char *line, int i);
+void	initialize_command(t_data *data, int cmd);
 
 /*
 ** create_command_table.c

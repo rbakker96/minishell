@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/05 19:44:06 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/22 16:36:18 by qli           ########   odam.nl         */
+/*   Updated: 2020/10/22 17:40:11 by qli           ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	preform_shell_expansions(t_data *data, int cmd, int tkn)
 		len = expansion_len(data, 0, 0);
 		new_token = malloc(sizeof(char) * (len + 1));
 		if (new_token == NULL)
-			malloc_error(data, data->command_nb, 0);
+			malloc_error(data, 0);
 		expand_token(data, &new_token, 0, 0);
 		free(data->commands[cmd]->tokens[tkn]);
 		data->commands[cmd]->tokens[tkn] = new_token;
@@ -93,7 +93,7 @@ void	exit_code(t_data *data, char **new_token, int *x)
 	i = 0;
 	exit_code = ft_itoa(g_exit_code);
 	if (exit_code == NULL)
-		malloc_error(data, data->command_nb, 0);
+		malloc_error(data, 0);
 	while (exit_code[i] != '\0')
 	{
 		(*new_token)[(*x)] = exit_code[i];

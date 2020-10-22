@@ -6,7 +6,7 @@
 /*   By: roybakker <roybakker@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/19 13:23:31 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/22 16:43:21 by qli           ########   odam.nl         */
+/*   Updated: 2020/10/22 17:39:45 by qli           ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,4 +63,10 @@ int		check_for_empty_command(char *line, int i)
 		i++;
 	}
 	return (1);
+}
+
+void	initialize_command(t_data *data, int cmd)
+{
+	data->commands[cmd]->pipes = NULL;
+	data->commands[cmd]->tokens = NULL;
 }

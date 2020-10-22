@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/05 21:11:22 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/22 13:18:34 by rbakker       ########   odam.nl         */
+/*   Updated: 2020/10/22 15:18:09 by rbakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ void	env_variable(t_data *data, char **new_token, int i, int *x)
 	var_len = token_var_len(token, i);
 	variable = ft_substr(token, i, var_len);
 	if (variable == NULL)
-		malloc_error(data, data->command_nb, 0);
+		malloc_error(data, 0);
 	z = 0;
 	while (z < get_array_size(data->envp))
 	{

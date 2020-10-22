@@ -6,13 +6,11 @@
 /*   By: rbakker <rbakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/12 16:36:24 by rbakker       #+#    #+#                 */
-/*   Updated: 2020/10/22 14:28:20 by rbakker       ########   odam.nl         */
+/*   Updated: 2020/10/22 15:09:09 by rbakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-
-int		g_pid = 0;
 
 void	execution_loop(t_data *data, int cmd, int tkn)
 {

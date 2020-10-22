@@ -6,13 +6,11 @@
 /*   By: qli <qli@student.codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/21 13:15:18 by qli           #+#    #+#                 */
-/*   Updated: 2020/10/22 14:13:56 by qli           ########   odam.nl         */
+/*   Updated: 2020/10/22 14:35:09 by rbakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-
-int		g_exit_code = 0;
 
 void	signal_handler(void)
 {

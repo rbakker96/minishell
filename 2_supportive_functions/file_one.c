@@ -6,7 +6,7 @@
 /*   By: roybakker <roybakker@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/02 11:27:20 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/21 16:39:34 by qli           ########   odam.nl         */
+/*   Updated: 2020/10/22 15:14:40 by rbakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,11 +61,11 @@ char	*get_current_directory(t_data *data)
 		get_directory_error(data);
 	directory = ft_split(path, '/');
 	if(directory == NULL)
-		malloc_error(data, 0, 0);
+		malloc_error(data, 0);
 	index = get_array_size(directory);
 	path = ft_strdup(directory[index - 1]);
 	if (path == NULL)
-		malloc_error(data, 0, 0);
+		malloc_error(data, 0);
 	free_array(directory);
 	return (path);
 }

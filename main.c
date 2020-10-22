@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/08/31 10:42:36 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/22 17:36:26 by qli           ########   odam.nl         */
+/*   Updated: 2020/10/22 17:39:55 by qli           ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ int		main(int argc, char **argv, char **envp)
 	}
 	initialize(&data);
 	signal_handler();
-	g_dir_path = get_current_directory(&data); // need to deal with free
 	while (1)
 	{
 		prompt(&data);

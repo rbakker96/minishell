@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/22 13:55:53 by rbakker       #+#    #+#                 */
-/*   Updated: 2020/10/22 14:17:26 by rbakker       ########   odam.nl         */
+/*   Updated: 2020/10/22 16:18:53 by rbakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,23 @@ void	free_array(char **array)
 	free(array);
 }
 
+void	free_int_array(int **array)
+{
+	int i;
+
+	i = 0;
+	if (!array)
+		return ;
+	while (array[i] != 0)
+		i++;
+	while (i >= 0)
+	{
+		free(array[i]);
+		i--;
+	}
+	free(array);
+}
+
 void	free_command_table(t_data *data)
 {
 	int array_size;
@@ -45,6 +62,7 @@ void	free_command_table(t_data *data)
 	array_size = get_command_table_size(data->commands);
 	while (i < array_size)
 	{
+		free_int_array(data->commands[i]->pipes);
 		free_array(data->commands[i]->tokens);
 		free(data->commands[i]);
 		i++;
