@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/07 14:50:47 by rbakker       #+#    #+#                 */
-/*   Updated: 2020/10/22 14:08:35 by qli           ########   odam.nl         */
+/*   Updated: 2020/10/22 14:38:25 by qli           ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,10 +96,7 @@ int		replace_double_pipes(t_data *data)
 			while (data->input[i + x] == ' ')
 				x++;
 			if (command_check('|', data->input[i + x]) == -1)
-			{
-				g_exit_code = 1; //double check
 				return (-1);
-			}
 			while (data->input[i + x] != ';' && data->input[i + x] != '\0')
 				(data->input[i] == '\\') ? x += 2 : x++;
 			reduce_input_str(data, x, &i);

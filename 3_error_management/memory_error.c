@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/05 10:19:20 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/22 15:04:28 by rbakker       ########   odam.nl         */
+/*   Updated: 2020/10/22 15:08:27 by rbakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void	malloc_error(t_data *data, int cmd, char **malloced_array)
 	i = 0;
 	cmd++;
 	print(data, 2, "minishell : error due to malloc failure\n", 0);
+	g_exit_code = 1;
 	free(data->input);
 	free_array(malloced_array);
 	free_array(data->envp);

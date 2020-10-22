@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/02 11:00:03 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/22 15:00:16 by rbakker       ########   odam.nl         */
+/*   Updated: 2020/10/22 15:06:33 by rbakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,19 @@ int		parse_command(t_data *data, char **envp)
 	if (!data->envp)
 		save_environment_variables(data, envp);
 	ret = get_next_line(0, &data->input);
-	if (ret == -1 || input_validation(data) == -1)
+	if (ret == -1)
+	{
+		g_exit_code = 1;
 		return (-1);
-	if (ret == 0)
+	}
+	else if (ret == 0)
 	{
 		clear_memory(data);
-		write(1, "exit\n", 5);
+		write(2, "exit\n", 5);
 		exit(0);
 	}
+	if (input_validation(data) == -1)
+		return (-1);
 	create_command_table(data, data->input, 0);
 	return (0);
 }
