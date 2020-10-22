@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/07 11:15:58 by rbakker       #+#    #+#                 */
-/*   Updated: 2020/10/20 11:24:36 by rbakker       ########   odam.nl         */
+/*   Updated: 2020/10/22 13:19:30 by rbakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,19 +39,19 @@ int		update_token_list(t_data *data, int cmd, int *tkn)
 	printf("usable tokens = %d\n", usable_tokens);
 	tokens = malloc(sizeof(char*) * (usable_tokens + 1));
 	if (tokens == NULL)
-		malloc_error(data, data->commands[cmd]->token_amount, 0);
+		malloc_error(data, data->commands[cmd]->token_nb, 0);
 	while (i < usable_tokens)
 	{
 		if (check_token_usability(data->commands[cmd]->tokens, (*tkn)) == -1)
 			(*tkn) += 2;
 		else if (save_list_element(data->commands[cmd]->tokens[(*tkn)],
 											&tokens[i], tkn, &i) == -1)
-			malloc_error(data, data->commands[cmd]->token_amount, tokens);
+			malloc_error(data, data->commands[cmd]->token_nb, tokens);
 	}
 	tokens[i] = 0;
 	free_array(data->commands[cmd]->tokens);
 	data->commands[cmd]->tokens = tokens;
-	data->commands[cmd]->token_amount = usable_tokens;
+	data->commands[cmd]->token_nb = usable_tokens;
 	(*tkn) = 0;
 	if (usable_tokens == 0)
 		return (-1);
@@ -74,7 +74,7 @@ int		count_usable_tokens(t_data *data, int cmd, int tkn)
 	int		amount;
 
 	amount = 0;
-	while (tkn < data->commands[cmd]->token_amount)
+	while (tkn < data->commands[cmd]->token_nb)
 	{
 		if (data->commands[cmd]->tokens[tkn][0] == '|')
 			break ;
@@ -86,7 +86,7 @@ int		count_usable_tokens(t_data *data, int cmd, int tkn)
 			amount++;
 		}
 	}
-	while (tkn < data->commands[cmd]->token_amount)
+	while (tkn < data->commands[cmd]->token_nb)
 	{
 		tkn++;
 		amount++;

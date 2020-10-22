@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/19 13:23:47 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/12 16:26:28 by rbakker       ########   odam.nl         */
+/*   Updated: 2020/10/22 13:19:30 by rbakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	save_tokens(t_data *data, char **array, char *command, int cmd)
 	len = 0;
 	while (command[c] == ' ' && command[c] != '\0')
 		c++;
-	while (command[c] != '\0' && index < data->commands[cmd]->token_amount)
+	while (command[c] != '\0' && index < data->commands[cmd]->token_nb)
 	{
 		spaces = 0;
 		start = begin_token(command, c);

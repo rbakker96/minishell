@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/12 16:36:24 by rbakker       #+#    #+#                 */
-/*   Updated: 2020/10/22 13:15:03 by qli           ########   odam.nl         */
+/*   Updated: 2020/10/22 14:15:38 by qli           ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,12 @@ int		g_pid = 0;
 
 void	execution_loop(t_data *data, int cmd, int tkn)
 {
-	while (cmd < data->command_amount)
+	while (cmd < data->command_nb)
 	{
 		preform_shell_expansions(data, cmd, 0);
 		initialize_pipes(data, cmd);
 		tkn = 0;
-		while (tkn < data->commands[cmd]->token_amount)
+		while (tkn < data->commands[cmd]->token_nb)
 		{
 			if (set_iostream(data, cmd, tkn) == -1 ||
 				update_token_list(data, cmd, &tkn) == -1)

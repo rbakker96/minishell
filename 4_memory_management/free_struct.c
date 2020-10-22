@@ -6,7 +6,7 @@
 /*   By: roybakker <roybakker@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/30 10:27:35 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/20 20:46:25 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/10/22 13:18:34 by rbakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,13 @@ void	free_struct(t_data *data)
 	int i;
 
 	i = 0;
-	while (i < data->command_amount)
+	while (i < data->command_nb)
 	{
 		free_array(data->commands[i]->tokens);
 		free(data->commands[i]);
 		i++;
 	}
-	if (data->command_amount != 0)
+	if (data->command_nb != 0)
 		free(data->commands);
 	if (data->args)
 		free_array(data->args);

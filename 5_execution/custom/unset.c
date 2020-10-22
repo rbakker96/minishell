@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/09 14:50:49 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/21 13:57:15 by rbakker       ########   odam.nl         */
+/*   Updated: 2020/10/22 13:18:34 by rbakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	execute_unset(t_data *data, int cmd, int tkn, int needed_tokens)
 		return ;
 	new_envp = (char**)malloc(sizeof(char*) * (envp_size - matching_vars + 1));
 	if (new_envp == NULL)
-		malloc_error(data, data->command_amount, 0);
+		malloc_error(data, data->command_nb, 0);
 	copy_remaining_vars(data, new_envp, cmd, tkn);
 	free_array(data->envp);
 	data->envp = new_envp;
@@ -49,7 +49,7 @@ void	copy_remaining_vars(t_data *data, char **new_envp, int cmd, int tkn)
 		{
 			new_envp[i] = ft_strdup(data->envp[i + x]);
 			if (new_envp[i] == NULL)
-				malloc_error(data, data->command_amount, new_envp);
+				malloc_error(data, data->command_nb, new_envp);
 			i++;
 		}
 		else

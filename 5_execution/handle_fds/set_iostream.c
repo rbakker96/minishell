@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/15 17:46:32 by rbakker       #+#    #+#                 */
-/*   Updated: 2020/10/21 20:13:02 by qli           ########   odam.nl         */
+/*   Updated: 2020/10/22 13:19:30 by rbakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int		set_iostream(t_data *data, int cmd, int tkn)
 	data->iostream[WRITE] = 1;
 	if (data->commands[cmd]->pipe_nb > 0)
 		set_pipe_fds(data, cmd);
-	if (data->commands[cmd]->token_amount > 0)
+	if (data->commands[cmd]->token_nb > 0)
 	{
 		if (set_redirection_fds(data, cmd, tkn) == -1)
 		{
@@ -62,7 +62,7 @@ int		set_redirection_fds(t_data *data, int cmd, int tkn)
 	fd[READ] = unused;
 	fd[WRITE] = unused;
 	value = data->commands[cmd]->tokens[tkn];
-	while (tkn < data->commands[cmd]->token_amount && fd[READ] != -1
+	while (tkn < data->commands[cmd]->token_nb && fd[READ] != -1
 													&& fd[WRITE] != -1)
 	{
 		if (redirection(value) == piped)

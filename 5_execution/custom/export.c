@@ -6,7 +6,7 @@
 /*   By: roybakker <roybakker@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/09 14:50:36 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/20 21:06:53 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/10/22 13:18:34 by rbakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	execute_export(t_data *data, int cmd, int tkn)
 	envp_size = get_envp_size(data, cmd, tkn);
 	new_envp = (char**)malloc(sizeof(char*) * (envp_size + 1));
 	if (new_envp == NULL)
-		malloc_error(data, data->command_amount, 0);
+		malloc_error(data, data->command_nb, 0);
 	copy_current_envp(data, new_envp);
 	add_new_env_to_envp(data, new_envp, cmd, tkn);
 	free_array(data->envp);
@@ -60,7 +60,7 @@ void	copy_current_envp(t_data *data, char **new_envp)
 	{
 		new_envp[index] = ft_strdup(data->envp[index]);
 		if (new_envp[index] == NULL)
-			malloc_error(data, data->command_amount, new_envp);
+			malloc_error(data, data->command_nb, new_envp);
 		index++;
 	}
 }
@@ -95,7 +95,7 @@ void	add_new_env_to_envp(t_data *data, char **new_envp, int cmd, int tkn)
 		{
 			new_envp[i] = ft_strdup(data->commands[cmd]->tokens[tkn]);
 			if (new_envp[i] == NULL)
-				malloc_error(data, data->command_amount, new_envp);
+				malloc_error(data, data->command_nb, new_envp);
 			i++;
 		}
 		else if (ret == error)
