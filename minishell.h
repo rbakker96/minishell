@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/01 15:55:06 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/22 14:29:15 by rbakker       ########   odam.nl         */
+/*   Updated: 2020/10/22 14:45:44 by rbakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,6 +134,7 @@ void	clear_used_memory(t_data *data);
 */
 void	free_string(char *string);
 void	free_array(char **array);
+void	free_int_array(int **array);
 void	free_command_table(t_data *data);
 
 /*

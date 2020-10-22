@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/02 11:00:03 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/22 14:30:33 by rbakker       ########   odam.nl         */
+/*   Updated: 2020/10/22 15:00:16 by rbakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int		parse_command(t_data *data, char **envp)
 		return (-1);
 	if (ret == 0)
 	{
-		//clear_memory(data); // need to solve free protection
+		clear_memory(data);
 		write(1, "exit\n", 5);
 		exit(0);
 	}
@@ -61,7 +61,6 @@ int		create_command_table(t_data *data, char *line, int cmd)
 	char	**commands;
 
 	data->command_nb = get_amount_of_commands(line, 0);
-	// printf("command amount = %d\n", data->command_nb); //TAKE OUT!!!
 	data->commands = (t_command_table**)malloc(sizeof(t_command_table*) *
 													(data->command_nb + 1));
 	if (data->commands == NULL)
