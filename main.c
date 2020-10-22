@@ -6,13 +6,11 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/08/31 10:42:36 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/22 14:00:53 by rbakker       ########   odam.nl         */
+/*   Updated: 2020/10/22 14:29:54 by rbakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-char	*g_dir_path = NULL;
 
 int		main(int argc, char **argv, char **envp)
 {

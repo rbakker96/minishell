@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/02 11:00:03 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/22 14:00:43 by rbakker       ########   odam.nl         */
+/*   Updated: 2020/10/22 14:30:33 by rbakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,7 @@ int		parse_command(t_data *data, char **envp)
 		save_environment_variables(data, envp);
 	ret = get_next_line(0, &data->input);
 	if (ret == -1 || input_validation(data) == -1)
-	{
-		g_exit_code = 1;
 		return (-1);
-	}
 	if (ret == 0)
 	{
 		//clear_memory(data); // need to solve free protection

@@ -5,8 +5,8 @@
 /*                                                     +:+                    */
 /*   By: rbakker <rbakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/12/18 16:15:44 by rbakker        #+#    #+#                */
-/*   Updated: 2020/01/13 12:25:58 by rbakker       ########   odam.nl         */
+/*   Created: 2019/12/18 16:15:44 by rbakker       #+#    #+#                 */
+/*   Updated: 2020/10/22 13:39:33 by qli           ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,12 @@ void	charachter_output(t_format *format, va_list arguments)
 
 void	min_flag_c(t_format *format, va_list arguments)
 {
-	int charachter;
+	int character;
 	int i;
 
 	i = 0;
-	charachter = va_arg(arguments, int);
-	write_function(charachter, format);
+	character = va_arg(arguments, int);
+	write_function(character, format);
 	while (i < (format->width - 1))
 	{
 		write_function(' ', format);
@@ -37,15 +37,15 @@ void	min_flag_c(t_format *format, va_list arguments)
 
 void	no_flag_c(t_format *format, va_list arguments)
 {
-	int charachter;
+	int character;
 	int i;
 
 	i = 0;
-	charachter = va_arg(arguments, int);
+	character = va_arg(arguments, int);
 	while (i < (format->width - 1))
 	{
 		write_function(' ', format);
 		i++;
 	}
-	write_function(charachter, format);
+	write_function(character, format);
 }

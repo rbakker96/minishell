@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/01 15:55:06 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/22 14:25:25 by rbakker       ########   odam.nl         */
+/*   Updated: 2020/10/22 14:29:15 by rbakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,7 @@ void	envp_malloc_error(t_data *data, char **failed_envp);
 /*
 ** validation_error.c
 */
-void	validation_error(t_data *data, char charachter);
+void	validation_error(t_data *data, char character, int exit_code);
 
 /*
 **--FOLDER---------------------4_MEMORY_MANAGEMENT------------------------------

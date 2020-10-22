@@ -6,18 +6,18 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/07 14:49:19 by rbakker       #+#    #+#                 */
-/*   Updated: 2020/10/08 14:51:11 by rbakker       ########   odam.nl         */
+/*   Updated: 2020/10/22 13:44:04 by qli           ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int		validate_single_quotes(t_data *data, char *charachter)
+int		validate_single_quotes(t_data *data, char *character)
 {
 	int i;
 
 	i = 0;
-	(*charachter) = '\'';
+	(*character) = '\'';
 	while (data->input[i] != '\0')
 	{
 		if (data->input[i] == '\'')
@@ -35,12 +35,12 @@ int		validate_single_quotes(t_data *data, char *charachter)
 	return (0);
 }
 
-int		validate_double_quotes(t_data *data, char *charachter)
+int		validate_double_quotes(t_data *data, char *character)
 {
 	int i;
 
 	i = 0;
-	(*charachter) = '\"';
+	(*character) = '\"';
 	while (data->input[i] != '\0')
 	{
 		if (data->input[i] == '\"')

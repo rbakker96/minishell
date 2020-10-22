@@ -6,18 +6,18 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/07 14:50:47 by rbakker       #+#    #+#                 */
-/*   Updated: 2020/10/08 13:10:57 by rbakker       ########   odam.nl         */
+/*   Updated: 2020/10/22 14:08:35 by qli           ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int		validate_input_redirection(t_data *data, char *charachter)
+int		validate_input_redirection(t_data *data, char *character)
 {
 	int i;
 
 	i = 0;
-	(*charachter) = '<';
+	(*character) = '<';
 	while (data->input[i] != '\0')
 	{
 		if (data->input[i] == '<')
@@ -26,7 +26,7 @@ int		validate_input_redirection(t_data *data, char *charachter)
 			while (data->input[i] == ' ')
 				i++;
 			if (command_check('<', data->input[i]) == -1)
-				return (-1);
+				return (-258);
 		}
 		else
 			(data->input[i] == '\\') ? i += 2 : i++;
@@ -34,12 +34,12 @@ int		validate_input_redirection(t_data *data, char *charachter)
 	return (0);
 }
 
-int		validate_output_redirection(t_data *data, char *charachter)
+int		validate_output_redirection(t_data *data, char *character)
 {
 	int i;
 
 	i = 0;
-	(*charachter) = '>';
+	(*character) = '>';
 	while (data->input[i] != '\0')
 	{
 		if (data->input[i] == '>')
@@ -50,7 +50,7 @@ int		validate_output_redirection(t_data *data, char *charachter)
 			while (data->input[i] == ' ')
 				i++;
 			if (command_check('>', data->input[i]) == -1)
-				return (-1);
+				return (-258);
 		}
 		else
 			(data->input[i] == '\\') ? i += 2 : i++;
@@ -58,12 +58,12 @@ int		validate_output_redirection(t_data *data, char *charachter)
 	return (0);
 }
 
-int		validate_pipes(t_data *data, char *charachter)
+int		validate_pipes(t_data *data, char *character)
 {
 	int i;
 
 	i = 0;
-	(*charachter) = '|';
+	(*character) = '|';
 	if (replace_double_pipes(data) == -1)
 		return (-1);
 	while (data->input[i] != '\0')
@@ -74,7 +74,7 @@ int		validate_pipes(t_data *data, char *charachter)
 			while (data->input[i] == ' ')
 				i++;
 			if (command_check('|', data->input[i]) == -1)
-				return (-1);
+				return (-258);
 		}
 		else
 			(data->input[i] == '\\') ? i += 2 : i++;
@@ -96,7 +96,10 @@ int		replace_double_pipes(t_data *data)
 			while (data->input[i + x] == ' ')
 				x++;
 			if (command_check('|', data->input[i + x]) == -1)
+			{
+				g_exit_code = 1; //double check
 				return (-1);
+			}
 			while (data->input[i + x] != ';' && data->input[i + x] != '\0')
 				(data->input[i] == '\\') ? x += 2 : x++;
 			reduce_input_str(data, x, &i);
