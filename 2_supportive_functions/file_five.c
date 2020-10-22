@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/09 16:44:49 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/22 13:39:33 by qli           ########   odam.nl         */
+/*   Updated: 2020/10/22 14:31:21 by qli           ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int		command_check(char check_value, char character)
 {
 	if (character == check_value || character == '|' || character == ';' ||
 		character == '\0')
-		return (-1);
+		return (-1); // needs to confirm
 	else
 		return (0);
 }

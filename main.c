@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/08/31 10:42:36 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/22 14:04:27 by qli           ########   odam.nl         */
+/*   Updated: 2020/10/22 14:57:17 by qli           ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,10 @@ int		main(int argc, char **argv, char **envp)
 	t_data	data;
 
 	if (argc != 1 || !argv)
+	{
+		print(&data, 2, "only ./minishell is needed\n", 0);
 		return (-1);
+	}
 	signal_handler();
 	g_dir_path = get_current_directory(&data); // need to deal with free
 	while (1)

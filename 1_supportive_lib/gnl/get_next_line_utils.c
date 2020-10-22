@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/11/11 10:55:17 by rbakker       #+#    #+#                 */
-/*   Updated: 2020/04/17 12:00:02 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/10/22 14:31:21 by qli           ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int		cpy(char **buf, char *s1)
 		size++;
 	ptr = (char*)malloc(sizeof(char) * (size + 1));
 	if (!ptr)
-		return (-1);
+		return (-1); // needs to confirm
 	while (s1[i] != '\0')
 	{
 		ptr[i] = s1[i];
@@ -84,5 +84,5 @@ int		cleanup(char **string1)
 {
 	free(*string1);
 	*string1 = 0;
-	return (-1);
+	return (-1); // needs to confirm
 }
