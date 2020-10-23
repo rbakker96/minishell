@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/01 15:55:06 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/23 13:56:51 by rbakker       ########   odam.nl         */
+/*   Updated: 2020/10/23 14:25:17 by rbakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -217,7 +217,7 @@ int		nb_of_matching_var(t_data *data, int cmd, int tkn, int needed_tokens);
 /*
 ** set_iostream.c
 */
-int		set_iostream(t_data *data, int cmd, int tkn);
+int		set_iostream(t_data *data, int cmd, int *tkn);
 void	set_pipe_fds(t_data *data, int cmd);
 int		set_redirection_fds(t_data *data, int cmd, int tkn);
 
