@@ -6,13 +6,13 @@
 /*   By: rbakker <rbakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/15 17:46:32 by rbakker       #+#    #+#                 */
-/*   Updated: 2020/10/22 16:36:07 by qli           ########   odam.nl         */
+/*   Updated: 2020/10/23 14:25:19 by rbakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-int		set_iostream(t_data *data, int cmd, int tkn)
+int		set_iostream(t_data *data, int cmd, int *tkn)
 {
 	data->iostream[READ] = 0;
 	data->iostream[WRITE] = 1;
@@ -20,11 +20,13 @@ int		set_iostream(t_data *data, int cmd, int tkn)
 		set_pipe_fds(data, cmd);
 	if (data->commands[cmd]->token_nb > 0)
 	{
-		if (set_redirection_fds(data, cmd, tkn) == -1)
+		if (set_redirection_fds(data, cmd, (*tkn)) == -1)
 		{
+			update_token_list(data, cmd, tkn, 0);
 			g_exit_code = 1;
 			return (-1);
 		}
+		update_token_list(data, cmd, tkn, 0);
 	}
 	// printf("iostream read = %d\n", data->iostream[READ]);
 	// printf("iostream write = %d\n", data->iostream[WRITE]);
