@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/05 10:18:54 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/22 14:00:43 by rbakker       ########   odam.nl         */
+/*   Updated: 2020/10/23 13:53:46 by rbakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,18 @@ void	check_file_permission(t_data *data, char *path)
 		if ((stats.st_mode & S_IXUSR) == 0)
 			print_special_errno(data, path, "Permission denied", 126);
 	}
+}
+
+void	print_redir_erno(t_data *data, char *filename, int exit_code)
+{
+	int errno;
+
+	print(data, 2, "minishell : ", 0);
+	print(data, 2, filename, 0);
+	print(data, 2, " : ", 0);
+	print(data, 2, strerror(errno), 0);
+	print_char(data, 2, '\n', 0);
+	g_exit_code = exit_code;
 }
 
 void	print_errno(t_data *data, int cmd, char *filename, int exit_code)
