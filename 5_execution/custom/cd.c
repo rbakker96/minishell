@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/09 14:50:20 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/23 14:31:37 by rbakker       ########   odam.nl         */
+/*   Updated: 2020/10/23 17:21:33 by rbakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ void	execute_cd(t_data *data, int cmd, int tkn, int needed_tokens)
 //		g_exit_code = 1;
 //		return ;
 //	}
-	if (needed_tokens == 1 || compare_command("~", value, 1) == 0)
+	if (needed_tokens == 1 || compare_command("~/", value, 2) == 0 ||
+		compare_command("~", value, 1) == 0)
 		go_to_home(data, cmd);
 	else if (chdir(value) == -1)
 		print_errno(data, cmd, value, 1);

@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/05 10:18:54 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/23 13:53:46 by rbakker       ########   odam.nl         */
+/*   Updated: 2020/10/23 17:24:14 by rbakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,6 @@ void	print_builtin_errno(t_data *data, char *filename, int exit_code)
 void	get_directory_error(t_data *data)
 {
 	print(data, 2, "minishell : getcwd function failed\n", 0);
-	clear_memory(data);
+	clear_used_memory(data);
 	exit(1);
 }

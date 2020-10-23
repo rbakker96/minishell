@@ -1,3 +1,10 @@
 # cases that do not yet work
 
 export LS="ls -la";$LS
+
+#declare -x envp[item]
+export
+
+[NO] unset % ; echo $?
+
+[NO] echo test     \    test ; echo $?

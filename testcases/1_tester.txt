@@ -60,31 +60,31 @@ export _testvar10=lala10 ; env | grep -a _testvar10 ; echo $?
 export testvar=10 ; export testvar=20 ; env | grep -a testvar ; echo $?
 
 #EXPORT
-[NO] export % ; echo $?
-[NO] export ! ; echo $?
-[NO] export + ; echo $?
-[NO] export testvar ; export | grep -a testvar ; echo $?
-[NO] export testvar= ; export | grep -a testvar ; echo $?
-[NO] export testvar=0 ; export | grep -a testvar ; echo $?
-[NO] export testvar=1234567 ; export | grep -a testvar ; echo $?
-[NO] export testvar=lala ; export | grep -a testvar ; echo $?
-[NO] export testvar=lala%lala ; export | grep -a testvar ; echo $?
-[NO] export testvar=@lala ; export | grep -a testvar ; echo $?
-[NO] export testvar10 ; export | grep -a testvar10 ; echo $?
-[NO] export testvar10= ; export | grep -a testvar10 ; echo $?
-[NO] export testvar10=10 ; export | grep -a testvar10 ; echo $?
-[NO] export _testvar ; export | grep -a _testvar ; echo $?
-[NO] export _testvar= ; export | grep -a _testvar ; echo $?
-[NO] export _testvar=10 ; export | grep -a _testvar ; echo $?
-[NO] export _testvar=lala ; export | grep -a _testvar ; echo $?
-[NO] export _testvar=lala10 ; export | grep -a _testvar ; echo $?
-[NO] export _testvar10 ; export | grep -a _testvar10 ; echo $?
-[NO] export _testvar10= ; export | grep -a _testvar10 ; echo $?
-[NO] export _testvar10=lala ; export | grep -a _testvar10 ; echo $?
-[NO] export _testvar10=10; export | grep -a _testvar10 ; echo $?
-[NO] export _testvar10=lala10 ; export | grep -a _testvar10 ; echo $?
-[NO] export testvar=10 ; export testvar=20 ; export | grep -a testvar ; echo $?
-[NO] export testvar=lala ; export ; export testvar=10 ; export' 'grep -v _=' 'sort ; echo $?
+export % ; echo $?
+export ! ; echo $?
+export + ; echo $?
+export testvar ; export | grep -a testvar ; echo $?
+export testvar= ; export | grep -a testvar ; echo $?
+export testvar=0 ; export | grep -a testvar ; echo $?
+export testvar=1234567 ; export | grep -a testvar ; echo $?
+export testvar=lala ; export | grep -a testvar ; echo $?
+export testvar=lala%lala ; export | grep -a testvar ; echo $?
+export testvar=@lala ; export | grep -a testvar ; echo $?
+export testvar10 ; export | grep -a testvar10 ; echo $?
+export testvar10= ; export | grep -a testvar10 ; echo $?
+export testvar10=10 ; export | grep -a testvar10 ; echo $?
+export _testvar ; export | grep -a _testvar ; echo $?
+export _testvar= ; export | grep -a _testvar ; echo $?
+export _testvar=10 ; export | grep -a _testvar ; echo $?
+export _testvar=lala ; export | grep -a _testvar ; echo $?
+export _testvar=lala10 ; export | grep -a _testvar ; echo $?
+export _testvar10 ; export | grep -a _testvar10 ; echo $?
+export _testvar10= ; export | grep -a _testvar10 ; echo $?
+export _testvar10=lala ; export | grep -a _testvar10 ; echo $?
+export _testvar10=10; export | grep -a _testvar10 ; echo $?
+export _testvar10=lala10 ; export | grep -a _testvar10 ; echo $?
+export testvar=10 ; export testvar=20 ; export | grep -a testvar ; echo $?
+export testvar=lala ; export ; export testvar=10 ; export' 'grep -v _=' 'sort ; echo $?
 
 #UNSET [NO]
 unset ; echo $?
@@ -115,7 +115,7 @@ pwd; echo $?
 pwd test; echo $?
 pwd test lala; echo $?
 pwd "test"; echo $?
-[NO] pwd ; cd .. ; pwd ; cd / ; pwd ; cd . ; pwd ; cd ~/ ; pwd; echo $?
+pwd ; cd .. ; pwd ; cd / ; pwd ; cd . ; pwd ; cd ~/ ; pwd; echo $?
 pwd .; echo $?
 pwd ..; echo $?
 

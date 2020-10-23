@@ -6,7 +6,7 @@
 /*   By: roybakker <roybakker@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/09 14:50:36 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/23 16:19:56 by rbakker       ########   odam.nl         */
+/*   Updated: 2020/10/23 16:45:02 by rbakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,14 +83,11 @@ int		validate_export_token(char *token)
 
 void	add_new_env_to_envp(t_data *data, char **new_envp, int cmd, int tkn)
 {
-	int envp_size;
 	int ret;
 	int i;
 
 	i = get_array_size(data->envp);
-	envp_size = get_envp_size(data, cmd, tkn);
-	while (tkn < calculate_needed_tokens(data, cmd, 0) &&
-			i < envp_size)
+	while (tkn < calculate_needed_tokens(data, cmd, 0))
 	{
 		ret = validate_export_token(data->commands[cmd]->tokens[tkn]);
 		if (ret == valid)
