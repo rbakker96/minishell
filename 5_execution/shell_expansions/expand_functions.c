@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/05 21:11:22 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/22 21:33:39 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/10/23 16:08:23 by rbakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,25 +29,24 @@ void	single_quotes(t_data *data, char **new_token, int *i, int *x)
 
 void	double_quotes(t_data *data, char **new_token, int *i, int *x)
 {
-	char *token;
-
-	token = data->current_token;
 	(*i)++;
 	while ((*x) < expansion_len(data, 0, 0))
 	{
-		if (token[(*i)] == '\\')
+		if (data->current_token[(*i)] == '\\' && data->current_token[(*i)])
 			escape_double_quotes(data, new_token, i, x);
-		else if (token[(*i)] == '$')
+		else if (data->current_token[(*i)] == '$')
 		{
 			if (data->current_token[(*i) + 1] == '?')
 				exit_code(data, new_token, x);
 			else
 				env_variable(data, new_token, (*i), x);
-			(*i) += token_var_len(token, (*i));
+			(*i) += token_var_len(data->current_token, (*i));
 		}
+		if (data->current_token[(*i)] == '\"')
+			break ;
 		else
 		{
-			(*new_token)[(*x)] = token[(*i)];
+			(*new_token)[(*x)] = data->current_token[(*i)];
 			(*x)++;
 			(*i)++;
 		}
@@ -66,8 +65,8 @@ void	escape_double_quotes(t_data *data, char **new_token, int *i, int *x)
 		(*new_token)[(*x)] = token[(*i)];
 	else
 	{
-		(*new_token)[(*x) - 1] = token[(*i)];
-		(*i)++;
+		(*new_token)[(*x)] = '\\';
+		(*x)++;
 		(*new_token)[(*x)] = token[(*i)];
 	}
 	(*x)++;

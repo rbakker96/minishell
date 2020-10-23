@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/09 14:49:34 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/22 16:17:47 by qli           ########   odam.nl         */
+/*   Updated: 2020/10/23 15:13:10 by rbakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,11 @@
 
 void	execute_echo(t_data *data, int cmd, int tkn, int needed_tokens)
 {
-	char	*value;
 	int		newline;
 
 	needed_tokens = calculate_needed_tokens(data, cmd, tkn);
 	tkn++;
-	value = data->commands[cmd]->tokens[tkn];
-	newline = newline_option(value, needed_tokens, &tkn);
+	newline = newline_option(data, cmd, &tkn);
 	while (tkn < needed_tokens)
 	{
 		print(data, data->iostream[1], data->commands[cmd]->tokens[tkn], 0);
@@ -32,13 +30,20 @@ void	execute_echo(t_data *data, int cmd, int tkn, int needed_tokens)
 		print_char(data, 1, '\n', 0);
 }
 
-int		newline_option(char *value, int needed_tokens, int *tkn)
+int		newline_option(t_data *data, int cmd, int *tkn)
 {
+	char	*value;
+
+	value = data->commands[cmd]->tokens[*tkn];
 	if (!value)
 		return (0);
 	else if (compare_command("-n", value, 2) == 0)
 	{
-		((*tkn) < needed_tokens) ? (*tkn)++ : (*tkn);
+		while (compare_command("-n", value, 2) == 0)
+		{
+			(*tkn)++;
+			value = data->commands[cmd]->tokens[(*tkn)];
+		}
 		return (1);
 	}
 	else

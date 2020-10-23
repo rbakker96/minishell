@@ -2,16 +2,16 @@
 echo test ; echo $?
 echo echo ; echo $?
 echo ; echo $?
-[NO] echo -n -n lala ; echo $?
+echo -n -n lala ; echo $?
 add_newline ; echo $?
 echo \n ; echo $?
 echo lala\nlala ; echo $?
-[NO] echo "lala\nlala" ; echo $?
+echo "lala\nlala" ; echo $?
 echo 'lala\nlala' ; echo $?
-[NO] echo "test""test" "lala" ; echo $?
-[NO] echo "test"test"" "lala" ; echo $?
-[NO] echo "test"\""test" "lala" ; echo $?
-[NO] echo "test"\"\""\"test" "lala" ; echo $?
+echo "test""test" "lala" ; echo $?
+echo "test"test"" "lala" ; echo $?
+echo "test"\""test" "lala" ; echo $?
+echo "test"\"\""\"test" "lala" ; echo $?
 echo 'test''test''lala' ; echo $?
 echo 'test'\\'test'\''lala' ; echo $?
 echo test "" test "" test ; echo $?
@@ -20,14 +20,9 @@ echo test "" "" "" test ; echo $?
 echo "" test "" test "" test "" ; echo $?
 echo -n oui ; echo $?
 echo $PWD ; echo $?
-[NO] echo $OLDPWD ; echo $?
 echo \$PWD ; echo $?
 echo \\$PWD ; echo $?
 echo $NOVAR ; echo $?
-[NO] pwd ; echo $PWD ; echo OLDPWD ; unset PWD ; echo $PWD ; echo $OLDPWD ; cd .. ; echo $OLDPWD ; pwd ; echo $OLDPWD ; cd .. ; pwd ; echo $OLDPWD  ; echo $?
-[NO] echo ${PWD} ; echo $?
-echo ${PATH ; echo $?
-[NO] echo $PWD} ; echo $?
 
 #ENV
 env' 'grep -v _=' 'sort
@@ -43,26 +38,26 @@ export SHLVL=-8+8 ; env' 'grep -a SHLVL
 export SHLVL=9-8 ; env' 'grep -a SHLVL
 export testvar ; env | grep -a testvar ; echo $?
 #export variable do not overwrite previous variable
-[NO] export testvar= ; env | grep -a testvar ; echo $?
-[NO] export testvar=0 ; env | grep -a testvar ; echo $?
-[NO] export testvar=1234567 ; env | grep -a testvar ; echo $?
-[NO] export testvar=lala ; env | grep -a testvar ; echo $?
-[NO] export testvar=lala%lala ; env | grep -a testvar ; echo $?
-[NO] export testvar=@lala ; env | grep -a testvar ; echo $?
+export testvar= ; env | grep -a testvar ; echo $?
+export testvar=0 ; env | grep -a testvar ; echo $?
+export testvar=1234567 ; env | grep -a testvar ; echo $?
+export testvar=lala ; env | grep -a testvar ; echo $?
+export testvar=lala%lala ; env | grep -a testvar ; echo $?
+export testvar=@lala ; env | grep -a testvar ; echo $?
 export testvar10 ; env | grep -a testvar10 ; echo $?
-[NO] export testvar10= ; env | grep -a testvar10 ; echo $?
-[NO] export testvar10=10 ; env | grep -a testvar10 ; echo $?
+export testvar10= ; env | grep -a testvar10 ; echo $?
+export testvar10=10 ; env | grep -a testvar10 ; echo $?
 export _testvar ; env | grep -a _testvar ; echo $?
-[NO] export _testvar= ; env | grep -a _testvar ; echo $?
-[NO] export _testvar=10 ; env | grep -a _testvar ; echo $?
-[NO] export _testvar=lala ; env | grep -a _testvar ; echo $?
-[NO] export _testvar=lala10 ; env | grep -a _testvar ; echo $?
+export _testvar= ; env | grep -a _testvar ; echo $?
+export _testvar=10 ; env | grep -a _testvar ; echo $?
+export _testvar=lala ; env | grep -a _testvar ; echo $?
+export _testvar=lala10 ; env | grep -a _testvar ; echo $?
 export _testvar10 ; env | grep -a _testvar10 ; echo $?
-[NO] export _testvar10= ; env | grep -a _testvar10 ; echo $?
-[NO] export _testvar10=lala ; env | grep -a _testvar10 ; echo $?
-[NO] export _testvar10=10; env | grep -a _testvar10 ; echo $?
-[NO] export _testvar10=lala10 ; env | grep -a _testvar10 ; echo $?
-[NO] export testvar=10 ; export testvar=20 ; env | grep -a testvar ; echo $?
+export _testvar10= ; env | grep -a _testvar10 ; echo $?
+export _testvar10=lala ; env | grep -a _testvar10 ; echo $?
+export _testvar10=10; env | grep -a _testvar10 ; echo $?
+export _testvar10=lala10 ; env | grep -a _testvar10 ; echo $?
+export testvar=10 ; export testvar=20 ; env | grep -a testvar ; echo $?
 
 #EXPORT
 [NO] export % ; echo $?
@@ -142,7 +137,7 @@ pwd ; cd test_cd error ; pwd
 pwd ; cd error test_cd error ; pwd
 pwd ; cd ~/test_cd error ; pwd
 pwd ; cd error ~/test_cd error ; pwd
-pwd ; cd .. ; pwd ; cd .. ; pwd ; cd .. ; pwd ; cd .. ; pwd ; cd .. ; pwd ; cd .. ; pwd 
+pwd ; cd .. ; pwd ; cd .. ; pwd ; cd .. ; pwd ; cd .. ; pwd ; cd .. ; pwd ; cd .. ; pwd
 pwd ; cd .. | pwd
 pwd | cd | pwd ; cd | pwd
 pwd ; cd ../minishell_tester ; pwd
@@ -254,49 +249,49 @@ echo test | cat | cat | cat | cat | cat | grep test
 
 #PARSING
 echo \n\n
-echo "" 
-echo \| 
-echo \"\" 
+echo ""
+echo \|
+echo \"\"
 echo \\
-echo \\\\ 
-echo \|\| 
-echo \\\|\\\| 
-echo \\"\\" 
-echo \$ \" 
-echo \[ \] \\ \` 
-echo \: \@ \< \> \= \? 
-echo \"a\" 
-echo \\"a\\" 
-echo "\\a\\" 
-echo \\\"a\"\\ 
-echo a\\a 
-echo a\"\a 
-echo $ 
+echo \\\\
+echo \|\|
+echo \\\|\\\|
+echo \\"\\"
+echo \$ \"
+echo \[ \] \\ \`
+echo \: \@ \< \> \= \?
+echo \"a\"
+echo \\"a\\"
+echo "\\a\\"
+echo \\\"a\"\\
+echo a\\a
+echo a\"\a
+echo $
 echo \$
-echo \\$ 
-echo $USER 
-echo \$USER 
-echo \\$USER 
-echo \\\$USER 
-echo $war 
-echo \$war 
-echo \\$war 
-echo \\\$war 
-echo \|\\$USER 
-echo \|\\\$USER 
-echo \\\"$USER 
-echo \|\\$USER 
-echo \|\\\$USER 
-echo \\\"$USER 
-echo \$ \! \@ \# \% \^ \& \* \( \) \_ \+ \| 
-echo \$ \! \@ \# \% \^ \& \* \( \) \_ \+ \| 
-echo \"\$ \! \@ \# \% \^ \& \* \( \) \_ \+ \|\" 
-echo \$ \! \@ \# \% \^ \& \* \( \) \_ \+ \| 
-echo \$ \! \@ \# \% \^ \& \* \( \) \_ \+ \| 
-echo \\\$ \\\! \\\@ \\\# \\\% \\\^ \\\& \\\* \\\( \\\) \\\_ \\\+ \\\| 
-echo \: \! \< \> \= \? 
-echo "\: \! \< \> \= \?" 
-echo \[ \] \\ \` 
+echo \\$
+echo $USER
+echo \$USER
+echo \\$USER
+echo \\\$USER
+echo $war
+echo \$war
+echo \\$war
+echo \\\$war
+echo \|\\$USER
+echo \|\\\$USER
+echo \\\"$USER
+echo \|\\$USER
+echo \|\\\$USER
+echo \\\"$USER
+echo \$ \! \@ \# \% \^ \& \* \( \) \_ \+ \|
+echo \$ \! \@ \# \% \^ \& \* \( \) \_ \+ \|
+echo \"\$ \! \@ \# \% \^ \& \* \( \) \_ \+ \|\"
+echo \$ \! \@ \# \% \^ \& \* \( \) \_ \+ \|
+echo \$ \! \@ \# \% \^ \& \* \( \) \_ \+ \|
+echo \\\$ \\\! \\\@ \\\# \\\% \\\^ \\\& \\\* \\\( \\\) \\\_ \\\+ \\\|
+echo \: \! \< \> \= \?
+echo "\: \! \< \> \= \?"
+echo \[ \] \\ \`
 echo \\ \\ \\
 echo \\ \\\ \\
 echo \\ \ \\

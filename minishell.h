@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/01 15:55:06 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/23 14:25:17 by rbakker       ########   odam.nl         */
+/*   Updated: 2020/10/23 15:12:34 by rbakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -174,7 +174,7 @@ int		directory_validation(t_data *data, int cmd, int tkn, int needed_tokens);
 ** echo.c
 */
 void	execute_echo(t_data *data, int cmd, int tkn, int needed_tokens);
-int		newline_option(char *value, int needed_tokens, int *tkn);
+int		newline_option(t_data *data, int cmd, int *tkn);
 
 /*
 ** env.c

@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/07 11:15:58 by rbakker       #+#    #+#                 */
-/*   Updated: 2020/10/23 14:35:56 by rbakker       ########   odam.nl         */
+/*   Updated: 2020/10/23 15:14:15 by rbakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	print_array(char **array)
 		size++;
 	while (i < size)
 	{
-		printf("final token [%d] = %s\n", i, array[i]);
+		//printf("final token [%d] = %s\n", i, array[i]);
 		i++;
 	}
 }

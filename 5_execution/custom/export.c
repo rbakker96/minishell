@@ -6,7 +6,7 @@
 /*   By: roybakker <roybakker@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/09 14:50:36 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/22 21:02:18 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/10/23 16:19:56 by rbakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ void	execute_export(t_data *data, int cmd, int tkn)
 	int		envp_size;
 	char	**new_envp;
 
+	execute_unset(data, cmd, tkn, 0);
 	envp_size = get_envp_size(data, cmd, tkn);
 	new_envp = (char**)malloc(sizeof(char*) * (envp_size + 1));
 	if (new_envp == NULL)

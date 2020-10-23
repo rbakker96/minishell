@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/09 14:50:49 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/22 15:17:46 by rbakker       ########   odam.nl         */
+/*   Updated: 2020/10/23 16:32:52 by rbakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,13 @@ void	execute_unset(t_data *data, int cmd, int tkn, int needed_tokens)
 	int		envp_size;
 	char	**new_envp;
 
+	printf("current token = %s\n", data->commands[cmd]->tokens[tkn]);
 	envp_size = get_array_size(data->envp);
+	printf("envp size = %d\n", envp_size);
 	needed_tokens = calculate_needed_tokens(data, cmd, tkn);
+	printf("needed tokens = %d\n", needed_tokens);
 	matching_vars = nb_of_matching_var(data, cmd, tkn, needed_tokens);
+	printf("matching vars = %d\n", matching_vars);
 	if (needed_tokens == 1 || !matching_vars)
 		return ;
 	new_envp = (char**)malloc(sizeof(char*) * (envp_size - matching_vars + 1));
@@ -94,12 +98,14 @@ int		nb_of_matching_var(t_data *data, int cmd, int tkn, int needed_tokens)
 	while (tkn < needed_tokens)
 	{
 		var = data->commands[cmd]->tokens[tkn];
-		var_len = ft_strlen(var);
+		printf("var = %s\n", var);
+		var_len = token_var_len(var, 0);
+		printf("varlen = %d\n", var_len);
 		i = 0;
 		while (i < envp_size)
 		{
-			if (compare_command(data->envp[i], var, var_len) == 0 &&
-				data->envp[i][var_len] == '=')
+			if (ft_strncmp(data->envp[i], var, var_len) == 0
+							&& data->envp[i][var_len] == '=')
 				count++;
 			i++;
 		}
