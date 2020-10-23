@@ -1,13 +1,5 @@
 # cases that do not yet work
 
-cd test with four arguments
-
-cd test < out99 | echo hallo
-
-ls -la | grep Oct > out| grep test | grep test_pipe
-
-ls -la > out| grep Oct | grep test > out | grep test_pipe
-
 ls >> out1 | cat < out1
 
 export LS="ls -la";$LS

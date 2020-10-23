@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/09 14:50:20 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/22 20:22:48 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/10/23 14:31:37 by rbakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,11 @@ void	execute_cd(t_data *data, int cmd, int tkn, int needed_tokens)
 	if (data->commands[cmd]->tokens[needed_tokens] != NULL &&
 		data->commands[cmd]->tokens[needed_tokens][0] == '|')
 		tkn = needed_tokens;
-	if (directory_validation(data, cmd, tkn, needed_tokens) == -1)
-	{
-		g_exit_code = 1;
-		return ;
-	}
+//	if (directory_validation(data, cmd, tkn, needed_tokens) == -1)
+//	{
+//		g_exit_code = 1;
+//		return ;
+//	}
 	if (needed_tokens == 1 || compare_command("~", value, 1) == 0)
 		go_to_home(data, cmd);
 	else if (chdir(value) == -1)

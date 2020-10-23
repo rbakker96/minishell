@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/12 16:36:24 by rbakker       #+#    #+#                 */
-/*   Updated: 2020/10/23 14:25:52 by rbakker       ########   odam.nl         */
+/*   Updated: 2020/10/23 14:36:20 by rbakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ void	execute_command(t_data *data, int cmd, int tkn)
 	char	*value;
 
 	value = data->commands[cmd]->tokens[tkn];
-	// printf("current token is [%s]\n", value);
+	printf("current token is [%s]\n", value);
 	g_exit_code = 0;
 	if (compare_command("echo", value, 4) == 0)
 		execute_echo(data, cmd, tkn, 0);

@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/07 11:15:58 by rbakker       #+#    #+#                 */
-/*   Updated: 2020/10/22 17:46:33 by rbakker       ########   odam.nl         */
+/*   Updated: 2020/10/23 14:35:56 by rbakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int		update_token_list(t_data *data, int cmd, int *tkn, int i)
 	data->commands[cmd]->tokens = tokens;
 	data->commands[cmd]->token_nb = usable_tokens;
 	(*tkn) = 0;
-	//print_array(data->commands[cmd]->tokens); // remove later
+	print_array(data->commands[cmd]->tokens); // remove later
 	return (usable_tokens);
 }
 

@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/19 13:23:47 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/23 11:53:12 by qli           ########   odam.nl         */
+/*   Updated: 2020/10/23 14:42:37 by rbakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	save_tokens(t_data *data, char **array, char *command, int cmd)
 		start = begin_token(command, c);
 		len = len_token(command, start, 0, &spaces);
 		data->commands[cmd]->tokens[index] = ft_substr(command, start, len);
-		// printf("token [%d] = [%s]\n", index, data->commands[cmd]->tokens[index]);
+		 printf("token [%d] = [%s]\n", index, data->commands[cmd]->tokens[index]);
 		if (data->commands[cmd]->tokens[index] == NULL)
 			malloc_error(data, array);
 		c += len + spaces;
@@ -65,6 +65,8 @@ int		len_token(char *command, int start, int len, int *spaces)
 			non_quoted_len(command, start, &len, &current_char);
 		else if (current_char == double_quote || current_char == single_quote)
 			quoted_len(command, start, &len, &current_char);
+		if (current_char == meta_char)
+			break ;
 		if (current_char == space)
 		{
 			(*spaces)++;
