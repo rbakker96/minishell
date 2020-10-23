@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/07 14:50:47 by rbakker       #+#    #+#                 */
-/*   Updated: 2020/10/22 15:19:27 by rbakker       ########   odam.nl         */
+/*   Updated: 2020/10/23 13:24:39 by rbakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ int		validate_pipes(t_data *data, char *character)
 	i = 0;
 	(*character) = '|';
 	if (replace_double_pipes(data) == -1)
-		return (-1);
+		return (-258);
 	while (data->input[i] != '\0')
 	{
 		if (data->input[i] == '|')

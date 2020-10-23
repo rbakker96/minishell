@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/07 13:52:27 by rbakker       #+#    #+#                 */
-/*   Updated: 2020/10/22 14:44:55 by qli           ########   odam.nl         */
+/*   Updated: 2020/10/23 13:05:22 by rbakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ int		validate_end_of_line_command(t_data *data, char *character, int len)
 		(*character) = '>';
 		return (-258);
 	}
-	else if (data->input[len - 1] == '<')
+	else if (data->input[len - 1] == '|')
 	{
 		(*character) = '|';
 		return (-258);

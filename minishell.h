@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/01 15:55:06 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/22 20:41:23 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/10/23 13:56:51 by rbakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,7 @@ void	print_special_errno(t_data *data, char *cmd, char *msg, int exit_code);
 ** file_system_error.c
 */
 void	get_directory_error(t_data *data);
+void	print_redir_erno(t_data *data, char *filename, int exit_code);
 void	print_errno(t_data *data, int cmd, char *filename, int exit_code);
 void	print_builtin_errno(t_data *data, char *filename, int exit_code);
 void	check_file_permission(t_data *data, char *path);

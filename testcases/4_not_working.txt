@@ -4,20 +4,6 @@ cd test with four arguments
 
 cd test < out99 | echo hallo
 
-# when there's no input file
-# when input file exists, the return value is 1 instead of 0
-
-ls | grep Oct < input
-ls > out | grep Oct < input
-
-echo <<< hallo
-
-echo hallo ||   ;
-
-echo hallo ||| hallo
-
-echo hallo |
-
 ls -la | grep Oct > out| grep test | grep test_pipe
 
 ls -la > out| grep Oct | grep test > out | grep test_pipe
@@ -25,4 +11,3 @@ ls -la > out| grep Oct | grep test > out | grep test_pipe
 ls >> out1 | cat < out1
 
 export LS="ls -la";$LS
-
