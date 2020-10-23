@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/02 11:00:03 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/22 20:46:55 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/10/23 11:53:12 by qli           ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ int		save_single_command(t_data *data, char **commands, int cmd)
 		return (-1);
 	initialize_command(data, cmd);
 	data->commands[cmd]->token_nb = get_amount_of_tokens(commands[cmd], 0, 0);
-	printf("token amount = %d\n", data->commands[cmd]->token_nb); //TAKE OUT
+	// printf("token amount = %d\n", data->commands[cmd]->token_nb); //TAKE OUT
 	data->commands[cmd]->tokens = (char**)malloc(sizeof(char*) *
 									(data->commands[cmd]->token_nb + 1));
 	if (data->commands[cmd]->tokens == NULL)
