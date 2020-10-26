@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/07 13:52:27 by rbakker       #+#    #+#                 */
-/*   Updated: 2020/10/23 13:05:22 by rbakker       ########   odam.nl         */
+/*   Updated: 2020/10/26 17:30:41 by qli           ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ int		input_validation(t_data *data)
 		validate_output_redirection(data, &character) == -258 ||
 		validate_pipes(data, &character) == -258 ||
 		validate_command_seperators(data, &character) == -258 ||
-		validate_end_of_line_command(data, &character, 0) == -258 ||
-		validate_start_of_line_command(data, &character) == -258)
+		validate_start_of_line_command(data, &character) == -258 ||
+		validate_end_of_line_command(data, &character, 0) == -258)
 	{
 		validation_error(data, character, 258);
 		return (-1);

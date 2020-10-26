@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/01 15:55:06 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/26 17:15:12 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/10/26 17:33:07 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -169,7 +169,6 @@ void	run_executable(t_data *data, int cmd, int tkn);
 */
 void	execute_cd(t_data *data, int cmd, int tkn, int needed_tokens);
 void	go_to_home(t_data *data, int cmd);
-int		directory_validation(t_data *data, int cmd, int tkn, int needed_tokens);
 
 /*
 ** echo.c
@@ -339,6 +338,7 @@ int		validate_start_of_line_command(t_data *data, char *charachter);
 */
 int		validate_single_quotes(t_data *data, char *charachter);
 int		validate_double_quotes(t_data *data, char *charachter);
+int		later_quotes_nb(t_data *data, int i, char character);
 
 /*
 ** validate_redirections.c

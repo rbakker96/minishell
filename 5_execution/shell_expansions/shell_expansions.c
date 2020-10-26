@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/05 19:44:06 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/26 17:16:26 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/10/26 17:32:05 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	preform_shell_expansions(t_data *data, int cmd, int tkn)
 		expand_token(data, &new_token, 0, 0);
 		free(data->commands[cmd]->tokens[tkn]);
 		data->commands[cmd]->tokens[tkn] = new_token;
-		//printf("updated token [%d] = %s\n", tkn, data->commands[cmd]->tokens[tkn]);
+		printf("updated token [%d] = %s\n", tkn, data->commands[cmd]->tokens[tkn]);
 		tkn++;
 	}
 }
