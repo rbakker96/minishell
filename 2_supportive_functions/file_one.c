@@ -6,7 +6,7 @@
 /*   By: roybakker <roybakker@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/02 11:27:20 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/23 17:26:33 by rbakker       ########   odam.nl         */
+/*   Updated: 2020/10/26 15:01:06 by qli           ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,23 +44,23 @@ int		prompt(t_data *data)
 	directory = get_current_directory(data);
 	print(data, 1, directory, directory);
 	free(directory);
-	print(data, 1, " ",0 );
+	print(data, 1, " ", 0);
 	print(data, 1, "\033[0m", 0);
 	return (0);
 }
 
 char	*get_current_directory(t_data *data)
 {
-	char buf[PATH_MAX];
-	int index;
-	char *path;
-	char **directory;
+	char	buf[PATH_MAX];
+	int		index;
+	char	*path;
+	char	**directory;
 
 	path = getcwd(buf, (size_t)PATH_MAX);
 	if (path == NULL)
 		get_directory_error(data);
 	directory = ft_split(path, '/');
-	if(directory == NULL)
+	if (directory == NULL)
 		malloc_error(data, 0);
 	index = get_array_size(directory);
 	if (directory[0] == NULL)
@@ -71,4 +71,30 @@ char	*get_current_directory(t_data *data)
 		malloc_error(data, 0);
 	free_array(directory);
 	return (path);
+}
+
+void	print_export_output(t_data *data, int array_size, int i, int j)
+{
+	int	count;
+
+	count = 1;
+	while (i < array_size)
+	{
+		print(data, data->iostream[WRITE], "declare -x ", 0);
+		j = 0;
+		count = 1;
+		while (data->envp[i][j] != '\0')
+		{
+			if (data->envp[i][j] == '=' && count == 1)
+			{
+				print(data, data->iostream[WRITE], "=\"", 0);
+				j++;
+				count = 0;
+			}
+			print_char(data, data->iostream[WRITE], data->envp[i][j], 0);
+			j++;
+		}
+		print(data, data->iostream[WRITE], "\"\n", 0);
+		i++;
+	}
 }

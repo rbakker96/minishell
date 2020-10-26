@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/01 15:55:06 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/26 13:42:14 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/10/26 15:00:22 by qli           ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ void	print(t_data *data, int fd, char *str, char *malloced_str);
 void	print_char(t_data *data, int fd, char c, char *malloced_str);
 int		prompt(t_data *data);
 char	*get_current_directory(t_data *data);
+void	print_export_output(t_data *data, int array_size, int i, int j);
+
 
 /*
 ** file_two.c
