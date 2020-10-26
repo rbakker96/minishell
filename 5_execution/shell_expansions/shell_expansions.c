@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/05 19:44:06 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/23 15:23:28 by rbakker       ########   odam.nl         */
+/*   Updated: 2020/10/26 12:48:38 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,11 +47,14 @@ int		expansion_len(t_data *data, int i, int len)
 				len += exit_code_len(data, 0);
 			else
 				len += env_var_len(data, data->current_token, i, 0);
+			//printf("len = %d\n", len);
+			//i += token_var_len_two(data->current_token, i);
 			i += token_var_len(data->current_token, i);
+			//printf("i = %d\n", i);
 		}
 		else
 		{
-			(data->current_token[i] == '\\') ? i += 2 : i++;
+			i += (data->current_token[i] == '\\') ? 2 : 1;
 			len++;
 		}
 	}

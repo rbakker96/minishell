@@ -7,4 +7,6 @@ export
 
 [NO] unset % ; echo $?
 
-[NO] echo test     \    test ; echo $?
+if (tkn != (needed_tokens - 1)&& data->commands[cmd]->tokens[tkn][0] != '\0') // make function check empty string
+
+[NO] export TEST=LOL ; echo $TEST$TEST$TEST=lol$TEST ; echo $?

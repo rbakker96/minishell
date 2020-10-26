@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/19 13:23:47 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/23 14:42:37 by rbakker       ########   odam.nl         */
+/*   Updated: 2020/10/26 10:01:43 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	save_tokens(t_data *data, char **array, char *command, int cmd)
 	while (command[c] != '\0' && index < data->commands[cmd]->token_nb)
 	{
 		spaces = 0;
-		start = begin_token(command, c);
+		start = begin_token(command, c, &spaces);
 		len = len_token(command, start, 0, &spaces);
 		data->commands[cmd]->tokens[index] = ft_substr(command, start, len);
 		 printf("token [%d] = [%s]\n", index, data->commands[cmd]->tokens[index]);
@@ -40,10 +40,13 @@ void	save_tokens(t_data *data, char **array, char *command, int cmd)
 	data->commands[cmd]->tokens[index] = 0;
 }
 
-int		begin_token(char *command, int cmd)
+int		begin_token(char *command, int cmd, int *spaces)
 {
 	while (ft_isspace(command[cmd]) == 1 && command[cmd] != '\0')
+	{
 		cmd++;
+		(*spaces)++;
+	}
 	return (cmd);
 }
 

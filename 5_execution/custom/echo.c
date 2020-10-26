@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/09 14:49:34 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/23 15:13:10 by rbakker       ########   odam.nl         */
+/*   Updated: 2020/10/26 10:05:28 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	execute_echo(t_data *data, int cmd, int tkn, int needed_tokens)
 	while (tkn < needed_tokens)
 	{
 		print(data, data->iostream[1], data->commands[cmd]->tokens[tkn], 0);
-		if (tkn != (needed_tokens - 1))
+		if (tkn != (needed_tokens - 1)&& data->commands[cmd]->tokens[tkn][0] != '\0') // make function check empty string
 			print(data, data->iostream[1], " ", 0);
 		tkn++;
 	}
