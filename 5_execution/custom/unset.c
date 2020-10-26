@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/09 14:50:49 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/23 16:37:04 by rbakker       ########   odam.nl         */
+/*   Updated: 2020/10/26 15:00:45 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void	execute_unset(t_data *data, int cmd, int tkn, int needed_tokens)
 
 	envp_size = get_array_size(data->envp);
 	needed_tokens = calculate_needed_tokens(data, cmd, tkn);
+	validate_unset_tokens(data, cmd, tkn, needed_tokens);
 	matching_vars = nb_of_matching_var(data, cmd, tkn, needed_tokens);
 	if (needed_tokens == 1 || !matching_vars)
 		return ;
@@ -29,6 +30,23 @@ void	execute_unset(t_data *data, int cmd, int tkn, int needed_tokens)
 	copy_remaining_vars(data, new_envp, cmd, tkn);
 	free_array(data->envp);
 	data->envp = new_envp;
+}
+
+void	validate_unset_tokens(t_data *data, int cmd, int tkn, int needed_tokens)
+{
+	char *value;
+	int i;
+
+	while (tkn < needed_tokens)
+	{
+		i = 0;
+		value = data->commands[cmd]->tokens[tkn];
+		while (ft_isalpha(value[i]))
+			i++;
+		if ((value[i] != '=' && i == 0) && value[i] != '\0')
+			print_unset_error(data, value);
+		tkn++;
+	}
 }
 
 void	copy_remaining_vars(t_data *data, char **new_envp, int cmd, int tkn)

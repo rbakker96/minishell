@@ -6,7 +6,7 @@
 /*   By: roybakker <roybakker@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/09 14:50:36 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/26 15:01:15 by qli           ########   odam.nl         */
+/*   Updated: 2020/10/26 15:07:49 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,8 +101,6 @@ void	add_new_env_to_envp(t_data *data, char **new_envp, int cmd, int tkn)
 				malloc_error(data, new_envp);
 			i++;
 		}
-		else if (ret == error)
-			print_export_error(data, data->commands[cmd]->tokens[tkn]);
 		tkn++;
 	}
 	new_envp[i] = 0;
