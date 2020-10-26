@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/09 14:50:20 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/26 14:08:39 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/10/26 15:16:27 by qli           ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,12 @@ void	execute_cd(t_data *data, int cmd, int tkn, int needed_tokens)
 	if (data->commands[cmd]->tokens[needed_tokens] != NULL &&
 		data->commands[cmd]->tokens[needed_tokens][0] == '|')
 		tkn = needed_tokens;
-//	if (directory_validation(data, cmd, tkn, needed_tokens) == -1)
-//	{
-//		g_exit_code = 1;
-//		return ;
-//	}
 	if (needed_tokens > 2)
-		printf("too many arguments\n");
+	{
+		print(data, 2, "minishell : cd : too many arguments\n", 0);
+		g_exit_code = 1;
+		return ;
+	}
 	if (needed_tokens == 1 || compare_command("~/", value, 2) == 0 ||
 		compare_command("~", value, 1) == 0)
 		go_to_home(data, cmd);
@@ -36,26 +35,6 @@ void	execute_cd(t_data *data, int cmd, int tkn, int needed_tokens)
 		print_errno(data, cmd, value, 1);
 	free(g_dir_path);
 	g_dir_path = get_current_directory(data);
-}
-
-int		directory_validation(t_data *data, int cmd, int tkn, int needed_tokens)
-{
-	char	*directory;
-	DIR		*dirp;
-
-	while (tkn < needed_tokens)
-	{
-		directory = data->commands[cmd]->tokens[tkn];
-		dirp = opendir(directory);
-		if (dirp == NULL)
-		{
-			print_errno(data, cmd, directory, 1);
-			return (-1);
-		}
-		closedir(dirp);
-		tkn++;
-	}
-	return (0);
 }
 
 void	go_to_home(t_data *data, int cmd)
