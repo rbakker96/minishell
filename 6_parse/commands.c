@@ -6,7 +6,7 @@
 /*   By: roybakker <roybakker@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/19 13:23:31 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/26 20:00:56 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/10/26 20:18:07 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,8 @@ char	**save_commands(char *line, char command_nb, int i, int index)
 
 int		len_command(char *line, int i, int len)
 {
-	while (line[i + len] != '\0')
+	while (line[i + len] != '\0' && line[i + len] != ';')
 	{
-		if (line[i + len] == ';')
-			break ;
 		if (char_type(line[i + len]) == single_quote ||
 			char_type(line[i + len]) == double_quote)
 			process_quotes(line + i, &len);

@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/04 12:50:32 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/26 20:06:16 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/10/26 20:18:10 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,8 @@ int		get_amount_of_commands(char *line, int i)
 			i++;
 		if (line[i] != '\0' && line[i] != ';')
 			count++;
-		while (line[i] != '\0')
+		while (line[i] != '\0' && line[i] != ';')
 		{
-			if (line[i] == ';')
-				break ;
 			if (char_type(line[i]) == single_quote ||
 				char_type(line[i]) == double_quote)
 				process_quotes(line, &i);
