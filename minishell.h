@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/01 15:55:06 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/26 15:07:22 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/10/26 17:15:12 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ int		prompt(t_data *data);
 char	*get_current_directory(t_data *data);
 void	print_export_output(t_data *data, int array_size, int i, int j);
 
-
 /*
 ** file_two.c
 */
@@ -72,7 +71,6 @@ int		redirection(char *str);
 int		get_array_size(char **array);
 int		get_command_table_size(t_command_table **array);
 int		token_var_len(char *str, int i);
-int		token_var_len_two(char *str, int i);
 
 /*
 ** file_six.c

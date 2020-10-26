@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/09 14:50:49 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/26 15:00:45 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/10/26 15:50:07 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@ void	execute_unset(t_data *data, int cmd, int tkn, int needed_tokens)
 
 void	validate_unset_tokens(t_data *data, int cmd, int tkn, int needed_tokens)
 {
-	char *value;
-	int i;
+	char	*value;
+	int		i;
 
 	while (tkn < needed_tokens)
 	{
