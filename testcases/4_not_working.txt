@@ -2,10 +2,6 @@
 
 export LS="ls -la";$LS
 
-echo testing multi ; echo "test 1 ; | and 2" ; cat test/test.txt | grep Lorem ; echo $?
-
-echo testing multi ; echo 'test 1 ; | and 2' ; cat test/test.txt | grep Lorem ; echo $?
-
 unset PATH ; ls ; cd /bin ; ls
 
 [NO] echo \$ \! \@ \# \% \^ \& \* \( \) \_ \+ \| ; echo $?
