@@ -6,56 +6,37 @@
 /*   By: rbakker <marvin@codam.nl>                    +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/28 14:34:02 by rbakker       #+#    #+#                 */
-/*   Updated: 2020/04/29 11:46:09 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/10/26 13:48:23 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int		result_check(const char *str, int i, int pos_neg)
+int		ft_atoi(const char *str)
 {
-	long int overflow_check;
-	long int result;
-
-	overflow_check = 0;
-	result = 0;
-	while (str[i] >= '0' && str[i] <= '9')
-	{
-		if (overflow_check <= result)
-		{
-			overflow_check = result;
-			result = result * 10 + (str[i] - '0');
-			i++;
-		}
-		else
-		{
-			if (pos_neg == -1)
-				return (0);
-			else
-				return (1);
-		}
-	}
-	return (result * pos_neg);
-}
-
-int				ft_atoi(const char *str)
-{
-	int			i;
-	int			pos_neg;
-	long int	result;
+	long long int i;
+	long long int neg;
+	long long int output;
 
 	i = 0;
-	pos_neg = 1;
-	result = 0;
-	while ((str[i] == 32) || (str[i] >= 9 && str[i] <= 13))
+	neg = 1;
+	output = 0;
+	while (str[i] == ' ' || (str[i] >= 9 && str[i] <= 13))
 		i++;
-	if (str[i] == '+' && str[i + 1] != '-')
+	if (str[i] == '-')
+		neg = neg * -1;
+	if (str[i] == '+' || str[i] == '-')
 		i++;
-	if (str[i] == '-' && str[i + 1] != '+')
+	while (str[i] != '\0' && str[i] >= '0' && str[i] <= '9')
 	{
-		pos_neg = -1;
+		if (output * 10 + str[i] - '0' < output && neg == 1)
+			return (0);
+		if (output * 10 + str[i] - '0' < output && neg == -1)
+			return (0);
+		output = output * 10 + str[i] - '0';
 		i++;
+		if (str[i] < '0' || str[i] > '9')
+			return ((int)output * neg);
 	}
-	result = result_check(str, i, pos_neg);
-	return (result);
+	return ((int)output * neg);
 }

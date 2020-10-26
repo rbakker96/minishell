@@ -148,46 +148,46 @@ pwd ; cd ... ; pwd
 pwd ; cd .error ; pwd
 pwd ; cd ..error ; pwd
 
-#EXIT [TESTED - does not print exit anymore]
-[NO - does not print exit anymore] exit
+#EXIT [TESTED]
+exit
 exit | echo lala
-[NO - does not print exit anymore] exit ; echo lala
+exit ; echo lala
 exit 0
 exit 1
 exit 255
 exit 256
 exit 1000
 exit 9223372036854775807
-[NO] exit +0
-[NO] exit +1
-[NO] exit +255
-[NO] exit +256
-[NO] exit +1000
-[NO] exit +9223372036854775807
-[NO] exit -0
-[NO] exit -1
-[NO] exit -255
-[NO] exit -256
-[NO] exit -1000
-[NO] exit -9223372036854775808
-[NO - exit code 2] exit --1
-[NO - exit code 2] exit ++1
-[NO - exit code 2] exit lala
-[NO - exit code 2] exit ?
-[NO - exit code 2] exit @@
+exit +0
+exit +1
+exit +255
+exit +256
+exit +1000
+exit +9223372036854775807
+exit -0
+exit -1
+exit -255
+exit -256
+exit -1000
+exit -9223372036854775808
+exit --1
+exit ++1
+exit lala
+exit ?
+exit @@
 exit 9223372036854775810
-[NO - exit code 2] exit -9223372036854775810
+exit -9223372036854775810
 export a ; exit $a
 export a= ; exit $a
 export a=77 ; exit $a
 export % ; exit $?
 exit $a
 exit 55 55
-[NO - different error message] exit +55 55
-[NO - different error message] exit -55 55
-[NO - exit code 2] exit lala lala
+exit +55 55
+exit -55 55
+exit lala lala
 exit 55 lala
-[NO - exit code 2] exit lala 55
+exit lala 55
 
 
 #VARIABLES D'ENVIRONNEMENTS [TESTED]
@@ -199,12 +199,6 @@ echo $TEST$TEST=lala
 echo $TEST=lala$TEST
 echo $TEST$TEST=lala$TEST
 echo $TEST$TEST=$TEST=$TEST=$TEST=$TEST=$TEST
-[NO] echo $1TEST
-[NO] echo $10000TEST
-[NO] echo $99TEST
-[NO] echo $=TEST
-echo $1 "" $9 "" $4 "" $7
-[NO] echo $?TEST$?
 echo "$PWD"
 echo "$LALA"
 [NO] echo \'$PWD\'
@@ -315,67 +309,67 @@ echo lala ;   echo test| echo        lala ; echo $?
 
 #REDIRECTIONS [TESTED - MOST CASES FAIL BECAUSE OF INCORRECT NEW LINES]
 mkdir test_files
-[NO - line not aligned] echo test > a ; cat < a
-[NO - line not aligned] echo lala >a ; cat <a
-[NO - line not aligned] echo test>a ; cat<a
-[NO - line not aligned] echo lala> a ; cat< a
-[NO - line not aligned] echo test >a ; cat <a
-[NO - line not aligned] echo lala> a ; cat< a
-[NO] echo test        >a ; cat<        a
-[NO] echo lala            >     a ; cat        <       a
-[NO - line not aligned] echo test > test_files/a ; cat < test_files/a
-[NO - line not aligned] echo lala >test_files/a ; cat <test_files/a
-[NO - line not aligned] echo test > b ; echo test add >> b ; cat < b
-[NO - line not aligned] echo test > b ; rm b ; echo test add >> b ; cat < b
+echo test > a ; cat < a
+echo lala >a ; cat <a
+echo test>a ; cat<a
+echo lala> a ; cat< a
+echo test >a ; cat <a
+echo lala> a ; cat< a
+echo test        >a ; cat<        a
+echo lala            >     a ; cat        <       a
+echo test > test_files/a ; cat < test_files/a
+echo lala >test_files/a ; cat <test_files/a
+echo test > b ; echo test add >> b ; cat < b
+echo test > b ; rm b ; echo test add >> b ; cat < b
 [NO - seg fault] echo test > a ; echo test2 > b ; <a >b ; cat a b
-[NO - line not aligned] echo test > a ; echo test2 > b ; >a >b <error; cat a b
-[NO - line not aligned] echo test > a ; echo test2 > b ; rm a ; rm b ; >a >b <error; cat a b
-[NO - line not aligned] echo test > a ; echo test2 > b ; >a <error b; cat a b
-[NO - line not aligned] echo test > a ; echo test2 > b ; rm a ; rm b ; >a <error >b ; cat a b
+echo test > a ; echo test2 > b ; >a >b <error; cat a b
+echo test > a ; echo test2 > b ; rm a ; rm b ; >a >b <error; cat a b
+echo test > a ; echo test2 > b ; >a <error b; cat a b
+echo test > a ; echo test2 > b ; rm a ; rm b ; >a <error >b ; cat a b
 cat <error
-[NO - line not aligned] echo test > test_files/a ; echo test2 > test_files/b ; >test_files/a >test_files/b <error; cat test_files/a test_files/b
-[NO - line not aligned] echo test > test_files/a ; echo test2 > test_files/b ; rm test_files/a ; rm test_files/b ; >test_files/a >test_files/b <error; cat test_files/a test_files/b
-[NO - line not aligned] echo test > test_files/a ; echo test2 > test_files/b ; >test_files/a <error >test_files/b; cat test_files/a test_files/b
-[NO - line not aligned] echo test > test_files/a ; echo test2 > test_files/b ; rm test_files/a ; rm test_files/b ; >test_files/a <error >test_files/b ; cat test_files/a test_files/b
+echo test > test_files/a ; echo test2 > test_files/b ; >test_files/a >test_files/b <error; cat test_files/a test_files/b
+echo test > test_files/a ; echo test2 > test_files/b ; rm test_files/a ; rm test_files/b ; >test_files/a >test_files/b <error; cat test_files/a test_files/b
+echo test > test_files/a ; echo test2 > test_files/b ; >test_files/a <error >test_files/b; cat test_files/a test_files/b
+echo test > test_files/a ; echo test2 > test_files/b ; rm test_files/a ; rm test_files/b ; >test_files/a <error >test_files/b ; cat test_files/a test_files/b
 cat <test_files/error
-[NO - line not aligned] echo test > ../a ; echo test2 > ../b ; >../a >../b <error ; cat ../a ../b
-[NO - line not aligned] echo test > ../a ; echo test2 > ../b ; rm ../a ; rm ../b ; >../a >../b <error; cat ../a ../b
-[NO - line not aligned] echo test > ../a ; echo test2 > ../b ; >../a <error >../b ; cat ../a ../b
-[NO - line not aligned] echo test > ../a ; echo test2 > ../b ; rm ../a ; rm ../b ; >../a <error >../b ; cat ../a ../b
+echo test > ../a ; echo test2 > ../b ; >../a >../b <error ; cat ../a ../b
+echo test > ../a ; echo test2 > ../b ; rm ../a ; rm ../b ; >../a >../b <error; cat ../a ../b
+echo test > ../a ; echo test2 > ../b ; >../a <error >../b ; cat ../a ../b
+echo test > ../a ; echo test2 > ../b ; rm ../a ; rm ../b ; >../a <error >../b ; cat ../a ../b
 cat <../error
 <error
-[NO - line not aligned] echo test > test_files/a ; echo test2 > test_files/b ; >test_files/a >>test_files/b <error; cat test_files/a test_files/b
-[NO - line not aligned] echo test > test_files/a ; echo test2 > test_files/b ; >>test_files/a >test_files/b <error; cat test_files/a test_files/b
-[NO - line not aligned] echo test > test_files/a ; echo test2 > test_files/b ; >>test_files/a >>test_files/b <error; cat test_files/a test_files/b
-[NO - line not aligned] echo test > test_files/a ; echo test2 > test_files/b ; >test_files/a <error >>test_files/b ; cat test_files/a test_files/b
-[NO - line not aligned] echo test > test_files/a ; echo test2 > test_files/b ; >test_files/a <error >>test_files/b ; cat test_files/a test_files/b
-[NO - line not aligned] echo test > test_files/a ; echo test2 > test_files/b ; <error >>test_files/a >>test_files/b ; cat test_files/a test_files/b
-[NO - line not aligned] echo test > test_files/a ; echo lala > test_files/b ; >test_files/a >>test_files/b <error; cat test_files/a test_files/b
-[NO - line not aligned] echo test > test_files/a ; echo lala > test_files/b ; >>test_files/a >>test_files/b <error; cat test_files/a test_files/b
+echo test > test_files/a ; echo test2 > test_files/b ; >test_files/a >>test_files/b <error; cat test_files/a test_files/b
+echo test > test_files/a ; echo test2 > test_files/b ; >>test_files/a >test_files/b <error; cat test_files/a test_files/b
+echo test > test_files/a ; echo test2 > test_files/b ; >>test_files/a >>test_files/b <error; cat test_files/a test_files/b
+echo test > test_files/a ; echo test2 > test_files/b ; >test_files/a <error >>test_files/b ; cat test_files/a test_files/b
+echo test > test_files/a ; echo test2 > test_files/b ; >test_files/a <error >>test_files/b ; cat test_files/a test_files/b
+echo test > test_files/a ; echo test2 > test_files/b ; <error >>test_files/a >>test_files/b ; cat test_files/a test_files/b
+echo test > test_files/a ; echo lala > test_files/b ; >test_files/a >>test_files/b <error; cat test_files/a test_files/b
+echo test > test_files/a ; echo lala > test_files/b ; >>test_files/a >>test_files/b <error; cat test_files/a test_files/b
 >test_files/a <error >>test_files/b ; cat test_files/a test_files/b
-[NO - line not aligned] <error >>test_files/a >>test_files/b ; cat test_files/a test_files/b
-[NO - line not aligned] echo lala > a >> a >> a ; echo test >> a ; cat < a
-[NO - line not aligned] echo lala > a >> a >> a ; echo test >> a ; echo lala > a >> a >> a ; cat < a
-[NO - line not aligned] echo lala >> a >> a > a ; echo test >> a ; cat < a
-[NO - line not aligned] echo lala >> a >> a > a ; echo test >> a ; echo lala >> a >> a > a ; cat < a
-[NO - line not aligned] echo test > a ; echo lala >> a >> a >> a ; echo test >> a ; cat < a
-[NO - line not aligned] echo test > a ; echo lala >> a >> a >> a ; echo test >> a ; echo lala >> a >> a >> a ; cat < a
-[NO - line not aligned] echo test > a ; echo lala > b ; rm b ; >>a >>b <error; cat a b
-[NO] echo test > a ; echo lala > b ; rm b ; >>a <error >> b ; cat a b
-[NO - line not aligned] echo test > a ; echo lala > b ; rm a ; rm b ; >>a >>b <error; cat a b
-[NO - line not aligned] echo test > a ; echo lala > b ; rm a ; rm b ; >>a <error >> b ; cat a b
+<error >>test_files/a >>test_files/b ; cat test_files/a test_files/b
+echo lala > a >> a >> a ; echo test >> a ; cat < a
+echo lala > a >> a >> a ; echo test >> a ; echo lala > a >> a >> a ; cat < a
+echo lala >> a >> a > a ; echo test >> a ; cat < a
+echo lala >> a >> a > a ; echo test >> a ; echo lala >> a >> a > a ; cat < a
+echo test > a ; echo lala >> a >> a >> a ; echo test >> a ; cat < a
+echo test > a ; echo lala >> a >> a >> a ; echo test >> a ; echo lala >> a >> a >> a ; cat < a
+echo test > a ; echo lala > b ; rm b ; >>a >>b <error; cat a b
+echo test > a ; echo lala > b ; rm b ; >>a <error >> b ; cat a b
+echo test > a ; echo lala > b ; rm a ; rm b ; >>a >>b <error; cat a b
+echo test > a ; echo lala > b ; rm a ; rm b ; >>a <error >> b ; cat a b
 echo <a <b
 echo <b <a
-[NO - line not aligned] echo lala > a ; rm a ; echo lala > b ; rm b ; echo lala > a > b > a ; cat a b
-[NO - line not aligned] echo test > a ; echo test > b ; echo lala > a > b > a ; cat a b
-[NO - line not aligned] echo lala > a ; rm a ; echo lala > b ; rm b ; echo lala >> a > b > a ; cat a b
-[NO - line not aligned] echo lala > a ; rm a ; echo lala > b ; rm b ; echo lala > a >> b > a ; cat a b
-[NO - line not aligned] echo test > a ; echo test > b ; echo lala > a >> b > a ; cat a b
-[NO - line not aligned] echo lala > a ; rm a ; echo lala > b ; rm b ; echo lala > a > b >> a ; cat a b
-[NO - line not aligned] echo test > a ; echo test > b ; echo lala > a > b >> a ; cat a b
-[NO - line not aligned] echo test > a ; echo test > b ; echo lala >> a > b > a ; cat a b
-[NO - line not aligned] echo lala > a ; rm a ; echo lala > b ; rm b ; echo lala >> a >> b >> a ; cat a b
-[NO - line not aligned] echo test > a ; echo test > b ; echo lala >> a >> b >> a ; cat a b
+echo lala > a ; rm a ; echo lala > b ; rm b ; echo lala > a > b > a ; cat a b
+echo test > a ; echo test > b ; echo lala > a > b > a ; cat a b
+echo lala > a ; rm a ; echo lala > b ; rm b ; echo lala >> a > b > a ; cat a b
+echo lala > a ; rm a ; echo lala > b ; rm b ; echo lala > a >> b > a ; cat a b
+echo test > a ; echo test > b ; echo lala > a >> b > a ; cat a b
+echo lala > a ; rm a ; echo lala > b ; rm b ; echo lala > a > b >> a ; cat a b
+echo test > a ; echo test > b ; echo lala > a > b >> a ; cat a b
+echo test > a ; echo test > b ; echo lala >> a > b > a ; cat a b
+echo lala > a ; rm a ; echo lala > b ; rm b ; echo lala >> a >> b >> a ; cat a b
+echo test > a ; echo test > b ; echo lala >> a >> b >> a ; cat a b
 rm -rf test_files
 
 
@@ -459,9 +453,8 @@ echo $[] ; echo $?
 echo \'\"\' ; echo $?
 echo \'\"\'\" ; echo $?
 echo \'\"\'\"|\" ; echo $?
-[NO] echo \'\"\'\"|\"\'||\' ; echo $?
+echo \'\"\'\"|\"\' ; echo $?
 echo \'\"\'\"|\"\'\|\|\' ; echo $?
 echo \'\"\'\"|\"\'\|\|\' \'\' \"\" ; echo $?
-[NO] echo "\\\"\\ ; echo $?
 echo \\'\"\' ; echo $?
 echo \'\\"\'\\"|\"\'\|\|\' \'\' \"\" ; echo $?

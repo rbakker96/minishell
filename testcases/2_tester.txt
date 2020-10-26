@@ -49,15 +49,15 @@ $EXPORT_SHOW ; echo $?
 [NO] export TEST="ls       -l     - a" ; echo $TEST ; $LS ;  $ENV_SHOW ; echo $?
 
 # REDIRECTIONS
-[NO] echo test > ls ; cat ls ; echo $?
-[NO] echo test > ls >> ls >> ls ; echo test >> ls; cat ls ; echo $?
-[NO] > lol echo test lol; cat lol ; echo $?
-[NO] >lol echo > test1>lol>test1>>lol>test1 mdr >lol test1 >test1; cat test1 ; echo $?
+echo test > ls ; cat ls ; echo $?
+echo test > ls >> ls >> ls ; echo test >> ls; cat ls ; echo $?
+> lol echo test lol; cat lol ; echo $?
+>lol echo > test1>lol>test1>>lol>test1 mdr >lol test1 >test1; cat test1 ; echo $?
 cat < ls ; echo $?
 cat < ls > ls ; echo $?
 
 # MULTI TESTS
-[NO] echo testing multi ; echo "test 1 ; | and 2" ; cat test/test.txt | grep Lorem ; echo $?
+echo testing multi ; echo "test 1 ; | and 2" ; cat test/test.txt | grep Lorem ; echo $?
 
 # SYNTAX ERROR
 ;; test ; echo $?
@@ -67,16 +67,16 @@ echo | | ; echo $?
 < ; echo $?
 
 # EXIT
-[NO] exit 42
+exit 42
 exit 42 53 68
-[NO] exit 259
+exit 259
 exit 9223372036854775807
-[NO] exit -9223372036854775808
-[NO] exit 9223372036854775808
+exit -9223372036854775808
+exit 9223372036854775808
 exit -9223372036854775810
-[NO] exit -4
-[NO] exit wrong
-[NO] exit wrong_command
+exit -4
+exit wrong
+exit wrong_command
 gdagadgag
 ls -Z
 cd gdhahahad
