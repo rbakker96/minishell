@@ -4,10 +4,6 @@ export LS="ls -la";$LS
 
 [NO] echo \$ \! \@ \# \% \^ \& \* \( \) \_ \+ \| ; echo $?
 
-[NO] unset % ; echo $?
-
-if (tkn != (needed_tokens - 1)&& data->commands[cmd]->tokens[tkn][0] != '\0') // make function check empty string
-
 [NO] export TEST=LOL ; echo $TEST$TEST$TEST=lol$TEST ; echo $?
 echo \'$PWD\'
 echo \'$LALA\'
@@ -25,5 +21,3 @@ exit -9223372036854775808
 
 
 unset PATH ; ls ; cd /bin ; ls
-
-clear
