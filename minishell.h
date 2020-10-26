@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/01 15:55:06 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/26 13:42:14 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/10/26 14:52:56 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ int		quotes_check(char *str);
 */
 void	fork_error(t_data *data, int cmd);
 void	write_error(t_data *data, char *malloced_str);
-void	print_export_error(t_data *data, char *cmd);
+void	print_unset_error(t_data *data, char *cmd);
 void	print_special_errno(t_data *data, char *cmd, char *msg, int exit_code);
 
 /*
@@ -208,6 +208,7 @@ void	execute_pwd(t_data *data, int cmd);
 ** unset.c
 */
 void	execute_unset(t_data *data, int cmd, int tkn, int needed_tokens);
+void	validate_unset_tokens(t_data *data, int cmd, int tkn, int needed_tokens);
 void	copy_remaining_vars(t_data *data, char **new_envp, int cmd, int tkn);
 int		compare_var(t_data *data, int cmd, int tkn, char *envp_var);
 int		nb_of_matching_var(t_data *data, int cmd, int tkn, int needed_tokens);
