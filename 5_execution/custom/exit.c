@@ -6,7 +6,7 @@
 /*   By: roybakker <roybakker@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/09 14:51:32 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/26 13:54:44 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/10/26 15:02:27 by qli           ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void	execute_exit(t_data *data, int cmd, int tkn, int needed_tokens)
 	if (needed_tokens == 1)
 	{
 		clear_memory(data);
+		print(data, data->iostream[1], "exit\n", 0);
 		exit(0);
 	}
 	if (numeric_arg_check(data, cmd) == -1)

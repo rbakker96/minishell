@@ -2,9 +2,6 @@
 
 export LS="ls -la";$LS
 
-#declare -x envp[item]
-export
-
 [NO] echo \$ \! \@ \# \% \^ \& \* \( \) \_ \+ \| ; echo $?
 
 [NO] export TEST=LOL ; echo $TEST$TEST$TEST=lol$TEST ; echo $?
@@ -24,3 +21,5 @@ exit -9223372036854775808
 
 
 unset PATH ; ls ; cd /bin ; ls
+
+clear
