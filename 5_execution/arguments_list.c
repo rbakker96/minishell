@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/07 11:15:58 by rbakker       #+#    #+#                 */
-/*   Updated: 2020/10/23 15:14:15 by rbakker       ########   odam.nl         */
+/*   Updated: 2020/10/27 17:16:38 by qli           ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	print_array(char **array)
 		size++;
 	while (i < size)
 	{
-		//printf("final token [%d] = %s\n", i, array[i]);
+		printf("final token [%d] = %s\n", i, array[i]);
 		i++;
 	}
 }
@@ -53,7 +53,7 @@ int		update_token_list(t_data *data, int cmd, int *tkn, int i)
 	data->commands[cmd]->tokens = tokens;
 	data->commands[cmd]->token_nb = usable_tokens;
 	(*tkn) = 0;
-	print_array(data->commands[cmd]->tokens); // remove later
+	//print_array(data->commands[cmd]->tokens); // remove later
 	return (usable_tokens);
 }
 

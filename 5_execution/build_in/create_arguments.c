@@ -6,7 +6,7 @@
 /*   By: qli <qli@student.codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/25 15:05:59 by qli           #+#    #+#                 */
-/*   Updated: 2020/10/22 15:17:05 by rbakker       ########   odam.nl         */
+/*   Updated: 2020/10/26 19:41:48 by qli           ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,13 @@ char	*get_abs_path(t_data *data, int cmd, int tkn, int x)
 	char		*path_token;
 	char		*abs_path;
 
+	if (find_path(data) == NULL)
+	{
+		abs_path = ft_strjoin("./", data->commands[cmd]->tokens[tkn]);
+		if (abs_path == NULL)
+			malloc_error(data, 0);
+		return (abs_path);
+	}
 	path = ft_split(find_path(data), ':');
 	if (path == NULL)
 		malloc_error(data, 0);

@@ -1,11 +1,15 @@
+
 # cases that do not yet work
+
+export LS="ls -la";$LS $LS
 
 export LS="ls -la";$LS
 
-echo testing multi ; echo "test 1 ; | and 2" ; cat test/test.txt | grep Lorem ; echo $?
+export LS="ls -la";echo $LS $LS
 
-echo testing multi ; echo 'test 1 ; | and 2' ; cat test/test.txt | grep Lorem ; echo $?
+export LS="ls -la";echo $LS hello
 
-unset PATH ; ls ; cd /bin ; ls
+export LS="ls -la";$LS hello
 
 [NO] echo \$ \! \@ \# \% \^ \& \* \( \) \_ \+ \| ; echo $?
+

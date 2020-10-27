@@ -239,9 +239,7 @@ echo \"a\" ; echo $?
 echo \\\"a\"\\ ; echo $?
 echo a\\a ; echo $?
 echo a\"\a ; echo $?
-[NO] echo $ ; echo $?
 echo \$ ; echo $?
-[NO] echo \\$ ; echo $?
 echo $USER ; echo $?
 echo \$USER ; echo $?
 echo \\$USER ; echo $?
@@ -266,9 +264,7 @@ echo \[ \] \\ \` ; echo $?
 echo \\ \\ \\ ; echo $?
 echo \\ \\\ \\ ; echo $?
 echo \\ \ \\ ; echo $?
-[NO] echo \\ $ \\ ; echo $?
 echo \\ \$ \\ ; echo $?
-[NO] echo \\ \\$ \\ ; echo $?
 echo \\ | \\ ; echo $?
 [NO] echo \\ \| \\ ; echo $?
 echo \\ \\| \\ ; echo $?
@@ -279,7 +275,6 @@ echo \ \\ \\ ; echo $?
 echo \ \\\ \\ ; echo $?
 echo \ \ \\ ; echo $?
 echo \ \$ \\ ; echo $?
-[NO] echo \ \\$ \\ ; echo $?
 echo \ \| \\ ; echo $?
 echo \ \\| \\ ; echo $?
 echo \ \; \\ ; echo $?
@@ -288,10 +283,8 @@ echo \ \\; \\ ; echo $?
 echo \"\\\"\\ ; echo $?
 echo "\\\|"\\ ; echo $?
 echo \"\\\|\"\\ ; echo $?
-[No - SGE FAULT] echo \"\\$TEST\|\"$1\\$444 ; echo $?
 echo \"\\\$TEST\|\"\$1\\\$444 ; echo $?
 echo "*"\\-\% \\ \$ ; echo $?
-[NO] echo \"*"\\-\% \\ \$" ; echo $?
 echo \' ; echo $?
 echo \\'\"\'\" ; echo $?
 echo \'\"\'\" ; echo $?
@@ -302,9 +295,9 @@ echo lala|echo test|echo lala ; echo $?
 echo lala;echo test|echo lala ; echo $?
 echo lala|echo test;echo lala ; echo $?
 echo lala ;   echo   test     ;echo      lala ; echo $?
-[NO] echo lala             |echo       test |                            echo  lala ; echo $?
+echo lala             |echo       test |                            echo  lala ; echo $?
 echo lala ;   echo test| echo        lala ; echo $?
-[NO] echo        lala|echo test ;echo                                   lala ; echo $?
+echo        lala|echo test ;echo                                   lala ; echo $?
 
 
 #REDIRECTIONS [TESTED - MOST CASES FAIL BECAUSE OF INCORRECT NEW LINES]

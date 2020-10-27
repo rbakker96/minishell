@@ -242,3 +242,17 @@ $hihihi
 
 # 0 exit code -> echo \n
 echo $hkskks
+
+####################################################################
+#                           OTHERS		                           #
+####################################################################
+
+export LS="cat main.c|cat -e";echo $LS $LS
+
+export LS="cat main.c | cat -e"; echo $LS hello
+
+export LS="cat main.c | cat -e"; $LS hello
+
+export LS="ls -la"; echo $LS hello asdfsadf
+
+export MYVAR="my variable value" ; echo $MYVAR

@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/04 12:50:32 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/19 14:07:59 by rbakker       ########   odam.nl         */
+/*   Updated: 2020/10/27 15:47:17 by qli           ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int		get_amount_of_commands(char *line, int i)
 	return (count);
 }
 
-int			get_amount_of_tokens(char *command, int cmd, int tkn)
+int		get_amount_of_tokens(char *command, int cmd, int tkn)
 {
 	while (ft_isspace(command[cmd]) == 1 && command[cmd] != '\0')
 		cmd++;
@@ -56,7 +56,7 @@ int			get_amount_of_tokens(char *command, int cmd, int tkn)
 	return (tkn);
 }
 
-int			char_type(char c)
+int		char_type(char c)
 {
 	if (ft_isspace(c) == 1)
 		return (space);
@@ -68,4 +68,15 @@ int			char_type(char c)
 		return (single_quote);
 	else
 		return (normal_char);
+}
+
+int		copy_env_token(char *old_str, char **new_str, char **token_list)
+{
+	*new_str = ft_strdup(old_str);
+	if (new_str == NULL)
+	{
+		free_array(token_list);
+		return (-1);
+	}
+	return (0);
 }
