@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/05 10:18:54 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/23 17:24:14 by rbakker       ########   odam.nl         */
+/*   Updated: 2020/10/27 19:20:12 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,19 +16,16 @@ void	check_file_permission(t_data *data, char *path)
 {
 	struct stat stats;
 
-	if (stat(path, &stats) != 0)
+	if (stat(path, &stats) == -1)
 	{
 		free(data->args);
 		data->args = NULL;
 		print_builtin_errno(data, path, 127);
 	}
-	else
-	{
-		if ((stats.st_mode & S_IFDIR) == 16384) //hex(4000)
-			print_special_errno(data, path, "is a directory", 126);
-		if ((stats.st_mode & S_IXUSR) == 0)
-			print_special_errno(data, path, "Permission denied", 126);
-	}
+	if ((stats.st_mode & S_IFDIR) == 16384)
+		print_special_errno(data, path, "is a directory", 126);
+	if ((stats.st_mode & S_IXUSR) == 0)
+		print_special_errno(data, path, "Permission denied", 126);
 }
 
 void	print_redir_erno(t_data *data, char *filename, int exit_code)

@@ -6,7 +6,7 @@
 /*   By: qli <qli@student.codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/21 13:15:18 by qli           #+#    #+#                 */
-/*   Updated: 2020/10/27 18:32:22 by qli           ########   odam.nl         */
+/*   Updated: 2020/10/27 19:29:08 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,23 +20,16 @@ void	signal_handler(void)
 		g_exit_code = 1;
 }
 
-void	print_prompt(void) // to discuss
+void	print_prompt(void)
 {
-	int	ret;
-
-	ret = write(2, "\b\b  \b\b", 6);
-	if (ret == -1)
-		exit(1);
-	ret = ft_printf("\n\033[1;32m→\033[1;36m %s\033[0m ", g_dir_path);
-	if (ret == -1)
-		exit(1);
+	if (write(2, "\b\b  \b\b", 6) == -1)
+		g_exit_code = -1;
+	if (ft_printf("\n\033[1;32m→\033[1;36m %s\033[0m ", g_dir_path) == -1)
+		g_exit_code = -1;
 }
 
 void	sigint_handler(int signum)
 {
-	int	ret;
-
-	ret = 0;
 	g_exit_code = 2;
 	if (g_pid == 0)
 	{
@@ -45,10 +38,10 @@ void	sigint_handler(int signum)
 	}
 	else
 	{
-		ret = kill(g_pid, g_exit_code);
-		if (ret == 0)
+		if (!kill(g_pid, g_exit_code))
 		{
-			write(2, "\n", 1);
+			if (write(2, "\n", 1) == -1)
+				g_exit_code = -1;
 			g_pid = 0;
 		}
 		else
@@ -57,33 +50,34 @@ void	sigint_handler(int signum)
 			print_prompt();
 		}
 	}
-	signal(signum, sigint_handler);
+	if (signal(signum, sigint_handler) == SIG_ERR)
+		g_exit_code = 1;
 }
 
 void	sigquit_handler(int signum)
 {
-	int	ret;
-
-	ret = 0;
 	g_exit_code = 3;
 	if (g_pid == 0)
 	{
-		write(2, "\b\b  \b\b", 6);
+		if (write(2, "\b\b  \b\b", 6) == -1)
+			g_exit_code = -1;
 		g_exit_code = 0;
 	}
 	else
 	{
-		ret = kill(g_pid, g_exit_code);
-		if (ret == 0)
+		if (!kill(g_pid, g_exit_code))
 		{
-			write(2, "Quit: 3\n", 8);
+			if (write(2, "Quit: 3\n", 8) == -1)
+				g_exit_code = -1;
 			g_pid = 0;
 		}
 		else
 		{
-			write(2, "\b\b  \b\b", 6);
+			if (write(2, "\b\b  \b\b", 6) == -1)
+				g_exit_code = -1;
 			g_exit_code = 0;
 		}
 	}
-	signal(signum, sigquit_handler);
+	if (signal(signum, sigquit_handler) == SIG_ERR)
+		g_exit_code = 1;
 }

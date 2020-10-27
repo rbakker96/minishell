@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/08/31 10:42:36 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/26 16:20:35 by qli           ########   odam.nl         */
+/*   Updated: 2020/10/27 19:28:39 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,11 @@ int		main(int argc, char **argv, char **envp)
 	signal_handler();
 	while (1)
 	{
+		if (g_exit_code == -1)
+		{
+			clear_memory(&data);
+			exit(1);
+		}
 		prompt(&data);
 		if (parse_command(&data, envp) != -1)
 			execution_loop(&data, 0, 0);

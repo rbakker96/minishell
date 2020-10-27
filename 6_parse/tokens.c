@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/19 13:23:47 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/26 10:01:43 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/10/27 19:17:32 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	save_tokens(t_data *data, char **array, char *command, int cmd)
 		start = begin_token(command, c, &spaces);
 		len = len_token(command, start, 0, &spaces);
 		data->commands[cmd]->tokens[index] = ft_substr(command, start, len);
-		 printf("token [%d] = [%s]\n", index, data->commands[cmd]->tokens[index]);
+		//printf("token [%d] = [%s]\n", index, data->commands[cmd]->tokens[index]);
 		if (data->commands[cmd]->tokens[index] == NULL)
 			malloc_error(data, array);
 		c += len + spaces;
