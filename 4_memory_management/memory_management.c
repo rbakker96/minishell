@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/22 13:51:43 by rbakker       #+#    #+#                 */
-/*   Updated: 2020/10/26 19:24:01 by qli           ########   odam.nl         */
+/*   Updated: 2020/10/27 20:19:03 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void	initialize(t_data *data)
 	data->commands = NULL;
 	data->args = NULL;
 	data->envp = NULL;
+	data->used_tokens = 0;
 	g_exit_code = 0;
 	g_pid = 0;
 	g_dir_path = get_current_directory(data);
@@ -33,7 +34,7 @@ void	clear_memory(t_data *data)
 	free_string(g_dir_path);
 	free_string(data->input);
 	free_array(data->envp);
-	//free_array(data->args);
+	free_array(data->args);
 }
 
 void	clear_used_memory(t_data *data)

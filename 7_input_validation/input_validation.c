@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/07 13:52:27 by rbakker       #+#    #+#                 */
-/*   Updated: 2020/10/26 17:30:41 by qli           ########   odam.nl         */
+/*   Updated: 2020/10/27 20:45:37 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,6 @@ int		input_validation(t_data *data)
 	char	character;
 
 	character = 0;
-	if (validate_single_quotes(data, &character) == -1 ||
-		validate_double_quotes(data, &character) == -1 ||
-		validate_end_of_line_command(data, &character, 0) == -1)
-	{
-		validation_error(data, character, 1);
-		return (-1);
-	}
 	if (validate_input_redirection(data, &character) == -258 ||
 		validate_output_redirection(data, &character) == -258 ||
 		validate_pipes(data, &character) == -258 ||
@@ -32,6 +25,13 @@ int		input_validation(t_data *data)
 		validate_end_of_line_command(data, &character, 0) == -258)
 	{
 		validation_error(data, character, 258);
+		return (-1);
+	}
+	if (validate_single_quotes(data, &character) == -1 ||
+		validate_double_quotes(data, &character) == -1 ||
+		validate_end_of_line_command(data, &character, 0) == -1)
+	{
+		validation_error(data, character, 1);
 		return (-1);
 	}
 	return (0);
@@ -58,22 +58,22 @@ int		validate_end_of_line_command(t_data *data, char *character, int len)
 	len = ft_strlen(data->input);
 	while (data->input[len - 1] == ' ')
 		len--;
-	if (data->input[len - 1] == '<')
+	if (data->input[len - 1] == '<' && data->input[len - 2] != '\\')
 	{
 		(*character) = '<';
 		return (-258);
 	}
-	else if (data->input[len - 1] == '>')
+	else if (data->input[len - 1] == '>' && data->input[len - 2] != '\\')
 	{
 		(*character) = '>';
 		return (-258);
 	}
-	else if (data->input[len - 1] == '|')
+	else if (data->input[len - 1] == '|' && data->input[len - 2] != '\\')
 	{
 		(*character) = '|';
 		return (-258);
 	}
-	else if (data->input[len - 1] == '\\')
+	else if (data->input[len - 1] == '\\' && data->input[len - 2] != '\\')
 	{
 		(*character) = '\\';
 		return (-1);
