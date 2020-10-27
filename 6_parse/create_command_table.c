@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/02 11:00:03 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/27 17:19:16 by qli           ########   odam.nl         */
+/*   Updated: 2020/10/27 18:25:36 by qli           ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int		parse_command(t_data *data, char **envp)
 	else if (ret == 0)
 	{
 		clear_memory(data);
-		write(2, "exit\n", 5);
+		print(data, 2, "exit\n", 0);
 		exit(0);
 	}
 	if (input_validation(data) == -1)
