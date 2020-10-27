@@ -6,7 +6,7 @@
 /*   By: qli <qli@student.codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/21 13:15:18 by qli           #+#    #+#                 */
-/*   Updated: 2020/10/22 14:35:09 by rbakker       ########   odam.nl         */
+/*   Updated: 2020/10/27 18:32:22 by qli           ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,16 @@ void	signal_handler(void)
 		g_exit_code = 1;
 }
 
-void	print_prompt(void)
+void	print_prompt(void) // to discuss
 {
-	write(2, "\b\b  \b\b", 6);
-	ft_printf("\n\033[1;32m→\033[1;36m %s\033[0m ", g_dir_path);
+	int	ret;
+
+	ret = write(2, "\b\b  \b\b", 6);
+	if (ret == -1)
+		exit(1);
+	ret = ft_printf("\n\033[1;32m→\033[1;36m %s\033[0m ", g_dir_path);
+	if (ret == -1)
+		exit(1);
 }
 
 void	sigint_handler(int signum)
