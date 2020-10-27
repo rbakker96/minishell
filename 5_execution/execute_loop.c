@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/12 16:36:24 by rbakker       #+#    #+#                 */
-/*   Updated: 2020/10/27 17:36:06 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/10/27 18:24:26 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ void	execution_loop(t_data *data, int cmd, int tkn)
 		}
 		close_all_fds(data, cmd);
 		wait_for_child_process();
-		printf("here\n");
 		cmd++;
 	}
 	clear_used_memory(data);

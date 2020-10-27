@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/01 14:27:26 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/27 13:16:58 by qli           ########   odam.nl         */
+/*   Updated: 2020/10/27 18:28:31 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ typedef struct			s_data
 	t_command_table		**commands;
 	int					command_nb;
 	char				*current_token;
+	int					used_tokens;
 }						t_data;
 
 #endif
