@@ -6,7 +6,7 @@
 #    By: rbakker <rbakker@student.42.fr>              +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/02/05 14:55:09 by rbakker       #+#    #+#                  #
-#    Updated: 2020/10/22 14:15:53 by rbakker       ########   odam.nl          #
+#    Updated: 2020/10/27 15:48:59 by qli           ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,6 +42,7 @@ SOURCES			= 	main.c \
 					5_execution/shell_expansions/expand_functions.c \
 					5_execution/shell_expansions/len_calculations.c \
 					5_execution/shell_expansions/shell_expansions.c \
+					5_execution/shell_expansions/env_expansions.c \
 					5_execution/arguments_list.c \
 					5_execution/execute_loop.c \
 					6_parse/create_command_table.c \

@@ -1,7 +1,14 @@
+
 # cases that do not yet work
+
+export LS="ls -la";$LS $LS
 
 export LS="ls -la";$LS
 
-unset PATH ; ls ; cd /bin ; ls
+export LS="ls -la";echo $LS $LS
 
-[NO] echo \$ \! \@ \# \% \^ \& \* \( \) \_ \+ \< \> \| ; echo $?
+export LS="ls -la";echo $LS hello
+
+export LS="ls -la";$LS hello
+
+[NO] echo \$ \! \@ \# \% \^ \& \* \( \) \_ \+ \| ; echo $?

@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/22 13:51:43 by rbakker       #+#    #+#                 */
-/*   Updated: 2020/10/22 20:22:17 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/10/26 19:24:01 by qli           ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	clear_memory(t_data *data)
 	free_string(g_dir_path);
 	free_string(data->input);
 	free_array(data->envp);
-	free_array(data->args);
+	//free_array(data->args);
 }
 
 void	clear_used_memory(t_data *data)

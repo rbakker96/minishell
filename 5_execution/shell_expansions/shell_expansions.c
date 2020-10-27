@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/05 19:44:06 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/27 17:21:50 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/10/27 17:24:54 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,13 @@ void	preform_shell_expansions(t_data *data, int cmd, int tkn)
 		if (new_token == NULL)
 			malloc_error(data, 0);
 		expand_token(data, &new_token, 0, 0);
-		free(data->commands[cmd]->tokens[tkn]);
-		data->commands[cmd]->tokens[tkn] = new_token;
-		//printf("updated token [%d] = %s\n", tkn, data->commands[cmd]->tokens[tkn]);
+		if (compare_command("echo", data->commands[cmd]->tokens[0], 4) != 0)
+			expand_token_list(data, cmd, tkn, new_token);
+		else
+		{
+			free(data->commands[cmd]->tokens[tkn]);
+			data->commands[cmd]->tokens[tkn] = new_token;
+		}
 		tkn++;
 	}
 }
@@ -52,7 +56,6 @@ int		expansion_len(t_data *data, int i, int len)
 		}
 		else
 		{
-			//i += (data->current_token[i] == '\\') ? 2 : 1;
 			i += (data->current_token[i] == '\\' && data->current_token[i + 1] != '|') ? 2 : 1;
 			len++;
 		}

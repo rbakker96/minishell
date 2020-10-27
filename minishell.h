@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/01 15:55:06 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/27 13:43:04 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/10/27 17:25:49 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ int		get_amount_of_commands(char *line, int i);
 void	process_quotes(char *line, int *i);
 int		get_amount_of_tokens(char *command, int cmd, int tkn);
 int		char_type(char c);
+int		copy_env_token(char *old_str, char **new_str, char **token_list);
 
 /*
 ** file_three.c
@@ -275,6 +276,12 @@ void	expand_token(t_data *data, char **new_token, int i, int x);
 void	exit_code(t_data *data, char **new_token, int *x);
 
 /*
+** env_expansions.c
+*/
+void	expand_token_list(t_data *data, int cmd, int tkn, char *new_token);
+char	**split_env_token(t_data *data, int cmd, int tkn, char **env_var);
+
+/*
 **-----------------------
 */
 
@@ -361,5 +368,7 @@ void	signal_handler(void);
 void	sigint_handler(int signum);
 void	sigquit_handler(int signum);
 void	print_prompt(void);
+
+void	print_array(char **array);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/12 16:36:24 by rbakker       #+#    #+#                 */
-/*   Updated: 2020/10/27 12:58:13 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/10/27 17:36:06 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ void	execution_loop(t_data *data, int cmd, int tkn)
 {
 	while (cmd < data->command_nb)
 	{
-		//preform_shell_expansions(data, cmd, 0);
 		initialize_pipes(data, cmd);
 		tkn = 0;
 		while (tkn < data->commands[cmd]->token_nb)
@@ -34,6 +33,7 @@ void	execution_loop(t_data *data, int cmd, int tkn)
 		}
 		close_all_fds(data, cmd);
 		wait_for_child_process();
+		printf("here\n");
 		cmd++;
 	}
 	clear_used_memory(data);
