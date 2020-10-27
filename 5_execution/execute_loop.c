@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/12 16:36:24 by rbakker       #+#    #+#                 */
-/*   Updated: 2020/10/26 15:33:48 by qli           ########   odam.nl         */
+/*   Updated: 2020/10/27 12:58:13 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	execution_loop(t_data *data, int cmd, int tkn)
 {
 	while (cmd < data->command_nb)
 	{
-		preform_shell_expansions(data, cmd, 0);
+		//preform_shell_expansions(data, cmd, 0);
 		initialize_pipes(data, cmd);
 		tkn = 0;
 		while (tkn < data->commands[cmd]->token_nb)
@@ -78,8 +78,8 @@ void	execute_command(t_data *data, int cmd, int tkn)
 {
 	char	*value;
 
+	preform_shell_expansions(data, cmd, 0);
 	value = data->commands[cmd]->tokens[tkn];
-	//printf("current token is [%s]\n", value);
 	g_exit_code = 0;
 	if (compare_command("echo", value, 4) == 0)
 		execute_echo(data, cmd, tkn, 0);

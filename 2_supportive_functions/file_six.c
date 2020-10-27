@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/12 13:11:44 by rbakker       #+#    #+#                 */
-/*   Updated: 2020/10/22 21:32:27 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/10/27 13:39:31 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,18 @@ int		calculate_needed_tokens(t_data *data, int cmd, int tkn)
 	value = data->commands[cmd]->tokens[tkn];
 	while (value != NULL && value[0] != '|')
 	{
+		if (ft_strncmp("\\|", value, 2) == 0)
+		{
+			free(data->commands[cmd]->tokens[tkn]);
+			data->commands[cmd]->tokens[tkn] = ft_strdup("|");
+			if (data->commands[cmd]->tokens[tkn] == NULL)
+				malloc_error(data, 0);
+		}
 		count++;
 		tkn++;
 		value = data->commands[cmd]->tokens[tkn];
+		if (value == NULL)
+			break ;
 	}
 	return (count);
 }

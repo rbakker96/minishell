@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/01 15:55:06 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/26 19:43:01 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/10/27 13:43:04 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -227,6 +227,7 @@ int		set_redirection_fds(t_data *data, int cmd, int tkn);
 /*
 ** initialize_redirections.c
 */
+void	get_file_name(t_data *data, int cmd, int tkn);
 void	create_output_file(t_data *data, int cmd, int *tkn, int *fd);
 void	create_input_file(t_data *data, int cmd, int *tkn, int *fd);
 
@@ -339,7 +340,6 @@ int		validate_start_of_line_command(t_data *data, char *charachter);
 */
 int		validate_single_quotes(t_data *data, char *charachter);
 int		validate_double_quotes(t_data *data, char *charachter);
-int		later_quotes_nb(t_data *data, int i, char character);
 
 /*
 ** validate_redirections.c

@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/05 19:44:06 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/26 20:06:45 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/10/27 17:21:50 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,8 @@ int		expansion_len(t_data *data, int i, int len)
 		}
 		else
 		{
-			i += (data->current_token[i] == '\\') ? 2 : 1;
+			//i += (data->current_token[i] == '\\') ? 2 : 1;
+			i += (data->current_token[i] == '\\' && data->current_token[i + 1] != '|') ? 2 : 1;
 			len++;
 		}
 	}
@@ -78,7 +79,7 @@ void	expand_token(t_data *data, char **new_token, int i, int x)
 		}
 		else
 		{
-			(data->current_token[i] == '\\') ? i++ : i;
+			(data->current_token[i] == '\\' && data->current_token[i + 1] != '|') ? i++ : i;
 			(*new_token)[x] = data->current_token[i];
 			x++;
 			i++;

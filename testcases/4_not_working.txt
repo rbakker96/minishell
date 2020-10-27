@@ -4,4 +4,4 @@ export LS="ls -la";$LS
 
 unset PATH ; ls ; cd /bin ; ls
 
-[NO] echo \$ \! \@ \# \% \^ \& \* \( \) \_ \+ \| ; echo $?
+[NO] echo \$ \! \@ \# \% \^ \& \* \( \) \_ \+ \< \> \| ; echo $?

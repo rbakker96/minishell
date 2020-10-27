@@ -201,8 +201,8 @@ echo $TEST$TEST=lala$TEST
 echo $TEST$TEST=$TEST=$TEST=$TEST=$TEST=$TEST
 echo "$PWD"
 echo "$LALA"
-[NO] echo \'$PWD\'
-[NO] echo \'$LALA\'
+echo \'$PWD\'
+echo \'$LALA\'
 
 
 #PIPE [TESTED]
