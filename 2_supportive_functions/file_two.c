@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/04 12:50:32 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/27 15:47:17 by qli           ########   odam.nl         */
+/*   Updated: 2020/10/27 17:18:51 by qli           ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,19 +23,27 @@ int		get_amount_of_commands(char *line, int i)
 			i++;
 		if (line[i] != '\0' && line[i] != ';')
 			count++;
-		while (line[i] != '\0')
+		while (line[i] != '\0' && line[i] != ';')
 		{
-			if (line[i] == ';')
-				break ;
-			else if (line[i] == '\\')
-				i += 2;
-			else
-				i++;
+			if (char_type(line[i]) == single_quote ||
+				char_type(line[i]) == double_quote)
+				process_quotes(line, &i);
+			(line[i] == '\\') ? i += 2 : i++;
 		}
 		if (line[i] != '\0')
 			i++;
 	}
 	return (count);
+}
+
+void	process_quotes(char *line, int *i)
+{
+	int	quote;
+
+	quote = char_type(line[(*i)]);
+	(*i)++;
+	while (char_type(line[(*i)]) != quote)
+		(line[(*i)] == '\\') ? (*i) += 2 : (*i)++;
 }
 
 int		get_amount_of_tokens(char *command, int cmd, int tkn)

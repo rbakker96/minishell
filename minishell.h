@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/01 15:55:06 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/27 15:50:19 by qli           ########   odam.nl         */
+/*   Updated: 2020/10/27 17:18:28 by qli           ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ void	print_export_output(t_data *data, int array_size, int i, int j);
 ** file_two.c
 */
 int		get_amount_of_commands(char *line, int i);
+void	process_quotes(char *line, int *i);
 int		get_amount_of_tokens(char *command, int cmd, int tkn);
 int		char_type(char c);
 int		copy_env_token(char *old_str, char **new_str, char **token_list);
