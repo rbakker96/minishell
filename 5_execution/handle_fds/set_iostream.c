@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/15 17:46:32 by rbakker       #+#    #+#                 */
-/*   Updated: 2020/10/27 17:32:30 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/10/27 21:41:06 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ int		set_iostream(t_data *data, int cmd, int *tkn)
 		if (!update_token_list(data, cmd, tkn, 0))
 			return (-1);
 	}
-	g_exit_code = 0;
 	return (0);
 }
 

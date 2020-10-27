@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/09 14:50:49 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/26 17:32:17 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/10/27 22:29:42 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	validate_unset_tokens(t_data *data, int cmd, int tkn, int needed_tokens)
 		value = data->commands[cmd]->tokens[tkn];
 		while (ft_isalpha(value[i]))
 			i++;
-		if ((value[i] != '=' && i == 0) && value[i] != '\0')
+		if ((value[i] != '=' || (value[i] == '=' && i == 0)) && value[i] != '\0')
 			print_unset_error(data, value);
 		tkn++;
 	}

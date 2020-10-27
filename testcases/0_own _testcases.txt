@@ -20,7 +20,7 @@ echo -e "$CD TESTING $Color_Off"
 # Relative path
 cd test
 
-# Absolute path 
+# Absolute path
 cd /Users/roybakker/Documents/Codam/minishell/5_execution/executable
 
 # non existing path
@@ -196,7 +196,7 @@ cat main.c > out > out1 > out2 ; cat
 ### input redirection ###
 
 # if int does not exist, it will say no file or directory
-# if int exist, cat main.c will be executed. < int will be disregarded 
+# if int exist, cat main.c will be executed. < int will be disregarded
 cat main.c < input
 
 # if int does not exist, error message
@@ -250,8 +250,6 @@ echo $hkskks
 export LS="cat main.c|cat -e";echo $LS $LS
 
 export LS="cat main.c | cat -e"; echo $LS hello
-
-export LS="cat main.c | cat -e"; $LS hello
 
 export LS="ls -la"; echo $LS hello asdfsadf
 

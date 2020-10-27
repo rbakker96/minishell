@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/05 21:11:22 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/27 10:19:37 by qli           ########   odam.nl         */
+/*   Updated: 2020/10/27 23:00:00 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,9 @@ void	double_quotes(t_data *data, char **new_token, int *i, int *x)
 				exit_code(data, new_token, x);
 			else
 				env_variable(data, new_token, (*i), x);
+			(*i)++;
 			(*i) += token_var_len(data->current_token, (*i));
 		}
-		if (data->current_token[(*i)] == '\"')
-			break ;
 		else
 		{
 			(*new_token)[(*x)] = data->current_token[(*i)];

@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/05 19:44:06 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/27 20:19:53 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/10/27 23:04:47 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,7 @@ void	expand_token(t_data *data, char **new_token, int i, int x)
 		}
 	}
 	(*new_token)[x] = '\0';
+	printf("new token = %s\n", (*new_token));
 }
 
 void	exit_code(t_data *data, char **new_token, int *x)

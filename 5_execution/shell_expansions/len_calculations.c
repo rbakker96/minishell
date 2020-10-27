@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/05 21:08:41 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/26 17:04:29 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/10/27 22:52:58 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ void	double_quotes_len(t_data *data, char *token, int *i, int *len)
 				(*len) += exit_code_len(data, 0);
 			else
 				(*len) += env_var_len(data, token, (*i), 0);
+			(*i)++;
 			(*i) += token_var_len(token, (*i));
 		}
 		else
