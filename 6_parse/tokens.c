@@ -6,39 +6,11 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/19 13:23:47 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/27 19:17:32 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/10/28 12:03:39 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-
-void	save_tokens(t_data *data, char **array, char *command, int cmd)
-{
-	int start;
-	int index;
-	int spaces;
-	int len;
-	int c;
-
-	c = 0;
-	index = 0;
-	len = 0;
-	while (command[c] == ' ' && command[c] != '\0')
-		c++;
-	while (command[c] != '\0' && index < data->commands[cmd]->token_nb)
-	{
-		spaces = 0;
-		start = begin_token(command, c, &spaces);
-		len = len_token(command, start, 0, &spaces);
-		data->commands[cmd]->tokens[index] = ft_substr(command, start, len);
-		//printf("token [%d] = [%s]\n", index, data->commands[cmd]->tokens[index]);
-		if (data->commands[cmd]->tokens[index] == NULL)
-			malloc_error(data, array);
-		c += len + spaces;
-		index++;
-	}
-	data->commands[cmd]->tokens[index] = 0;
-}
 
 int		begin_token(char *command, int cmd, int *spaces)
 {

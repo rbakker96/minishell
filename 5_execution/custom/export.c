@@ -6,7 +6,7 @@
 /*   By: roybakker <roybakker@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/09 14:50:36 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/26 15:07:49 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/10/28 13:54:40 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int		get_envp_size(t_data *data, int cmd, int tkn)
 	{
 		i = 0;
 		value = data->commands[cmd]->tokens[tkn];
-		while (ft_isalpha(value[i]))
+		while (ft_isalpha(value[i]) || value[i] == '_' || ft_isdigit(value[i]))
 			i++;
 		if (value[i] == '=')
 			size++;
@@ -75,7 +75,7 @@ int		validate_export_token(char *token)
 	int i;
 
 	i = 0;
-	while (ft_isalpha(token[i]))
+	while (ft_isalpha(token[i]) || token[i] == '_' || ft_isdigit(token[i]))
 		i++;
 	if (token[i] == '=' && i != 0)
 		return (valid);

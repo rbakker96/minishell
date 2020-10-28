@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/09 16:44:49 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/27 22:33:53 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/10/28 13:53:58 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,8 @@ int		token_var_len(char *str, int i)
 	int len;
 
 	len = 0;
-	while (ft_isalpha(str[i + len]) == 1 || str[i + len] == '?')
+	while (ft_isalpha(str[i + len]) == 1 || str[i + len] == '?' ||
+			str[i + len] == '_' || ft_isdigit(str[i + len]) == 1)
 		len++;
 	return (len);
 }

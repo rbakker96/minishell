@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/09 14:50:49 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/27 22:29:42 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/10/28 13:53:19 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	execute_unset(t_data *data, int cmd, int tkn, int needed_tokens)
 
 	envp_size = get_array_size(data->envp);
 	needed_tokens = calculate_needed_tokens(data, cmd, tkn);
-	validate_unset_tokens(data, cmd, tkn, needed_tokens);
+	validate_unset_token(data, cmd, tkn, needed_tokens);
 	matching_vars = nb_of_matching_var(data, cmd, tkn, needed_tokens);
 	if (needed_tokens == 1 || !matching_vars)
 		return ;
@@ -32,7 +32,7 @@ void	execute_unset(t_data *data, int cmd, int tkn, int needed_tokens)
 	data->envp = new_envp;
 }
 
-void	validate_unset_tokens(t_data *data, int cmd, int tkn, int needed_tokens)
+void	validate_unset_token(t_data *data, int cmd, int tkn, int needed_tokens)
 {
 	char	*value;
 	int		i;
@@ -41,9 +41,10 @@ void	validate_unset_tokens(t_data *data, int cmd, int tkn, int needed_tokens)
 	{
 		i = 0;
 		value = data->commands[cmd]->tokens[tkn];
-		while (ft_isalpha(value[i]))
+		while (ft_isalpha(value[i]) || value[i] == '_' || ft_isdigit(value[i]))
 			i++;
-		if ((value[i] != '=' || (value[i] == '=' && i == 0)) && value[i] != '\0')
+		if ((value[i] != '=' || (value[i] == '=' && i == 0)) &&
+															value[i] != '\0')
 			print_unset_error(data, value);
 		tkn++;
 	}

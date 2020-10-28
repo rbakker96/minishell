@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/02 14:39:39 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/19 13:55:40 by rbakker       ########   odam.nl         */
+/*   Updated: 2020/10/28 11:40:04 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,8 @@ void	normal_token(char *command, int *cmd, int *tkn)
 	(*tkn)++;
 	while (command[(*cmd)] != '\0' && command[(*cmd)] != ' ')
 	{
-		while (char_type(command[(*cmd)]) == normal_char && command[(*cmd)] != '\0')
+		while (char_type(command[(*cmd)]) == normal_char &&
+														command[(*cmd)] != '\0')
 			(command[(*cmd)] == '\\') ? (*cmd) += 2 : (*cmd)++;
 		if (char_type(command[(*cmd)]) == single_quote ||
 			char_type(command[(*cmd)]) == double_quote)

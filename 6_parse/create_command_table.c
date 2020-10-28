@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/02 11:00:03 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/27 19:17:41 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/10/28 12:03:34 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,6 @@ int		create_command_table(t_data *data, char *line, int cmd)
 	char	**commands;
 
 	data->command_nb = get_amount_of_commands(line, 0);
-	//printf("data->command_nb = %d\n", data->command_nb);
 	data->commands = (t_command_table**)malloc(sizeof(t_command_table*) *
 													(data->command_nb + 1));
 	if (data->commands == NULL)
@@ -95,11 +94,37 @@ int		save_single_command(t_data *data, char **commands, int cmd)
 		return (-1);
 	initialize_command(data, cmd);
 	data->commands[cmd]->token_nb = get_amount_of_tokens(commands[cmd], 0, 0);
-	// printf("token amount = %d\n", data->commands[cmd]->token_nb); //TAKE OUT
 	data->commands[cmd]->tokens = (char**)malloc(sizeof(char*) *
 									(data->commands[cmd]->token_nb + 1));
 	if (data->commands[cmd]->tokens == NULL)
 		return (-1);
 	save_tokens(data, commands, commands[cmd], cmd);
 	return (0);
+}
+
+void	save_tokens(t_data *data, char **array, char *command, int cmd)
+{
+	int start;
+	int index;
+	int spaces;
+	int len;
+	int c;
+
+	c = 0;
+	index = 0;
+	len = 0;
+	while (command[c] == ' ' && command[c] != '\0')
+		c++;
+	while (command[c] != '\0' && index < data->commands[cmd]->token_nb)
+	{
+		spaces = 0;
+		start = begin_token(command, c, &spaces);
+		len = len_token(command, start, 0, &spaces);
+		data->commands[cmd]->tokens[index] = ft_substr(command, start, len);
+		if (data->commands[cmd]->tokens[index] == NULL)
+			malloc_error(data, array);
+		c += len + spaces;
+		index++;
+	}
+	data->commands[cmd]->tokens[index] = 0;
 }

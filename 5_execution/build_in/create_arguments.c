@@ -6,18 +6,16 @@
 /*   By: qli <qli@student.codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/25 15:05:59 by qli           #+#    #+#                 */
-/*   Updated: 2020/10/26 19:41:48 by qli           ########   odam.nl         */
+/*   Updated: 2020/10/28 12:05:10 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-void	create_args(t_data *data, int cmd, int tkn)
+void	create_args(t_data *data, int cmd, int tkn, int x)
 {
-	int	x;
 	int args_num;
 
-	x = 1;
 	args_num = check_args_num(data, cmd, tkn);
 	data->args = (char **)malloc(sizeof(char *) * (args_num + 1));
 	if (data->args == NULL)
@@ -67,13 +65,9 @@ char	*get_abs_path(t_data *data, int cmd, int tkn, int x)
 	char		*path_token;
 	char		*abs_path;
 
+	abs_path = NULL;
 	if (find_path(data) == NULL)
-	{
-		abs_path = ft_strjoin("./", data->commands[cmd]->tokens[tkn]);
-		if (abs_path == NULL)
-			malloc_error(data, 0);
-		return (abs_path);
-	}
+		return (create_executable(data, cmd, tkn, abs_path));
 	path = ft_split(find_path(data), ':');
 	if (path == NULL)
 		malloc_error(data, 0);
@@ -90,6 +84,14 @@ char	*get_abs_path(t_data *data, int cmd, int tkn, int x)
 	free(path_token);
 	free_array(path);
 	return (0);
+}
+
+char	*create_executable(t_data *data, int cmd, int tkn, char *abs_path)
+{
+	abs_path = ft_strjoin("./", data->commands[cmd]->tokens[tkn]);
+	if (abs_path == NULL)
+		malloc_error(data, 0);
+	return (abs_path);
 }
 
 char	*check_path_array(t_data *data, char **path, char *path_token, int x)

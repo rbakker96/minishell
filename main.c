@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/08/31 10:42:36 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/27 21:41:23 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/10/28 11:57:58 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ int		main(int argc, char **argv, char **envp)
 		prompt(&data);
 		if (parse_command(&data, envp) != -1)
 			execution_loop(&data, 0, 0);
-		//printf("g_exit_code : [%d]\n", g_exit_code);
 	}
 	return (0);
 }

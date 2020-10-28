@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/01 15:55:06 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/28 11:25:32 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/10/28 12:05:22 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,16 +17,15 @@
 # include "1_supportive_lib/gnl/get_next_line.h"
 # include "1_supportive_lib/ft_printf/ft_printf.h"
 # include "structs.h"
-# include <stdio.h> //to remove
 # include <unistd.h>
 # include <sys/types.h>
 # include <sys/wait.h>
-# include <errno.h> /* for 'ENOENT' and 'ENOMEM' */
+# include <errno.h>
 # include <limits.h>
 # include <dirent.h>
-# include <string.h> /* for strerror */
-# include <sys/stat.h> /* for open */
-# include <fcntl.h> /* for open */
+# include <string.h>
+# include <sys/stat.h>
+# include <fcntl.h>
 # include <signal.h>
 
 /*
@@ -152,9 +151,10 @@ void	free_command_table(t_data *data);
 /*
 ** create_arguments.c
 */
-void	create_args(t_data *data, int cmd, int tkn);
+void	create_args(t_data *data, int cmd, int tkn, int x);
 int		check_args_num(t_data *data, int cmd, int tkn);
 char	*get_abs_path(t_data *data, int cmd, int tkn, int x);
+char	*create_executable(t_data *data, int cmd, int tkn, char *abs_path);
 char	*check_path_array(t_data *data, char **path, char *path_token, int x);
 
 /*
@@ -209,7 +209,7 @@ void	execute_pwd(t_data *data, int cmd);
 ** unset.c
 */
 void	execute_unset(t_data *data, int cmd, int tkn, int needed_tokens);
-void	validate_unset_tokens(t_data *data, int cmd, int tkn, int needed_tokens);
+void	validate_unset_token(t_data *data, int cmd, int tkn, int needed_tokens);
 void	copy_remaining_vars(t_data *data, char **new_envp, int cmd, int tkn);
 int		compare_var(t_data *data, int cmd, int tkn, char *envp_var);
 int		nb_of_matching_var(t_data *data, int cmd, int tkn, int needed_tokens);
@@ -320,11 +320,11 @@ int		parse_command(t_data *data, char **envp);
 int		save_environment_variables(t_data *data, char **envp);
 int		create_command_table(t_data *data, char *line, int cmd);
 int		save_single_command(t_data *data, char **commands, int cmd);
+void	save_tokens(t_data *data, char **array, char *command, int cmd);
 
 /*
 ** tokens.c
 */
-void	save_tokens(t_data *data, char **array, char *command, int cmd);
 int		begin_token(char *command, int cmd, int *space);
 int		len_token(char *command, int start, int len, int *spaces);
 void	meta_char_len(char *command, int start, int *len, int *current_char);

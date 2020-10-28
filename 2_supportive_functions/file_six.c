@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/12 13:11:44 by rbakker       #+#    #+#                 */
-/*   Updated: 2020/10/27 20:28:26 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/10/28 12:57:13 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,12 +87,12 @@ int		custom_cmd(t_data *data, int cmd, int tkn)
 	char *value;
 
 	value = data->commands[cmd]->tokens[tkn];
-	if (compare_command("echo", value, 4) == 0 	 ||
-		compare_command("cd", value, 2) == 0 	 ||
-		compare_command("pwd", value, 3) == 0 	 ||
+	if (compare_command("echo", value, 4) == 0 ||
+		compare_command("cd", value, 2) == 0 ||
+		compare_command("pwd", value, 3) == 0 ||
 		compare_command("export", value, 6) == 0 ||
-		compare_command("unset", value, 5) == 0  ||
-		compare_command("env", value, 3) == 0 	 ||
+		compare_command("unset", value, 5) == 0 ||
+		compare_command("env", value, 3) == 0 ||
 		compare_command("exit", value, 4) == 0)
 		return (1);
 	else

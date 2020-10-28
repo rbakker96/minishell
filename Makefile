@@ -6,7 +6,7 @@
 #    By: rbakker <rbakker@student.42.fr>              +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/02/05 14:55:09 by rbakker       #+#    #+#                  #
-#    Updated: 2020/10/27 15:48:59 by qli           ########   odam.nl          #
+#    Updated: 2020/10/28 14:15:21 by roybakker     ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -55,8 +55,11 @@ SOURCES			= 	main.c \
 
 OBJECTS 		=	${SOURCES:%.c=%.o}
 
-INLCUDES 		= 	-L1_supportive_lib/gnl -lgnl -L1_supportive_lib/libft -lft -L1_supportive_lib/ft_printf -lftprintf
-EXTERNAL_LIBS	=	1_supportive_lib/libft/libft.a 1_supportive_lib/gnl/libgnl.a 1_supportive_lib/ft_printf/libftprintf.a
+INLCUDES 		= 	-L1_supportive_lib/gnl -lgnl -L1_supportive_lib/libft -lft\
+					-L1_supportive_lib/ft_printf -lftprintf
+EXTERNAL_LIBS	=	1_supportive_lib/libft/libft.a \
+					1_supportive_lib/gnl/libgnl.a \
+					1_supportive_lib/ft_printf/libftprintf.a
 LIBFT			=	1_supportive_lib/libft
 GNL				=	1_supportive_lib/gnl
 FT_PRINTF		=	1_supportive_lib/ft_printf

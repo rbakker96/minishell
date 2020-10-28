@@ -6,27 +6,11 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/07 11:15:58 by rbakker       #+#    #+#                 */
-/*   Updated: 2020/10/27 22:38:19 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/10/28 11:56:46 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-
-void	print_array(char **array)
-{
-	int size;
-	int i;
-
-	i = 0;
-	size = 0;
-	while (array[size] != 0)
-		size++;
-	while (i < size)
-	{
-		printf("final token [%d] = %s\n", i, array[i]);
-		i++;
-	}
-}
 
 int		update_token_list(t_data *data, int cmd, int *tkn, int i)
 {
@@ -53,7 +37,6 @@ int		update_token_list(t_data *data, int cmd, int *tkn, int i)
 	data->commands[cmd]->tokens = tokens;
 	data->commands[cmd]->token_nb = usable_tokens;
 	(*tkn) = 0;
-	//print_array(data->commands[cmd]->tokens); // remove later
 	return (usable_tokens);
 }
 
