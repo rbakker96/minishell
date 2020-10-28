@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/01 15:55:06 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/27 17:25:49 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/10/28 11:25:32 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -271,6 +271,7 @@ int		exit_code_len(t_data *data, int len);
 ** shell_expansions.c
 */
 void	preform_shell_expansions(t_data *data, int i, int tkn);
+int		empty_quotes(t_data *data, int cmd, int tkn, char **new_token);
 int		expansion_len(t_data *data, int i, int len);
 void	expand_token(t_data *data, char **new_token, int i, int x);
 void	exit_code(t_data *data, char **new_token, int *x);

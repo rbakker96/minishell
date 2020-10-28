@@ -1,15 +1,2 @@
 
 # cases that do not yet work
-
-# 0 exit code -> expansion to nothing
-$hihihi
-
-echo "" test "" test "" test "" ; echo $?
-echo '' test '' test '' test '' ; echo $?
-
-#double quotes do not fully work
-echo "test""test" "lala" ; echo $?
-echo "test"\""test" "lala" ; echo $?
-echo "test"\"\""\"test" "lala" ; echo $?
-
-export test=lala ; echo $test ; export $test=10 ; echo $lala

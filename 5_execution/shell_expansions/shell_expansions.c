@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/05 19:44:06 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/28 10:13:14 by qli           ########   odam.nl         */
+/*   Updated: 2020/10/28 11:26:42 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,16 +25,40 @@ void	preform_shell_expansions(t_data *data, int cmd, int tkn)
 		new_token = malloc(sizeof(char) * (len + 1));
 		if (new_token == NULL)
 			malloc_error(data, 0);
-		expand_token(data, &new_token, 0, 0);
-		if (compare_command("echo", data->commands[cmd]->tokens[0], 4) != 0)
-			expand_token_list(data, cmd, tkn, new_token);
-		else
+		if (!empty_quotes(data, cmd, tkn, &new_token))
 		{
-			free(data->commands[cmd]->tokens[tkn]);
-			data->commands[cmd]->tokens[tkn] = new_token;
+			expand_token(data, &new_token, 0, 0);
+			if (compare_command("echo", data->commands[cmd]->tokens[0], 4) != 0)
+				expand_token_list(data, cmd, tkn, new_token);
+			else
+			{
+				free(data->commands[cmd]->tokens[tkn]);
+				data->commands[cmd]->tokens[tkn] = new_token;
+			}
 		}
 		tkn++;
 	}
+}
+
+int		empty_quotes(t_data *data, int cmd, int tkn, char **new_token)
+{
+	if (ft_strlen(data->current_token) != 2)
+		return (0);
+	if ((data->current_token[0] == '\"' && data->current_token[1] == '\"') ||
+		(data->current_token[0] == '\'' && data->current_token[1] == '\''))
+	{
+		free((*new_token));
+		(*new_token) = malloc(sizeof(char) * 2);
+		if (new_token == NULL)
+			malloc_error(data, 0);
+		(*new_token) = ft_strdup(" ");
+		if (new_token[0] == NULL)
+			malloc_error(data, new_token);
+		free(data->commands[cmd]->tokens[tkn]);
+		data->commands[cmd]->tokens[tkn] = (*new_token);
+		return (1);
+	}
+	return (0);
 }
 
 int		expansion_len(t_data *data, int i, int len)
@@ -56,7 +80,8 @@ int		expansion_len(t_data *data, int i, int len)
 		}
 		else
 		{
-			i += (data->current_token[i] == '\\' && data->current_token[i + 1] != '|') ? 2 : 1;
+			i += (data->current_token[i] == '\\' &&
+									data->current_token[i + 1] != '|') ? 2 : 1;
 			len++;
 		}
 	}
@@ -82,14 +107,14 @@ void	expand_token(t_data *data, char **new_token, int i, int x)
 		}
 		else
 		{
-			(data->current_token[i] == '\\' && data->current_token[i + 1] != '|') ? i++ : i;
+			(data->current_token[i] == '\\' &&
+								data->current_token[i + 1] != '|') ? i++ : i;
 			(*new_token)[x] = data->current_token[i];
 			x++;
 			i++;
 		}
 	}
 	(*new_token)[x] = '\0';
-	printf("new token = %s\n", (*new_token));
 }
 
 void	exit_code(t_data *data, char **new_token, int *x)
