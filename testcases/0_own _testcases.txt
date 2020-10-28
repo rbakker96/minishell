@@ -242,19 +242,3 @@ $hihihi ; echo $?
 
 # 0 exit code -> echo \n
 echo $hkskks ; echo $?
-
-####################################################################
-#                           OTHERS		                           #
-####################################################################
-
-export LS="ls -la"; $LS
-
-export LS="ls -la"; $LS hello asdfsadf
-
-export LS="ls -la"; echo $LS hello asdfsadf
-
-export LS="cat main.c|cat -e"; echo $LS $LS
-
-export LS="cat main.c | cat -e"; echo $LS hello
-
-export MYVAR="my variable value" ; echo $MYVAR
