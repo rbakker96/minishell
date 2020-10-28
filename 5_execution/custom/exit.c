@@ -6,7 +6,7 @@
 /*   By: roybakker <roybakker@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/09 14:51:32 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/26 15:02:27 by qli           ########   odam.nl         */
+/*   Updated: 2020/10/28 20:03:18 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,9 @@ void	execute_exit(t_data *data, int cmd, int tkn, int needed_tokens)
 	needed_tokens = calculate_needed_tokens(data, cmd, tkn);
 	if (needed_tokens == 1)
 	{
+		if (data->commands[cmd]->pipe_nb == 0)
+			print(data, data->iostream[1], "exit\n", 0);
 		clear_memory(data);
-		print(data, data->iostream[1], "exit\n", 0);
 		exit(0);
 	}
 	if (numeric_arg_check(data, cmd) == -1)
@@ -36,8 +37,9 @@ void	execute_exit(t_data *data, int cmd, int tkn, int needed_tokens)
 		numeric_error(data, cmd);
 		exit(2);
 	}
+	if (data->commands[cmd]->pipe_nb == 0)
+		print(data, data->iostream[1], "exit\n", 0);
 	clear_memory(data);
-	print(data, data->iostream[1], "exit\n", 0);
 	exit(exit_code);
 }
 
@@ -68,7 +70,8 @@ void	too_many_args(t_data *data)
 
 void	numeric_error(t_data *data, int cmd)
 {
-	print(data, 2, "exit\n", 0);
+	if (data->commands[cmd]->pipe_nb == 0)
+		print(data, 2, "exit\n", 0);
 	print(data, 2, "bash: exit: ", 0);
 	print(data, 2, data->commands[cmd]->tokens[1], 0);
 	print(data, 2, ": numeric argument required\n", 0);

@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/08 14:47:32 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/12 16:34:31 by qli           ########   odam.nl         */
+/*   Updated: 2020/10/28 18:50:45 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int		check_relative_path(char *command)
 	i = 0;
 	while (ft_isspace(command[i]) == 1)
 		i++;
-	if (command[i] == '.')
+	if (command[i] == '/' || command[i] == '.')
 		return (1);
 	else
 		return (0);

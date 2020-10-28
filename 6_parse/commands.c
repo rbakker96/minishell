@@ -6,7 +6,7 @@
 /*   By: roybakker <roybakker@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/19 13:23:31 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/28 11:57:01 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/10/28 19:41:57 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,4 +68,5 @@ void	initialize_command(t_data *data, int cmd)
 {
 	data->commands[cmd]->pipes = NULL;
 	data->commands[cmd]->tokens = NULL;
+	data->commands[cmd]->pipe_nb = 0;
 }
