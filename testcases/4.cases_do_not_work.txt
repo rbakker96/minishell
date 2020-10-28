@@ -1,0 +1,8 @@
+exit | exit
+
+/bin/cat
+
+cat lol | echo >> lol | echo >> lol
+
+;; test | echo $?
+cat test | echo $?
