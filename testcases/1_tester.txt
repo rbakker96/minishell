@@ -89,7 +89,7 @@ export testvar=lala ; export ; export testvar=10 ; export' 'grep -v _=' 'sort ; 
 #UNSET [NO]
 unset ; echo $?
 unset novar ; echo $?
-[NO] unset % ; echo $?
+unset % ; echo $?
 export a ; export ; unset a ; export' 'grep -v _= ; echo $?
 export a= ; export ; unset a ; export' 'grep -v _= ; echo $?
 export a=10 ; export ; unset a ; export' 'grep -v _= ; echo $?
@@ -227,15 +227,15 @@ echo \| ; echo $?
 echo \"\" ; echo $?
 echo \\ ; echo $?
 echo \\\\ ; echo $?
-[NO] echo \|\| ; echo $?
+echo \|\| ; echo $?
 echo \\\|\\\| ; echo $?
-[NO] echo \\"\\" ; echo $?
+echo \\"\\" ; echo $?
 echo \$ \" ; echo $?
 echo \[ \] \\ \` ; echo $?
-[NO] echo \: \@ \< \> \= \? ; echo $?
+echo \: \@ \< \> \= \? ; echo $?
 echo \"a\" ; echo $?
-[NO] echo \\"a\\" ; echo $?
-[NO] echo "\\a\\" ; echo $?
+echo \\"a\\" ; echo $?
+echo "\\a\\" ; echo $?
 echo \\\"a\"\\ ; echo $?
 echo a\\a ; echo $?
 echo a\"\a ; echo $?
@@ -254,19 +254,18 @@ echo \\\"$USER ; echo $?
 [NO] echo \|\\$USER ; echo $?
 [NO] echo \|\\\$USER ; echo $?
 echo \\\"$USER ; echo $?
-[NO] echo \$ \! \@ \# \% \^ \& \* \( \) \_ \+ \| ; echo $?
+echo \$ \! \@ \# \% \^ \& \* \( \) \_ \+ \| ; echo $?
 echo \"\$ \! \@ \# \% \^ \& \* \( \) \_ \+ \|\" ; echo $?
-[NO] echo \$ \! \@ \# \% \^ \& \* \( \) \_ \+ \| ; echo $?
 echo \\\$ \\\! \\\@ \\\# \\\% \\\^ \\\& \\\* \\\( \\\) \\\_ \\\+ \\\| ; echo $?
-[NO] echo \: \! \< \> \= \? ; echo $?
-[NO] echo "\: \! \< \> \= \?" ; echo $?
+echo \: \! \< \> \= \? ; echo $?
+echo "\: \! \< \> \= \?" ; echo $?
 echo \[ \] \\ \` ; echo $?
 echo \\ \\ \\ ; echo $?
 echo \\ \\\ \\ ; echo $?
 echo \\ \ \\ ; echo $?
 echo \\ \$ \\ ; echo $?
 echo \\ | \\ ; echo $?
-[NO] echo \\ \| \\ ; echo $?
+echo \\ \| \\ ; echo $?
 echo \\ \\| \\ ; echo $?
 echo \\ ; \\ ; echo $?
 echo \\ \; \\ ; echo $?
@@ -305,7 +304,6 @@ mkdir test_files
 echo test > a ; cat < a
 echo lala >a ; cat <a
 echo test>a ; cat<a
-echo lala> a ; cat< a
 echo test >a ; cat <a
 echo lala> a ; cat< a
 echo test        >a ; cat<        a
@@ -314,7 +312,7 @@ echo test > test_files/a ; cat < test_files/a
 echo lala >test_files/a ; cat <test_files/a
 echo test > b ; echo test add >> b ; cat < b
 echo test > b ; rm b ; echo test add >> b ; cat < b
-[NO - seg fault] echo test > a ; echo test2 > b ; <a >b ; cat a b
+echo test > a ; echo test2 > b ; <a >b ; cat a b
 echo test > a ; echo test2 > b ; >a >b <error; cat a b
 echo test > a ; echo test2 > b ; rm a ; rm b ; >a >b <error; cat a b
 echo test > a ; echo test2 > b ; >a <error b; cat a b
@@ -334,7 +332,7 @@ cat <../error
 echo test > test_files/a ; echo test2 > test_files/b ; >test_files/a >>test_files/b <error; cat test_files/a test_files/b
 echo test > test_files/a ; echo test2 > test_files/b ; >>test_files/a >test_files/b <error; cat test_files/a test_files/b
 echo test > test_files/a ; echo test2 > test_files/b ; >>test_files/a >>test_files/b <error; cat test_files/a test_files/b
-echo test > test_files/a ; echo test2 > test_files/b ; >test_files/a <error >>test_files/b ; cat test_files/a test_files/b
+echo test > test_files/ a; echo test2 > test_files/b ; >test_files/a <error >>test_files/b ; cat test_files/a test_files/b
 echo test > test_files/a ; echo test2 > test_files/b ; >test_files/a <error >>test_files/b ; cat test_files/a test_files/b
 echo test > test_files/a ; echo test2 > test_files/b ; <error >>test_files/a >>test_files/b ; cat test_files/a test_files/b
 echo test > test_files/a ; echo lala > test_files/b ; >test_files/a >>test_files/b <error; cat test_files/a test_files/b
@@ -363,8 +361,6 @@ echo test > a ; echo test > b ; echo lala > a > b >> a ; cat a b
 echo test > a ; echo test > b ; echo lala >> a > b > a ; cat a b
 echo lala > a ; rm a ; echo lala > b ; rm b ; echo lala >> a >> b >> a ; cat a b
 echo test > a ; echo test > b ; echo lala >> a >> b >> a ; cat a b
-rm -rf test_files
-
 
 #$? [TESTED]
 export a ; echo $?
@@ -389,7 +385,7 @@ unset a | echo $?
 echo $? ; echo $? ; echo $?
 echo $? | echo $? | echo $?
 cd error ; echo $?
-[NOT EXACTLY THE SAME ERROR MSG - DO WE CARE ABOUT THAT?] cd error error ; echo $?
+cd error error ; echo $?
 ./error ; echo $?
 <error ; echo $?
 cat <error ; echo $?
@@ -402,7 +398,7 @@ echo test >> ; echo $?
 ./prog a
 ./prog a b
 ./prog a b c
-[NO ERROR MESSAGE] $PWD/prog
+$PWD/prog
 $PWD/prog a
 $PWD/prog b
 mkdir test_prog
@@ -417,12 +413,10 @@ touch test_file ; rm test_file
 ls
 cat bible.txt
 /bin/ls
-[NOT CORRECT NEW LINE] echo test > a ; /bin/cat a
+echo test > a ; /bin/cat a
 echo test > a ; /bin/rm a
 /bin/pwd
-[NO] unset PATH ; ls ; cd /bin ; ls
-[NO] export PATH=$PWD/add_path:$PATH ; export | grep PATH ; ls
-
+unset PATH ; ls ; cd /bin ; ls
 
 #NOT MANDATORY TO BE SIMILAR BUT MUST NOT SEGFAULT [TESTED]
 echo $! ; echo $?

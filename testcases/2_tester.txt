@@ -24,7 +24,6 @@ echo test     \    test ; echo $?
 echo \"test ; echo $?
 echo $TEST ; echo $?
 echo "$TEST" ; echo $?
-echo $TEST ; echo $?
 echo "$TEST$TEST$TEST" ; echo $?
 echo "$TEST$TEST=lol$TEST" ; echo $?
 echo "   $TEST lol $TEST" ; echo $?

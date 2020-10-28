@@ -226,31 +226,35 @@ cat <int1 <int2 < int3
 ####################################################################
 
 # 126 exit code -> it's a directory
-./test
+./test ; echo $?
 
 # 127 exit code -> permission denied
-./test/child_no_permission
+./test/child_no_permission ; echo $?
 
 # 0 exit code
-./test/child
+./test/child ; echo $?
 
 # 127 exit code -> command not found
-adsafdsfas
+adsafdsfas ; echo $?
 
 # 0 exit code -> expansion to nothing
-$hihihi
+$hihihi ; echo $?
 
 # 0 exit code -> echo \n
-echo $hkskks
+echo $hkskks ; echo $?
 
 ####################################################################
 #                           OTHERS		                           #
 ####################################################################
 
-export LS="cat main.c|cat -e";echo $LS $LS
+export LS="ls -la"; $LS
 
-export LS="cat main.c | cat -e"; echo $LS hello
+export LS="ls -la"; $LS hello asdfsadf
 
 export LS="ls -la"; echo $LS hello asdfsadf
+
+export LS="cat main.c|cat -e"; echo $LS $LS
+
+export LS="cat main.c | cat -e"; echo $LS hello
 
 export MYVAR="my variable value" ; echo $MYVAR

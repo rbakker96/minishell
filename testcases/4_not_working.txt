@@ -1,14 +1,15 @@
 
 # cases that do not yet work
 
-export LS="ls -la";$LS $LS
+# 0 exit code -> expansion to nothing
+$hihihi
 
-export LS="ls -la";$LS
+echo "" test "" test "" test "" ; echo $?
+echo '' test '' test '' test '' ; echo $?
 
-export LS="ls -la";echo $LS $LS
+#double quotes do not fully work
+echo "test""test" "lala" ; echo $?
+echo "test"\""test" "lala" ; echo $?
+echo "test"\"\""\"test" "lala" ; echo $?
 
-export LS="ls -la";echo $LS hello
-
-export LS="ls -la";$LS hello
-
-[NO] echo \$ \! \@ \# \% \^ \& \* \( \) \_ \+ \| ; echo $?
+export test=lala ; echo $test ; export $test=10 ; echo $lala

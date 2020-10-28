@@ -1,3 +1,5 @@
+[FULLY TESTED]
+
 cat < Makefile | cat -e
 Expected: output contents of file with EOL indication
 
@@ -22,15 +24,15 @@ cat < noexist < Makefile > out2
 Expected: "No such file or directory" error
 
 
-< in1 cat
+< main.c cat
 Expected: outputs contents of in1
 
 
-< in1 < in2 > out3
+< main.c < Makefile > out3
 Expected: creates empty out3
 
 
-< in1 cat < in2 > out3
+< main.c cat < Makefile > out3
 Expected: creates out3 with contents of in2
 
 
