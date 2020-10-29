@@ -5,9 +5,7 @@ exit asdf34r 234 | exit asdf34 234 // fixed
 
 /bin/cat //fixed
 
-cat lol | echo >> lol | echo >> lol
-
-
+cat lol | echo >> lol | echo >> lol  //fixed
 
 ;; test | echo $?
 cat test | echo $?

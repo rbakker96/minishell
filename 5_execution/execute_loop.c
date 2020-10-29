@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/12 16:36:24 by rbakker       #+#    #+#                 */
-/*   Updated: 2020/10/29 13:23:43 by rbakker       ########   odam.nl         */
+/*   Updated: 2020/10/29 14:22:38 by rbakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ void	execution_loop(t_data *data, int cmd, int tkn)
 			}
 			close_used_fds(data, cmd);
 			update_token_position(data, cmd, &tkn);
-			ft_printf("token pos = %d\n", tkn);
 			data->commands[cmd]->pipe_pos++;
 		}
 		close_all_fds(data, cmd);
@@ -79,7 +78,7 @@ void	execute_command(t_data *data, int cmd, int tkn)
 	char	*value;
 
 	if (data->commands[cmd]->pipe_nb > 0 && data->commands[cmd]->pipe_pos > 0)
-        g_exit_code = 0;
+		g_exit_code = 0;
 	preform_shell_expansions(data, cmd, 0);
 	value = data->commands[cmd]->tokens[tkn];
 	g_exit_code = 0;

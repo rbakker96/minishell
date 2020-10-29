@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/15 17:46:32 by rbakker       #+#    #+#                 */
-/*   Updated: 2020/10/29 13:24:50 by rbakker       ########   odam.nl         */
+/*   Updated: 2020/10/29 16:19:57 by rbakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ int		set_iostream(t_data *data, int cmd, int *tkn)
 		set_pipe_fds(data, cmd);
 	if (data->commands[cmd]->token_nb > 0)
 	{
-		ft_printf("token nb = %d\n", data->commands[cmd]->token_nb);
 		if (set_redirection_fds(data, cmd, (*tkn)) == -1)
 		{
 			update_token_list(data, cmd, tkn, 0);
@@ -30,8 +29,6 @@ int		set_iostream(t_data *data, int cmd, int *tkn)
 		if (!update_token_list(data, cmd, tkn, 0))
 			return (-1);
 	}
-	ft_printf("------\nREAD  [%d]\n", data->iostream[READ]);
-	ft_printf("WRITE [%d]\n------\n", data->iostream[WRITE]);
 	return (0);
 }
 

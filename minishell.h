@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/01 15:55:06 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/29 10:43:40 by rbakker       ########   odam.nl         */
+/*   Updated: 2020/10/29 15:27:01 by rbakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ int		token_var_len(char *str, int i);
 ** file_six.c
 */
 int		compare_command(char *command, char *token_command, int len);
-int		check_token_usability(char **array, int i);
+int		check_token_usability(char **tokens, int i, int start_pos);
 int		calculate_needed_tokens(t_data *data, int cmd, int tkn);
 void	update_token_position(t_data *data, int cmd, int *tkn);
 int		custom_cmd(t_data *data, int cmd, int tkn);
@@ -292,6 +292,7 @@ char	**split_env_token(t_data *data, int cmd, int tkn, char **env_var);
 int		update_token_list(t_data *data, int cmd, int *tkn, int i);
 int		save_list_element(char *old_token, char **new_token, int *tkn, int *x);
 int		count_usable_tokens(t_data *data, int cmd, int tkn);
+int		get_start_point(t_data *data, int cmd, int *tkn);
 
 /*
 ** execution_loop.c

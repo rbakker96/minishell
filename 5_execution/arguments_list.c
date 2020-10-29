@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/07 11:15:58 by rbakker       #+#    #+#                 */
-/*   Updated: 2020/10/29 13:28:39 by rbakker       ########   odam.nl         */
+/*   Updated: 2020/10/29 16:24:55 by rbakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,22 +15,22 @@
 int		update_token_list(t_data *data, int cmd, int *tkn, int i)
 {
 	int		usable_tokens;
+	int		start_pos;
 	char	**tokens;
 
+	start_pos = get_start_point(data, cmd, tkn);
 	usable_tokens = count_usable_tokens(data, cmd, (*tkn));
 	tokens = malloc(sizeof(char*) * (usable_tokens + 1));
 	if (tokens == NULL)
 		malloc_error(data, 0);
 	while (i < usable_tokens)
 	{
-		if (check_token_usability(data->commands[cmd]->tokens, (*tkn)) == -1)
+		if (check_token_usability(data->commands[cmd]->tokens,
+									(*tkn), start_pos) == -1)
 			(*tkn) += 2;
 		else if (save_list_element(data->commands[cmd]->tokens[(*tkn)],
-											&tokens[i], tkn, &i) == -1)
-		{
-			tokens[i + 1] = 0;
+									&tokens[i], tkn, &i) == -1)
 			malloc_error(data, tokens);
-		}
 	}
 	tokens[i] = 0;
 	free_array(data->commands[cmd]->tokens);
@@ -42,7 +42,6 @@ int		update_token_list(t_data *data, int cmd, int *tkn, int i)
 
 int		save_list_element(char *old_token, char **new_token, int *tkn, int *x)
 {
-	ft_printf("old token = %s\n", old_token);
 	(*new_token) = ft_strdup(old_token);
 	if ((*new_token) == NULL)
 		return (-1);
@@ -70,9 +69,27 @@ int		count_usable_tokens(t_data *data, int cmd, int tkn)
 	}
 	while (tkn < data->commands[cmd]->token_nb)
 	{
-		ft_printf("amount = %d %s\n", amount, data->commands[cmd]->tokens[tkn]);
 		tkn++;
 		amount++;
 	}
 	return (amount);
+}
+
+int		get_start_point(t_data *data, int cmd, int *tkn)
+{
+	char	*token;
+	int		i;
+
+	i = (*tkn);
+	token = data->commands[cmd]->tokens[i];
+	while (token != NULL && token[0] != '|')
+	{
+		i++;
+		token = data->commands[cmd]->tokens[i];
+	}
+	if (token == NULL)
+		return (0);
+	i++;
+	(*tkn) += i;
+	return (i);
 }

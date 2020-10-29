@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/12 13:11:44 by rbakker       #+#    #+#                 */
-/*   Updated: 2020/10/28 12:57:13 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/10/29 15:34:31 by rbakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,12 @@ int		compare_command(char *command, char *token_command, int len)
 	return (ft_strncmp(command, token_command, len));
 }
 
-int		check_token_usability(char **tokens, int i)
+int		check_token_usability(char **tokens, int i, int start_pos)
 {
 	int x;
 
 	x = i;
-	while (x > 0)
+	while (x > 0 && x > start_pos)
 	{
 		if (tokens[x][0] == '|')
 			return (0);
