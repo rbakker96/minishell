@@ -1,6 +1,9 @@
-exit | exit
+exit | exit // fixed
+exit 33 | exit 33 // fixed
+exit 234 asdf34 | exit 234 asdf23 //fixed
+exit asdf34r 234 | exit asdf34 234 // fixed
 
-/bin/cat
+/bin/cat //fixed
 
 cat lol | echo >> lol | echo >> lol
 
