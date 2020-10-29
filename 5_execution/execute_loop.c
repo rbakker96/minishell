@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/12 16:36:24 by rbakker       #+#    #+#                 */
-/*   Updated: 2020/10/29 13:23:43 by rbakker       ########   odam.nl         */
+/*   Updated: 2020/10/29 14:43:31 by qli           ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ void	execution_loop(t_data *data, int cmd, int tkn)
 {
 	while (cmd < data->command_nb)
 	{
+		set_dollar_sign_value(data, cmd);
 		initialize_pipes(data, cmd);
 		tkn = 0;
 		while (tkn < data->commands[cmd]->token_nb)
@@ -78,8 +79,6 @@ void	execute_command(t_data *data, int cmd, int tkn)
 {
 	char	*value;
 
-	if (data->commands[cmd]->pipe_nb > 0 && data->commands[cmd]->pipe_pos > 0)
-        g_exit_code = 0;
 	preform_shell_expansions(data, cmd, 0);
 	value = data->commands[cmd]->tokens[tkn];
 	g_exit_code = 0;

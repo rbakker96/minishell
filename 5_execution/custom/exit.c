@@ -6,7 +6,7 @@
 /*   By: roybakker <roybakker@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/09 14:51:32 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/29 10:47:29 by rbakker       ########   odam.nl         */
+/*   Updated: 2020/10/29 14:42:23 by qli           ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,8 @@ void	too_many_args(t_data *data, int cmd)
 		print(data, 2, "exit\n", 0);
 	print(data, 2, "minishell: exit: too many arguments\n", 0);
 	g_exit_code = 1;
+	if (data->commands[cmd]->pipe_nb > 0)
+		exit(1);
 }
 
 void	numeric_error(t_data *data, int cmd)

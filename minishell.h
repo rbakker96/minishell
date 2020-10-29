@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/01 15:55:06 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/29 10:43:40 by rbakker       ########   odam.nl         */
+/*   Updated: 2020/10/29 14:50:36 by qli           ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@
 # include <sys/stat.h>
 # include <fcntl.h>
 # include <signal.h>
+# include <stdio.h> // to remove
 
 /*
 **--FOLDER-----------------2_SUPPORTIVE__FUNCTIONS------------------------------
@@ -56,6 +57,8 @@ int		copy_env_token(char *old_str, char **new_str, char **token_list);
 void	meta_token(char *command, int *cmd, int *tkn);
 void	quoted_sentence(char *command, int *cmd, int x);
 void	normal_token(char *command, int *cmd, int *tkn);
+void	set_dollar_sign_value(t_data *data, int cmd);
+
 
 /*
 ** file_four.c
