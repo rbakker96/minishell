@@ -1,12 +1,13 @@
+//fixed
 exit | exit // fixed
 exit 33 | exit 33 // fixed
 exit 234 asdf34 | exit 234 asdf23 //fixed
 exit asdf34r 234 | exit asdf34 234 // fixed
 
-/bin/cat //fixed
+//fixed
+/bin/cat
 
-cat lol | echo >> lol | echo >> lol  //fixed
-
+// fixed
 ;; test | echo $?
 cat test | echo $?
 $? | $?
@@ -16,3 +17,15 @@ cat main | echo $?
 echo $? | cat asdf
 "echo $? | cat asdf"
 'echo $? | cat asdf'
+
+exit 234 asdf34 | exit 234 asdf23
+$? | $? | $?
+
+exit 234 asdf34 | exit 234 asdf23
+$? | $? | $? ; $?
+
+exit 234 asdf34 | exit 234 asdf23
+$? | $? | $? ; $? | $? | $?
+
+// fixed
+cat lol | echo >> lol | echo >> lol

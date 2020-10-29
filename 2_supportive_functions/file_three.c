@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/02 14:39:39 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/28 11:40:04 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/10/29 14:27:52 by qli           ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,5 +49,29 @@ void	normal_token(char *command, int *cmd, int *tkn)
 			quoted_sentence(command, cmd, char_type(command[(*cmd)]));
 		if (char_type(command[(*cmd)]) == meta_char)
 			break ;
+	}
+}
+
+void	set_dollar_sign_value(t_data *data, int cmd)
+{
+	int		i;
+
+	i = 0;
+	while (i < data->commands[cmd]->token_nb)
+	{
+		if (compare_command("|", data->commands[cmd]->tokens[i], 1) == 0)
+			break ;
+		i++;
+	}
+	while (i < data->commands[cmd]->token_nb)
+	{
+		if (compare_command("$?", data->commands[cmd]->tokens[i], 2) == 0)
+		{
+			free(data->commands[cmd]->tokens[i]);
+			data->commands[cmd]->tokens[i] = ft_strdup("0");
+			if (data->commands[cmd]->tokens[i] == NULL)
+				malloc_error(data, 0);
+		}
+		i++;
 	}
 }
