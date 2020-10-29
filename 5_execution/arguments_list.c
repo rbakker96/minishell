@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/07 11:15:58 by rbakker       #+#    #+#                 */
-/*   Updated: 2020/10/28 11:56:46 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/10/29 13:28:39 by rbakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ int		update_token_list(t_data *data, int cmd, int *tkn, int i)
 
 int		save_list_element(char *old_token, char **new_token, int *tkn, int *x)
 {
+	ft_printf("old token = %s\n", old_token);
 	(*new_token) = ft_strdup(old_token);
 	if ((*new_token) == NULL)
 		return (-1);
@@ -69,6 +70,7 @@ int		count_usable_tokens(t_data *data, int cmd, int tkn)
 	}
 	while (tkn < data->commands[cmd]->token_nb)
 	{
+		ft_printf("amount = %d %s\n", amount, data->commands[cmd]->tokens[tkn]);
 		tkn++;
 		amount++;
 	}

@@ -7,5 +7,14 @@ exit asdf34r 234 | exit asdf34 234 // fixed
 
 cat lol | echo >> lol | echo >> lol
 
+
+
 ;; test | echo $?
 cat test | echo $?
+$? | $?
+$? | $? | $?
+$? ; $? ; $?
+cat main | echo $?
+echo $? | cat asdf
+"echo $? | cat asdf"
+'echo $? | cat asdf'
