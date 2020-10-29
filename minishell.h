@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/01 15:55:06 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/28 12:05:22 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/10/29 10:43:40 by rbakker       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -188,7 +188,7 @@ void	execute_env(t_data *data, int cmd, int tkn, int needed_tokens);
 */
 void	execute_exit(t_data *data, int cmd, int tkn, int needed_tokens);
 int		numeric_arg_check(t_data *data, int cmd);
-void	too_many_args(t_data *data);
+void	too_many_args(t_data *data, int cmd);
 void	numeric_error(t_data *data, int cmd);
 
 /*
