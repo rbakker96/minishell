@@ -227,3 +227,59 @@ $hihihi ; echo $?
 
 # 0 exit code -> echo \n
 echo $hkskks ; echo $?
+
+####################################################################
+#                SPECIAL PIPES & EXIT STATUS	                   #
+####################################################################
+
+//fixed
+exit | exit // fixed
+exit 33 | exit 33 // fixed
+exit 234 asdf34 | exit 234 asdf23 //fixed
+exit asdf34r 234 | exit asdf34 234 // fixed
+
+//fixed
+/bin/cat
+
+// fixed
+
+[test 1]
+;; test | echo $?
+cat test | echo $?
+
+[test 2]
+;; test | echo $?
+$? | $?
+
+[test 3]
+cat hihi
+$? | $? | $?
+
+[test 4]
+cat main | echo $?
+$? ; $? ; $?
+
+[test 5]
+echo $? | cat asdf
+$? | $? | $?
+
+[test 6]
+"echo $? | cat asdf"
+
+[test 7]
+'echo $? | cat asdf'
+
+[test 8]
+exit 234 asdf34 | exit 234 asdf23
+$? | $? | $?
+
+[test 9]
+exit 234 asdf34 | exit 234 asdf23
+$? | $? | $? ; $?
+
+[test 10]
+exit 234 asdf34 | exit 234 asdf23
+$? | $? | $? ; $? | $? | $?
+
+// fixed
+cat lol | echo >> lol | echo >> lol
