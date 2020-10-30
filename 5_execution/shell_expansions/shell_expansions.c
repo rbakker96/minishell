@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/05 19:44:06 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/30 15:00:55 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/10/30 15:02:38 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int		empty_quotes(t_data *data, int cmd, int tkn, char **new_token)
 	int i;
 
 	i = 0;
-	if (data->current_token[0] == '\"' || data->current_token[0] == '\"')
+	if (data->current_token[0] == '\"' || data->current_token[0] == '\'')
 		while (data->current_token[i] == data->current_token[0])
 			i++;
 	if (!(i % 2) && i != 0)
