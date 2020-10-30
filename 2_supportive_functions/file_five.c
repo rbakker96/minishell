@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/09 16:44:49 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/28 13:53:58 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/10/30 10:44:10 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,4 +45,21 @@ int		token_var_len(char *str, int i)
 			str[i + len] == '_' || ft_isdigit(str[i + len]) == 1)
 		len++;
 	return (len);
+}
+
+int		custom_cmd(t_data *data, int cmd, int tkn)
+{
+	char *value;
+
+	value = data->commands[cmd]->tokens[tkn];
+	if (compare_command("echo", value, 4) == 0 ||
+		compare_command("cd", value, 2) == 0 ||
+		compare_command("pwd", value, 3) == 0 ||
+		compare_command("export", value, 6) == 0 ||
+		compare_command("unset", value, 5) == 0 ||
+		compare_command("env", value, 3) == 0 ||
+		compare_command("exit", value, 4) == 0)
+		return (1);
+	else
+		return (0);
 }

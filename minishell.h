@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/01 15:55:06 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/29 16:27:25 by rbakker       ########   odam.nl         */
+/*   Updated: 2020/10/30 10:52:26 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@
 # include <sys/stat.h>
 # include <fcntl.h>
 # include <signal.h>
-# include <stdio.h> // to remove
 
 /*
 **--FOLDER-----------------2_SUPPORTIVE__FUNCTIONS------------------------------
@@ -59,7 +58,6 @@ void	quoted_sentence(char *command, int *cmd, int x);
 void	normal_token(char *command, int *cmd, int *tkn);
 void	set_dollar_sign_value(t_data *data, int cmd);
 
-
 /*
 ** file_four.c
 */
@@ -75,15 +73,16 @@ int		redirection(char *str);
 int		get_array_size(char **array);
 int		get_command_table_size(t_command_table **array);
 int		token_var_len(char *str, int i);
+int		custom_cmd(t_data *data, int cmd, int tkn);
 
 /*
 ** file_six.c
 */
 int		compare_command(char *command, char *token_command, int len);
-int		check_token_usability(char **tokens, int i, int start_pos);
+int		check_token_usability(char **tokens, int i);
 int		calculate_needed_tokens(t_data *data, int cmd, int tkn);
 void	update_token_position(t_data *data, int cmd, int *tkn);
-int		custom_cmd(t_data *data, int cmd, int tkn);
+void	copy_remaining_tokens(t_data *data, int cmd, int tkn);
 
 /*
 ** file_seven.c
