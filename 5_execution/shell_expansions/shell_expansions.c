@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/05 19:44:06 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/28 13:05:18 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/10/30 15:00:55 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,13 @@ void	preform_shell_expansions(t_data *data, int cmd, int tkn)
 
 int		empty_quotes(t_data *data, int cmd, int tkn, char **new_token)
 {
-	if (ft_strlen(data->current_token) != 2)
-		return (0);
-	if ((data->current_token[0] == '\"' && data->current_token[1] == '\"') ||
-		(data->current_token[0] == '\'' && data->current_token[1] == '\''))
+	int i;
+
+	i = 0;
+	if (data->current_token[0] == '\"' || data->current_token[0] == '\"')
+		while (data->current_token[i] == data->current_token[0])
+			i++;
+	if (!(i % 2) && i != 0)
 	{
 		free((*new_token));
 		(*new_token) = malloc(sizeof(char) * 2);
