@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/04 12:50:32 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/27 17:18:51 by qli           ########   odam.nl         */
+/*   Updated: 2020/10/31 15:26:12 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	process_quotes(char *line, int *i)
 	quote = char_type(line[(*i)]);
 	(*i)++;
 	while (char_type(line[(*i)]) != quote)
-		(line[(*i)] == '\\') ? (*i) += 2 : (*i)++;
+		(line[(*i)] == '\\' && quote != single_quote) ? (*i) += 2 : (*i)++;
 }
 
 int		get_amount_of_tokens(char *command, int cmd, int tkn)

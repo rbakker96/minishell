@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/19 13:23:47 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/28 12:03:39 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/10/31 15:22:57 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ void	quoted_len(char *command, int start, int *len, int *current_char)
 	{
 		if ((*current_char) == quote_type)
 			quotes--;
-		if (command[start + (*len)] == '\\' && quote_type != 3)
+		if (command[start + (*len)] == '\\' && quote_type != single_quote)
 			(*len) += 2;
 		else
 			(*len)++;

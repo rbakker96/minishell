@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/07 14:49:19 by rbakker       #+#    #+#                 */
-/*   Updated: 2020/10/27 09:52:45 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/10/31 15:14:32 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int		validate_double_quotes(t_data *data, char *character)
 	{
 		if (data->input[i] == '\"')
 		{
-			i++;
+			(data->input[i] == '\\') ? i += 2 : i++;
 			while (data->input[i] != '\"')
 			{
 				if (data->input[i] == '\0')

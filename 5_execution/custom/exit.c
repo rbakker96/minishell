@@ -6,7 +6,7 @@
 /*   By: roybakker <roybakker@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/09 14:51:32 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/29 16:26:43 by rbakker       ########   odam.nl         */
+/*   Updated: 2020/10/31 15:31:54 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,9 @@ void	execute_exit(t_data *data, int cmd, int tkn, int needed_tokens)
 		return ;
 	}
 	exit_code = ft_atoi(data->commands[cmd]->tokens[1]);
-	if (exit_code == 0 && data->commands[cmd]->tokens[1][0] != '0')
+	if (data->commands[cmd]->tokens[1][0] == '\0')
+		exit_code = 0;
+	else if (exit_code == 0 && data->commands[cmd]->tokens[1][0] != '0')
 		numeric_error(data, cmd);
 	if (data->commands[cmd]->pipe_nb == 0)
 		print(data, data->iostream[1], "exit\n", 0);
