@@ -1,0 +1,56 @@
+[FULLY TESTED]
+
+cat < Makefile | cat -e
+Expected: output contents of file with EOL indication
+
+
+ls >> out1 | cat < out1
+Expected: output contents of file + ls output
+
+
+echo > file1 hello >file2 world! > file3 | cat -e
+Expected: creates 3 files, puts “hello world!” in file3, outputs nothing
+
+
+export LS="ls -la";$LS
+Expected: output ls -la results
+
+
+cat | cat -e
+Expected: repeats input with suffixed $
+
+
+cat < noexist < Makefile > out2
+Expected: "No such file or directory" error
+
+
+< main.c cat
+Expected: outputs contents of in1
+
+
+< main.c < Makefile > out3
+Expected: creates empty out3
+
+
+< main.c cat < Makefile > out3
+Expected: creates out3 with contents of in2
+
+
+echo hello; cat < in1 > out2
+Expected: creates out1 with contents of in1; echoes hello in terminal
+
+
+echo oui ; > out4 > out5
+Expected: echoes oui in terminal; creates empty out4 & out5
+
+
+< noexist
+Expected: flags “no such file or directory” error, doesn’t create file
+
+
+< in1
+Expected: nothing
+
+
+< in1 < noexist 
+Expected: flags “no such file or directory” error
