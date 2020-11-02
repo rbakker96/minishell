@@ -6,7 +6,7 @@
 /*   By: qli <qli@student.codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/27 15:48:12 by qli           #+#    #+#                 */
-/*   Updated: 2020/10/28 10:38:02 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/11/02 10:51:30 by qli           ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,13 @@ void	expand_token_list(t_data *data, int cmd, int tkn, char *new_token)
 		{
 			data->commands[cmd]->token_nb += array_size - 1;
 			token_list = split_env_token(data, cmd, tkn, env_var);
+			free_array(env_var);
 			if (token_list == 0)
 				malloc_error(data, &new_token);
 			data->commands[cmd]->tokens = token_list;
 			return ;
 		}
+		free_array(env_var);
 	}
 	free(data->commands[cmd]->tokens[tkn]);
 	data->commands[cmd]->tokens[tkn] = new_token;

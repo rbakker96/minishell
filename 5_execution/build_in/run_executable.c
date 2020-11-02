@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/24 20:12:02 by qli           #+#    #+#                 */
-/*   Updated: 2020/10/30 11:23:35 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/11/02 11:45:14 by qli           ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 void	run_executable(t_data *data, int cmd, int tkn)
 {
-	char *value;
+	char		*value;
+	struct stat stats;
 
 	value = data->commands[cmd]->tokens[tkn];
 	if (value[0] == '\0')
@@ -26,7 +27,7 @@ void	run_executable(t_data *data, int cmd, int tkn)
 	}
 	else
 		create_args(data, cmd, tkn, 1);
-	if (data->args[0] == NULL)
+	if (data->args[0] == NULL || stat(data->args[0], &stats) == -1)
 		print_special_errno(data, value, "command not found", 127);
 	execve(data->args[0], data->args, data->envp);
 	clear_memory(data);

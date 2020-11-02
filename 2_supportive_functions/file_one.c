@@ -6,7 +6,7 @@
 /*   By: roybakker <roybakker@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/02 11:27:20 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/11/02 11:19:04 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/11/02 11:54:57 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,32 +71,4 @@ char	*get_current_directory(t_data *data)
 		malloc_error(data, 0);
 	free_array(directory);
 	return (path);
-}
-
-void	print_export_output(t_data *data, int array_size, int i, int j)
-{
-	int	count;
-
-	count = 1;
-	while (i < array_size)
-	{
-		print(data, data->iostream[WRITE], "declare -x ", 0);
-		j = 0;
-		count = 1;
-		while (data->envp[i][j] != '\0')
-		{
-			if (data->envp[i][j] == '=' && count == 1)
-			{
-				print(data, data->iostream[WRITE], "=\"", 0);
-				j++;
-				count = 0;
-			}
-			print_char(data, data->iostream[WRITE], data->envp[i][j], 0);
-			j++;
-		}
-		if (envp_new_value_check(data->envp[i]))
-			print_char(data, data->iostream[WRITE], '\"', 0);
-		print_char(data, data->iostream[WRITE], '\n', 0);
-		i++;
-	}
 }

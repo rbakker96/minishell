@@ -1,0 +1,112 @@
+----------------------------------ROY-------------------------------------------
+
+[TO FIX]
+export TEST= 100
+--> save it as TEST= but should give an error message
+
+[TO FIX]
+export testvar ; export | grep -a testvar ; echo $?
+--> if testvar exist, it should not unset the variable
+
+[Check later]
+export test_var= ; export | grep -a test_var ; echo $?
+--> if no value after =, an empty string should be assigned as the value. 
+Otherwise, it will give random values
+
+----------------------------------QING-------------------------------------------
+
+[FIXED]
+export does not print a, b, c
+
+[FIXED] export ; export a="\\" ; export b='\\' ; export c="\b" ; export
+To print one more \ when there's a \
+
+//bash
+declare -x a="\\"
+declare -x b="\\\\"
+declare -x c="\\b"
+
+//env --> saved correctly
+a=\
+b=\\
+c=\b
+
+[ADDED]
+cd $IETSONBESTAANDS ; cd $GEK .. ; cd $NOTHING $MORENOTHING ..
+cd $NOTHING $MORENOTHING .. ..
+cd ../Desktop
+cd ~/test_cd
+cd ~test_cd
+cd ~/Desktop
+echo | cd .. | pwd
+
+[FIXED]
+memory leaks in expand_token_list
+
+[FIXED]
+unset PATH ; ls
+bash: ls: No such file or directory
+
+-------------------------------------TO FIX----------------------------------------
+
+export 1test
+bash: export: `1test': not a valid identifier
+
+[;;;]
+echo ; echo \n ' \n this is the; "first line"' ; echo "and right here;;; 'We have the second'" ; echo and" a fe"'w 'here'; with some slash and quotes   .'   '\' ; echo '\\' ; echo "\\" ; echo    "\"" ; echo   \\ ; echo   \' ; echo   \" "\\"    "\""   \\   \'   \"
+
+export $hiuohoi
+work as export
+
+env $hiuohoi
+work as env
+
+--> double check Peer's version
+[NO] asdf ctrl-D --> handled
+// when there's input, ctrl-D should not exit
+[NO] asdf ctrl-\ --> not handled
+// input is lost
+
+
+----------------------------------DOUBLE CHECK-----------------------------------
+
+export | grep -e "PWD="
+
+echo | cd .. | pwd
+
+echo test >> test.txt
+
+cat | cat -e
+
+----------------------------------IGNORE-----------------------------------
+[IGNORE]
+echo \|\| ; echo $?
+echo \\\|\\\| ; echo $?
+echo \|\\$USER ; echo $?
+echo \|\\\$USER ; echo $?
+echo \\\$ \\\! \\\@ \\\# \\\% \\\^ \\\& \\\* \\\( \\\) \\\_ \\\+ \\\| ; echo $?
+echo \ \| \\ ; echo $?
+echo \"\\\|\"\\ ; echo $?
+
+[IGNORE]
+[NO] echo "hallo$"
+[NO] echo $/
+[NO] echo $2$4 ; echo $ ; echo "123\"456" ; echo $1234 ; echo hoi$1234
+
+------------------------------------FIXED-------------------------------------------
+
+[FIXED] --> process_quotes(char *line, int *i) function
+[FIXED] echo \\'\"\'\" ; echo $?
+[FIXED] echo \\'\"\' ; echo $?
+[FIXED] echo "test"\"\""\"test" "lala" ; echo $?
+[FIXED] echo 'test'\\'test'\''lala' ; echo $?
+[FIXED] echo "test""test" "lala" ; echo $?
+
+[FIXED] --> execute_exit() function
+export a ; exit $a
+export a= ; exit $a
+exit $a
+--> if $a does not exit, it equals to exit (0)
+
+[FIXED]
+echo test """" test """" test ; echo $?
