@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/01 14:27:26 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/31 16:12:38 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/11/02 14:33:30 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ typedef enum			e_defenitions
 	append = 8,
 	redirected = 9,
 	succes = 10,
-	save = 11,
+	save = 11
 }						t_defenitions;
 
 /*

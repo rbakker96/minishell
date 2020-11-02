@@ -6,7 +6,7 @@
 /*   By: qli <qli@student.codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/31 20:54:07 by qli           #+#    #+#                 */
-/*   Updated: 2020/11/02 11:54:51 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/11/02 16:30:07 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,5 @@ void	print_envp_line(t_data *data, char *line)
 		print_char(data, data->iostream[WRITE], line[i], 0);
 		i++;
 	}
-	if (envp_new_value_check(data->envp[i]))
-		print_char(data, data->iostream[WRITE], '\"', 0);
-	print_char(data, data->iostream[WRITE], '\n', 0);
+	print(data, data->iostream[WRITE], "\"\n", 0);
 }

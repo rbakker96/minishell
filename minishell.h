@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/01 15:55:06 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/11/02 11:51:27 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/11/02 14:39:58 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -212,8 +212,7 @@ void	numeric_error(t_data *data, int cmd);
 void	execute_export(t_data *data, int cmd, int tkn);
 int		get_envp_size(t_data *data, int cmd, int tkn);
 void	copy_current_envp(t_data *data, char **new_envp);
-void	validate_export_token(t_data *data, int cmd, int tkn,
-								int needed_tokens);
+void	validate_export_token(t_data *data, int cmd, int tkn, int needed_tokens);
 void	add_new_env_to_envp(t_data *data, char **new_envp, int cmd, int tkn);
 
 /*

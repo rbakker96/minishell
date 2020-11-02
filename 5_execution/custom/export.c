@@ -6,7 +6,7 @@
 /*   By: roybakker <roybakker@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/09 14:50:36 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/11/02 11:55:46 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/11/02 16:48:03 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	execute_export(t_data *data, int cmd, int tkn)
 	execute_unset(data, cmd, tkn, 0);
 	tkn++;
 	envp_size = get_envp_size(data, cmd, tkn);
-	new_envp = (char**)malloc(sizeof(char*) * (envp_size + 1));
+	new_envp = (char**)malloc(sizeof(char*) * (envp_size + 2));
 	if (new_envp == NULL)
 		malloc_error(data, 0);
 	copy_current_envp(data, new_envp);
@@ -50,7 +50,7 @@ int		get_envp_size(t_data *data, int cmd, int tkn)
 		while (ft_isalpha(value[i]) || value[i] == '_' || ft_isdigit(value[i]))
 			i++;
 		if (((value[i] == '=' && i != 0) || value[i] == '\0') &&
-													!unique_var(data, value))
+			!unique_var(data, value))
 			size++;
 		tkn++;
 	}
@@ -98,6 +98,7 @@ void	add_new_env_to_envp(t_data *data, char **new_envp, int cmd, int tkn)
 	int i;
 
 	i = get_array_size(data->envp);
+	new_envp[i] = 0;
 	while (tkn < calculate_needed_tokens(data, cmd, 0))
 	{
 		if (save_token(data->commands[cmd]->tokens[tkn]) == save &&
@@ -110,5 +111,5 @@ void	add_new_env_to_envp(t_data *data, char **new_envp, int cmd, int tkn)
 		}
 		tkn++;
 	}
-	new_envp[i] = 0;
+	new_envp[i] = NULL;
 }

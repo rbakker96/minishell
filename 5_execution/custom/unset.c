@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/09 14:50:49 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/11/02 11:43:42 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/11/02 17:07:48 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void	execute_unset(t_data *data, int cmd, int tkn, int needed_tokens)
 	if (compare_command("unset", data->commands[cmd]->tokens[tkn], 5) == 0)
 		validate_unset_token(data, cmd, tkn, needed_tokens);
 	matching_vars = nb_of_matching_var(data, cmd, tkn, needed_tokens);
+	ft_printf("matching = %d\n", matching_vars);
 	if (!matching_vars)
 		return ;
 	new_envp = (char**)malloc(sizeof(char*) * (envp_size - matching_vars + 1));
@@ -97,7 +98,7 @@ int		compare_var(t_data *data, int cmd, int tkn, char *envp_var)
 	{
 		var = data->commands[cmd]->tokens[tkn];
 		if (ft_strncmp(envp_var, var, envp_var_len) == 0 &&
-			var_len == envp_var_len && envp_new_value_check(var))
+			var_len == envp_var_len)
 			return (1);
 		tkn++;
 	}
@@ -112,18 +113,17 @@ int		nb_of_matching_var(t_data *data, int cmd, int tkn, int needed_tokens)
 	int		i;
 
 	count = 0;
-	needed_tokens = calculate_needed_tokens(data, cmd, tkn);
 	tkn++;
 	while (tkn < needed_tokens)
 	{
 		var = data->commands[cmd]->tokens[tkn];
 		var_len = token_var_len(var, 0);
+		ft_printf("var len = %d\n", var_len);
 		i = 0;
 		while (i < get_array_size(data->envp))
 		{
-			if (ft_strncmp(data->envp[i], var, var_len) == 0
-			&& (data->envp[i][var_len] == '=' || data->envp[i][var_len] == '\0')
-			&& envp_new_value_check(var))
+			if (ft_strncmp(data->envp[i], var, var_len) == 0 &&
+			(data->envp[i][var_len] == '=' || data->envp[i][var_len] == '\0'))
 				count++;
 			i++;
 		}
