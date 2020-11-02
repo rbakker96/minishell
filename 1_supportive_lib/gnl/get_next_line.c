@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/11/11 10:55:43 by rbakker       #+#    #+#                 */
-/*   Updated: 2020/10/22 16:08:44 by qli           ########   odam.nl         */
+/*   Updated: 2020/11/02 17:31:16 by qli           ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ int				get_next_line(int fd, char **line)
 		fail = (buf == 0) ? cpy(&buf, b) : join_free(&buf, b, 0, 0);
 		if (fail == -1)
 			return (-1);
-		if (res == 0)
+		if (res == 0 && buf[0] == '\0')
 			break ;
 	}
 	if (save_line(&buf, line, 0, 0) == -1)

@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/07 13:52:27 by rbakker       #+#    #+#                 */
-/*   Updated: 2020/10/27 20:45:37 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/11/02 17:32:38 by qli           ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,16 +39,15 @@ int		input_validation(t_data *data)
 
 int		validate_command_seperators(t_data *data, char *character)
 {
-	int i;
+	int	len;
 
-	i = 0;
-	(*character) = ';';
-	while (data->input[i] != '\0')
+	len = ft_strlen(data->input);
+	while (data->input[len - 1] == ' ')
+		len--;
+	if (data->input[len - 1] == ';' && data->input[len - 2] == ';')
 	{
-		if (data->input[i] == ';' && data->input[i + 1] == ';')
-			return (-258);
-		else
-			(data->input[i] == '\\') ? i += 2 : i++;
+		(*character) = ';';
+		return (-258);
 	}
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: roybakker <roybakker@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/09 14:50:36 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/11/02 16:48:03 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/11/02 17:35:50 by qli           ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,9 @@ void	execute_export(t_data *data, int cmd, int tkn)
 	int		needed_tokens;
 
 	needed_tokens = calculate_needed_tokens(data, cmd, tkn);
-	if (needed_tokens == 1)
+	if ((needed_tokens > 1 && \
+		check_multiple_args(data, cmd, tkn, needed_tokens)) == 1 || \
+		needed_tokens == 1)
 		print_export_output(data, get_array_size(data->envp), 0, 0);
 	validate_export_token(data, cmd, tkn, needed_tokens);
 	execute_unset(data, cmd, tkn, 0);

@@ -6,7 +6,7 @@
 /*   By: qli <qli@student.codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/31 20:54:07 by qli           #+#    #+#                 */
-/*   Updated: 2020/11/02 16:30:07 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/11/02 17:40:45 by qli           ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,14 +65,17 @@ int		find_smallest_envp(t_data *data, int array_size)
 void	print_envp_line(t_data *data, char *line)
 {
 	int		i;
+	int		count;
 
 	i = 0;
+	count = 0;
 	print(data, data->iostream[WRITE], "declare -x ", 0);
 	while (line[i] != '\0')
 	{
 		if (line[i] == '=')
 		{
 			print(data, data->iostream[WRITE], "=\"", 0);
+			count = 1;
 			i++;
 		}
 		if (line[i] == '\\')
@@ -80,5 +83,22 @@ void	print_envp_line(t_data *data, char *line)
 		print_char(data, data->iostream[WRITE], line[i], 0);
 		i++;
 	}
-	print(data, data->iostream[WRITE], "\"\n", 0);
+	if (count == 1)
+		print_char(data, data->iostream[WRITE], '"', 0);
+	print_char(data, data->iostream[WRITE], '\n', 0);
+}
+
+int		check_multiple_args(t_data *data, int cmd, int tkn, int needed_tokens)
+{
+	needed_tokens--;
+	tkn++;
+	while (needed_tokens > 0)
+	{
+		if (data->commands[cmd]->tokens[tkn][0] == '\0')
+			tkn++;
+		else
+			return (0);
+		needed_tokens--;
+	}
+	return (1);
 }

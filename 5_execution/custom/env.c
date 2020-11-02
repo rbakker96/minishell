@@ -6,7 +6,7 @@
 /*   By: roybakker <roybakker@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/09 14:51:19 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/11/02 14:39:48 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/11/02 17:37:30 by qli           ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ void	execute_env(t_data *data, int cmd, int tkn, int needed_tokens)
 
 	index = 0;
 	needed_tokens = calculate_needed_tokens(data, cmd, tkn);
-	if (needed_tokens > 1)
+	if (needed_tokens > 1 && \
+		check_multiple_args(data, cmd, tkn, needed_tokens) == 0)
 	{
 		print(data, 2, "minishell : env : no arguments allowed\n", 0);
 		g_exit_code = 1;
