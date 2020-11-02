@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/01 15:55:06 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/31 20:54:46 by qli           ########   odam.nl         */
+/*   Updated: 2020/11/02 10:44:31 by qli           ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -177,8 +177,11 @@ void	run_executable(t_data *data, int cmd, int tkn);
 /*
 ** cd.c
 */
+
 void	execute_cd(t_data *data, int cmd, int tkn, int needed_tokens);
-void	go_to_home(t_data *data, int cmd);
+void	go_to_home(t_data *data, int cmd, char *value, int needed_tokens);
+int		cd_multiple_args(t_data *data, int cmd, int *tkn, int needed_tokens);
+char	*expand_home_path(t_data *data, char *value, char *home_path);
 
 /*
 ** echo.c

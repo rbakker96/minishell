@@ -24,18 +24,8 @@ echo ; echo \n ' \n this is the; "first line"' ; echo "and right here;;; 'We hav
 [FIXED]
 export does not print a, b, c
 
----------------------------------------------------------------------------------
-
-[TO ADD]
-cd $IETSONBESTAANDS ; cd $GEK .. ; cd $NOTHING $MORENOTHING ..
-cd $NOTHING $MORENOTHING .. ..
-cd ../Desktop
-cd ~/test_cd
-cd ~test_cd
-
------------------------------------------------------------------------------
-
-[NO] export ; export a="\\" ; export b='\\' ; export c="\b" ; export
+[FIXED] export ; export a="\\" ; export b='\\' ; export c="\b" ; export
+To print one more \ when there's a \
 
 //bash
 declare -x a="\\"
@@ -47,7 +37,16 @@ a=\
 b=\\
 c=\b
 
-To print one more \ when there's a \
+[ADDED]
+cd $IETSONBESTAANDS ; cd $GEK .. ; cd $NOTHING $MORENOTHING ..
+cd $NOTHING $MORENOTHING .. ..
+cd ../Desktop
+cd ~/test_cd
+cd ~test_cd
+cd ~/Desktop
+
+[FIXED]
+memory leaks in expand_token_list
 
 -----------------------------------------------------------------------------
 
