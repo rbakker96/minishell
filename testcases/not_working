@@ -44,6 +44,7 @@ cd ../Desktop
 cd ~/test_cd
 cd ~test_cd
 cd ~/Desktop
+echo | cd .. | pwd
 
 [FIXED]
 memory leaks in expand_token_list
