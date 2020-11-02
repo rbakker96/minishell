@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/01 15:55:06 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/30 10:52:26 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/11/02 11:46:07 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ void	meta_token(char *command, int *cmd, int *tkn);
 void	quoted_sentence(char *command, int *cmd, int x);
 void	normal_token(char *command, int *cmd, int *tkn);
 void	set_dollar_sign_value(t_data *data, int cmd);
+int		save_token(char *token);
 
 /*
 ** file_four.c
@@ -90,6 +91,8 @@ void	copy_remaining_tokens(t_data *data, int cmd, int tkn);
 int		command_check(char check_value, char charachter);
 int		redirection_check(char *str);
 int		quotes_check(char *str);
+int		envp_new_value_check(char *new_envp);
+int		unique_var(t_data *data, char *var);
 
 /*
 **--FOLDER---------------------3_ERROR_MANAGEMENT-------------------------------
@@ -184,6 +187,7 @@ int		newline_option(t_data *data, int cmd, int *tkn);
 ** env.c
 */
 void	execute_env(t_data *data, int cmd, int tkn, int needed_tokens);
+int		env_with_value(char *variable);
 
 /*
 ** exit.c
@@ -199,7 +203,8 @@ void	numeric_error(t_data *data, int cmd);
 void	execute_export(t_data *data, int cmd, int tkn);
 int		get_envp_size(t_data *data, int cmd, int tkn);
 void	copy_current_envp(t_data *data, char **new_envp);
-int		validate_export_token(char *token);
+void	validate_export_token(t_data *data, int cmd, int tkn,
+								int needed_tokens);
 void	add_new_env_to_envp(t_data *data, char **new_envp, int cmd, int tkn);
 
 /*

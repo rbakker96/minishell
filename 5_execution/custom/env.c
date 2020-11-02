@@ -6,7 +6,7 @@
 /*   By: roybakker <roybakker@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/09 14:51:19 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/22 20:30:06 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/10/31 17:26:40 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,25 @@ void	execute_env(t_data *data, int cmd, int tkn, int needed_tokens)
 	}
 	while (data->envp[index] != 0)
 	{
-		print(data, data->iostream[1], data->envp[index], 0);
-		print_char(data, data->iostream[1], '\n', 0);
+		if (env_with_value(data->envp[index]))
+		{
+			print(data, data->iostream[1], data->envp[index], 0);
+			print_char(data, data->iostream[1], '\n', 0);
+		}
 		index++;
 	}
+}
+
+int		env_with_value(char *variable)
+{
+	int i;
+
+	i = 0;
+	while (variable[i] != '\0')
+	{
+		if (variable[i] == '=')
+			return (1);
+		i++;
+	}
+	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/09 14:50:49 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/28 13:53:19 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/11/02 11:43:42 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,10 @@ void	execute_unset(t_data *data, int cmd, int tkn, int needed_tokens)
 
 	envp_size = get_array_size(data->envp);
 	needed_tokens = calculate_needed_tokens(data, cmd, tkn);
-	validate_unset_token(data, cmd, tkn, needed_tokens);
+	if (compare_command("unset", data->commands[cmd]->tokens[tkn], 5) == 0)
+		validate_unset_token(data, cmd, tkn, needed_tokens);
 	matching_vars = nb_of_matching_var(data, cmd, tkn, needed_tokens);
-	if (needed_tokens == 1 || !matching_vars)
+	if (!matching_vars)
 		return ;
 	new_envp = (char**)malloc(sizeof(char*) * (envp_size - matching_vars + 1));
 	if (new_envp == NULL)
@@ -43,8 +44,7 @@ void	validate_unset_token(t_data *data, int cmd, int tkn, int needed_tokens)
 		value = data->commands[cmd]->tokens[tkn];
 		while (ft_isalpha(value[i]) || value[i] == '_' || ft_isdigit(value[i]))
 			i++;
-		if ((value[i] != '=' || (value[i] == '=' && i == 0)) &&
-															value[i] != '\0')
+		if (value[i] != '\0')
 			print_unset_error(data, value);
 		tkn++;
 	}
@@ -81,17 +81,23 @@ int		compare_var(t_data *data, int cmd, int tkn, char *envp_var)
 {
 	int		needed_tokens;
 	int		envp_var_len;
+	int		var_len;
 	char	*var;
 
 	needed_tokens = calculate_needed_tokens(data, cmd, tkn);
 	tkn++;
 	envp_var_len = 0;
-	while (envp_var[envp_var_len] != '=')
+	var_len = 0;
+	var = data->commands[cmd]->tokens[tkn];
+	while (envp_var[envp_var_len] != '=' || var[var_len] == '\0')
 		envp_var_len++;
+	while (var[var_len] != '=' || var[var_len] == '\0')
+		var_len++;
 	while (tkn < needed_tokens)
 	{
 		var = data->commands[cmd]->tokens[tkn];
-		if (compare_command(envp_var, var, envp_var_len) == 0)
+		if (ft_strncmp(envp_var, var, envp_var_len) == 0 &&
+			var_len == envp_var_len && envp_new_value_check(var))
 			return (1);
 		tkn++;
 	}
@@ -100,14 +106,12 @@ int		compare_var(t_data *data, int cmd, int tkn, char *envp_var)
 
 int		nb_of_matching_var(t_data *data, int cmd, int tkn, int needed_tokens)
 {
-	int		envp_size;
 	int		var_len;
 	char	*var;
 	int		count;
 	int		i;
 
 	count = 0;
-	envp_size = get_array_size(data->envp);
 	needed_tokens = calculate_needed_tokens(data, cmd, tkn);
 	tkn++;
 	while (tkn < needed_tokens)
@@ -115,10 +119,11 @@ int		nb_of_matching_var(t_data *data, int cmd, int tkn, int needed_tokens)
 		var = data->commands[cmd]->tokens[tkn];
 		var_len = token_var_len(var, 0);
 		i = 0;
-		while (i < envp_size)
+		while (i < get_array_size(data->envp))
 		{
 			if (ft_strncmp(data->envp[i], var, var_len) == 0
-							&& data->envp[i][var_len] == '=')
+			&& (data->envp[i][var_len] == '=' || data->envp[i][var_len] == '\0')
+			&& envp_new_value_check(var))
 				count++;
 			i++;
 		}

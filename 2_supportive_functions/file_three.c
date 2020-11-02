@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/02 14:39:39 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/29 14:27:52 by qli           ########   odam.nl         */
+/*   Updated: 2020/11/02 11:45:36 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,4 +74,18 @@ void	set_dollar_sign_value(t_data *data, int cmd)
 		}
 		i++;
 	}
+}
+
+int		save_token(char *token)
+{
+	int i;
+
+	i = 0;
+	if (ft_isdigit(token[i]))
+		return (0);
+	while (ft_isalpha(token[i]) || token[i] == '_' || ft_isdigit(token[i]))
+		i++;
+	if ((token[i] == '=' && i != 0) || token[i] == '\0')
+		return (save);
+	return (0);
 }

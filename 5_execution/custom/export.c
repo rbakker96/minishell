@@ -6,7 +6,7 @@
 /*   By: roybakker <roybakker@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/09 14:50:36 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/28 13:54:40 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/11/02 11:46:50 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,9 @@ void	execute_export(t_data *data, int cmd, int tkn)
 	needed_tokens = calculate_needed_tokens(data, cmd, tkn);
 	if (needed_tokens == 1)
 		print_export_output(data, get_array_size(data->envp), 0, 0);
+	validate_export_token(data, cmd, tkn, needed_tokens);
 	execute_unset(data, cmd, tkn, 0);
+	tkn++;
 	envp_size = get_envp_size(data, cmd, tkn);
 	new_envp = (char**)malloc(sizeof(char*) * (envp_size + 1));
 	if (new_envp == NULL)
@@ -47,7 +49,8 @@ int		get_envp_size(t_data *data, int cmd, int tkn)
 		value = data->commands[cmd]->tokens[tkn];
 		while (ft_isalpha(value[i]) || value[i] == '_' || ft_isdigit(value[i]))
 			i++;
-		if (value[i] == '=')
+		if (((value[i] == '=' && i != 0) || value[i] == '\0') &&
+													!unique_var(data, value))
 			size++;
 		tkn++;
 	}
@@ -70,31 +73,35 @@ void	copy_current_envp(t_data *data, char **new_envp)
 	}
 }
 
-int		validate_export_token(char *token)
+void	validate_export_token(t_data *data, int cmd, int tkn, int needed_tokens)
 {
-	int i;
+	char	*value;
+	int		i;
 
-	i = 0;
-	while (ft_isalpha(token[i]) || token[i] == '_' || ft_isdigit(token[i]))
-		i++;
-	if (token[i] == '=' && i != 0)
-		return (valid);
-	else if (token[i] == '\0')
-		return (0);
-	else
-		return (error);
+	while (tkn < needed_tokens)
+	{
+		i = 0;
+		value = data->commands[cmd]->tokens[tkn];
+		if (ft_isdigit(value[i]))
+			print_unset_error(data, value);
+		while (ft_isalpha(value[i]) || value[i] == '_' || ft_isdigit(value[i]))
+			i++;
+		if ((value[i] == '=' && i == 0) || (value[i] != '=' &&
+			value[i] != '\0'))
+			print_unset_error(data, value);
+		tkn++;
+	}
 }
 
 void	add_new_env_to_envp(t_data *data, char **new_envp, int cmd, int tkn)
 {
-	int ret;
 	int i;
 
 	i = get_array_size(data->envp);
 	while (tkn < calculate_needed_tokens(data, cmd, 0))
 	{
-		ret = validate_export_token(data->commands[cmd]->tokens[tkn]);
-		if (ret == valid)
+		if (save_token(data->commands[cmd]->tokens[tkn]) == save &&
+			!unique_var(data, data->commands[cmd]->tokens[tkn]))
 		{
 			new_envp[i] = ft_strdup(data->commands[cmd]->tokens[tkn]);
 			if (new_envp[i] == NULL)

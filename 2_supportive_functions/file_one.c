@@ -6,7 +6,7 @@
 /*   By: roybakker <roybakker@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/02 11:27:20 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/26 15:01:06 by qli           ########   odam.nl         */
+/*   Updated: 2020/11/02 11:19:04 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,9 @@ void	print_export_output(t_data *data, int array_size, int i, int j)
 			print_char(data, data->iostream[WRITE], data->envp[i][j], 0);
 			j++;
 		}
-		print(data, data->iostream[WRITE], "\"\n", 0);
+		if (envp_new_value_check(data->envp[i]))
+			print_char(data, data->iostream[WRITE], '\"', 0);
+		print_char(data, data->iostream[WRITE], '\n', 0);
 		i++;
 	}
 }
