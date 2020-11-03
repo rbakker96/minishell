@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/01 15:55:06 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/11/03 16:01:51 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/11/03 16:54:59 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -207,9 +207,9 @@ int		env_with_value(char *variable);
 ** exit.c
 */
 void	execute_exit(t_data *data, int cmd, int tkn, int needed_tokens);
-int		numeric_arg_check(t_data *data, int cmd);
+int		numeric_arg_check(t_data *data, int cmd, int tkn);
 void	too_many_args(t_data *data, int cmd);
-void	numeric_error(t_data *data, int cmd);
+void	numeric_error(t_data *data, int cmd, int tkn);
 
 /*
 ** export.c

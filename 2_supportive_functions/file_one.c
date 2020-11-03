@@ -6,7 +6,7 @@
 /*   By: roybakker <roybakker@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/02 11:27:20 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/11/03 14:33:42 by qli           ########   odam.nl         */
+/*   Updated: 2020/11/03 17:05:59 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,14 +78,15 @@ int		validate_args(t_data *data, int cmd, int *tkn, int needed_tokens)
 	int ret;
 
 	ret = check_multiple_args(data, cmd, (*tkn), needed_tokens);
-	if (ret == 1)
+	if (ret >= 1)
 	{
 		(*tkn)++;
 		while (data->commands[cmd]->tokens[(*tkn) + 1] != NULL &&
 				data->commands[cmd]->tokens[(*tkn)][0] == '\0')
 			(*tkn)++;
-		return (0);
 	}
+	if (ret == 1)
+		return (0);
 	if (ret > 1)
 		return (1);
 	return (0);
