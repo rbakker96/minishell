@@ -108,9 +108,9 @@ env $hiohioi $hjiohiohoi $hihio test
 [Y] exit $yiyio | exit 5
 [Y] exit 5 | exit $hiohioi
 [Y] exit $yiyoi $kpk 2 6
-[N] exit $yiyoi $kpk 2
-[N] exit $yiyoi $kpk
-[N] exit 2 $hiohio
+[Y] exit $yiyoi $kpk 2
+[Y] exit $yiyoi $kpk
+[Y] exit 2 $hiohio
 
 [pwd]
 pwd $hioho

@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/01 15:55:06 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/11/03 13:38:10 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/11/03 14:31:29 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -200,6 +200,7 @@ int		newline_option(t_data *data, int cmd, int *tkn);
 ** env.c
 */
 void	execute_env(t_data *data, int cmd, int tkn, int needed_tokens);
+int		check_args(t_data *data, int cmd, int tkn, int needed_tokens);
 int		env_with_value(char *variable);
 
 /*
