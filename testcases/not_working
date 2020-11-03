@@ -69,7 +69,7 @@ cd /home/qli/Desktop
 cd .. $hioho $were
 cd .. $hiho .. $hioho
 cd ../Desktop
-cd ~/test_cd
+cd ~/test_cd $hioh
 cd ~test_cd
 cd ~/Desktop
 cd ~/Desktop $hioh
@@ -79,19 +79,21 @@ cd $hioh ~/Desktop ..
 cd .. $hioho
 echo | cd $hioho | pwd
 echo | cd .. | pwd
-echo | cd .. $hioho | pwd
+echo | cd $hiho .. $hioho | pwd
 
 
-[export] -> working
+[export] - wait for the final export version
 export $hiuohoi
 export $hiohi 1test
 export $hhhh $PWD
 export $hhhh PWD
 echo $PWD
-export PWD $hihoi | echo hello
+export $asdf PWD $hihoi | echo hello
 echo $PWD
-export $hiohioi $hjiohiohoi $hihio test
-export test $hiohioi $hjiohiohoi $hihio 
+[NO] export $hiohioi $hjiohiohoi $hihio test=100
+[NO] export
+[NO] export $hiohioi test=200 $hjiohiohoi $hihio
+[NO] export
 
 [env - to fix]
 env $hiuohoi
