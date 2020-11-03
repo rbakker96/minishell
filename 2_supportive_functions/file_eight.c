@@ -6,7 +6,7 @@
 /*   By: qli <qli@student.codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/31 20:54:07 by qli           #+#    #+#                 */
-/*   Updated: 2020/11/03 12:50:28 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/11/03 13:37:52 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,4 +103,14 @@ int		check_multiple_args(t_data *data, int cmd, int tkn, int needed_tokens)
 		needed_tokens--;
 	}
 	return (count);
+}
+
+void	skip_empty_token(t_data *data, int cmd, int *tkn)
+{
+	while ((*tkn) < data->commands[cmd]->token_nb)
+	{
+		if (data->commands[cmd]->tokens[*tkn][0] == '\0')
+			(*tkn)++;
+		break ;
+	}
 }

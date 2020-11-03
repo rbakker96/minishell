@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/05 10:19:20 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/11/03 10:27:27 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/11/03 11:58:25 by qli           ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ void	malloc_error(t_data *data, char **malloced_array)
 	print(data, 2, "minishell : error due to malloc failure\n", 0);
 	free_array(malloced_array);
 	clear_memory(data);
-	while(1){}
 	exit(1);
 }
 

@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/01 15:55:06 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/11/03 11:43:14 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/11/03 13:38:10 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ int		get_array_size(char **array);
 int		get_command_table_size(t_command_table **array);
 int		token_var_len(char *str, int i);
 int		custom_cmd(t_data *data, int cmd, int tkn);
+void	copy_valid_args(t_data *data, int cmd, int tkn, int x);
 
 /*
 ** file_six.c
@@ -101,7 +102,7 @@ void	print_export_output(t_data *data, int array_size, int i, int j);
 int		find_smallest_envp(t_data *data, int array_size);
 void	print_envp_line(t_data *data, char *line);
 int		check_multiple_args(t_data *data, int cmd, int tkn, int needed_tokens);
-int		remove_empty_args(t_data *data, int cmd, int *tkn, int *needed_tokens);
+void	skip_empty_token(t_data *data, int cmd, int *tkn);
 
 /*
 **--FOLDER---------------------3_ERROR_MANAGEMENT-------------------------------

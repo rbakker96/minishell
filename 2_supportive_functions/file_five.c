@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/09 16:44:49 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/30 10:44:10 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/11/03 12:59:55 by qli           ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,4 +62,24 @@ int		custom_cmd(t_data *data, int cmd, int tkn)
 		return (1);
 	else
 		return (0);
+}
+
+void	copy_valid_args(t_data *data, int cmd, int tkn, int x)
+{
+	int args_num;
+
+	args_num = check_args_num(data, cmd, tkn);
+	while (x < args_num)
+	{
+		if (data->commands[cmd]->tokens[tkn + x][0] != '\0')
+		{
+			data->args[x] = ft_strdup(data->commands[cmd]->tokens[tkn + x]);
+			if (data->args[x] == NULL)
+				malloc_error(data, 0);
+			x++;
+		}
+		else
+			tkn++;
+	}
+	data->args[args_num] = NULL;
 }

@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/12 16:36:24 by rbakker       #+#    #+#                 */
-/*   Updated: 2020/11/02 11:17:53 by qli           ########   odam.nl         */
+/*   Updated: 2020/11/03 13:37:30 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,8 +79,9 @@ void	execute_command(t_data *data, int cmd, int tkn)
 	char	*value;
 
 	preform_shell_expansions(data, cmd, 0);
-	value = data->commands[cmd]->tokens[tkn];
 	g_exit_code = 0;
+	skip_empty_token(data, cmd, &tkn);
+	value = data->commands[cmd]->tokens[tkn];
 	if (compare_command("echo", value, 4) == 0)
 		execute_echo(data, cmd, tkn, 0);
 	else if (compare_command("cd", value, 2) == 0)
