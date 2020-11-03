@@ -82,7 +82,7 @@ echo | cd .. | pwd
 echo | cd $hiho .. $hioho | pwd
 
 
-[export] - wait for the final export version
+[export FIXED]
 export $hiuohoi
 export $hiohi 1test
 export $hhhh $PWD
@@ -90,10 +90,10 @@ export $hhhh PWD
 echo $PWD
 export $asdf PWD $hihoi | echo hello
 echo $PWD
-[NO] export $hiohioi $hjiohiohoi $hihio test=100
-[NO] export
-[NO] export $hiohioi test=200 $hjiohiohoi $hihio
-[NO] export
+export $hiohioi $hjiohiohoi $hihio test=100
+export
+export $hiohioi test=200 $hjiohiohoi $hihio
+export
 
 [env - to fix]
 env $hiuohoi
@@ -128,6 +128,12 @@ echo $hhiohoih hello
 echo $hiohio $hiho haha
 echo $hiohi $awepori
 echo hello $hiohoiwer
+
+[builtins]
+$hioh ls $huihoi -la $hiohoih
+$hioh cat $huihoi main.c $hiohoih | $hioh ls $huihoi -la $hiohoih
+$hioh cat $huihoi main.c $hiohoih | $hioh cat $huihoi -e $hiohoih
+
 ----------------------------------DOUBLE CHECK-----------------------------------
 
 export | grep -e "PWD="

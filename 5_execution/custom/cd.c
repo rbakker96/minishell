@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/09 14:50:20 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/11/03 10:25:59 by qli           ########   odam.nl         */
+/*   Updated: 2020/11/03 11:09:34 by qli           ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ void	execute_cd(t_data *data, int cmd, int tkn, int needed_tokens)
 	needed_tokens = calculate_needed_tokens(data, cmd, tkn);
 	tkn++;
 	value = data->commands[cmd]->tokens[tkn];
-	if (data->commands[cmd]->tokens[needed_tokens] != NULL &&
-		data->commands[cmd]->tokens[needed_tokens][0] == '|')
-		tkn = needed_tokens;
+	// if (data->commands[cmd]->tokens[needed_tokens] != NULL &&
+	// 	data->commands[cmd]->tokens[needed_tokens][0] == '|')
+	// 	tkn = needed_tokens;
 	if (needed_tokens > 2)
 	{
 		if (cd_multiple_args(data, cmd, &tkn, needed_tokens) == 0)
