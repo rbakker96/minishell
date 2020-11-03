@@ -35,16 +35,16 @@ export testvar10 ; env | grep -a testvar10 ; echo $?
 export testvar10= ; env | grep -a testvar10 ; echo $?
 export testvar10=10 ; env | grep -a testvar10 ; echo $?
 export testvar=10 ; export testvar=20 ; env | grep -a testvar ; echo $?
-	export _testvar ; env | grep -a _testvar ; echo $?
-	export _testvar= ; env | grep -a _testvar ; echo $?
-	export _testvar=10 ; env | grep -a _testvar ; echo $?
-	export _testvar=lala ; env | grep -a _testvar ; echo $?
-	export _testvar=lala10 ; env | grep -a _testvar ; echo $?
-	export _testvar10 ; env | grep -a _testvar10 ; echo $?
-	export _testvar10= ; env | grep -a _testvar10 ; echo $?
-	export _testvar10=lala ; env | grep -a _testvar10 ; echo $?
-	export _testvar10=10; env | grep -a _testvar10 ; echo $?
-	export _testvar10=lala10 ; env | grep -a _testvar10 ; echo $?
+export _testvar ; env | grep -a _testvar ; echo $?
+export _testvar= ; env | grep -a _testvar ; echo $?
+export _testvar=10 ; env | grep -a _testvar ; echo $?
+export _testvar=lala ; env | grep -a _testvar ; echo $?
+export _testvar=lala10 ; env | grep -a _testvar ; echo $?
+export _testvar10 ; env | grep -a _testvar10 ; echo $?
+export _testvar10= ; env | grep -a _testvar10 ; echo $?
+export _testvar10=lala ; env | grep -a _testvar10 ; echo $?
+export _testvar10=10; env | grep -a _testvar10 ; echo $?
+export _testvar10=lala10 ; env | grep -a _testvar10 ; echo $?
 
 #EXPORT
 export % ; echo $?
@@ -214,8 +214,6 @@ echo \| ; echo $?
 echo \"\" ; echo $?
 echo \\ ; echo $?
 echo \\\\ ; echo $?
-echo \|\| ; echo $?
-echo \\\|\\\| ; echo $?
 echo \\"\\" ; echo $?
 echo \$ \" ; echo $?
 echo \: \@ \< \> \= \? ; echo $?
@@ -234,11 +232,6 @@ echo $war ; echo $?
 echo \$war ; echo $?
 echo \\$war ; echo $?
 echo \\\$war ; echo $?
-echo \|\\$USER ; echo $?
-echo \|\\\$USER ; echo $?
-echo \\\"$USER ; echo $?
-[NO] echo \|\\$USER ; echo $?
-[NO] echo \|\\\$USER ; echo $?
 echo \\\"$USER ; echo $?
 echo \$ \! \@ \# \% \^ \& \* \( \) \_ \+ \| ; echo $?
 echo \"\$ \! \@ \# \% \^ \& \* \( \) \_ \+ \|\" ; echo $?
