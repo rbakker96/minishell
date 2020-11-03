@@ -104,24 +104,28 @@ env $hhhh PWD
 env $hiohioi $hjiohiohoi $hihio test
 
 [exit]
-[Y] exit $hiohioi
-[Y] exit $yiyio | exit 5
-[Y] exit 5 | exit $hiohioi
-[Y] exit $yiyoi $kpk 2 6
-[N] exit $yiyoi $kpk 2
-[N] exit $yiyoi $kpk
-[N] exit 2 $hiohio
+exit $hiohioi
+exit $yiyio | exit 5
+exit 5 | exit $hiohioi
+exit $yiyoi $kpk 2 6
+exit $yiyoi $kpk 2
+exit $yiyoi $kpk
+exit 2 $hiohio
 
 [pwd]
 pwd $hioho
 pwd $uiou $uyiopu
 pwd $yioyi qwerw
+$hihoi pwd $hioho test | cat $hiohi -e
 
 [unset]
 unset $hiuohoi
 unset $hiohi 1test
 unset $hhhh $PWD
 unset $hiohioi $hjiohiohoi $hihio test
+$huhiu unset $hihioho
+$huhiu unset $hihioho hihi
+$huhiu unset $hihioho 11 $hihih
 
 [echo]
 echo $hhiohoih hello

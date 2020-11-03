@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/09 14:50:49 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/11/03 09:20:42 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/11/03 14:37:50 by qli           ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	validate_unset_token(t_data *data, int cmd, int tkn, int needed_tokens)
 		value = data->commands[cmd]->tokens[tkn];
 		while (ft_isalpha(value[i]) || value[i] == '_' || ft_isdigit(value[i]))
 			i++;
-		if (value[i] != '\0')
+		if (ft_isdigit(value[0]) || value[i] != '\0')
 			print_unset_error(data, value);
 		tkn++;
 	}
