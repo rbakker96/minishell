@@ -6,7 +6,7 @@
 /*   By: qli <qli@student.codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/21 13:15:18 by qli           #+#    #+#                 */
-/*   Updated: 2020/11/01 13:42:10 by qli           ########   odam.nl         */
+/*   Updated: 2020/11/03 16:14:21 by qli           ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	print_prompt(void)
 
 void	sigint_handler(int signum)
 {
-	g_exit_code = 2;
+	g_exit_code = -2;
 	if (g_pid == 0)
 	{
 		g_exit_code = 130;
@@ -54,7 +54,7 @@ void	sigint_handler(int signum)
 
 void	sigquit_handler(int signum)
 {
-	g_exit_code = 3;
+	g_exit_code = -3;
 	if (g_pid == 0)
 	{
 		if (write(2, "\b\b  \b\b", 6) == -1)

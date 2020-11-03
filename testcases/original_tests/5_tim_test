@@ -11,8 +11,13 @@ pwd
 +++ ECHO +++
 echo 00\\\'pp ; echo 00\\\\\'pp
 echo 00\\\\'pp' ; echo “./hello”. ; echo ./hello ; echo ello
+<<<<<<< HEAD
+echo ; echo \n ' \n this is the; "first line"' ;;; echo "and right here;;; 'We have the second'" ; echo and" a fe"'w 'here'; with some slash and quotes   .'   '\' ; echo '\\' ; echo "\\" ; echo    "\"" ; echo   \\ ; echo   \' ; echo   \" "\\"    "\""   \\   \'   \"
+echo ; echo \n ' \n this is the; "first line"' ; echo "and right here; 'We have the second'" ; echo and" a fe"'w 'here'; with some slash and quotes   .'   '\' ; echo '\\' ; echo "\\" ; echo    "\"" ; echo   \\ ; echo   \' ; echo   \" "\\"    "\""   \\   \'   \"
+=======
 [NO]echo ; echo \n ' \n this is the; "first line"' ; echo "and right here;;; 'We have the second'" ; echo and" a fe"'w 'here'; with some slash and quotes   .'   '\' ; echo '\\' ; echo "\\" ; echo    "\"" ; echo   \\ ; echo   \' ; echo   \" "\\"    "\""   \\   \'   \"
 with some slash and quotes   .'   '\' ; echo '\\' ; echo "\\" ; echo    "echo ; echo \n ' \n this is the; "first line"' ; echo "and right here; 'We have the second'" ; echo and" a fe"'w 'here'; \"" ; echo   \\ ; echo   \' ; echo   \" "\\"    "\""   \\   \'   \"
+>>>>>>> fc15fdf83232b19f694a3d73dcfd56155376b4f3
 echo /$"123$USER"
 echo $1 234
 echo $POEP hallo
