@@ -12,7 +12,7 @@ pwd
 echo 00\\\'pp ; echo 00\\\\\'pp
 echo 00\\\\'pp' ; echo “./hello”. ; echo ./hello ; echo ello
 [NO]echo ; echo \n ' \n this is the; "first line"' ; echo "and right here;;; 'We have the second'" ; echo and" a fe"'w 'here'; with some slash and quotes   .'   '\' ; echo '\\' ; echo "\\" ; echo    "\"" ; echo   \\ ; echo   \' ; echo   \" "\\"    "\""   \\   \'   \"
-echo ; echo \n ' \n this is the; "first line"' ; echo "and right here; 'We have the second'" ; echo and" a fe"'w 'here'; with some slash and quotes   .'   '\' ; echo '\\' ; echo "\\" ; echo    "\"" ; echo   \\ ; echo   \' ; echo   \" "\\"    "\""   \\   \'   \"
+with some slash and quotes   .'   '\' ; echo '\\' ; echo "\\" ; echo    "echo ; echo \n ' \n this is the; "first line"' ; echo "and right here; 'We have the second'" ; echo and" a fe"'w 'here'; \"" ; echo   \\ ; echo   \' ; echo   \" "\\"    "\""   \\   \'   \"
 echo /$"123$USER"
 echo $1 234
 echo $POEP hallo
@@ -100,7 +100,7 @@ cd notworking
 cd .
 cd .. ;pwd;/bin/ls;cd .. ;      pwd    ;/bin/ls;     cd notworking;     cd .
 cd ~
-[NO] cd $IETSONBESTAANDS ; cd $GEK .. ; cd $NOTHING $MORENOTHING .. // if cd is followed by nothing, then 
+[NO] cd $IETSONBESTAANDS ; cd $GEK .. ; cd $NOTHING $MORENOTHING .. // if cd is followed by nothing, then
 
 +++ PWD +++
 pwd ; pwd .; pwd ..
