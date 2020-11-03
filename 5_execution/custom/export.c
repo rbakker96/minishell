@@ -6,7 +6,7 @@
 /*   By: roybakker <roybakker@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/09 14:50:36 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/11/03 10:40:50 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/11/03 11:00:50 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ void	execute_export(t_data *data, int cmd, int tkn)
 	tkn++;
 	while (tkn < needed_tokens)
 	{
-		if (validate_export_token(data, cmd, tkn))
+		if (data->commands[cmd]->tokens[tkn][0] != '\0' &&
+			validate_export_token(data, cmd, tkn))
 		{
 			if (unique_var(data, data->commands[cmd]->tokens[tkn]))
 				add_var_envp(data, data->commands[cmd]->tokens[tkn]);
