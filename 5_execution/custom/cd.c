@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/09 14:50:20 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/11/02 11:33:48 by qli           ########   odam.nl         */
+/*   Updated: 2020/11/03 10:25:59 by qli           ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,13 +40,21 @@ void	execute_cd(t_data *data, int cmd, int tkn, int needed_tokens)
 
 int		cd_multiple_args(t_data *data, int cmd, int *tkn, int needed_tokens)
 {
-	while (needed_tokens > 0 && (*tkn) < data->commands[cmd]->token_nb - 1)
+	int		token;
+	char	*value;
+
+	value = data->commands[cmd]->tokens[needed_tokens];
+	token = *tkn;
+	while (needed_tokens > 0 && token < data->commands[cmd]->token_nb)
 	{
-		if (data->commands[cmd]->tokens[*tkn][0] == '\0')
-			(*tkn)++;
+		if (data->commands[cmd]->tokens[token][0] == '\0')
+			needed_tokens--;
 		else
-			break ;
-		needed_tokens--;
+			*tkn = token;
+		if (value != NULL && value[0] == '|')
+			token--;
+		else
+			token++;
 	}
 	if (needed_tokens > 2)
 	{

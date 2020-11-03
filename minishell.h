@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/01 15:55:06 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/11/02 17:36:28 by qli           ########   odam.nl         */
+/*   Updated: 2020/11/02 18:09:47 by qli           ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,7 @@ void	print_export_output(t_data *data, int array_size, int i, int j);
 int		find_smallest_envp(t_data *data, int array_size);
 void	print_envp_line(t_data *data, char *line);
 int		check_multiple_args(t_data *data, int cmd, int tkn, int needed_tokens);
+int		remove_empty_args(t_data *data, int cmd, int *tkn, int *needed_tokens);
 
 /*
 **--FOLDER---------------------3_ERROR_MANAGEMENT-------------------------------

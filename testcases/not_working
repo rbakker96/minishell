@@ -1,7 +1,7 @@
 ----------------------------------ROY-------------------------------------------
 
 [TO FIX]
-export TEST= 100
+export TEST=100
 --> save it as TEST= but should give an error message
 
 [TO FIX]
@@ -58,7 +58,74 @@ work as export
 env $hiuohoi
 work as env
 
+exit $hih $hihi should still exit
 
+----------------------------------EMPTY COMMANDS----------------------------------
+
+[cd FIXED]
+cd $IETSONBESTAANDS ; cd $GEK .. ; cd $NOTHING $MORENOTHING ..
+cd $NOTHING $MORENOTHING .. ..
+cd /home/qli/Desktop
+cd .. $hioho $were
+cd .. $hiho .. $hioho
+cd ../Desktop
+cd ~/test_cd
+cd ~test_cd
+cd ~/Desktop
+cd ~/Desktop $hioh
+cd $hioh ~/Desktop
+cd ~/Desktop $hioh ..
+cd $hioh ~/Desktop ..
+cd .. $hioho
+echo | cd $hioho | pwd
+echo | cd .. | pwd
+echo | cd .. $hioho | pwd
+
+
+[export] -> working
+export $hiuohoi
+export $hiohi 1test
+export $hhhh $PWD
+export $hhhh PWD
+echo $PWD
+export PWD $hihoi | echo hello
+echo $PWD
+export $hiohioi $hjiohiohoi $hihio test
+export test $hiohioi $hjiohiohoi $hihio 
+
+[env - to fix]
+env $hiuohoi
+env $hiohi 1test
+env $hiohi test
+env $hhhh $PWD
+env $hhhh PWD
+env $hiohioi $hjiohiohoi $hihio test
+
+[exit]
+[Y] exit $hiohioi
+[Y] exit $yiyio | exit 5
+[Y] exit 5 | exit $hiohioi
+[Y] exit $yiyoi $kpk 2 6
+[N] exit $yiyoi $kpk 2
+[N] exit $yiyoi $kpk
+[N] exit 2 $hiohio
+
+[pwd]
+pwd $hioho
+pwd $uiou $uyiopu
+pwd $yioyi qwerw
+
+[unset]
+unset $hiuohoi
+unset $hiohi 1test
+unset $hhhh $PWD
+unset $hiohioi $hjiohiohoi $hihio test
+
+[echo]
+echo $hhiohoih hello
+echo $hiohio $hiho haha
+echo $hiohi $awepori
+echo hello $hiohoiwer
 ----------------------------------DOUBLE CHECK-----------------------------------
 
 export | grep -e "PWD="
