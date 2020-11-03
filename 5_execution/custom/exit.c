@@ -6,7 +6,7 @@
 /*   By: roybakker <roybakker@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/09 14:51:32 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/11/02 18:13:25 by qli           ########   odam.nl         */
+/*   Updated: 2020/11/03 13:57:19 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,18 +17,18 @@ void	execute_exit(t_data *data, int cmd, int tkn, int needed_tokens)
 	int exit_code;
 
 	needed_tokens = calculate_needed_tokens(data, cmd, tkn);
-	if (needed_tokens == 1)
+	if (validate_args(data, cmd, &tkn, needed_tokens))
+	{
+		numeric_arg_check(data, cmd);
+		too_many_args(data, cmd);
+		return ;
+	}
+	if (compare_command("exit", data->commands[cmd]->tokens[tkn], 4) == 0)
 	{
 		if (data->commands[cmd]->pipe_nb == 0)
 			print(data, data->iostream[1], "exit\n", 0);
 		clear_memory(data);
 		exit(0);
-	}
-	numeric_arg_check(data, cmd);
-	if (needed_tokens > 2)
-	{
-		too_many_args(data, cmd);
-		return ;
 	}
 	exit_code = ft_atoi(data->commands[cmd]->tokens[1]);
 	if (data->commands[cmd]->tokens[1][0] == '\0')
