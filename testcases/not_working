@@ -10,7 +10,7 @@ export testvar ; export | grep -a testvar ; echo $?
 
 [Check later]
 export test_var= ; export | grep -a test_var ; echo $?
---> if no value after =, an empty string should be assigned as the value. 
+--> if no value after =, an empty string should be assigned as the value.
 Otherwise, it will give random values
 
 export 1test
