@@ -6,7 +6,7 @@
 /*   By: qli <qli@student.codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/21 13:15:18 by qli           #+#    #+#                 */
-/*   Updated: 2020/11/03 16:19:29 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/11/03 16:33:26 by qli           ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	sigint_handler(int signum)
 		}
 		else
 		{
-			g_exit_code = 1;
+			g_exit_code = 130;
 			print_prompt();
 		}
 	}
