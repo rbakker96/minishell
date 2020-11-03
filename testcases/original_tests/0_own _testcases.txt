@@ -144,33 +144,33 @@ pwd | cat > out
 
 ls -la | grep Oct > out
 
-ls -la | grep Oct
+ls -la | grep Nov
 
-ls -la > out | grep Oct
+ls -la > out | grep Nov
 
-ls | grep Oct < input
+ls | grep Nov < input
 
-ls > out | grep Oct < input
+ls > out | grep Nov < input
 
 # pipe both before & after
 
-ls -la | grep Oct | grep test > out
+ls -la | grep Nov | grep test > out
 
-ls -la | grep Oct | grep test | grep test_pipe
+ls -la | grep Nov | grep test | grep test_pipe
 
-ls -la | grep Oct | grep test | grep test_pipe > out
+ls -la | grep Nov | grep test | grep test_pipe > out
 
-ls -la | grep Oct | grep qli | grep 30 | grep test | grep test_pipe > out
+ls -la | grep Nov | grep qli | grep 30 | grep test | grep test_pipe > out
 
 pwd | cat | grep /home/ > out
 
-ls -la | grep Oct > out| grep test | grep test_pipe
+ls -la | grep Nov > out| grep test | grep test_pipe
 
-ls -la | grep Oct | grep test > out | grep test_pipe
+ls -la | grep Nov | grep test > out | grep test_pipe
 
-ls -la > out| grep Oct | grep test > out | grep test_pipe
+ls -la > out| grep Nov | grep test > out | grep test_pipe
 
-ls -la | grep Oct | cat
+ls -la | grep Nov | cat
 
 ####################################################################
 #                           REDIRECTION	                           #
