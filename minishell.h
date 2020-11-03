@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/01 15:55:06 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/11/03 10:47:15 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/11/03 11:43:14 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ void	print(t_data *data, int fd, char *str, char *malloced_str);
 void	print_char(t_data *data, int fd, char c, char *malloced_str);
 int		prompt(t_data *data);
 char	*get_current_directory(t_data *data);
+int		validate_args(t_data *data, int cmd, int *tkn, int needed_tokens);
 
 /*
 ** file_two.c
@@ -183,10 +184,9 @@ void	run_executable(t_data *data, int cmd, int tkn);
 /*
 ** cd.c
 */
-
 void	execute_cd(t_data *data, int cmd, int tkn, int needed_tokens);
+void	multiple_args(t_data *data);
 void	go_to_home(t_data *data, int cmd, char *value, int needed_tokens);
-int		cd_multiple_args(t_data *data, int cmd, int *tkn, int needed_tokens);
 char	*expand_home_path(t_data *data, char *value, char *home_path);
 
 /*

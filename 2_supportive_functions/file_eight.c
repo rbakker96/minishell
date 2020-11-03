@@ -6,7 +6,7 @@
 /*   By: qli <qli@student.codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/31 20:54:07 by qli           #+#    #+#                 */
-/*   Updated: 2020/11/03 09:00:40 by qli           ########   odam.nl         */
+/*   Updated: 2020/11/03 12:50:28 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,15 +90,17 @@ void	print_envp_line(t_data *data, char *line)
 
 int		check_multiple_args(t_data *data, int cmd, int tkn, int needed_tokens)
 {
+	int count;
+
+	count = 0;
 	needed_tokens--;
 	tkn++;
 	while (needed_tokens > 0)
 	{
-		if (data->commands[cmd]->tokens[tkn][0] == '\0')
-			tkn++;
-		else
-			return (0);
+		if (data->commands[cmd]->tokens[tkn][0] != '\0')
+			count++;
+		tkn++;
 		needed_tokens--;
 	}
-	return (1);
+	return (count);
 }

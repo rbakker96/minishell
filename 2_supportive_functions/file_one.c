@@ -6,7 +6,7 @@
 /*   By: roybakker <roybakker@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/02 11:27:20 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/10/31 20:53:00 by qli           ########   odam.nl         */
+/*   Updated: 2020/11/03 13:10:10 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,4 +71,22 @@ char	*get_current_directory(t_data *data)
 		malloc_error(data, 0);
 	free_array(directory);
 	return (path);
+}
+
+int		validate_args(t_data *data, int cmd, int *tkn, int needed_tokens)
+{
+	int ret;
+
+	ret = check_multiple_args(data, cmd, (*tkn), needed_tokens);
+	if (ret == 1)
+	{
+		(*tkn)++;
+		while (data->commands[cmd]->tokens[(*tkn) + 1] != NULL &&
+				data->commands[cmd]->tokens[(*tkn)][0] == '\0')
+			(*tkn)++;
+		return (0);
+	}
+	if (ret > 1)
+		return (1);
+	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/09 14:50:20 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/11/03 10:25:59 by qli           ########   odam.nl         */
+/*   Updated: 2020/11/03 13:26:16 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,20 +17,12 @@ void	execute_cd(t_data *data, int cmd, int tkn, int needed_tokens)
 	char	*value;
 
 	needed_tokens = calculate_needed_tokens(data, cmd, tkn);
-	tkn++;
+	if (validate_args(data, cmd, &tkn, needed_tokens))
+		return (multiple_args(data));
 	value = data->commands[cmd]->tokens[tkn];
-	if (data->commands[cmd]->tokens[needed_tokens] != NULL &&
-		data->commands[cmd]->tokens[needed_tokens][0] == '|')
-		tkn = needed_tokens;
-	if (needed_tokens > 2)
-	{
-		if (cd_multiple_args(data, cmd, &tkn, needed_tokens) == 0)
-			value = data->commands[cmd]->tokens[tkn];
-		else
-			return ;
-	}
-	if (needed_tokens == 1 || compare_command("~", value, 1) == 0 ||
-		value[0] == '\0' || ft_strncmp("~/", value, 2) == 0)
+	if (compare_command("~", value, 1) == 0 ||
+		compare_command("cd", value, 2) == 0 ||
+		ft_strncmp("~/", value, 2) == 0)
 		go_to_home(data, cmd, value, needed_tokens);
 	else if (chdir(value) == -1)
 		print_errno(data, cmd, value, 1);
@@ -38,31 +30,10 @@ void	execute_cd(t_data *data, int cmd, int tkn, int needed_tokens)
 	g_dir_path = get_current_directory(data);
 }
 
-int		cd_multiple_args(t_data *data, int cmd, int *tkn, int needed_tokens)
+void	multiple_args(t_data *data)
 {
-	int		token;
-	char	*value;
-
-	value = data->commands[cmd]->tokens[needed_tokens];
-	token = *tkn;
-	while (needed_tokens > 0 && token < data->commands[cmd]->token_nb)
-	{
-		if (data->commands[cmd]->tokens[token][0] == '\0')
-			needed_tokens--;
-		else
-			*tkn = token;
-		if (value != NULL && value[0] == '|')
-			token--;
-		else
-			token++;
-	}
-	if (needed_tokens > 2)
-	{
-		print(data, 2, "minishell : cd : too many arguments\n", 0);
-		g_exit_code = 1;
-		return (-1);
-	}
-	return (0);
+	print(data, 2, "minishell : cd : too many arguments\n", 0);
+	g_exit_code = 1;
 }
 
 void	go_to_home(t_data *data, int cmd, char *value, int needed_tokens)
