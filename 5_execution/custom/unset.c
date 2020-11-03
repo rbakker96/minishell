@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/09 14:50:49 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/11/02 17:21:10 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/11/03 09:20:42 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,7 @@ void	execute_unset(t_data *data, int cmd, int tkn, int needed_tokens)
 
 	envp_size = get_array_size(data->envp);
 	needed_tokens = calculate_needed_tokens(data, cmd, tkn);
-	if (compare_command("unset", data->commands[cmd]->tokens[tkn], 5) == 0)
-		validate_unset_token(data, cmd, tkn, needed_tokens);
+	validate_unset_token(data, cmd, tkn, needed_tokens);
 	matching_vars = nb_of_matching_var(data, cmd, tkn, needed_tokens);
 	if (!matching_vars)
 		return ;

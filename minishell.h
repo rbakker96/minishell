@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/01 15:55:06 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/11/02 18:09:47 by qli           ########   odam.nl         */
+/*   Updated: 2020/11/03 10:47:15 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	meta_token(char *command, int *cmd, int *tkn);
 void	quoted_sentence(char *command, int *cmd, int x);
 void	normal_token(char *command, int *cmd, int *tkn);
 void	set_dollar_sign_value(t_data *data, int cmd);
-int		save_token(char *token);
+int		unique_var(t_data *data, char *var);
 
 /*
 ** file_four.c
@@ -90,8 +90,8 @@ void	copy_remaining_tokens(t_data *data, int cmd, int tkn);
 int		command_check(char check_value, char charachter);
 int		redirection_check(char *str);
 int		quotes_check(char *str);
-int		envp_new_value_check(char *new_envp);
-int		unique_var(t_data *data, char *var);
+int		envp_with_value(char *token);
+int		validate_export_token(t_data *data, int cmd, int tkn);
 
 /*
 ** file_eight.c
@@ -144,6 +144,7 @@ void	validation_error(t_data *data, char character, int exit_code);
 void	initialize(t_data *data);
 void	clear_memory(t_data *data);
 void	clear_used_memory(t_data *data);
+void	free_incomplete_envp(t_data *data, int i);
 
 /*
 ** free_functions.c
@@ -212,10 +213,8 @@ void	numeric_error(t_data *data, int cmd);
 ** export.c
 */
 void	execute_export(t_data *data, int cmd, int tkn);
-int		get_envp_size(t_data *data, int cmd, int tkn);
-void	copy_current_envp(t_data *data, char **new_envp);
-void	validate_export_token(t_data *data, int cmd, int tkn, int needed_tokens);
-void	add_new_env_to_envp(t_data *data, char **new_envp, int cmd, int tkn);
+void	add_var_envp(t_data *data, char *new_var);
+void	replace_var_envp(t_data *data, char *new_var);
 
 /*
 ** pwd.c
