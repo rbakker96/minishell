@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/22 13:51:43 by rbakker       #+#    #+#                 */
-/*   Updated: 2020/11/02 10:23:30 by qli           ########   odam.nl         */
+/*   Updated: 2020/11/03 10:39:21 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,4 +45,16 @@ void	clear_used_memory(t_data *data)
 	data->commands = NULL;
 	data->input = NULL;
 	data->args = NULL;
+}
+
+void	free_incomplete_envp(t_data *data, int i)
+{
+	i++;
+	while (data->envp[i] != NULL)
+	{
+		free(data->envp[i]);
+		i++;
+	}
+	free_array(data->envp);
+	data->envp = NULL;
 }

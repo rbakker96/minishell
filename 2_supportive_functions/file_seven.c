@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/22 14:10:21 by rbakker       #+#    #+#                 */
-/*   Updated: 2020/11/02 15:27:36 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/11/03 10:10:56 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,33 +44,32 @@ int		quotes_check(char *str)
 		return (normal_char);
 }
 
-int		envp_new_value_check(char *new_envp)
+int		validate_export_token(t_data *data, int cmd, int tkn)
+{
+	char	*value;
+	int		i;
+
+	i = 0;
+	value = data->commands[cmd]->tokens[tkn];
+	while (ft_isalpha(value[i]) || value[i] == '_' || ft_isdigit(value[i]))
+		i++;
+	if (ft_isdigit(value[0]) || value[0] == '=' ||
+		(value[i] != '=' && value[i] != '\0'))
+	{
+		print_unset_error(data, value);
+		return (0);
+	}
+	return (1);
+}
+
+int		envp_with_value(char *token)
 {
 	int i;
 
 	i = 0;
-	while (new_envp[i] != '\0')
+	while (token[i] != '\0')
 	{
-		if (new_envp[i] == '=')
-			return (1);
-		i++;
-	}
-	return (0);
-}
-
-int		unique_var(t_data *data, char *var)
-{
-	int		envp_size;
-	int		var_len;
-	int		i;
-
-	envp_size = get_array_size(data->envp);
-	var_len = token_var_len(var, 0);
-	i = 0;
-	while (i < envp_size)
-	{
-		if (ft_strncmp(data->envp[i], var, var_len) == 0
-			&& data->envp[i][var_len] == '=')
+		if (token[i] == '=')
 			return (1);
 		i++;
 	}

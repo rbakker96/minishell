@@ -6,7 +6,7 @@
 /*   By: rbakker <rbakker@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/09/02 14:39:39 by roybakker     #+#    #+#                 */
-/*   Updated: 2020/11/02 14:34:37 by roybakker     ########   odam.nl         */
+/*   Updated: 2020/11/03 10:16:14 by roybakker     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,16 +76,21 @@ void	set_dollar_sign_value(t_data *data, int cmd)
 	}
 }
 
-int		save_token(char *token)
+int		unique_var(t_data *data, char *var)
 {
-	int i;
+	int		envp_size;
+	int		var_len;
+	int		i;
 
+	envp_size = get_array_size(data->envp);
+	var_len = token_var_len(var, 0);
 	i = 0;
-	if (ft_isdigit(token[i]))
-		return (0);
-	while (ft_isalpha(token[i]) || token[i] == '_' || ft_isdigit(token[i]))
+	while (i < envp_size)
+	{
+		if (ft_strncmp(data->envp[i], var, var_len) == 0 &&
+			(data->envp[i][var_len] == '=' || data->envp[i][var_len] == '\0'))
+			return (0);
 		i++;
-	if ((token[i] == '=' && i != 0) || token[i] == '\0')
-		return (save);
-	return (0);
+	}
+	return (1);
 }
