@@ -53,7 +53,6 @@ exit 42 53 68
 exit 259
 exit -4
 exit wrong
-exit wrong_command
 gdagadgag
 ls -Z
 cd gdhahahad
