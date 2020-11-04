@@ -12,7 +12,9 @@
 
 This project’s objectives are similar to all this first year’s objectives: Rigor, use of C, use of basic algorithms, information research etc. With Minishell, you’ll be able to travel through time and come back to problems people faced when Windows didn’t exist.
 
-This is an group project created by R. Bakker & Q. Li
+This is an group project created by R. Bakker & <a href="https://github.com/qingqingqingli" target="_blank">Q. Li</a>
+
+
 
 ---
 
