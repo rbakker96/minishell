@@ -18,6 +18,10 @@ int		parse_command(t_data *data, char **envp)
 
 	ret = 0;
 	if (!data->envp)
+	    /*
+	     * Anatoliy:
+	     * Why is it done here and not in initialize()? It's not related to parsing commands as far as I can tell.
+	     */
 		save_environment_variables(data, envp);
 	ret = get_next_line(0, &data->input);
 	if (ret == -1)

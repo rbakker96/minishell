@@ -18,6 +18,12 @@ int		main(int argc, char **argv, char **envp)
 
 	if (argc != 1 || !argv)
 	{
+	    /*
+	     * Anatoliy:
+	     * This message can be misleading to the user. What if they don't run it from CWD?
+	     * 'is needed' for what?
+	     * I'd rephrase to something like "Minishell does not take any arguments".
+	     */
 		print(&data, 2, "only ./minishell is needed\n", 0);
 		return (-1);
 	}
@@ -32,7 +38,18 @@ int		main(int argc, char **argv, char **envp)
 		}
 		prompt(&data);
 		if (parse_command(&data, envp) != -1)
+		    /*
+		     * Anatoliy:
+		     * I couldn't find any other calls to this function in the codebase, so
+		     * it's not clear what cmd and tkn arguments are for.
+		     */
 			execution_loop(&data, 0, 0);
 	}
+	/*
+	 * Anatoliy:
+	 * No cleanup here?
+	 *
+	 * Btw, this code is unreachable.
+	 */
 	return (0);
 }
