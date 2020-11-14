@@ -10,6 +10,23 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+/*
+ * Anatoliy:
+ * Generally speaking, unless you're creating a library, you should not have a
+ * master-header like this. Every .c file should be accompanied by a .h that only
+ * lists forward declarations in that .c. This way your project stays decoupled
+ * and the dependencies are clear.
+ *
+ * With a master header like this every module of your project knows about every
+ * other. Replacing or modifying a single module becomes a jenga game - you don't
+ * know which other blocks rely on it and will fall.
+ *
+ * Even with libraries it's a good idea to keep everything in .c/.h file pairs.
+ * If you then need a master header you create one that just #includes all .h files.
+ *
+ * Let's talk about coupling and cohesion during our call.
+ */
+
 #ifndef MINISHELL_H
 # define MINISHELL_H
 # include <stdlib.h>
@@ -17,6 +34,25 @@
 # include "1_supportive_lib/gnl/get_next_line.h"
 # include "1_supportive_lib/ft_printf/ft_printf.h"
 # include "structs.h"
+
+
+/*
+ * Anatoliy:
+ * It doesn't look like you are using any of these includes in this file. Same principle
+ * w.r.t. coupling here - you're now making a huge part of standard library globally
+ * available, which means you don't know explicitly which module depends on which part.
+ *
+ * Ideally, you should move the includes into .c files. Only leave those in .h files that
+ * are directly used in that .h file.
+*/
+
+/*
+ * Anatoliy:
+ * Additionally, the fewer includes make compilation faster. It might not matter for a
+ * small project like this, but it does for larger ones (and especially C++ ones).
+ *
+ * I'd suggest using this tool: https://include-what-you-use.org/
+ */
 # include <unistd.h>
 # include <sys/types.h>
 # include <sys/wait.h>
@@ -33,8 +69,28 @@
 */
 
 /*
+ * Anatoliy:
+ * For someone who will maintain or modify your code after you these file names
+ * don't tell anything. Try to group functions in logical blocks (you did this in the
+ * other parts of the project).
+ */
+/*
 ** file_one.c
 */
+/*
+ * Anatoliy:
+ * Make in a habit to document functions in public interfaces. Not only your followers
+ * will thank you for that, you yourself will thank yourself when looking at this code
+ * after a few months.
+ *
+ * Any format will do, but I suggest you to stick to doxygen format. It's a de-facto
+ * standard, and is very similar to dox formats in other languages (e.g. javadoc). So even
+ * if you don't stick to c/c++ in your career you will still have some valuable skill to
+ * carry over.
+ *
+ * I'd suggest making doxygen part of your regular build (add it to the makefile), so that
+ * it notifies you immediately when you forget to document something.
+ */
 void	print(t_data *data, int fd, char *str, char *malloced_str);
 void	print_char(t_data *data, int fd, char c, char *malloced_str);
 int		prompt(t_data *data);
@@ -385,8 +441,15 @@ void	reduce_input_str(t_data *data, int reduction, int *i);
 ** handle_signal.c
 */
 void	signal_handler(void);
+
+/*
+ * Anatoliy:
+ * Doesn't look like anyone is supposed to call these handler functions from outside.
+ * They should not be in this header.
+ */
 void	sigint_handler(int signum);
 void	sigquit_handler(int signum);
+
 void	print_prompt(void);
 
 void	print_array(char **array);

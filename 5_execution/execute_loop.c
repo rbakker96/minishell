@@ -82,6 +82,18 @@ void	execute_command(t_data *data, int cmd, int tkn)
 	g_exit_code = 0;
 	skip_empty_token(data, cmd, &tkn);
 	value = data->commands[cmd]->tokens[tkn];
+
+	/*
+	 * Anatoliy:
+	 * I've written a comment already in some other place about string literals and their
+	 * lengths passed, this is very fragile.
+	 *
+	 * Aside from that, this chain of ifs is hard to maintain (too much repetition and boilerplate).
+	 * I'd suggest to create some sort of dispatch table here, e.g. an array of
+	 * structures, where each element contains a command name and a function pointer to
+	 * the appropriate command handler. You will be able to replace these ifs with a simple
+	 * loop, and adding a new command will be as simple as adding a new array item.
+	 */
 	if (compare_command("echo", value, 4) == 0)
 		execute_echo(data, cmd, tkn, 0);
 	else if (compare_command("cd", value, 2) == 0)

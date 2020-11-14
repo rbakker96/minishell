@@ -18,9 +18,26 @@
 # define WRITE 1
 
 /*
+ * Anatoliy:
+ * Whenever you find yourself delimiting files with comments into sections,
+ * it's usually a sign that you need to put those sections in separate files.
+ *
+ * (Same with many other things btw. If you can mark a section of a function
+ * with comments, it's often a good idea to extract that section into a separate
+ * function)
+ */
+/*
 **--------------------------------GENERAL---------------------------------------
 */
 
+/*
+ * Anatoliy:
+ * Why did you choose to store some data in an instance of t_data, and some as global
+ * variables?
+ *
+ * (Speaking of global variables, you should avoid them at all cost as they couple your
+ * code).
+ */
 extern	int				g_exit_code;
 extern	char			*g_dir_path;
 extern	int				g_pid;
@@ -55,6 +72,16 @@ typedef struct			s_command_table
 	int					pipe_pos;
 }						t_command_table;
 
+/*
+ * Anatoliy:
+ * This is a very unfortunate name for a structure. For someone reading your code
+ * it's totally impossible to deduct what it represents from the type name.
+ *
+ * Even looking at the content of this structure it's not clear what it represents.
+ * Feels like you're trying to use it to store all the state in the universe and make it
+ * available to all your units. This is bad from design point of view, because again it
+ * adds a lot of coupling into your system. Everything now depends of everything.
+ */
 typedef struct			s_data
 {
 	int					iostream[2];
